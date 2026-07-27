@@ -1,0 +1,31 @@
+# https://kampfkarren.github.io/selene/roblox.html
+
+std = "luau+roblox"
+
+[lints]
+shadowing = "allow"
+multiple_statements = "allow"
+parenthese_conditions = "allow"
+constant_table_comparison = "warn"
+if_same_then_else = "allow"
+mixed_table = "allow"
+unused_variable = "warn"
+
+# await_in_sync = "deny"
+# ban_standard_library = "deny"
+# deprecated = "deny"
+# duplicate_keys = "deny"
+# empty_if = "deny"
+# global_usage = "deny"
+# incorrect_standard_library_use = "deny"
+# lowercase_global = "deny"
+# mixed_table = "deny"
+# multiple_statements = "warn"
+# shadowing = "warn"
+# parenthese_conditions = "warn"
+# roblox_incorrect_api_usage = "deny"
+# suspicious_reverse_loop = "deny"
+# trailing_whitespace = "warn"
+# undefined_variable = "deny"
+# unscoped_variables = "warn"
+# unreachable_code = "warn"

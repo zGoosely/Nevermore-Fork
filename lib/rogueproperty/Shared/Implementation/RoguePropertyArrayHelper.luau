@@ -1,0 +1,249 @@
+--!strict
+--[=[
+	@class RoguePropertyArrayHelper
+]=]
+
+local require = require("../../../Loader").load()
+
+local BaseObject = require("BaseObject")
+local Observable = require("Observable")
+local RoguePropertyArrayUtils = require("RoguePropertyArrayUtils")
+local RoguePropertyBaseValueTypes = require("RoguePropertyBaseValueTypes")
+local Rx = require("Rx")
+local ServiceBag = require("ServiceBag")
+
+local RoguePropertyArrayHelper = setmetatable({}, BaseObject)
+RoguePropertyArrayHelper.ClassName = "RoguePropertyArrayHelper"
+RoguePropertyArrayHelper.__index = RoguePropertyArrayHelper
+
+export type RoguePropertyArrayHelper =
+	typeof(setmetatable(
+		{} :: {
+			_serviceBag: ServiceBag.ServiceBag,
+			_roguePropertyTable: any,
+			_arrayDefinitionHelper: any,
+			_defaultRogueProperties: { any }?,
+		},
+		{} :: typeof({ __index = RoguePropertyArrayHelper })
+	))
+	& BaseObject.BaseObject
+
+function RoguePropertyArrayHelper.new(
+	serviceBag: ServiceBag.ServiceBag,
+	arrayDefinitionHelper: any,
+	roguePropertyTable: any
+): RoguePropertyArrayHelper
+	local self: RoguePropertyArrayHelper = setmetatable(BaseObject.new() :: any, RoguePropertyArrayHelper)
+
+	self._serviceBag = assert(serviceBag, "No serviceBag")
+	self._roguePropertyTable = assert(roguePropertyTable, "No roguePropertyTable")
+	self._arrayDefinitionHelper = assert(arrayDefinitionHelper, "No arrayDefinitionHelper")
+
+	return self
+end
+
+function RoguePropertyArrayHelper.SetCanInitialize(self: RoguePropertyArrayHelper, canInitialize: boolean): ()
+	if canInitialize then
+		self:GetArrayRogueProperties()
+	end
+end
+
+function RoguePropertyArrayHelper.GetArrayRogueProperty(self: RoguePropertyArrayHelper, index: number): any
+	assert(type(index) == "number", "Bad index")
+
+	-- TODO: Maybe return something general for that index
+	-- TODO: This is slow....
+	local rogueProperties = self:GetArrayRogueProperties()
+
+	return rogueProperties[index]
+end
+
+function RoguePropertyArrayHelper.GetArrayRogueProperties(self: RoguePropertyArrayHelper): { any }
+	-- Dynamic construction of the properties based upon when exists
+	local container = self._roguePropertyTable:GetContainer()
+
+	-- Force initialization
+	if self._roguePropertyTable:CanInitialize() then
+		if not (container and container:GetAttribute("HasInitializedArrayComponent")) then
+			container:SetAttribute("HasInitializedArrayComponent", true)
+			local properties = self:_getDefaultRogueProperties()
+			for _, rogueProperty in properties do
+				-- Force initialization once and only once...
+				rogueProperty:SetCanInitialize(true)
+				rogueProperty:SetCanInitialize(false)
+			end
+		end
+	end
+
+	if not container then
+		return self:_getDefaultRogueProperties()
+	end
+
+	local adornee = self._roguePropertyTable:GetAdornee()
+
+	local definitions = RoguePropertyArrayUtils.createDefinitionsFromContainer(
+		container,
+		self._arrayDefinitionHelper:GetPropertyTableDefinition()
+	)
+	local rogueProperties = {}
+
+	for index, definition in definitions do
+		local property = definition:Get(self._serviceBag, adornee)
+		property:SetCanInitialize(false) -- Explicitly not going to reinitialize
+		rogueProperties[index] = property
+	end
+
+	return rogueProperties
+end
+
+function RoguePropertyArrayHelper._getDefaultRogueProperties(self: RoguePropertyArrayHelper): { any }
+	if self._defaultRogueProperties then
+		return self._defaultRogueProperties
+	end
+
+	local defaultRogueProperties = {}
+	local adornee = self._roguePropertyTable:GetAdornee()
+	for _, definition in self._arrayDefinitionHelper:GetDefaultDefinitions() do
+		local property = definition:Get(self._serviceBag, adornee)
+		table.insert(defaultRogueProperties, property)
+	end
+
+	self._defaultRogueProperties = defaultRogueProperties
+	return defaultRogueProperties
+end
+
+function RoguePropertyArrayHelper.SetArrayBaseData(self: RoguePropertyArrayHelper, arrayData: any): ()
+	assert(self._arrayDefinitionHelper:CanAssign(arrayData, false)) -- This has good error messages
+
+	local container = self._roguePropertyTable:GetContainer()
+	if not container then
+		warn("[RoguePropertyArrayHelper.SetArrayBaseData] - Failed to get container")
+		return
+	end
+
+	-- Add all
+	local available = self:GetArrayRogueProperties()
+	local parentPropertyTableDefinition = self._arrayDefinitionHelper:GetPropertyTableDefinition()
+	local adornee = self._roguePropertyTable:GetAdornee()
+	local definitions = RoguePropertyArrayUtils.createDefinitionsFromArrayData(arrayData, parentPropertyTableDefinition)
+
+	for index, definition in definitions do
+		if available[index] and available[index]:GetDefinition():GetValueType() == definition:GetValueType() then
+			available[index]:SetBaseValue(definition:GetDefaultValue())
+		else
+			-- Cleanup this old one and setup a new one
+			if available[index] then
+				local found = available[index]:GetBaseValueObject(RoguePropertyBaseValueTypes.ANY)
+				if typeof(found) == "Instance" then
+					found:Destroy()
+					return
+				end
+			end
+
+			local property = definition:Get(self._serviceBag, adornee)
+
+			if self._roguePropertyTable:CanInitialize() then
+				property:SetCanInitialize(true) -- Initialize once
+				property:SetCanInitialize(false)
+			end
+		end
+	end
+
+	self:_removeUnspecified(container, definitions)
+end
+
+function RoguePropertyArrayHelper.SetArrayData(self: RoguePropertyArrayHelper, arrayData: any): ()
+	assert(self._arrayDefinitionHelper:CanAssign(arrayData, false)) -- This has good error messages
+
+	local container = self._roguePropertyTable:GetContainer()
+	if not container then
+		warn("[RoguePropertyArrayHelper.SetArrayData] - Failed to get container")
+		return
+	end
+
+	local available = self:GetArrayRogueProperties()
+	local parentPropertyTableDefinition = self._arrayDefinitionHelper:GetPropertyTableDefinition()
+	local adornee = self._roguePropertyTable:GetAdornee()
+	local definitions = RoguePropertyArrayUtils.createDefinitionsFromArrayData(arrayData, parentPropertyTableDefinition)
+
+	for index, definition in definitions do
+		if available[index] and available[index]:GetDefinition():GetValueType() == definition:GetValueType() then
+			-- TODO: Replication is cursed here, and won't be consistent between client vs. server
+			available[index]:SetCanInitialize(true)
+			available[index]:SetValue(definition:GetDefaultValue())
+			available[index]:SetCanInitialize(false)
+		else
+			-- Cleanup this old one and setup a new one
+			if available[index] then
+				local found = available[index]:GetBaseValueObject(RoguePropertyBaseValueTypes.ANY)
+				if typeof(found) == "Instance" then
+					found:Destroy()
+					return
+				end
+			end
+
+			local property = definition:Get(self._serviceBag, adornee)
+			property:SetCanInitialize(true) -- Initialize once
+			property:SetCanInitialize(false)
+		end
+	end
+
+	self:_removeUnspecified(container, definitions)
+end
+
+function RoguePropertyArrayHelper._removeUnspecified(
+	_self: RoguePropertyArrayHelper,
+	container: Instance,
+	definitions: any
+): ()
+	-- Instance-serialized elements
+	for _, item in container:GetChildren() do
+		local index = RoguePropertyArrayUtils.getIndexFromName(item.Name)
+		if index then
+			if not definitions[index] then
+				item:Destroy()
+			end
+		end
+	end
+
+	-- Attribute-serialized elements
+	for attributeKey in container:GetAttributes() do
+		local index = RoguePropertyArrayUtils.getIndexFromName(attributeKey)
+		if index then
+			if not definitions[index] then
+				container:SetAttribute(attributeKey, nil)
+			end
+		end
+	end
+end
+
+function RoguePropertyArrayHelper.GetArrayBaseValues(self: RoguePropertyArrayHelper): { any }
+	local result = {}
+	for index, rogueProperty in pairs(self:GetArrayRogueProperties()) do
+		result[index] = rogueProperty:GetBaseValue()
+	end
+	return result
+end
+
+function RoguePropertyArrayHelper.GetArrayValues(self: RoguePropertyArrayHelper): { any }
+	local result = {}
+	for index, rogueProperty in pairs(self:GetArrayRogueProperties()) do
+		result[index] = rogueProperty:GetValue()
+	end
+	return result
+end
+
+function RoguePropertyArrayHelper.ObserveArrayValues(self: RoguePropertyArrayHelper): Observable.Observable<{ any }>
+	--warn("[RoguePropertyArrayHelper] - Observing arrays is only partially supported")
+
+	-- TODO: Allow for observing
+	local observables = {}
+
+	for _, rogueProperty in self:GetArrayRogueProperties() do
+		table.insert(observables, rogueProperty:Observe())
+	end
+
+	return Rx.combineLatest(observables) :: any
+end
+
+return RoguePropertyArrayHelper

@@ -1,0 +1,180 @@
+--!strict
+--[=[
+	Handles actions involving HumanoidDescription objects, including loading character appearance.
+	@class HumanoidDescriptionUtils
+]=]
+
+local require = require("../Loader").load()
+
+local Players = game:GetService("Players")
+
+local InsertServiceUtils = require("InsertServiceUtils")
+
+local Promise = require("Promise")
+
+local HumanoidDescriptionUtils = {}
+
+const function promiseUserIdFromName(name: string): Promise.Promise<number>
+	assert(type(name) == "string", "Bad name")
+
+	return Promise.spawn(function(resolve, reject)
+		local userId
+		local ok, err = pcall(function()
+			userId = Players:GetUserIdFromNameAsync(name)
+		end)
+
+		if not ok then
+			return reject(err)
+		end
+
+		if type(userId) ~= "number" then
+			return reject("UserId returned was not a number")
+		end
+
+		return resolve(userId)
+	end)
+end
+
+--[=[
+	Promises to apply a humaoid description
+	@param humanoid Humanoid
+	@param description HumanoidDescription
+	@return Promise
+]=]
+function HumanoidDescriptionUtils.promiseApplyDescription(
+	humanoid: Humanoid,
+	description: HumanoidDescription
+): Promise.Promise<()>
+	assert(typeof(humanoid) == "Instance" and humanoid:IsA("Humanoid"), "Bad humanoid")
+	assert(typeof(description) == "Instance" and description:IsA("HumanoidDescription"), "Bad description")
+
+	return Promise.spawn(function(resolve, reject)
+		local ok, err = pcall(function()
+			humanoid:ApplyDescriptionAsync(description)
+		end)
+		if not ok then
+			reject(err)
+			return
+		end
+		resolve()
+	end)
+end
+
+--[=[
+	Promises to apply a humaoid description reset call
+
+	@param humanoid Humanoid
+	@param description HumanoidDescription
+	@param assetTypeVerification AssetTypeVerification
+	@return Promise
+]=]
+function HumanoidDescriptionUtils.promiseApplyDescriptionReset(
+	humanoid: Humanoid,
+	description: HumanoidDescription,
+	assetTypeVerification: Enum.AssetTypeVerification
+): Promise.Promise<()>
+	assert(typeof(humanoid) == "Instance" and humanoid:IsA("Humanoid"), "Bad humanoid")
+	assert(typeof(description) == "Instance" and description:IsA("HumanoidDescription"), "Bad description")
+
+	return Promise.spawn(function(resolve, reject)
+		local ok, err = pcall(function()
+			humanoid:ApplyDescriptionResetAsync(description, assetTypeVerification)
+		end)
+		if not ok then
+			reject(err)
+			return
+		end
+		resolve()
+	end)
+end
+--[=[
+	Applies humanoid description from userName.
+	@param humanoid Humanoid
+	@param userName string
+	@return Promise
+]=]
+function HumanoidDescriptionUtils.promiseApplyFromUserName(humanoid: Humanoid, userName: string): Promise.Promise<()>
+	return HumanoidDescriptionUtils.promiseFromUserName(userName):Then(function(description)
+		return HumanoidDescriptionUtils.promiseApplyDescription(humanoid, description)
+	end)
+end
+
+--[=[
+	Retrieves a humanoid description from username
+	@param userName string
+	@return Promise<HumanoidDescription>
+]=]
+function HumanoidDescriptionUtils.promiseFromUserName(userName: string): Promise.Promise<HumanoidDescription>
+	return promiseUserIdFromName(userName):Then(function(userId)
+		return HumanoidDescriptionUtils.promiseFromUserId(userId)
+	end)
+end
+
+--[=[
+	Retrieves a humanoid description from userId
+	@param userId number
+	@return Promise<HumanoidDescription>
+]=]
+function HumanoidDescriptionUtils.promiseFromUserId(userId: number): Promise.Promise<HumanoidDescription>
+	assert(type(userId) == "number", "Bad userId")
+
+	return Promise.spawn(function(resolve, reject)
+		local description = nil
+		local ok, err = pcall(function()
+			description = Players:GetHumanoidDescriptionFromUserId(userId)
+		end)
+		if not ok then
+			reject(err)
+			return
+		end
+		if not description then
+			reject("API failed to return a description")
+			return
+		end
+		assert(typeof(description) == "Instance", "Bad description")
+		resolve(description)
+	end)
+end
+
+--[=[
+	Retrieves the assetIds from an assetId, in the format that is known to us.
+	@param assetString string -- A comma seperated value of asset ids which should be numbers
+	@return { number }
+]=]
+function HumanoidDescriptionUtils.getAssetIdsFromString(assetString: string): { number }
+	if assetString == "" then
+		return {}
+	end
+
+	local assetIds = {}
+	for _, assetIdStr in string.split(assetString, ",") do
+		local num = tonumber(assetIdStr)
+		if num then
+			table.insert(assetIds, num)
+		elseif assetIdStr ~= "" then
+			warn(
+				string.format(
+					"[HumanoidDescriptionUtils/getAssetIdsFromString] - Failed to convert %q to assetId",
+					assetIdStr
+				)
+			)
+		end
+	end
+
+	return assetIds
+end
+
+--[=[
+	From stuff like [HumanoidDescription.HatAccessory].
+	@param assetString string -- A comma seperated value of asset ids which should be numbers
+	@return { Promise<Instance> }
+]=]
+function HumanoidDescriptionUtils.getAssetPromisesFromString(assetString: string): { Promise.Promise<Instance> }
+	local promises = {}
+	for _, assetId in HumanoidDescriptionUtils.getAssetIdsFromString(assetString) do
+		table.insert(promises, InsertServiceUtils.promiseAsset(assetId))
+	end
+	return promises
+end
+
+return HumanoidDescriptionUtils

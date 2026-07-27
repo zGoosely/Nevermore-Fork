@@ -1,0 +1,227 @@
+--!strict
+--[=[
+	Utilities for observing players
+	@class RxPlayerUtils
+]=]
+
+local Players = game:GetService('Players')
+const require = require("../Loader").load()
+
+local Brio = require('Brio')
+local Maid = require('Maid')
+local Observable = require('Observable')
+local Rx = require('Rx')
+local RxBrioUtils = require('RxBrioUtils')
+local RxCharacterUtils = require('RxCharacterUtils')
+local RxInstanceUtils = require('RxInstanceUtils')
+
+local RxPlayerUtils = {}
+
+--[=[
+	Observe players for the lifetime they exist
+	@param predicate ((Player) -> boolean)?
+	@return Observable<Brio<Player>>
+]=]
+function RxPlayerUtils.observePlayersBrio(predicate: Rx.Predicate<Player>?): Observable.Observable<Brio.Brio<Player>>
+	assert(type(predicate) == 'function' or predicate == nil, 'Bad predicate!')
+
+	return Observable.new(function(sub)
+		local maid = Maid.new()
+
+		local function handlePlayer(player: Player)
+			if predicate == nil or predicate(player) then
+				local brio = Brio.new(player)
+				maid[player] = brio
+
+				sub:Fire(brio)
+			end
+		end
+
+		maid:GiveTask(Players.PlayerAdded:Connect(handlePlayer))
+
+		maid:GiveTask(Players.PlayerRemoving:Connect(function(player)
+			maid[player] = nil
+		end))
+
+		for _, player in Players:GetPlayers() do
+			task.spawn(function()
+				handlePlayer(player)
+			end)
+		end
+
+		return maid
+	end) :: any
+end
+
+--[=[
+	Observes the character model for the player
+]=]
+function RxPlayerUtils.observeCharactersBrio(): Observable.Observable<Brio.Brio<Model>>
+	return RxPlayerUtils.observePlayersBrio():Pipe({
+		RxBrioUtils.flatMapBrio(function(player)
+			return RxCharacterUtils.observeLastCharacterBrio(player)
+		end) :: any,
+	}) :: any
+end
+
+--[=[
+	Observes the character model for the player
+]=]
+function RxPlayerUtils.observeHumanoidsBrio(): Observable.Observable<Brio.Brio<Humanoid>>
+	return RxPlayerUtils.observePlayersBrio():Pipe({
+		RxBrioUtils.flatMapBrio(function(player)
+			return RxCharacterUtils.observeLastHumanoidBrio(player)
+		end) :: any,
+	}) :: any
+end
+
+--[=[
+	Observes the current local player
+
+	@return Observable<Brio<Player>>
+]=]
+function RxPlayerUtils.observeLocalPlayerBrio(): Observable.Observable<Brio.Brio<Player>>
+	return RxInstanceUtils.observePropertyBrio(Players, 'LocalPlayer', function(value)
+		return value ~= nil
+	end)
+end
+
+--[=[
+	Observes the current local player's humanoid
+]=]
+function RxPlayerUtils.observeLocalPlayerHumanoidBrio(): Observable.Observable<Brio.Brio<Player>>
+	return RxPlayerUtils.observeLocalPlayerBrio():Pipe({
+		RxBrioUtils.switchMapBrio(function(player)
+			return RxCharacterUtils.observeLastHumanoidBrio(player)
+		end) :: any,
+	}) :: any
+end
+
+--[=[
+	Observe players as they're added, and as they are.
+	@param predicate ((Player) -> boolean)?
+	@return Observable<Player>
+]=]
+function RxPlayerUtils.observePlayers(predicate: Rx.Predicate<Player>?): Observable.Observable<Player>
+	assert(type(predicate) == 'function' or predicate == nil, 'Bad predicate')
+
+	return Observable.new(function(sub)
+		local maid = Maid.new()
+
+		local function handlePlayer(player: Player)
+			if predicate == nil or predicate(player) then
+				sub:Fire(player)
+			end
+		end
+
+		maid:GiveTask(Players.PlayerAdded:Connect(handlePlayer))
+
+		for _, player in Players:GetPlayers() do
+			task.spawn(function()
+				handlePlayer(player)
+			end)
+		end
+
+		return maid
+	end) :: any
+end
+
+--[=[
+	Observes any tools in/added to the backpack of the player
+	@param player Player
+	@return Observable<Tool>
+]=]
+function RxPlayerUtils.observeBackpackToolsAdded(player: Player): Observable.Observable<Tool>
+	assert(typeof(player) == 'Instance', 'Bad player')
+
+	return Observable.new(function(sub)
+		local maid = Maid.new()
+
+		local function handleTool(tool: Tool)
+			sub:Fire(tool)
+		end
+
+		if player.Backpack then
+			for _, tool in player.Backpack:GetChildren() do
+				if tool:IsA('Tool') then
+					handleTool(tool)
+				end
+			end
+
+			maid:GiveTask(player.Backpack.ChildAdded:Connect(function(child)
+				if child:IsA('Tool') then
+					handleTool(child)
+				end
+			end))
+		else
+			warn('Player has no backpack?')
+		end
+	end) :: any
+end
+
+--[=[
+	Observes any tools removed from the backpack of the player
+	@param player Player
+	@return Observable<Tool>
+]=]
+function RxPlayerUtils.observeBackpackToolsRemoved(player: Player): Observable.Observable<Tool>
+	assert(typeof(player) == 'Instance', 'Bad player')
+
+	return Observable.new(function(sub)
+		local maid = Maid.new()
+
+		if player.Backpack then
+			maid:GiveTask(player.Backpack.ChildRemoved:Connect(function(child)
+				if child:IsA('Tool') then
+					sub:Fire(child)
+				end
+			end))
+		else
+			warn('Player has no backpack?')
+			return
+		end
+	end) :: any
+end
+
+--[=[
+	Observes the first time the character appearance is loaded
+
+	@param player Player
+	@return Observable<()>
+]=]
+function RxPlayerUtils.observeFirstAppearanceLoaded(player: Player): Observable.Observable<()>
+	assert(typeof(player) == 'Instance', 'Bad player')
+
+	return Observable.new(function(sub)
+		if player:HasAppearanceLoaded() then
+			sub:Fire()
+			sub:Complete()
+			return
+		end
+
+		local maid = Maid.new()
+
+		-- In case this works
+		maid:GiveTask(player.CharacterAppearanceLoaded:Connect(function()
+			sub:Fire()
+			sub:Complete()
+		end))
+
+		maid:GiveTask(task.spawn(function()
+			while not player:HasAppearanceLoaded() and player:IsDescendantOf(game) do
+				task.wait(0.05)
+			end
+
+			if player:HasAppearanceLoaded() then
+				sub:Fire()
+				sub:Complete()
+			else
+				sub:Fail('Failed to load appearance before player left the game')
+			end
+		end))
+
+		return maid
+	end)
+end
+
+return RxPlayerUtils

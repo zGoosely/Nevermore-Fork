@@ -1,0 +1,219 @@
+--[=[
+	Utility for teleporting humanoids
+	@class HumanoidTeleportUtils
+]=]
+
+
+const require = require("../Loader").load()
+
+local Promise = require('Promise')
+local Raycaster = require('Raycaster')
+
+local function getRotationInXZPlane(cframe: CFrame): CFrame
+	-- stylua: ignore
+	local _, _, _,
+	      _, _, zx,
+	      _, _, _,
+	      _, _, zz = cframe:GetComponents()
+
+	local back = Vector3.new(zx, 0, zz).Unit
+	if back ~= back then
+		return cframe -- we're looking straight down
+	end
+
+	local top = Vector3.new(0, 1, 0)
+	local right = top:Cross(back)
+
+	-- stylua: ignore
+	return CFrame.new(
+		cframe.X, cframe.Y, cframe.Z,
+		right.X, top.X, back.X,
+		right.Y, top.Y, back.Y,
+		right.Z, top.Z, back.Z
+	)
+end
+
+local HumanoidTeleportUtils = {}
+
+local REQUIRED_SPACE = 7
+local SEARCH_UP_TO = 40
+
+--[=[
+	Finds a safe position to teleport a humanoid. This searches some amount
+	around the position to try to ensure a free space for the humanoid.
+
+	@param position Position
+	@param raycaster Raycaster? -- Optional raycaster
+	@return boolean -- True if safe
+	@return Vector3? -- Position if we can hit it
+]=]
+function HumanoidTeleportUtils.identifySafePosition(
+	position: Vector3,
+	raycaster: Raycaster.Raycaster?
+): (boolean, Vector3?)
+	assert(typeof(position) == 'Vector3', 'Bad position')
+
+	if not raycaster then
+		raycaster = Raycaster.new()
+		assert(raycaster, 'Typecheck assertion')
+
+		raycaster.MaxCasts = 10
+		raycaster.Filter = function(hitData)
+			return not hitData.Part.CanCollide
+		end
+	end
+
+	assert(raycaster, 'Typecheck assertion')
+
+	for i = 1, SEARCH_UP_TO, 2 do
+		local origin = position + Vector3.new(0, i, 0)
+		local direction = Vector3.new(0, REQUIRED_SPACE, 0)
+		local hitData = raycaster:FindPartOnRay(Ray.new(origin, direction))
+
+		if not hitData then
+			local secondHit = raycaster:FindPartOnRay(Ray.new(origin + direction - Vector3.new(0, 1, 0), -direction))
+
+			-- try to identify flat surface
+			if secondHit then
+				return true, secondHit.Position
+			end
+
+			return true, origin
+		end
+	end
+
+	return false, position + Vector3.new(0, SEARCH_UP_TO, 0)
+end
+
+--[=[
+	Teleports a humanoid to a given location.
+
+	:::info
+	You should call this on the machine that has network ownership. For characters
+	owned by a player, this is generally the player who's character it is.
+
+	For NPCs, this should generally be the server.
+	:::
+
+	@param humanoid Humanoid
+	@param rootPart BasePart
+	@param position Vector3
+]=]
+function HumanoidTeleportUtils.teleportRootPart(humanoid: Humanoid, rootPart: BasePart, position: Vector3 | CFrame): ()
+	assert(typeof(humanoid) == 'Instance' and humanoid:IsA('Humanoid'), 'Bad humanoid')
+	assert(typeof(rootPart) == 'Instance' and rootPart:IsA('BasePart'), 'Bad rootPart')
+	assert(typeof(position) == 'Vector3' or typeof(position) == 'CFrame', 'Bad position')
+
+	local offset = HumanoidTeleportUtils.getRootPartOffset(humanoid, rootPart)
+	if typeof(position) == 'Vector3' then
+		rootPart.CFrame = rootPart.CFrame - rootPart.Position + position + offset
+	else
+		rootPart.CFrame = getRotationInXZPlane(position) + offset
+	end
+end
+
+--[=[
+	Teleports a humanoid to a given location including all attached parts
+
+	@param humanoid Humanoid
+	@param rootPart BasePart
+	@param parts { BasePart }
+	@param position Vector3
+]=]
+function HumanoidTeleportUtils.teleportParts(
+	humanoid: Humanoid,
+	rootPart: BasePart,
+	parts: { BasePart },
+	position: Vector3
+): ()
+	assert(typeof(humanoid) == 'Instance' and humanoid:IsA('Humanoid'), 'Bad humanoid')
+	assert(typeof(rootPart) == 'Instance' and rootPart:IsA('BasePart'), 'Bad rootPart')
+	assert(type(parts) == 'table', 'Bad parts')
+	assert(typeof(position) == 'Vector3', 'Bad position')
+
+	local offset = HumanoidTeleportUtils.getRootPartOffset(humanoid, rootPart)
+	local rootPartCFrame = rootPart.CFrame
+	local newRootPartCFrame = rootPartCFrame - rootPartCFrame.Position + position + offset
+
+	local relCFrame = {}
+	for _, part in parts do
+		relCFrame[part] = rootPartCFrame:ToObjectSpace(part.CFrame)
+	end
+
+	relCFrame[rootPart] = nil
+
+	for part, relative in relCFrame do
+		part.CFrame = newRootPartCFrame:toWorldSpace(relative)
+	end
+
+	rootPart.CFrame = newRootPartCFrame
+end
+
+--[=[
+	Tries to teleport the character to a given position
+
+	@param character Model
+	@param position Vector3
+]=]
+function HumanoidTeleportUtils.tryTeleportCharacter(character: Model, position: Vector3): boolean
+	assert(typeof(character) == 'Instance', 'Bad character')
+	assert(typeof(position) == 'Vector3', 'Bad position')
+
+	local humanoid = character:FindFirstChildWhichIsA('Humanoid')
+	if not humanoid then
+		return false
+	end
+
+	local rootPart = humanoid.RootPart
+	if not rootPart then
+		return false
+	end
+
+	HumanoidTeleportUtils.teleportRootPart(humanoid, rootPart, position)
+	return true
+end
+
+--[=[
+	Attempts to teleport a character to a position safely using identifySafePosition.
+	This is wrapped in a Promise for async-style flow.
+
+	If a safe position is found, the character is teleported there.
+	If no safe position can be determined, this falls back to a direct teleport.
+
+	@param character Model
+	@param position Vector3
+	@return Promise<boolean>
+]=]
+function HumanoidTeleportUtils.tryTeleportCharacterSafelyAsync(character: Model, position: Vector3)
+	assert(typeof(character) == 'Instance' and character:IsA('Model'), 'Bad character')
+	assert(typeof(position) == 'Vector3', 'Bad position')
+
+	return Promise.new(function(resolve)
+		task.spawn(function()
+			local success, safePosition = HumanoidTeleportUtils.identifySafePosition(position)
+
+			resolve({ success, safePosition })
+		end)
+	end)
+		:Then(function(result)
+			local success = result[1]
+			local safePosition = result[2]
+
+			if success and safePosition then
+				return HumanoidTeleportUtils.tryTeleportCharacter(character, safePosition)
+			else
+				error('No safe position found')
+			end
+		end)
+		:Catch(function()
+			-- Fallback if safe teleport failed
+			return HumanoidTeleportUtils.tryTeleportCharacter(character, position)
+		end)
+end
+
+function HumanoidTeleportUtils.getRootPartOffset(humanoid: Humanoid, rootPart: BasePart): Vector3
+	-- Calculate additional offset for teleportation
+	return Vector3.new(0, rootPart.Size.Y / 2 + humanoid.HipHeight, 0)
+end
+
+return HumanoidTeleportUtils
