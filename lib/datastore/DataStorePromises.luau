@@ -14,7 +14,7 @@ const Promise = require("Promise")
 const t = require("t")
 
 const isRobloxDataStore = t.union(
-	t.instance,
+	t.Instance,
 	t.interface({
 		GetAsync = t.callback,
 		UpdateAsync = t.callback,

@@ -327,6 +327,21 @@ function PlayerDataStoreService.Start(self: PlayerDataStoreService): ()
 				return
 			end
 
+			-- Roll back the same way when a profile Validator refuses the value, so
+			-- SetValue never asserts on a client-driven write and the client is
+			-- corrected instead of left believing its own guess.
+			if
+				PlayerDataStoreServiceUtils.getWriteValidationError(
+					self._profileData.Validators,
+					profile.Data,
+					path,
+					payload.value
+				)
+			then
+				self:ReplicateValue(player :: Player, path, currentValue)
+				return
+			end
+
 			self:SetValue(player :: Player, path, payload.value)
 		end
 	)
@@ -901,6 +916,14 @@ function PlayerDataStoreService.SetValue(self: PlayerDataStoreService, player: P
 		return newValue
 	end
 
+	const validationError = PlayerDataStoreServiceUtils.getWriteValidationError(
+		self._profileData.Validators,
+		profile.Data,
+		keyName,
+		newValue
+	)
+	assert(not validationError, `Bad keyValue for {keyName}: {validationError}`)
+
 	PlayerDataStoreServiceUtils.writeValuePath(profile.Data, keyName, newValue)
 	self:ReplicateValue(player, keyName, newValue)
 
@@ -933,6 +956,10 @@ function PlayerDataStoreService.UpdateProfile(self: PlayerDataStoreService, play
 
 	const currentData = profile.Data
 	const newData = callback(TableUtils.deepCopy(currentData))
+
+	const validationError = PlayerDataStoreServiceUtils.getValidationError(self._profileData.Validators, newData)
+	assert(not validationError, `Bad UpdateProfile result: {validationError}`)
+
 	const pendingReplication = PlayerDataStoreServiceUtils.deepDiffPaths(currentData, newData)
 
 	TableUtils.deepOverwrite(profile.Data, newData)
@@ -1071,6 +1098,13 @@ function PlayerDataStoreService.TransactionAsync(
 		then
 			maid:DoCleaning()
 			return reject("A profile changed during the transaction")
+		end
+
+		const validationError = PlayerDataStoreServiceUtils.getValidationError(self._profileData.Validators, newDataA)
+			or PlayerDataStoreServiceUtils.getValidationError(self._profileData.Validators, newDataB)
+		if validationError then
+			maid:DoCleaning()
+			return reject(`Transaction produced invalid data ({validationError})`)
 		end
 
 		-- Commit. Nothing below yields, so no other code observes one profile

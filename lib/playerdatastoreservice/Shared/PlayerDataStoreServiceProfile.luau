@@ -10,10 +10,16 @@
 const require = require("../../Loader").load()
 
 const ProfileData = require("ProfileData")
+const t = require("t")
+
+const isValidators = t.optional(t.map(t.string, t.callback))
+
+export type Validators = { [string]: (value: any) -> (boolean, string?) }
 
 export type ProfileDefinition = {
 	Template: any,
 	Schema: any,
+	Validators: Validators?,
 	StoreName: string?,
 	StoreVersion: number?,
 	SlotDataSchema: any?,
@@ -42,6 +48,7 @@ function PlayerDataStoreServiceProfile.Select(profileDefinition: ProfileDefiniti
 			and type(profileDefinition.Schema.des) == "function",
 		"Profile definition must provide a Squash Schema"
 	)
+	assert(isValidators(profileDefinition.Validators), "Profile definition Validators must map paths to t checkers")
 	assert(type(profileName) == "string" and profileName ~= "", "Bad profileName")
 
 	if isLocked then

@@ -383,4 +383,84 @@ function PlayerDataStoreServiceUtils.deepDiffPaths(oldData: any, newData: any, p
 	return changes
 end
 
+--[=[
+	Runs every validator in `validators` against the value it currently reads at
+	its path in `data`, returning the first failure message or nil when all pass.
+	A validator is a `t` checker keyed by a dot-separated profile path.
+
+	@within PlayerDataStoreServiceUtils
+	@param validators PlayerDataStoreServiceProfile.Validators?
+	@param data table
+	@return string?
+]=]
+function PlayerDataStoreServiceUtils.getValidationError(
+	validators: PlayerDataStoreServiceProfile.Validators?,
+	data: any
+): string?
+	if not validators then
+		return nil
+	end
+
+	for validatorPath, validator in validators do
+		const ok, err = validator(PlayerDataStoreServiceUtils.readValuePath(data, validatorPath))
+		if not ok then
+			return `{validatorPath}: {err or "value did not pass validation"}`
+		end
+	end
+
+	return nil
+end
+
+--[=[
+	Validates the write of `value` at `path` against every validator it would
+	affect, returning the first failure message or nil when all pass. `data` is
+	never mutated: each affected validator is checked against the value it would
+	read after the write, whether the validator sits at, above, or below `path`.
+
+	@within PlayerDataStoreServiceUtils
+	@param validators PlayerDataStoreServiceProfile.Validators?
+	@param data table
+	@param path string
+	@param value any
+	@return string?
+]=]
+function PlayerDataStoreServiceUtils.getWriteValidationError(
+	validators: PlayerDataStoreServiceProfile.Validators?,
+	data: any,
+	path: string,
+	value: any
+): string?
+	if not validators then
+		return nil
+	end
+
+	for validatorPath, validator in validators do
+		if not PlayerDataStoreServiceUtils.valuePathsOverlap(validatorPath, path) then
+			continue
+		end
+
+		local candidateValue
+		if validatorPath == path then
+			candidateValue = value
+		elseif string.sub(validatorPath, 1, #path + 1) == path .. "." then
+			-- The validator sits inside the written value.
+			candidateValue = PlayerDataStoreServiceUtils.readValuePath(value, string.sub(validatorPath, #path + 2))
+		else
+			-- The validator is an ancestor of the write. Rebuild its subtree with
+			-- the write applied so it never sees the pre-write value.
+			const currentRoot = PlayerDataStoreServiceUtils.readValuePath(data, validatorPath)
+			const candidateRoot = if type(currentRoot) == "table" then TableUtils.deepCopy(currentRoot) else {}
+			PlayerDataStoreServiceUtils.writeValuePath(candidateRoot, string.sub(path, #validatorPath + 2), value)
+			candidateValue = candidateRoot
+		end
+
+		const ok, err = validator(candidateValue)
+		if not ok then
+			return `{validatorPath}: {err or "value did not pass validation"}`
+		end
+	end
+
+	return nil
+end
+
 return PlayerDataStoreServiceUtils
