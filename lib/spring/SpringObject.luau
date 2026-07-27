@@ -5,22 +5,21 @@
 	@class SpringObject
 ]=]
 
-
-local RunService = game:GetService('RunService')
+local RunService = game:GetService("RunService")
 const require = require("../Loader").load()
 
-local Blend = require('Blend')
-local DuckTypeUtils = require('DuckTypeUtils')
-local Maid = require('Maid')
-local Observable = require('Observable')
-local Promise = require('Promise')
-local Signal = require('Signal')
-local Spring = require('Spring')
-local SpringUtils = require('SpringUtils')
-local StepUtils = require('StepUtils')
+local Blend = require("Blend")
+local DuckTypeUtils = require("DuckTypeUtils")
+local Maid = require("Maid")
+local Observable = require("Observable")
+local Promise = require("Promise")
+local Signal = require("Signal")
+local Spring = require("Spring")
+local SpringUtils = require("SpringUtils")
+local StepUtils = require("StepUtils")
 
 local SpringObject = {}
-SpringObject.ClassName = 'SpringObject'
+SpringObject.ClassName = "SpringObject"
 SpringObject.__index = SpringObject
 
 export type SpringObject<T> = typeof(setmetatable(
@@ -190,7 +189,7 @@ function SpringObject:PromiseFinished(signal)
 
 	-- TODO: Mathematical solution?
 	local startAnimate, stopAnimate = StepUtils.bindToSignal(signal, function()
-		local currentSpring = rawget(self, '_currentSpring')
+		local currentSpring = rawget(self, "_currentSpring")
 		if not currentSpring then
 			return false
 		end
@@ -225,7 +224,11 @@ function SpringObject:ObserveVelocityOnSignal(signal)
 		local maid = Maid.new()
 
 		local startAnimate, stopAnimate = StepUtils.bindToSignal(signal, function()
-			local currentSpring = rawget(self, '_currentSpring')
+			if not sub:IsPending() then
+				return false
+			end
+
+			local currentSpring = rawget(self, "_currentSpring")
 			if not currentSpring then
 				return false
 			end
@@ -258,7 +261,11 @@ function SpringObject:ObserveOnSignal(signal)
 		local maid = Maid.new()
 
 		local startAnimate, stopAnimate = StepUtils.bindToSignal(signal, function()
-			local currentSpring = rawget(self, '_currentSpring')
+			if not sub:IsPending() then
+				return false
+			end
+
+			local currentSpring = rawget(self, "_currentSpring")
 			if not currentSpring then
 				return false
 			end
@@ -281,7 +288,7 @@ end
 	@return boolean -- True if animating
 ]=]
 function SpringObject:IsAnimating(): boolean
-	local currentSpring = rawget(self, '_currentSpring')
+	local currentSpring = rawget(self, "_currentSpring")
 	if not currentSpring then
 		return false
 	end
@@ -310,7 +317,7 @@ end
 	@param doNotAnimate boolean? -- Whether or not to animate
 ]=]
 function SpringObject:SetTarget<T>(target: T, doNotAnimate: boolean?)
-	assert(target ~= nil, 'Bad target')
+	assert(target ~= nil, "Bad target")
 
 	local observable = Blend.toPropertyObservable(target)
 	if not observable then
@@ -325,7 +332,7 @@ function SpringObject:SetTarget<T>(target: T, doNotAnimate: boolean?)
 		local isFirst = true
 		sub = observable:Subscribe(function(unconverted)
 			local converted = SpringUtils.toLinearIfNeeded(unconverted)
-			assert(converted, 'Not a valid converted target')
+			assert(converted, "Not a valid converted target")
 
 			local wasFirst = isFirst
 			isFirst = false
@@ -358,7 +365,7 @@ end
 	@param velocity T
 ]=]
 function SpringObject:SetVelocity(velocity)
-	assert(velocity ~= nil, 'Bad velocity')
+	assert(velocity ~= nil, "Bad velocity")
 
 	local observable = Blend.toPropertyObservable(velocity)
 	if not observable then
@@ -384,7 +391,7 @@ end
 	@param position T
 ]=]
 function SpringObject:SetPosition(position)
-	assert(position ~= nil, 'Bad position')
+	assert(position ~= nil, "Bad position")
 
 	local observable = Blend.toPropertyObservable(position)
 	if not observable then
@@ -409,13 +416,13 @@ end
 	@param damper number | Observable<number>
 ]=]
 function SpringObject:SetDamper(damper)
-	assert(damper ~= nil, 'Bad damper')
+	assert(damper ~= nil, "Bad damper")
 
-	if type(damper) == 'number' then
+	if type(damper) == "number" then
 		self._maid._damperSub = nil
 		self:_applyDamper(damper)
 	else
-		local observable = assert(Blend.toPropertyObservable(damper), 'Invalid damper')
+		local observable = assert(Blend.toPropertyObservable(damper), "Invalid damper")
 
 		self._maid._damperSub = observable:Subscribe(function(unconverted)
 			self:_applyDamper(unconverted)
@@ -424,9 +431,9 @@ function SpringObject:SetDamper(damper)
 end
 
 function SpringObject:_applyDamper(unconverted: number)
-	assert(type(unconverted) == 'number', 'Bad unconverted')
+	assert(type(unconverted) == "number", "Bad unconverted")
 
-	local currentSpring = rawget(self, '_currentSpring')
+	local currentSpring = rawget(self, "_currentSpring")
 	if currentSpring then
 		currentSpring.Damper = unconverted
 	else
@@ -442,13 +449,13 @@ end
 	@param speed number | Observable<number>
 ]=]
 function SpringObject:SetSpeed(speed)
-	assert(speed ~= nil, 'Bad speed')
+	assert(speed ~= nil, "Bad speed")
 
-	if type(speed) == 'number' then
+	if type(speed) == "number" then
 		self._maid._speedSub = nil
 		self:_applySpeed(speed)
 	else
-		local observable = assert(Blend.toPropertyObservable(speed), 'Invalid speed')
+		local observable = assert(Blend.toPropertyObservable(speed), "Invalid speed")
 
 		self._maid._speedSub = observable:Subscribe(function(unconverted)
 			self:_applySpeed(unconverted)
@@ -457,9 +464,9 @@ function SpringObject:SetSpeed(speed)
 end
 
 function SpringObject:_applySpeed(unconverted: number)
-	assert(type(unconverted) == 'number', 'Bad unconverted')
+	assert(type(unconverted) == "number", "Bad unconverted")
 
-	local currentSpring = rawget(self, '_currentSpring')
+	local currentSpring = rawget(self, "_currentSpring")
 	if currentSpring then
 		currentSpring.Speed = unconverted
 	else
@@ -475,9 +482,9 @@ end
 	@param clock () -> (number)
 ]=]
 function SpringObject:SetClock(clock: Spring.SpringClock)
-	assert(type(clock) == 'function', 'Bad clock clock')
+	assert(type(clock) == "function", "Bad clock clock")
 
-	local currentSpring = rawget(self, '_currentSpring')
+	local currentSpring = rawget(self, "_currentSpring")
 	if currentSpring then
 		currentSpring.Clock = clock
 	else
@@ -493,9 +500,9 @@ end
 	@param epsilon number
 ]=]
 function SpringObject:SetEpsilon(epsilon: number)
-	assert(type(epsilon) == 'number', 'Bad epsilon')
+	assert(type(epsilon) == "number", "Bad epsilon")
 
-	rawset(self, '_epsilon', epsilon)
+	rawset(self, "_epsilon", epsilon)
 
 	self.Changed:Fire()
 end
@@ -506,9 +513,9 @@ end
 	@return ()
 ]=]
 function SpringObject:TimeSkip(delta: number)
-	assert(type(delta) == 'number', 'Bad delta')
+	assert(type(delta) == "number", "Bad delta")
 
-	local currentSpring = rawget(self, '_currentSpring')
+	local currentSpring = rawget(self, "_currentSpring")
 	if not currentSpring then
 		return
 	end
@@ -518,81 +525,81 @@ function SpringObject:TimeSkip(delta: number)
 end
 
 (SpringObject :: any).__index = function(self, index)
-	local currentSpring = rawget(self, '_currentSpring')
+	local currentSpring = rawget(self, "_currentSpring")
 
 	if SpringObject[index] then
 		return SpringObject[index]
-	elseif index == 'Value' or index == 'Position' or index == 'p' then
+	elseif index == "Value" or index == "Position" or index == "p" then
 		if currentSpring then
 			return SpringUtils.fromLinearIfNeeded(currentSpring.Value)
 		else
 			return 0
 		end
-	elseif index == 'Velocity' or index == 'v' then
+	elseif index == "Velocity" or index == "v" then
 		if currentSpring then
 			return SpringUtils.fromLinearIfNeeded(currentSpring.Velocity)
 		else
 			return 0
 		end
-	elseif index == 'Target' or index == 't' then
+	elseif index == "Target" or index == "t" then
 		if currentSpring then
 			return SpringUtils.fromLinearIfNeeded(currentSpring.Target)
 		else
 			return 0
 		end
-	elseif index == 'Damper' or index == 'd' then
+	elseif index == "Damper" or index == "d" then
 		if currentSpring then
 			return currentSpring.Damper
 		else
 			return (self :: any):_getInitInfo().Damper
 		end
-	elseif index == 'Speed' or index == 's' then
+	elseif index == "Speed" or index == "s" then
 		if currentSpring then
 			return currentSpring.Speed
 		else
 			return (self :: any):_getInitInfo().Speed
 		end
-	elseif index == 'Clock' then
+	elseif index == "Clock" then
 		if currentSpring then
 			return currentSpring.Clock
 		else
 			return (self :: any):_getInitInfo().Clock
 		end
-	elseif index == 'Epsilon' then
+	elseif index == "Epsilon" then
 		return self._epsilon
-	elseif index == '_currentSpring' then
-		local found = rawget(self, '_currentSpring')
+	elseif index == "_currentSpring" then
+		local found = rawget(self, "_currentSpring")
 		if found then
 			return found
 		end
 
 		-- Note that sometimes the current spring isn't loaded yet as a type so
 		-- we use a number for this.
-		error('Internal error: Cannot get _currentSpring, as we aren\'t initialized yet')
+		error("Internal error: Cannot get _currentSpring, as we aren't initialized yet")
 	else
-		error(string.format('%q is not a member of SpringObject', tostring(index)))
+		error(string.format("%q is not a member of SpringObject", tostring(index)))
 	end
 end
 
 function SpringObject:__newindex(index, value)
-	if index == 'Value' or index == 'Position' or index == 'p' then
+	if index == "Value" or index == "Position" or index == "p" then
 		self:SetPosition(value)
-	elseif index == 'Velocity' or index == 'v' then
+	elseif index == "Velocity" or index == "v" then
 		self:SetVelocity(value)
-	elseif index == 'Target' or index == 't' then
+	elseif index == "Target" or index == "t" then
 		self:SetTarget(value)
-	elseif index == 'Damper' or index == 'd' then
+	elseif index == "Damper" or index == "d" then
 		self:SetDamper(value)
-	elseif index == 'Speed' or index == 's' then
+	elseif index == "Speed" or index == "s" then
 		self:SetSpeed(value)
-	elseif index == 'Clock' then
+	elseif index == "Clock" then
 		self:SetClock(value)
-	elseif index == 'Epsilon' then
+	elseif index == "Epsilon" then
 		self:SetEpsilon(value)
-	elseif index == '_currentSpring' then
-		error('Cannot set _currentSpring')
+	elseif index == "_currentSpring" then
+		error("Cannot set _currentSpring")
 	else
-		error(string.format('%q is not a member of SpringObject', tostring(index)))
+		error(string.format("%q is not a member of SpringObject", tostring(index)))
 	end
 end
 
@@ -600,21 +607,21 @@ end
 	Callers of this must invoke .Changed after using this method
 ]]
 function SpringObject:_getSpringForType(converted)
-	local currentSpring = rawget(self, '_currentSpring')
+	local currentSpring = rawget(self, "_currentSpring")
 
 	if currentSpring == nil then
 		-- only happens on init
 		local newSpring = Spring.new(converted)
 
-		local foundInitInfo = rawget(self, '_initInfo')
+		local foundInitInfo = rawget(self, "_initInfo")
 		if foundInitInfo then
-			rawset(self, '_initInfo', nil)
+			rawset(self, "_initInfo", nil)
 			newSpring.Clock = foundInitInfo.Clock
 			newSpring.Speed = foundInitInfo.Speed
 			newSpring.Damper = foundInitInfo.Damper
 		end
 
-		rawset(self, '_currentSpring', newSpring)
+		rawset(self, "_currentSpring", newSpring)
 
 		return newSpring
 	else
@@ -630,19 +637,19 @@ function SpringObject:_getSpringForType(converted)
 			newSpring.Clock = clock
 			newSpring.Speed = oldSpeed
 			newSpring.Damper = oldDamper
-			rawset(self, '_currentSpring', newSpring)
+			rawset(self, "_currentSpring", newSpring)
 			return newSpring
 		end
 	end
 end
 
 function SpringObject:_getInitInfo()
-	local currentSpring = rawget(self, '_currentSpring')
+	local currentSpring = rawget(self, "_currentSpring")
 	if currentSpring then
-		error('Should not have currentSpring')
+		error("Should not have currentSpring")
 	end
 
-	local foundInitInfo = rawget(self, '_initInfo')
+	local foundInitInfo = rawget(self, "_initInfo")
 	if foundInitInfo then
 		return foundInitInfo
 	end
@@ -653,7 +660,7 @@ function SpringObject:_getInitInfo()
 		Speed = 1,
 	}
 
-	rawset(self, '_initInfo', value)
+	rawset(self, "_initInfo", value)
 
 	return value
 end
