@@ -306,9 +306,13 @@ function DataStore._promiseLoad(self: DataStore): Promise.Promise<any>
 		return self._loadPromise
 	end
 
-	self._loadPromise = self:_promiseLoadFresh():Finally(function()
+	-- Tap, not Finally: this library's Finally is Then(func, func), which would
+	-- replace the loaded data with the cleanup callback's nil return and make the
+	-- first fresh Load resolve nil. Tap runs the cleanup but forwards the result.
+	const function clearLoadPromise()
 		self._loadPromise = nil
-	end)
+	end
+	self._loadPromise = self:_promiseLoadFresh():Tap(clearLoadPromise, clearLoadPromise)
 
 	return self._loadPromise
 end
