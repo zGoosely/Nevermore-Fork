@@ -123,6 +123,16 @@ function LoopedSoundPlayer.SetSoundGroup(
 end
 
 --[=[
+	Observes the currently selected sound source.
+
+	@return Observable<SoundId?>
+	@within LoopedSoundPlayer
+]=]
+function LoopedSoundPlayer.ObserveCurrentSoundId(self: LoopedSoundPlayer): Observable.Observable<SoundUtils.SoundId?>
+	return self._currentSoundId:Observe()
+end
+
+--[=[
 	Sets the BPM for syncing sound playback.
 ]=]
 function LoopedSoundPlayer.SetBPM(self: LoopedSoundPlayer, bpm: ValueObject.Mountable<number?>): () -> ()
