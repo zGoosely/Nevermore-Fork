@@ -143,4 +143,18 @@ function AttributeValue.__newindex<T>(self: AttributeValue<T>, index, value)
 	end
 end
 
+function AttributeValue.Destroy<T>(self: AttributeValue<T>)
+	-- rawget throughout: the custom __index errors on any member it does not
+	-- recognize, so a plain self._maid lookup would throw when none was set.
+	local maid = rawget(self :: any, '_maid')
+	if maid then
+		maid:DoCleaning()
+	end
+
+	self._object:SetAttribute(rawget(self :: any, '_attributeName') :: string, nil)
+
+	table.clear(self :: any)
+	setmetatable(self :: any, nil)
+end
+
 return AttributeValue
