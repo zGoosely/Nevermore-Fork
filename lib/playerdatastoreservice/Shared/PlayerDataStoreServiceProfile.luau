@@ -31,6 +31,18 @@ local selectedProfile = ProfileData :: ProfileDefinition
 local selectedName = "ProfileData"
 local isLocked = false
 
+local function assertValidProfile(profileDefinition: ProfileDefinition, profileName: string)
+	assert(type(profileDefinition) == "table", "Bad profileDefinition")
+	assert(type(profileDefinition.Template) == "table", "Profile definition must provide Template")
+	assert(
+		type(profileDefinition.Schema) == "table"
+			and type(profileDefinition.Schema.ser) == "function"
+			and type(profileDefinition.Schema.des) == "function",
+		`{profileName}.Schema must be a single Squash codec exposing ser and des; wrap the per-key fields with Squash.record`
+	)
+	assert(isValidators(profileDefinition.Validators), `{profileName}.Validators must map paths to t checkers`)
+end
+
 --[=[
 	Selects the profile contract used by PlayerDataStoreService in the current realm. This
 	must happen before PlayerDataStoreService or PlayerDataStoreServiceClient initializes.
@@ -40,16 +52,8 @@ local isLocked = false
 	@param profileName string
 ]=]
 function PlayerDataStoreServiceProfile.Select(profileDefinition: ProfileDefinition, profileName: string)
-	assert(type(profileDefinition) == "table", "Bad profileDefinition")
-	assert(type(profileDefinition.Template) == "table", "Profile definition must provide Template")
-	assert(
-		type(profileDefinition.Schema) == "table"
-			and type(profileDefinition.Schema.ser) == "function"
-			and type(profileDefinition.Schema.des) == "function",
-		"Profile definition must provide a Squash Schema"
-	)
-	assert(isValidators(profileDefinition.Validators), "Profile definition Validators must map paths to t checkers")
 	assert(type(profileName) == "string" and profileName ~= "", "Bad profileName")
+	assertValidProfile(profileDefinition, profileName)
 
 	if isLocked then
 		assert(
@@ -91,6 +95,10 @@ end
 	@return ProfileDefinition
 ]=]
 function PlayerDataStoreServiceProfile.Lock(): ProfileDefinition
+	-- Validate here too: the default ProfileData never passes through Select, so
+	-- without this a malformed default Schema surfaces as a cryptic nil call deep
+	-- inside profile loading rather than a clear failure at initialization.
+	assertValidProfile(selectedProfile, selectedName)
 	isLocked = true
 	return selectedProfile
 end
