@@ -20,12 +20,15 @@ const WebhookTypes = require("WebhookTypes")
 const FATAL_PREFIX = "[Fatal] "
 const MAX_CONTEXT_DEPTH = 4
 const MAX_CONTEXT_ENTRIES = 64
-const MAX_EMBED_DESCRIPTION_LENGTH = 1000
 const MAX_EMBED_FIELD_LENGTH = 512
+const MAX_STACK_FRAMES = 10
+const FATAL_COLOR = Color3.fromRGB(237, 66, 69)
+const ERROR_COLOR = Color3.fromRGB(230, 126, 34)
 
 type ErrorContext = { [string]: any }
 
 export type ErrorReport = {
+	reportId: string,
 	schemaVersion: number,
 	severity: "error" | "fatal",
 	message: string,
@@ -52,9 +55,64 @@ local function truncate(value: string, maxLength: number): string
 	return `{string.sub(value, 1, maxLength - 3)}...`
 end
 
-local function formatCodeBlock(value: string, maxLength: number): string
-	const safeValue = string.gsub(truncate(value, maxLength - 8), "```", "'''")
-	return "```\n" .. safeValue .. "\n```"
+local function formatCodeBlock(value: string, maxLength: number, language: string?): string
+	const languagePrefix = if language then language else ""
+	const overhead = 8 + #languagePrefix
+	const safeValue = string.gsub(truncate(value, maxLength - overhead), "```", "'''")
+	return "```" .. languagePrefix .. "\n" .. safeValue .. "\n```"
+end
+
+local function formatInlineValue(value: string): string
+	const safeValue = string.gsub(value, "`", "'")
+	return "`" .. safeValue .. "`"
+end
+
+local function formatJsonValue(value: any, indentation: number): string
+	if not t.table(value) then
+		if value == nil then
+			return "null"
+		end
+
+		return HttpService:JSONEncode(value)
+	end
+
+	const prefix = string.rep("  ", indentation)
+	const childPrefix = string.rep("  ", indentation + 1)
+	const lines = {}
+	for key, nestedValue in value do
+		const encodedKey = HttpService:JSONEncode(tostring(key))
+		const encodedValue = formatJsonValue(nestedValue, indentation + 1)
+		table.insert(lines, `{childPrefix}{encodedKey}: {encodedValue}`)
+	end
+
+	if #lines == 0 then
+		return "{}"
+	end
+
+	table.sort(lines)
+	return "{\n" .. table.concat(lines, ",\n") .. "\n" .. prefix .. "}"
+end
+
+local function formatStackTrace(stack: string, maxLength: number): string
+	const lines = {}
+	for line in string.gmatch(stack, "[^\r\n]+") do
+		table.insert(lines, line)
+	end
+
+	if #lines > MAX_STACK_FRAMES then
+		const remainingFrameCount = #lines - MAX_STACK_FRAMES
+		while #lines > MAX_STACK_FRAMES do
+			table.remove(lines)
+		end
+		table.insert(lines, `...{remainingFrameCount} more frames`)
+	end
+
+	return formatCodeBlock(table.concat(lines, "\n"), maxLength)
+end
+
+local function formatTitle(message: string): string
+	const oneLineMessage = string.gsub(message, "[\r\n]+", " ")
+	return truncate(oneLineMessage, 256)
 end
 
 local function sanitizeValue(value: any, depth: number, seen: { [any]: boolean }): any
@@ -140,6 +198,7 @@ function ErrorReportingUtils.createReport(
 	safeContext.stack = nil
 
 	return {
+		reportId = HttpService:GenerateGUID(false),
 		schemaVersion = 1,
 		severity = if isFatal then "fatal" else "error",
 		message = normalizedMessage,
@@ -168,47 +227,76 @@ function ErrorReportingUtils.createEmbed(report: ErrorReport): WebhookTypes.Embe
 	assert(t.table(report), "Bad report")
 
 	const contextSuccess, contextJson = pcall(function(): string
-		return HttpService:JSONEncode(report.context)
+		return formatJsonValue(report.context, 0)
 	end)
 	const contextText = if contextSuccess then contextJson else "<context unavailable>"
 	const stackText = report.stack or "<stack unavailable>"
-	const environmentText = table.concat({
-		`Universe: {report.universeId}`,
-		`Place: {report.placeId}`,
-		`Place Version: {report.placeVersion}`,
-	}, "\n")
-	const runtimeText = table.concat({
-		`Job ID: {if report.jobId ~= "" then report.jobId else "<not available>"}`,
-		`Players: {report.playerCount}`,
-		`Realm: {report.realm}`,
-		`Studio: {tostring(report.isStudio)}`,
-	}, "\n")
+	const normalizedReportId = string.upper(string.gsub(report.reportId, "-", ""))
+	const shortReportId = string.sub(normalizedReportId, 1, 12)
+	const timestamp = DateTime.fromUnixTimestamp(report.timestamp)
+	const utcComponents = timestamp:ToUniversalTime()
+	const utcText = string.format(
+		"%04d-%02d-%02d %02d:%02d UTC",
+		utcComponents.Year,
+		utcComponents.Month,
+		utcComponents.Day,
+		utcComponents.Hour,
+		utcComponents.Minute
+	)
 	const fields: { WebhookTypes.EmbedField } = {
 		{
-			Name = "Environment",
-			Value = environmentText,
+			Name = "🌎 Universe",
+			Value = formatInlineValue(tostring(report.universeId)),
 			Inline = true,
 		},
 		{
-			Name = "Runtime",
-			Value = runtimeText,
+			Name = "📍 Place",
+			Value = formatInlineValue(tostring(report.placeId)),
 			Inline = true,
 		},
 		{
-			Name = "Context",
-			Value = formatCodeBlock(contextText, MAX_EMBED_FIELD_LENGTH),
+			Name = "👥 Players",
+			Value = formatInlineValue(tostring(report.playerCount)),
+			Inline = true,
 		},
 		{
-			Name = "Stack trace",
-			Value = formatCodeBlock(stackText, MAX_EMBED_FIELD_LENGTH),
+			Name = "💻 Studio",
+			Value = formatInlineValue(if report.isStudio then "Yes" else "No"),
+			Inline = true,
+		},
+		{
+			Name = "🆔 Job",
+			Value = formatInlineValue(if report.jobId ~= "" then report.jobId else "<not available>"),
+			Inline = true,
+		},
+		{
+			Name = "🖥️ Realm",
+			Value = formatInlineValue(report.realm),
+			Inline = true,
+		},
+		{
+			Name = "📄 Context",
+			Value = formatCodeBlock(contextText, MAX_EMBED_FIELD_LENGTH, "json"),
+		},
+		{
+			Name = "📜 Stack Trace",
+			Value = formatStackTrace(stackText, MAX_EMBED_FIELD_LENGTH),
+		},
+		{
+			Name = "🕒 Time",
+			Value = `{utcText}\n<t:{report.timestamp}:R>`,
 		},
 	}
 
 	return {
-		Title = if report.severity == "fatal" then "Fatal error report" else "Error report",
-		Description = `**Message**\n{formatCodeBlock(report.message, MAX_EMBED_DESCRIPTION_LENGTH)}`,
-		Timestamp = DateTime.fromUnixTimestamp(report.timestamp),
-		Color = if report.severity == "fatal" then Color3.fromRGB(220, 50, 50) else Color3.fromRGB(240, 160, 40),
+		Author = {
+			Name = if report.severity == "fatal"
+				then `❌ Fatal Error • Report #{shortReportId}`
+				else `🟠 Error • Report #{shortReportId}`,
+		},
+		Title = formatTitle(report.message),
+		Timestamp = timestamp,
+		Color = if report.severity == "fatal" then FATAL_COLOR else ERROR_COLOR,
 		Footer = {
 			Text = `Message type: {report.messageType}`,
 		},

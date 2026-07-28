@@ -22,6 +22,8 @@ ErrorReportingUtils.logFatal("Failed to initialize the match", {
 })
 ```
 
-Each report becomes one Discord embed containing the message, stack, context,
-place metadata, player count, realm, and Studio status. Up to two reports are
-sent per webhook request to stay within Discord's combined embed limit.
+Each report becomes one Discord embed containing a referenceable report ID,
+message, stack, context, place metadata, player count, realm, and Studio status.
+Timestamps include both UTC text and Discord's live relative-time display. Up to
+two reports are sent per webhook request to stay within Discord's combined embed
+limit.
