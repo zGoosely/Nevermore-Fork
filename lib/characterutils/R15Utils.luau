@@ -10,6 +10,19 @@ local R15Utils = {}
 export type R15Side = "Left" | "Right"
 
 --[=[
+	Returns whether an instance can be driven by the Motor6D stack.
+
+	This predicate is intentionally allocation-free because it runs while
+	observing every descendant of a character.
+
+	@param instance Instance
+	@return boolean
+]=]
+function R15Utils.isAnimationConstraintOrMotor6D(instance: Instance): boolean
+	return instance:IsA("Motor6D") or instance:IsA("AnimationConstraint")
+end
+
+--[=[
 	Searches the rig for an attachment
 	@param character Model
 	@param partName string
