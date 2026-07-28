@@ -52,6 +52,11 @@ local function truncate(value: string, maxLength: number): string
 	return `{string.sub(value, 1, maxLength - 3)}...`
 end
 
+local function formatCodeBlock(value: string, maxLength: number): string
+	const safeValue = string.gsub(truncate(value, maxLength - 8), "```", "'''")
+	return "```\n" .. safeValue .. "\n```"
+end
+
 local function sanitizeValue(value: any, depth: number, seen: { [any]: boolean }): any
 	if value == nil or t.string(value) or t.boolean(value) then
 		return value
@@ -167,12 +172,12 @@ function ErrorReportingUtils.createEmbed(report: ErrorReport): WebhookTypes.Embe
 	end)
 	const contextText = if contextSuccess then contextJson else "<context unavailable>"
 	const stackText = report.stack or "<stack unavailable>"
-	const metadataText = table.concat({
-		`Severity: {report.severity}`,
-		`Message Type: {report.messageType}`,
+	const environmentText = table.concat({
 		`Universe: {report.universeId}`,
 		`Place: {report.placeId}`,
 		`Place Version: {report.placeVersion}`,
+	}, "\n")
+	const runtimeText = table.concat({
 		`Job ID: {if report.jobId ~= "" then report.jobId else "<not available>"}`,
 		`Players: {report.playerCount}`,
 		`Realm: {report.realm}`,
@@ -180,20 +185,33 @@ function ErrorReportingUtils.createEmbed(report: ErrorReport): WebhookTypes.Embe
 	}, "\n")
 	const fields: { WebhookTypes.EmbedField } = {
 		{
-			Name = "Metadata",
-			Value = truncate(metadataText, MAX_EMBED_FIELD_LENGTH),
+			Name = "Environment",
+			Value = environmentText,
+			Inline = true,
+		},
+		{
+			Name = "Runtime",
+			Value = runtimeText,
+			Inline = true,
 		},
 		{
 			Name = "Context",
-			Value = truncate(contextText, MAX_EMBED_FIELD_LENGTH),
+			Value = formatCodeBlock(contextText, MAX_EMBED_FIELD_LENGTH),
+		},
+		{
+			Name = "Stack trace",
+			Value = formatCodeBlock(stackText, MAX_EMBED_FIELD_LENGTH),
 		},
 	}
 
 	return {
-		Title = truncate(`[{string.upper(report.severity)}] {report.message}`, 256),
-		Description = truncate(stackText, MAX_EMBED_DESCRIPTION_LENGTH),
+		Title = if report.severity == "fatal" then "Fatal error report" else "Error report",
+		Description = `**Message**\n{formatCodeBlock(report.message, MAX_EMBED_DESCRIPTION_LENGTH)}`,
 		Timestamp = DateTime.fromUnixTimestamp(report.timestamp),
 		Color = if report.severity == "fatal" then Color3.fromRGB(220, 50, 50) else Color3.fromRGB(240, 160, 40),
+		Footer = {
+			Text = `Message type: {report.messageType}`,
+		},
 		Fields = fields,
 	}
 end
