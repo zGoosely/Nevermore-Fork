@@ -12,6 +12,7 @@ This is the target style for all new and changed code in `lib/`. Some packages a
 - Check the packages already available in `lib/` before creating a module or implementing functionality from scratch.
 - Format every changed Luau file with StyLua. Tabs, indentation, spacing, double quotes, and blank lines are part of correctness.
 - Keep service public APIs small. Services orchestrate lifecycle and dependencies; they are not miscellaneous function containers.
+- Do not add redundant `_isStarted` or `_isDestroyed` service fields. `ServiceBag` owns service lifecycle ordering, and the service's `Maid` owns cleanup; use those lifecycle mechanisms instead of tracking duplicate state.
 
 ## Pick the right module kind
 
@@ -287,6 +288,7 @@ Service responsibilities:
 - `Init` is the first method after the exported type. It validates one-time initialization, stores the `ServiceBag`, creates the maid, and resolves every service dependency. It should not depend on another service having started.
 - `Start` connects runtime behavior after all services have initialized. Put player observers, network listeners, and startup side effects here when they do not need to exist during dependency setup.
 - `Destroy` releases every connection, promise, object, and callback owned by the service.
+- Do not track initialization or destruction with redundant boolean fields such as `_isStarted` or `_isDestroyed`; `ServiceBag` controls lifecycle ordering and `Maid` cleanup controls owned resources.
 - Resolve services only in `Init`. Never call `GetService` from `Start`, another method, or a callback.
 - Store every resolved service on `self` and declare it in the exported type, for example `_cmdrService: CmdrService.CmdrService`. This keeps the complete dependency graph visible at the top of the module.
 - Set `ServerOnly = true` on server-only services. Client mirrors use the `ServiceClient` suffix and must not pretend client state is authoritative.
