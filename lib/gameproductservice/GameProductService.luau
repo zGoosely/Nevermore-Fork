@@ -18,6 +18,7 @@ const Players = game:GetService("Players")
 const require = require("../Loader").load()
 
 const CmdrService = require("CmdrService")
+const ErrorReportingUtils = require("ErrorReportingUtils")
 const GameConfigAssetTypes = require("GameConfigAssetTypes")
 const GameConfigService = require("GameConfigService")
 const GameProductHandlerResult = require("GameProductHandlerResult")
@@ -125,6 +126,13 @@ function GameProductService.Init(self: GameProductService, serviceBag: ServiceBa
 			return self:_processReceipt(receiptInfo :: any)
 		end)
 		if not succeeded then
+			ErrorReportingUtils.logFatal(
+				"Developer product receipt processing failed",
+				ErrorReportingUtils.createFailureContext(result, {
+					playerId = (receiptInfo :: any).PlayerId,
+					productId = (receiptInfo :: any).ProductId,
+				})
+			)
 			warn(`[GameProductService] - Receipt processing failed and will retry: {result}`)
 			return Enum.ProductPurchaseDecision.NotProcessedYet
 		end
@@ -770,12 +778,30 @@ function GameProductService._dispatchCallbacks(self: GameProductService, context
 
 		local succeeded, result = pcall(entry.callback, context)
 		if not succeeded then
+			ErrorReportingUtils.logFatal(
+				"Game product purchase callback failed",
+				ErrorReportingUtils.createFailureContext(result, {
+					playerId = context.Player.UserId,
+					assetType = context.AssetType,
+					assetId = context.AssetId,
+					assetKey = context.AssetKey,
+				})
+			)
 			warn(`[GameProductService] - Purchase callback failed: {result}`)
 			return GameProductHandlerResult.RETRY
 		end
 		if Promise.isPromise(result) then
 			succeeded, result = (result :: Promise.Promise<any>):Yield()
 			if not succeeded then
+				ErrorReportingUtils.logFatal(
+					"Game product purchase callback promise failed",
+					ErrorReportingUtils.createFailureContext(result, {
+						playerId = context.Player.UserId,
+						assetType = context.AssetType,
+						assetId = context.AssetId,
+						assetKey = context.AssetKey,
+					})
+				)
 				warn(`[GameProductService] - Purchase callback promise failed: {result}`)
 				return GameProductHandlerResult.RETRY
 			end
@@ -786,6 +812,15 @@ function GameProductService._dispatchCallbacks(self: GameProductService, context
 		elseif result == GameProductHandlerResult.RETRY or result == false then
 			return GameProductHandlerResult.RETRY
 		elseif result ~= nil and result ~= GameProductHandlerResult.SKIP then
+			ErrorReportingUtils.logFatal(
+				"Game product purchase callback returned an invalid result",
+				ErrorReportingUtils.createFailureContext(tostring(result), {
+					playerId = context.Player.UserId,
+					assetType = context.AssetType,
+					assetId = context.AssetId,
+					assetKey = context.AssetKey,
+				})
+			)
 			warn(`[GameProductService] - Invalid purchase callback result {tostring(result)}; retrying safely`)
 			return GameProductHandlerResult.RETRY
 		end
@@ -837,6 +872,13 @@ function GameProductService._processReceipt(self: GameProductService, receiptInf
 		self:_finishPendingPrompt(player, GameConfigAssetTypes.PRODUCT, productId, true)
 	end)
 	if not notified then
+		ErrorReportingUtils.logFatal(
+			"Product was granted but purchase notification failed",
+			ErrorReportingUtils.createFailureContext(notificationError, {
+				playerId = player.UserId,
+				productId = productId,
+			})
+		)
 		warn(`[GameProductService] - Product was granted but purchase notification failed: {notificationError}`)
 	end
 	return Enum.ProductPurchaseDecision.PurchaseGranted
@@ -872,6 +914,13 @@ function GameProductService._handlePassPromptFinished(
 	}
 	const result = self:_dispatchCallbacks(context)
 	if result == GameProductHandlerResult.RETRY then
+		ErrorReportingUtils.logFatal(
+			"Game pass purchase callback requested an unsupported retry",
+			ErrorReportingUtils.createFailureContext("Game passes cannot be retried through ProcessReceipt", {
+				playerId = player.UserId,
+				passId = passId,
+			})
+		)
 		warn(`[GameProductService] - Pass callback requested a retry, but game-pass prompts have no retryable receipt`)
 	end
 	self:_recordPurchase(player, GameConfigAssetTypes.PASS, passId, context)

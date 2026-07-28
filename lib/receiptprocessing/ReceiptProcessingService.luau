@@ -11,6 +11,7 @@ local MarketplaceService = game:GetService("MarketplaceService")
 local RunService = game:GetService("RunService")
 
 local EnumUtils = require("EnumUtils")
+local ErrorReportingUtils = require("ErrorReportingUtils")
 local Maid = require("Maid")
 local Observable = require("Observable")
 local ObservableSubscriptionTable = require("ObservableSubscriptionTable")
@@ -155,12 +156,33 @@ function ReceiptProcessingService:_handleProcessReceiptAsync(receiptInfo: Receip
 
 	-- Chain of command this thing
 	for _, data in self._processors do
-		local result = data.processor(receiptInfo)
+		local called, result = pcall(data.processor, receiptInfo)
+		if not called then
+			ErrorReportingUtils.logFatal(
+				"Receipt processor threw an error",
+				ErrorReportingUtils.createFailureContext(result, {
+					playerId = receiptInfo.PlayerId,
+					productId = receiptInfo.ProductId,
+					purchaseId = receiptInfo.PurchaseId,
+					processorStack = data.traceback,
+				})
+			)
+			continue
+		end
 
 		-- Unpack pro
 		if Promise.isPromise(result) then
 			local ok, promiseResult = result:Yield()
 			if not ok then
+				ErrorReportingUtils.logFatal(
+					"Receipt processor promise failed",
+					ErrorReportingUtils.createFailureContext(promiseResult, {
+						playerId = receiptInfo.PlayerId,
+						productId = receiptInfo.ProductId,
+						purchaseId = receiptInfo.PurchaseId,
+						processorStack = data.traceback,
+					})
+				)
 				warn(
 					string.format(
 						"[ReceiptProcessingService._handleProcessReceiptAsync] - Promise failed with %q.\n%s",
@@ -180,6 +202,15 @@ function ReceiptProcessingService:_handleProcessReceiptAsync(receiptInfo: Receip
 		elseif result == nil then
 			continue
 		else
+			ErrorReportingUtils.logFatal(
+				"Receipt processor returned an invalid purchase decision",
+				ErrorReportingUtils.createFailureContext(`Received {typeof(result)}`, {
+					playerId = receiptInfo.PlayerId,
+					productId = receiptInfo.ProductId,
+					purchaseId = receiptInfo.PurchaseId,
+					processorStack = data.traceback,
+				})
+			)
 			warn(
 				string.format(
 					"[ReceiptProcessingService._handleProcessReceiptAsync] - Got unexpected result of type %q from receiptInfo.\n%s",

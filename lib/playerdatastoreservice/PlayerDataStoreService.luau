@@ -17,6 +17,7 @@ const AsyncSemaphore = require("AsyncSemaphore")
 const AttributeUtils = require("AttributeUtils")
 const BindToCloseService = require("BindToCloseService")
 const CmdrService = require("CmdrService")
+const ErrorReportingUtils = require("ErrorReportingUtils")
 const Maid = require("Maid")
 const Observable = require("Observable")
 const ObservableMap = require("ObservableMap")
@@ -746,7 +747,16 @@ function PlayerDataStoreService.SaveProfile(self: PlayerDataStoreService, player
 	const promise = PromiseUtils.fromSignal((profile :: any).OnAfterSave)
 	profile:Save()
 
-	return PromiseUtils.timeout(SAVE_TIMEOUT_SECONDS, promise)
+	return PromiseUtils.timeout(SAVE_TIMEOUT_SECONDS, promise):Catch(function(errorMessage)
+		ErrorReportingUtils.logFatal(
+			"Player profile save timed out or failed",
+			ErrorReportingUtils.createFailureContext(errorMessage, {
+				playerId = player.UserId,
+				playerName = player.Name,
+			})
+		)
+		return Promise.rejected(errorMessage)
+	end)
 end
 
 --[=[
@@ -1156,6 +1166,15 @@ function PlayerDataStoreService._loadProfileAsync(self: PlayerDataStoreService, 
 		})
 
 		if not profile or player.Parent ~= Players then
+			if not profile and player.Parent == Players then
+				ErrorReportingUtils.logFatal(
+					"Player profile failed to load",
+					ErrorReportingUtils.createFailureContext("ProfileStore returned no active profile", {
+						playerId = userId,
+						playerName = player.Name,
+					})
+				)
+			end
 			if profile and profile:IsActive() then
 				profile:EndSession()
 			end
@@ -1174,6 +1193,16 @@ function PlayerDataStoreService._loadProfileAsync(self: PlayerDataStoreService, 
 			self._profileList:Remove(player)
 
 			if player.Parent == Players then
+				ErrorReportingUtils.logFatal(
+					"Active player profile session ended unexpectedly",
+					ErrorReportingUtils.createFailureContext(
+						"ProfileStore session ended while the player was connected",
+						{
+							playerId = userId,
+							playerName = player.Name,
+						}
+					)
+				)
 				player:Kick("There has been an error with your data, please rejoin.")
 			end
 		end)
@@ -1217,8 +1246,19 @@ function PlayerDataStoreService._startLoadingProfiles(self: PlayerDataStoreServi
 					AttributeUtils.setAttribute(player, keyName, (profile.Data :: any)[keyName])
 				end
 			end)
-			:Catch(function(...): ...any
-				warn(`[PlayerDataStoreService] - Promise failed during profile loading for {player.UserId} ({...})`)
+			:Catch(function(errorMessage: any): ...any
+				if player.Parent == Players then
+					ErrorReportingUtils.logFatal(
+						"Player profile loading promise failed",
+						ErrorReportingUtils.createFailureContext(errorMessage, {
+							playerId = player.UserId,
+							playerName = player.Name,
+						})
+					)
+				end
+				warn(
+					`[PlayerDataStoreService] - Promise failed during profile loading for {player.UserId} ({errorMessage})`
+				)
 			end)
 	end))
 end

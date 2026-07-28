@@ -319,11 +319,30 @@ function ErrorReportingUtils.logFatal(message: string, context: { [string]: any 
 
 	const safeContext = ErrorReportingUtils.sanitizeContext(context or {})
 	safeContext.fatal = true
-	safeContext.stack = debug.traceback(nil, 2)
+	if not t.string(safeContext.stack) then
+		safeContext.stack = debug.traceback(nil, 2)
+	end
 
 	local escapedMessage = string.gsub(message, "{", "{{")
 	escapedMessage = string.gsub(escapedMessage, "}", "}}")
 	LogService:Error(`{FATAL_PREFIX}{escapedMessage}`, safeContext)
+end
+
+--[=[
+	Creates a context table containing an error value and its full traceback.
+
+	@within ErrorReportingUtils
+	@param errorValue any
+	@param context { [string]: any }?
+	@return { [string]: any }
+]=]
+function ErrorReportingUtils.createFailureContext(errorValue: any, context: { [string]: any }?): ErrorContext
+	assert(t.optional(t.table)(context), "Bad context")
+
+	const result = ErrorReportingUtils.sanitizeContext(context or {})
+	result.error = tostring(errorValue)
+	result.stack = debug.traceback(tostring(errorValue), 2)
+	return result
 end
 
 return ErrorReportingUtils

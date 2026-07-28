@@ -24,6 +24,7 @@ const GameConfigPicker = require("GameConfigPicker")
 const GameConfigServiceConstants = require("GameConfigServiceConstants")
 const GameConfigTranslator = require("GameConfigTranslator")
 const GameConfigUtils = require("GameConfigUtils")
+const ErrorReportingUtils = require("ErrorReportingUtils")
 const Maid = require("Maid")
 const MarketplaceServiceCache = require("MarketplaceServiceCache")
 const PreferredParentUtils = require("PreferredParentUtils")
@@ -70,16 +71,31 @@ function GameConfigService.Init(self: GameConfigService, serviceBag: ServiceBag.
 end
 
 function GameConfigService.Start(self: GameConfigService): ()
+	local function registerConfigFolder(config: Folder)
+		const succeeded, errorMessage = pcall(function()
+			self:RegisterConfigFolder(config)
+		end)
+		if not succeeded then
+			ErrorReportingUtils.logFatal(
+				"Failed to register game configuration",
+				ErrorReportingUtils.createFailureContext(errorMessage, {
+					configName = config.Name,
+					configPath = config:GetFullName(),
+				})
+			)
+		end
+	end
+
 	const parent = self:GetPreferredParent()
 	for _, child in parent:GetChildren() do
 		if child:IsA("Folder") then
-			self:RegisterConfigFolder(child)
+			registerConfigFolder(child)
 		end
 	end
 
 	self._maid:GiveTask(parent.ChildAdded:Connect(function(child)
 		if child:IsA("Folder") then
-			self:RegisterConfigFolder(child)
+			registerConfigFolder(child)
 		end
 	end))
 	self._maid:GiveTask(parent.DescendantAdded:Connect(function(descendant)
@@ -103,10 +119,16 @@ function GameConfigService.RegisterConfigFolder(self: GameConfigService, config:
 	if config:GetAttribute(GameConfigConstants.GAME_ID_ATTRIBUTE) == nil then
 		config:SetAttribute(GameConfigConstants.GAME_ID_ATTRIBUTE, game.GameId)
 	end
-	assert(
-		type(config:GetAttribute(GameConfigConstants.GAME_ID_ATTRIBUTE)) == "number",
-		"Config GameId attribute must be a number"
-	)
+	if type(config:GetAttribute(GameConfigConstants.GAME_ID_ATTRIBUTE)) ~= "number" then
+		ErrorReportingUtils.logFatal(
+			"Game configuration has an invalid GameId",
+			ErrorReportingUtils.createFailureContext("Config GameId attribute must be a number", {
+				configName = config.Name,
+				configPath = config:GetFullName(),
+			})
+		)
+		return config
+	end
 
 	if not self._binders.GameConfig:HasTag(config) then
 		self._binders.GameConfig:Bind(config)
@@ -352,6 +374,15 @@ function GameConfigService._tryRegisterAssetFolder(self: GameConfigService, asse
 		if typeFolder.Name == GameConfigAssetTypeUtils.getPlural(assetType) then
 			const assetId = asset:GetAttribute(GameConfigAssetConstants.ASSET_ID_ATTRIBUTE)
 			if not GameConfigAssetUtils.isValidAssetId(assetType, assetId) then
+				ErrorReportingUtils.logFatal(
+					"Game configuration has an invalid asset ID",
+					ErrorReportingUtils.createFailureContext("Asset ID failed validation", {
+						assetName = asset.Name,
+						assetPath = asset:GetFullName(),
+						assetType = assetType,
+						assetId = tostring(assetId),
+					})
+				)
 				return
 			end
 
