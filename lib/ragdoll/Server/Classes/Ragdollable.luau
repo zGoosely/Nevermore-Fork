@@ -22,6 +22,7 @@ local Rx = require("Rx")
 local RxBrioUtils = require("RxBrioUtils")
 local RxRagdollUtils = require("RxRagdollUtils")
 local ServiceBag = require("ServiceBag")
+local t = require("t")
 
 local Ragdollable = setmetatable({}, RagdollableBase)
 Ragdollable.ClassName = "Ragdollable"
@@ -44,6 +45,8 @@ export type Ragdollable =
 	@return Ragdollable
 ]=]
 function Ragdollable.new(humanoid: Humanoid, serviceBag: ServiceBag.ServiceBag): Ragdollable
+	assert(t.instanceIsA("Humanoid")(humanoid), "Bad humanoid")
+
 	local self: Ragdollable = setmetatable(RagdollableBase.new(humanoid) :: any, Ragdollable)
 
 	self._serviceBag = assert(serviceBag, "No serviceBag")
@@ -115,7 +118,16 @@ function Ragdollable._setRagdollEnabled(self: Ragdollable, isEnabled: boolean): 
 	end
 end
 
+local function newRagdollable(instance: Instance, serviceBag: ServiceBag.ServiceBag): Ragdollable?
+	if not t.instanceIsA("Humanoid")(instance) then
+		warn(string.format("[Ragdollable] Ignoring non-Humanoid tag on %s", instance:GetFullName()))
+		return nil
+	end
+
+	return Ragdollable.new(instance :: Humanoid, serviceBag)
+end
+
 return PlayerHumanoidBinder.new(
 		"Ragdollable",
-		Ragdollable :: any
+		newRagdollable :: any
 	) :: PlayerHumanoidBinder.PlayerHumanoidBinder<Ragdollable>
