@@ -111,37 +111,37 @@ end
 function AccelTween:__index(index)
 	if AccelTween[index] then
 		return AccelTween[index]
-	elseif index == 'p' then
+	elseif index == "p" then
 		local pos, _ = self:_getState(os.clock())
 		return pos
-	elseif index == 'v' then
+	elseif index == "v" then
 		local _, vel = self:_getState(os.clock())
 		return vel
-	elseif index == 'a' then
+	elseif index == "a" then
 		return self._accel
-	elseif index == 't' then
+	elseif index == "t" then
 		return self._y1
-	elseif index == 'rtime' then
+	elseif index == "rtime" then
 		local time = os.clock()
 		return time < self._t1 and self._t1 - time or 0
 	else
-		error(string.format('Bad index %q', tostring(index)))
+		error(string.format("Bad index %q", tostring(index)))
 	end
 end
 
 function AccelTween:__newindex(index, value)
-	if index == 'p' then
+	if index == "p" then
 		self:_setState(value, nil, nil, nil)
-	elseif index == 'v' then
+	elseif index == "v" then
 		self:_setState(nil, value, nil, nil)
-	elseif index == 'a' then
+	elseif index == "a" then
 		self:_setState(nil, nil, value, nil)
-	elseif index == 't' then
+	elseif index == "t" then
 		self:_setState(nil, nil, nil, value)
-	elseif index == 'pt' then
+	elseif index == "pt" then
 		self:_setState(value, 0, nil, value)
 	else
-		error(string.format('Bad index %q', tostring(index)))
+		error(string.format("Bad index %q", tostring(index)))
 	end
 end
 

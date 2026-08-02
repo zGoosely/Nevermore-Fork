@@ -1,5 +1,21 @@
 # GameProductService
 
+`GameProductDataService` is also available as a compatibility facade for packages that use the upstream
+Nevermore purchase-data API. It delegates prompting, ownership, session purchase state, and purchase
+observation to this fork's `GameProductService`/`GameProductServiceClient` implementations.
+
+```luau
+const GameProductDataService = require("GameProductDataService")
+
+local dataService = serviceBag:GetService(GameProductDataService)
+dataService:PromisePlayerOwnership(player, "pass", "x2Coins"):Then(function(owns)
+	print("Owns pass:", owns)
+end)
+```
+
+The compatibility layer supports the fork's `pass` and `product` asset types. Bundle, asset, membership,
+and subscription trackers are not present in this repository.
+
 `GameProductService` is the purchase boundary between `GameConfigService`, Roblox
 `MarketplaceService`, and your game-specific fulfillment code. It resolves configured
 asset keys, opens one purchase prompt per player, processes developer-product receipts,
