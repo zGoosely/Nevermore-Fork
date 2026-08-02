@@ -75,6 +75,12 @@ export type ServiceBag =
 	))
 	& BaseObject.BaseObject<any>
 
+type ServiceDefinition<T> = {
+	Init: (self: T, serviceBag: ServiceBag) -> (),
+}
+
+type ServiceType<T> = ServiceDefinition<T> | ModuleScript
+
 --[=[
 	Constructs a new ServiceBag
 
@@ -127,8 +133,8 @@ end
 	Retrieves the service, ensuring initialization if we are in
 	the initialization phase.
 
-	The return is inferred from what you assign it to, so annotate the
-	destination with the service's own exported type:
+	The return type is inferred from the service definition's `Init` method,
+	so the service's own exported type is preserved:
 
 	```lua
 	export type MyThing = typeof(setmetatable(
@@ -141,16 +147,10 @@ end
 	self._playerDataStoreService = self._serviceBag:GetService(PlayerDataStoreService)
 	```
 
-	`serviceType` is deliberately loose. What comes back is not the module you
-	pass in -- it is a fresh service built with that module as its `__index`, as
-	the module's exported type describes. Tying the return to the argument's type
-	instead would hand back the module's own type, which is a different type that
-	happens to share its name, hence errors reading `Expected 'X' but got 'X'`.
-
-	@param serviceType ServiceType
-	@return Service
+	@param serviceType ServiceType<T>
+	@return T
 ]=]
-function ServiceBag.GetService<T>(self: ServiceBag, serviceType: any): T
+function ServiceBag.GetService<T>(self: ServiceBag, serviceType: ServiceType<T>): T
 	if typeof(serviceType) == "Instance" then
 		serviceType = (require :: any)(serviceType)
 	end
