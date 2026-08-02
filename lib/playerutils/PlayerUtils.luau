@@ -1,25 +1,14 @@
 --!strict
 
-local LocalizationService = game:GetService('LocalizationService')
-local Players = game:GetService('Players')
-local RunService = game:GetService('RunService')
-local TextChatService = game:GetService('TextChatService')
-local VoiceChatService = game:GetService('VoiceChatService')
+local LocalizationService = game:GetService("LocalizationService")
+local Players = game:GetService("Players")
+local TextChatService = game:GetService("TextChatService")
+local VoiceChatService = game:GetService("VoiceChatService")
 
 const require = require("../Loader").load()
 
-local FriendUtils = require('FriendUtils')
-local Promise = require('Promise')
-
-local LocalPlayer = nil
-local PlayerScripts = nil
-local PlayerModule = nil
-
-if RunService:IsClient() then
-	LocalPlayer = Players.LocalPlayer
-	PlayerScripts = LocalPlayer:WaitForChild('PlayerScripts')
-	PlayerModule = PlayerScripts:WaitForChild('PlayerModule')
-end
+local FriendUtils = require("FriendUtils")
+local Promise = require("Promise")
 
 export type UserInfo = {
 	Username: string,
@@ -47,7 +36,7 @@ function PlayerUtils.clearTools(player: Player)
 	local backpack = player.Backpack
 
 	for _, tool in ipairs(backpack:GetChildren()) do
-		if tool:IsA('Tool') then
+		if tool:IsA("Tool") then
 			tool:Destroy()
 		end
 	end
@@ -62,7 +51,7 @@ end
 	@return RBXScriptConnection -- The PlayerAdded connection
 ]=]
 function PlayerUtils.safePlayerAdded(Callback: (Player) -> nil): RBXScriptConnection
-	assert(typeof(Callback) == 'function', 'Exception on safePlayerAdded: Callback must be type function')
+	assert(typeof(Callback) == "function", "Exception on safePlayerAdded: Callback must be type function")
 
 	for _, Player in ipairs(Players:GetPlayers()) do
 		task.spawn(Callback, Player)
@@ -106,7 +95,7 @@ function PlayerUtils.formatNameWithDisplay(player: Player): string
 	if name:lower() == displayName:lower() then
 		return displayName
 	else
-		return ('%s (@%s)'):format(displayName, name)
+		return ("%s (@%s)"):format(displayName, name)
 	end
 end
 
@@ -123,7 +112,7 @@ end
 	@return string -- Formatted name
 ]=]
 function PlayerUtils.formatName(player: Player): string
-	assert(typeof(player) == 'Instance' and player:IsA('Player'), 'Bad player')
+	assert(typeof(player) == "Instance" and player:IsA("Player"), "Bad player")
 
 	local name = player.Name
 	local displayName = player.DisplayName
@@ -148,7 +137,7 @@ function PlayerUtils.formatDisplayName(name: string, displayName: string): strin
 	if string.lower(name) == string.lower(displayName) then
 		return displayName
 	else
-		return string.format('%s (@%s)', displayName, name)
+		return string.format("%s (@%s)", displayName, name)
 	end
 end
 
@@ -158,9 +147,9 @@ end
 	@return string
 ]=]
 function PlayerUtils.formatDisplayNameFromUserInfo(userInfo: UserInfo): string
-	assert(type(userInfo) == 'table', 'Bad userInfo')
-	assert(type(userInfo.Username) == 'string', 'Bad userInfo.Username')
-	assert(type(userInfo.DisplayName) == 'string', 'Bad userInfo.DisplayName')
+	assert(type(userInfo) == "table", "Bad userInfo")
+	assert(type(userInfo.Username) == "string", "Bad userInfo.Username")
+	assert(type(userInfo.DisplayName) == "string", "Bad userInfo.DisplayName")
 
 	local result = PlayerUtils.formatDisplayName(userInfo.Username, userInfo.DisplayName)
 
@@ -178,7 +167,7 @@ end
 	@return string
 ]=]
 function PlayerUtils.addVerifiedBadgeToName(name: string): string
-	return string.format('%s %s', name, utf8.char(0xE000))
+	return string.format("%s %s", name, utf8.char(0xE000))
 end
 
 --[=[
@@ -191,7 +180,7 @@ function PlayerUtils.getPlayerRegionAsync(player: Player)
 	local success, response = pcall(LocalizationService.GetCountryRegionForPlayerAsync, LocalizationService, player)
 
 	if success then
-		return Promise.resolve(response)
+		return Promise.resolved(response)
 	else
 		return Promise.rejected(response)
 	end
@@ -217,7 +206,7 @@ function PlayerUtils.getFriendPagesAsync(player: Player)
 		end
 
 		if not pages then
-			return reject('Failure to get pages')
+			return reject("Failure to get pages")
 		end
 
 		return resolve(pages)
@@ -231,7 +220,7 @@ end
 	@return Promise<FriendPages>
 ]=]
 function PlayerUtils.promiseFriendPages(userId: number): Promise.Promise<FriendPages>
-	assert(type(userId) == 'number', 'Bad userId')
+	assert(type(userId) == "number", "Bad userId")
 
 	return Promise.new(function(resolve, reject)
 		local pages
@@ -243,7 +232,7 @@ function PlayerUtils.promiseFriendPages(userId: number): Promise.Promise<FriendP
 			return reject(err)
 		end
 		if not pages then
-			return reject('failed to get a friends page')
+			return reject("failed to get a friends page")
 		end
 
 		return resolve(pages)
@@ -280,11 +269,8 @@ end
 	@param limitMaxFriends number?
 	@return Promise<{ FriendData }>
 ]=]
-function PlayerUtils.promiseAllFriends(
-	userId: number,
-	limitMaxFriends: number?
-): Promise.Promise<{ FriendData }>
-	assert(type(userId) == 'number', 'Bad userId')
+function PlayerUtils.promiseAllFriends(userId: number, limitMaxFriends: number?): Promise.Promise<{ FriendData }>
+	assert(type(userId) == "number", "Bad userId")
 
 	return PlayerUtils.promiseFriendPages(userId):Then(function(pages: FriendPages)
 		return Promise.spawn(function(resolve, _)
@@ -332,14 +318,14 @@ end
 	@return () -> FriendData?
 ]=]
 function PlayerUtils.iterateFriendsYielding(pages: FriendPages): () -> FriendData?
-	assert(pages, 'Bad pages')
+	assert(pages, "Bad pages")
 
 	return coroutine.wrap(function()
 		while true do
 			for _, userData in pages:GetCurrentPage() do
-				assert(type(userData.Id) == 'number', 'Bad userData.Id')
-				assert(type(userData.Username) == 'string', 'Bad userData.Username')
-				assert(type(userData.IsOnline) == 'boolean', 'Bad userData.IsOnline')
+				assert(type(userData.Id) == "number", "Bad userData.Id")
+				assert(type(userData.Username) == "string", "Bad userData.Username")
+				assert(type(userData.IsOnline) == "boolean", "Bad userData.IsOnline")
 
 				coroutine.yield(userData)
 			end
@@ -399,14 +385,14 @@ function PlayerUtils.promiseStudioServiceUserId(): Promise.Promise<number>
 	return Promise.new(function(resolve, reject)
 		local userId
 		local ok, err = pcall(function()
-			local StudioService = game:GetService('StudioService')
+			local StudioService = game:GetService("StudioService")
 			userId = StudioService:GetUserId()
 		end)
 
 		if not ok then
 			return reject(err)
-		elseif type(userId) ~= 'number' then
-			return reject('no userId returned')
+		elseif type(userId) ~= "number" then
+			return reject("no userId returned")
 		else
 			return resolve(userId)
 		end
@@ -422,7 +408,7 @@ function PlayerUtils.promiseCurrentStudioUserId(): Promise.Promise<number>
 	return PlayerUtils.promiseStudioServiceUserId():Catch(function(...)
 		warn(...)
 
-		local player = Players:FindFirstChildWhichIsA('Player')
+		local player = Players:FindFirstChildWhichIsA("Player")
 		if player then
 			return player.UserId
 		end
@@ -501,7 +487,7 @@ end
 	@return Promise<boolean>
 ]=]
 function PlayerUtils.promiseIsVoiceEnabledForPlayer(player: Player): Promise.Promise<boolean>
-	assert(typeof(player) == 'Instance' and player:IsA('Player'), 'Bad player')
+	assert(typeof(player) == "Instance" and player:IsA("Player"), "Bad player")
 
 	return PlayerUtils.promiseIsVoiceEnabledForUserId(player.UserId)
 end
@@ -513,7 +499,7 @@ end
 	@return Promise<boolean>
 ]=]
 function PlayerUtils.promiseIsVoiceEnabledForUserId(userId: number): Promise.Promise<boolean>
-	assert(type(userId) == 'number', 'Bad userId')
+	assert(type(userId) == "number", "Bad userId")
 
 	return Promise.new(function(resolve, reject)
 		local result
@@ -525,8 +511,8 @@ function PlayerUtils.promiseIsVoiceEnabledForUserId(userId: number): Promise.Pro
 			warn(err)
 			return reject(err)
 		end
-		if type(result) ~= 'boolean' then
-			return reject('Result was not a boolean')
+		if type(result) ~= "boolean" then
+			return reject("Result was not a boolean")
 		end
 
 		return resolve(result)
@@ -540,7 +526,7 @@ end
 	@return Promise<number> -- Promise that resolves with the user ID
 ]=]
 function PlayerUtils.promiseUserIdFromName(name: string): Promise.Promise
-	assert(type(name) == 'string', 'Bad name')
+	assert(type(name) == "string", "Bad name")
 
 	return Promise.new(function(resolve, reject)
 		local userId
@@ -552,8 +538,8 @@ function PlayerUtils.promiseUserIdFromName(name: string): Promise.Promise
 			return reject(err)
 		end
 
-		if type(userId) ~= 'number' then
-			return reject('UserId returned was not a number')
+		if type(userId) ~= "number" then
+			return reject("UserId returned was not a number")
 		end
 
 		return resolve(userId)
@@ -567,7 +553,7 @@ end
 	@return Promise<string> -- Promise that resolves with the username
 ]=]
 function PlayerUtils.promiseNameFromUserId(userId: number): Promise.Promise
-	assert(type(userId) == 'number', 'Bad userId')
+	assert(type(userId) == "number", "Bad userId")
 
 	return Promise.new(function(resolve, reject)
 		local username
@@ -579,8 +565,8 @@ function PlayerUtils.promiseNameFromUserId(userId: number): Promise.Promise
 			return reject(err)
 		end
 
-		if type(username) ~= 'string' then
-			return reject('Username returned was not a string')
+		if type(username) ~= "string" then
+			return reject("Username returned was not a string")
 		end
 
 		return resolve(username)
@@ -594,71 +580,18 @@ end
 	@return Promise<Model>
 ]=]
 function PlayerUtils.promiseLoadCharacter(player: Player): Promise.Promise<Model>
-	assert(typeof(player) == 'Instance' and player:IsA('Player'), 'Bad player')
+	assert(typeof(player) == "Instance" and player:IsA("Player"), "Bad player")
 
 	return Promise.spawn(function(resolve, reject)
 		local ok, err = pcall(function()
 			player:LoadCharacterAsync()
 		end)
 		if not ok then
-			return reject(err or 'Failed to load character')
+			return reject(err or "Failed to load character")
 		end
 
 		return resolve()
 	end)
 end
-
---[=[
-	Gets the local player's control module from PlayerScripts.
-	Only works on the client.
-
-	@return any? -- The ControlModule, or nil if not found
-]=]
-function PlayerUtils.getControls(): any?
-	local ok, result = pcall(function()
-		return require(PlayerModule):GetControls()
-	end)
-
-	if ok then
-		return result
-	end
-
-	return nil
-end
-
---[=[
-	Promises the local player's control module from PlayerScripts.
-	Only works on the client.
-
-	@return Promise<any> -- Promise that resolves with the ControlModule
-]=]
-function PlayerUtils.promiseGetControls(): Promise.Promise
-	return Promise.new(function(resolve, reject)
-		local ok, result = pcall(function()
-			return require(PlayerModule):GetControls()
-		end)
-
-		if not ok then
-			return reject(result)
-		end
-
-		if not result then
-			return reject('Controls not found')
-		end
-
-		return resolve(result)
-	end)
-end
-
-PlayerUtils.promiseOnlineFriends = FriendUtils.promiseOnlineFriends
-PlayerUtils.promiseFriendsWhoPlayed = FriendUtils.promiseFriendsWhoPlayed
-PlayerUtils.promiseFriendsInPlace = FriendUtils.promiseFriendsInPlace
-PlayerUtils.promiseFriendsInCurrentPlace = FriendUtils.promiseFriendsInCurrentPlace
-PlayerUtils.promiseFriendsInCurrentServer = FriendUtils.promiseFriendsInCurrentServer
-PlayerUtils.promiseIsFriendsWith = FriendUtils.promiseIsFriendsWith
-PlayerUtils.friendsWhoPlayed = FriendUtils.friendsWhoPlayed
-PlayerUtils.friendsInPlace = FriendUtils.friendsInPlace
-PlayerUtils.friendsInCurrentPlace = FriendUtils.friendsInCurrentPlace
-PlayerUtils.friendsInCurrentServer = FriendUtils.friendsInCurrentServer
 
 return PlayerUtils

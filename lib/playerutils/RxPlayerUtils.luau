@@ -4,16 +4,15 @@
 	@class RxPlayerUtils
 ]=]
 
-local Players = game:GetService('Players')
+local Players = game:GetService("Players")
 const require = require("../Loader").load()
 
-local Brio = require('Brio')
-local Maid = require('Maid')
-local Observable = require('Observable')
-local Rx = require('Rx')
-local RxBrioUtils = require('RxBrioUtils')
-local RxCharacterUtils = require('RxCharacterUtils')
-local RxInstanceUtils = require('RxInstanceUtils')
+local Brio = require("Brio")
+local Maid = require("Maid")
+local Observable = require("Observable")
+local Rx = require("Rx")
+local RxBrioUtils = require("RxBrioUtils")
+local RxCharacterUtils = require("RxCharacterUtils")
 
 local RxPlayerUtils = {}
 
@@ -23,7 +22,7 @@ local RxPlayerUtils = {}
 	@return Observable<Brio<Player>>
 ]=]
 function RxPlayerUtils.observePlayersBrio(predicate: Rx.Predicate<Player>?): Observable.Observable<Brio.Brio<Player>>
-	assert(type(predicate) == 'function' or predicate == nil, 'Bad predicate!')
+	assert(type(predicate) == "function" or predicate == nil, "Bad predicate!")
 
 	return Observable.new(function(sub)
 		local maid = Maid.new()
@@ -76,34 +75,12 @@ function RxPlayerUtils.observeHumanoidsBrio(): Observable.Observable<Brio.Brio<H
 end
 
 --[=[
-	Observes the current local player
-
-	@return Observable<Brio<Player>>
-]=]
-function RxPlayerUtils.observeLocalPlayerBrio(): Observable.Observable<Brio.Brio<Player>>
-	return RxInstanceUtils.observePropertyBrio(Players, 'LocalPlayer', function(value)
-		return value ~= nil
-	end)
-end
-
---[=[
-	Observes the current local player's humanoid
-]=]
-function RxPlayerUtils.observeLocalPlayerHumanoidBrio(): Observable.Observable<Brio.Brio<Player>>
-	return RxPlayerUtils.observeLocalPlayerBrio():Pipe({
-		RxBrioUtils.switchMapBrio(function(player)
-			return RxCharacterUtils.observeLastHumanoidBrio(player)
-		end) :: any,
-	}) :: any
-end
-
---[=[
 	Observe players as they're added, and as they are.
 	@param predicate ((Player) -> boolean)?
 	@return Observable<Player>
 ]=]
 function RxPlayerUtils.observePlayers(predicate: Rx.Predicate<Player>?): Observable.Observable<Player>
-	assert(type(predicate) == 'function' or predicate == nil, 'Bad predicate')
+	assert(type(predicate) == "function" or predicate == nil, "Bad predicate")
 
 	return Observable.new(function(sub)
 		local maid = Maid.new()
@@ -132,7 +109,7 @@ end
 	@return Observable<Tool>
 ]=]
 function RxPlayerUtils.observeBackpackToolsAdded(player: Player): Observable.Observable<Tool>
-	assert(typeof(player) == 'Instance', 'Bad player')
+	assert(typeof(player) == "Instance", "Bad player")
 
 	return Observable.new(function(sub)
 		local maid = Maid.new()
@@ -143,18 +120,18 @@ function RxPlayerUtils.observeBackpackToolsAdded(player: Player): Observable.Obs
 
 		if player.Backpack then
 			for _, tool in player.Backpack:GetChildren() do
-				if tool:IsA('Tool') then
+				if tool:IsA("Tool") then
 					handleTool(tool)
 				end
 			end
 
 			maid:GiveTask(player.Backpack.ChildAdded:Connect(function(child)
-				if child:IsA('Tool') then
+				if child:IsA("Tool") then
 					handleTool(child)
 				end
 			end))
 		else
-			warn('Player has no backpack?')
+			warn("Player has no backpack?")
 		end
 	end) :: any
 end
@@ -165,19 +142,19 @@ end
 	@return Observable<Tool>
 ]=]
 function RxPlayerUtils.observeBackpackToolsRemoved(player: Player): Observable.Observable<Tool>
-	assert(typeof(player) == 'Instance', 'Bad player')
+	assert(typeof(player) == "Instance", "Bad player")
 
 	return Observable.new(function(sub)
 		local maid = Maid.new()
 
 		if player.Backpack then
 			maid:GiveTask(player.Backpack.ChildRemoved:Connect(function(child)
-				if child:IsA('Tool') then
+				if child:IsA("Tool") then
 					sub:Fire(child)
 				end
 			end))
 		else
-			warn('Player has no backpack?')
+			warn("Player has no backpack?")
 			return
 		end
 	end) :: any
@@ -190,7 +167,7 @@ end
 	@return Observable<()>
 ]=]
 function RxPlayerUtils.observeFirstAppearanceLoaded(player: Player): Observable.Observable<()>
-	assert(typeof(player) == 'Instance', 'Bad player')
+	assert(typeof(player) == "Instance", "Bad player")
 
 	return Observable.new(function(sub)
 		if player:HasAppearanceLoaded() then
@@ -216,7 +193,7 @@ function RxPlayerUtils.observeFirstAppearanceLoaded(player: Player): Observable.
 				sub:Fire()
 				sub:Complete()
 			else
-				sub:Fail('Failed to load appearance before player left the game')
+				sub:Fail("Failed to load appearance before player left the game")
 			end
 		end))
 
