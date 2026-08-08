@@ -1,6 +1,6 @@
 # Nevermore package generator
 
-`nevermore_package_gen.py` creates a loader-free package tree for a project. It follows imports from each selected package, includes every transitive dependency, rewrites imports to `require(Packages.<Module>)`, and writes the result to `roblox_packages`.
+`nevermore_package_gen.py` creates loader-free package folders for a project. It follows imports from each selected package, includes every transitive dependency, rewrites imports to `require(Packages.<Package>.<Module>)`, and writes the result to `roblox_packages`.
 
 Copy `.nevermore.toml.example` to `.nevermore.toml`, select the package folders you need, then run:
 

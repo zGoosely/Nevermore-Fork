@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate a loader-free, flat package folder from a Nevermore checkout."""
+"""Generate loader-free package folders from a Nevermore checkout."""
 
 from __future__ import annotations
 
@@ -33,6 +33,14 @@ def module_name(path: Path) -> str:
 def package_name(path: Path, source: Path) -> str:
     relative = path.relative_to(source)
     return relative.parts[0]
+
+
+def package_display_name(root: str, package_files: list[Path]) -> str:
+    for path in package_files:
+        name = module_name(path)
+        if name.lower() == root.lower():
+            return name
+    return root[:1].upper() + root[1:]
 
 
 def read_config(path: Path) -> tuple[Path, Path, list[str], set[str]]:
@@ -78,7 +86,12 @@ def resolve_key(name: str, current: Path, module_keys: dict[str, list[Path]], ke
     return matching_package[0] if len(matching_package) == 1 else candidates[0] if len(candidates) == 1 else None
 
 
-def rewrite(source: str, current: Path, module_keys: dict[str, list[Path]], keys: dict[Path, str]) -> str:
+def package_ref(target: Path, keys: dict[Path, tuple[str, str]]) -> str:
+    package, module = keys[target]
+    return f"Packages.{package}.{module}"
+
+
+def rewrite(source: str, current: Path, module_keys: dict[str, list[Path]], keys: dict[Path, tuple[str, str]]) -> str:
     source = LOADER_LINE.sub("", source)
 
     def script_replace(match: re.Match[str]) -> str:
@@ -92,7 +105,7 @@ def rewrite(source: str, current: Path, module_keys: dict[str, list[Path]], keys
                 return expression
             name = identifiers[-1]
         target = resolve_key(name, current, module_keys, keys)
-        return f"require(Packages.{keys[target]})" if target else expression
+        return f"require({package_ref(target, keys)})" if target else expression
 
     source = SCRIPT_REQUIRE.sub(script_replace, source)
 
@@ -101,8 +114,8 @@ def rewrite(source: str, current: Path, module_keys: dict[str, list[Path]], keys
         if name.lower().endswith("loader") or name == "Loader":
             return match.group(0)
         target = resolve_key(name, current, module_keys, keys)
-        key = keys[target] if target else name
-        return f"require(Packages.{key})"
+        reference = package_ref(target, keys) if target else f"Packages.{name}"
+        return f"require({reference})"
 
     source = STRING_REQUIRE.sub(string_replace, source)
     if "require(Packages." in source and "Packages =" not in source:
@@ -190,23 +203,25 @@ def generate(config_path: Path) -> None:
         raise SystemExit(f"Missing dependencies (add them to lib or [external]): {details}")
 
     selected_files = [path for root in sorted(selected) for path in package_files[root]]
-    keys: dict[Path, str] = {}
-    used: set[str] = set()
+    keys: dict[Path, tuple[str, str]] = {}
+    package_names = {root: package_display_name(root, package_files[root]) for root in selected}
     for path in selected_files:
         path = path.relative_to(source)
         base = module_name(path)
-        key = base if base not in used else f"{path.parts[0]}_{base}"
-        while key in used:
-            key = f"{path.parts[0]}_{key}"
-        used.add(key)
-        keys[path] = key
+        package = path.parts[0]
+        siblings = [candidate for candidate in selected_files if candidate.relative_to(source).parts[0] == package]
+        sibling_names = {module_name(candidate) for candidate in siblings if candidate.relative_to(source) != path}
+        key = base if base not in sibling_names else f"{package_names[package]}_{base}"
+        keys[path] = (package_names[package], key)
 
     if output.exists():
         shutil.rmtree(output)
     output.mkdir(parents=True)
     for path in selected_files:
         relative = path.relative_to(source)
-        destination = output / f"{keys[relative]}{path.suffix}"
+        package_directory = output / keys[relative][0]
+        package_directory.mkdir(parents=True, exist_ok=True)
+        destination = package_directory / f"{keys[relative][1]}{path.suffix}"
         destination.write_text(rewrite(path.read_text(), relative, module_keys, keys))
     print(f"Generated {len(selected_files)} modules from {len(selected)} packages in {output}")
 
