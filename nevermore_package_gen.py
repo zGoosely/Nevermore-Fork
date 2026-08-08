@@ -61,10 +61,21 @@ def resolve_key(name: str, current: Path, module_keys: dict[str, list[Path]], ke
         name = Path(name).name
     candidates = module_keys.get(name, [])
     if not candidates:
+        lowered = name.lower()
+        candidates = [
+            candidate
+            for module, module_candidates in module_keys.items()
+            if module.lower() == lowered
+            for candidate in module_candidates
+        ]
+    if not candidates:
         return None
     current_package = current.parts[0]
     local = [candidate for candidate in candidates if candidate.parts[0] == current_package]
-    return local[0] if len(local) == 1 else candidates[0] if len(candidates) == 1 else None
+    if len(local) == 1:
+        return local[0]
+    matching_package = [candidate for candidate in candidates if candidate.parts[0].lower() == name.lower()]
+    return matching_package[0] if len(matching_package) == 1 else candidates[0] if len(candidates) == 1 else None
 
 
 def rewrite(source: str, current: Path, module_keys: dict[str, list[Path]], keys: dict[Path, str]) -> str:
@@ -133,6 +144,13 @@ def generate(config_path: Path) -> None:
             selected.add(root)
             continue
         candidates = module_keys.get(name, [])
+        if not candidates:
+            candidates = [
+                path
+                for module, module_paths in module_keys.items()
+                if module.lower() == name.lower()
+                for path in module_paths
+            ]
         if len(candidates) == 1:
             selected.add(candidates[0].parts[0])
             continue
