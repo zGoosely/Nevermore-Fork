@@ -1,0 +1,11 @@
+# Copy this file to .nevermore.toml in a Roblox project.
+
+[nevermore]
+source = "lib"
+output = "roblox_packages"
+
+# Package folders or unique module names may be selected.
+packages = ["binder", "maid", "promise"]
+
+# Dependencies not present in this checkout can be declared here.
+# external = ["Jest"]
