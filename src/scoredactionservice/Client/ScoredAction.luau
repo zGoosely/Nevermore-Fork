@@ -1,0 +1,139 @@
+--!strict
+--[=[
+	An action that has a score, and may recieve priority from [ScoredActionServiceClient]
+
+	@client
+	@class ScoredAction
+]=]
+
+local require = require("../../Loader").load()
+
+local BaseObject = require("BaseObject")
+local Observable = require("Observable")
+local Signal = require("Signal")
+local StateStack = require("StateStack")
+local ValueObject = require("ValueObject")
+
+local ScoredAction = setmetatable({}, BaseObject)
+ScoredAction.ClassName = "ScoredAction"
+ScoredAction.__index = ScoredAction
+
+export type ScoredAction =
+	typeof(setmetatable(
+		{} :: {
+			PreferredChanged: Signal.Signal<boolean>,
+			Removing: Signal.Signal<()>,
+			EnabledChanged: Signal.Signal<(boolean, boolean, ...any)>,
+
+			-- Private
+			_isEnabled: ValueObject.ValueObject<boolean>,
+			_score: number,
+			_createdTimeStamp: number,
+			_preferredStack: StateStack.StateStack<boolean>,
+		},
+		{} :: typeof({ __index = ScoredAction })
+	))
+	& BaseObject.BaseObject
+
+--[=[
+	Constructs a new ScoredAction. Should not be called directly. See [ScoredActionServiceClient.GetScoredAction].
+
+	@return ScoredAction
+]=]
+function ScoredAction.new(): ScoredAction
+	local self: ScoredAction = setmetatable(BaseObject.new() :: any, ScoredAction)
+
+	self._score = -math.huge
+	self._createdTimeStamp = tick()
+	self._preferredStack = self._maid:Add(StateStack.new(false, "boolean"))
+	self._isEnabled = self._maid:Add(ValueObject.new(true, "boolean"))
+
+	self.EnabledChanged = self._isEnabled.Changed
+
+	--[=[
+	@prop PreferredChanged Signal<boolean>
+	@within ScoredAction
+]=]
+	self.PreferredChanged = self._preferredStack.Changed -- :Fire(newState)
+
+	--[=[
+	@prop Removing Signal<()>
+	@within ScoredAction
+]=]
+	self.Removing = Signal.new()
+	self._maid:GiveTask(function()
+		self.Removing:Fire()
+		self.Removing:Destroy()
+	end)
+
+	return self
+end
+
+--[=[
+	Sets if the action is enabled. A disabled action cannot be preferred, even if it's the only option.
+]=]
+function ScoredAction.SetIsEnabled(self: ScoredAction, isEnabled: boolean | Observable.Observable<boolean>)
+	return self._isEnabled:Mount(isEnabled)
+end
+
+--[=[
+	Returns if the action is enabled
+]=]
+function ScoredAction.IsEnabled(self: ScoredAction): boolean
+	return self._isEnabled.Value
+end
+
+--[=[
+	Observes if the action is enabled
+]=]
+function ScoredAction.ObserveIsEnabled(self: ScoredAction): Observable.Observable<boolean>
+	return self._isEnabled:Observe()
+end
+
+--[=[
+	Returns whether the action is currently preferred
+	@return boolean
+]=]
+function ScoredAction.IsPreferred(self: ScoredAction): boolean
+	return self._preferredStack:GetState()
+end
+
+--[=[
+	@return Observable<boolean>
+]=]
+function ScoredAction.ObservePreferred(self: ScoredAction): Observable.Observable<boolean>
+	return self._preferredStack:Observe()
+end
+
+--[=[
+	Sets the score
+
+	:::info
+	Big number is more important. At `-math.huge` we won't ever set preferred
+	:::
+
+	@param score number
+]=]
+function ScoredAction.SetScore(self: ScoredAction, score: number): ()
+	assert(type(score) == "number", "Bad score")
+
+	self._score = score
+end
+
+--[=[
+	Retrieves the score
+	@return number
+]=]
+function ScoredAction.GetScore(self: ScoredAction): number
+	return self._score
+end
+
+--[=[
+	Pushes that we're preferred
+	@return MaidTask
+]=]
+function ScoredAction.PushPreferred(self: ScoredAction): () -> ()
+	return self._preferredStack:PushState(true)
+end
+
+return ScoredAction

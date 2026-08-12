@@ -9,6 +9,6 @@
     "**/.ignored_*"
   ],
   "tree": {
-    "$path": "lib"
+    "$path": "src"
   }
 }
