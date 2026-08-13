@@ -8,7 +8,7 @@ from typing import Any
 
 from textual import on, work
 from textual.app import App, ComposeResult
-from textual.containers import Horizontal, Vertical, VerticalScroll
+from textual.containers import Horizontal, Vertical
 from textual.screen import ModalScreen
 from textual.widgets import (
     Button,
@@ -17,7 +17,6 @@ from textual.widgets import (
     Header,
     Input,
     Label,
-    Markdown,
     RichLog,
     Select,
     Static,
@@ -235,11 +234,11 @@ class PackageManagerApp(App[None]):
             with Vertical(id="details"):
                 with TabbedContent():
                     with TabPane("Overview", id="overview-tab"):
-                        yield Markdown("Select a package", id="overview")
+                        yield Static("Select a package", id="overview")
                     with TabPane("Exports", id="exports-tab"):
                         yield DataTable(id="exports-table", zebra_stripes=True)
                     with TabPane("Dependencies", id="dependencies-tab"):
-                        yield Markdown("", id="dependencies")
+                        yield Static("", id="dependencies")
                     with TabPane("Modules", id="modules-tab"):
                         yield DataTable(id="modules-table", zebra_stripes=True)
                     with TabPane("Logs", id="logs-tab"):
@@ -277,7 +276,7 @@ class PackageManagerApp(App[None]):
             self.show_record(selected)
         else:
             self.selected_name = None
-            self.query_one("#overview", Markdown).update("No packages match the current search.")
+            self.query_one("#overview", Static).update("No packages match the current search.")
 
     @on(Input.Changed, "#search")
     def search_changed(self, event: Input.Changed) -> None:
@@ -293,9 +292,10 @@ class PackageManagerApp(App[None]):
 
     def show_record(self, record: PackageRecord) -> None:
         self.selected_name = record.name
-        self.query_one("#overview", Markdown).update(
-            f"# {record.name}\n\n**Version:** `{record.version}`\n\n**Purpose:** {record.catalog.purpose}\n\n"
-            f"{record.catalog.description}\n\n**Path:** `{record.root.relative_to(self.manager.root)}`"
+        self.query_one("#overview", Static).update(
+            f"[b]{record.name}[/b]\n\nVersion: [cyan]{record.version}[/cyan]\n\n"
+            f"Purpose: {record.catalog.purpose}\n\n{record.catalog.description}\n\n"
+            f"Path: {record.root.relative_to(self.manager.root)}"
         )
         exports = self.query_one("#exports-table", DataTable)
         exports.clear()
@@ -303,8 +303,8 @@ class PackageManagerApp(App[None]):
             exports.add_row(alias, target)
         dependencies = [f"- `{dependency}`" for dependency in record.dependencies]
         externals = [f"- `{external}` (external)" for external in record.externals]
-        self.query_one("#dependencies", Markdown).update(
-            "# Dependencies\n\n" + "\n".join(dependencies + externals or ["No dependencies."])
+        self.query_one("#dependencies", Static).update(
+            "[b]Dependencies[/b]\n\n" + "\n".join(dependencies + externals or ["No dependencies."])
         )
         modules = self.query_one("#modules-table", DataTable)
         modules.clear()

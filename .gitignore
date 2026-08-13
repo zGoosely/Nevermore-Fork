@@ -1,2 +1,6 @@
 AGENTS.md
 sourcemap.json
+__pycache__/
+.pytest_cache/
+.venv/
+*.py[cod]

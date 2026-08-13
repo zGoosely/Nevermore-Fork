@@ -31,10 +31,6 @@ TYPE_DECLARATION = re.compile(
     r"^export type\s+(?P<name>[A-Za-z_][A-Za-z0-9_]*)\s*(?P<generics><[^=\n]+>)?\s*=",
     re.MULTILINE,
 )
-CATALOG_PACKAGE = re.compile(r"^# (?P<name>[a-z0-9][a-z0-9-]*)$", re.MULTILINE)
-CATALOG_COVERAGE = re.compile(r"^\*\*Coverage:\*\* .+$", re.MULTILINE)
-
-
 def resolve_module(package_root: Path, target: str) -> Path:
     base = package_root if target == "." else package_root / target
     if base.is_dir():

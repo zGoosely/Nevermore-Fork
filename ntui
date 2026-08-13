@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+readonly PROJECT_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+readonly VENV_PATH="${PROJECT_ROOT}/.venv"
+readonly PYTHON_PATH="${VENV_PATH}/bin/python"
+
+if [[ ! -x "${PYTHON_PATH}" ]]; then
+	python3 -m venv "${VENV_PATH}"
+fi
+
+if ! "${PYTHON_PATH}" -c 'from importlib.metadata import version; assert version("nevermore-package-manager") == "0.1.0"; assert version("textual") == "8.2.7"' >/dev/null 2>&1; then
+	"${PYTHON_PATH}" -m pip install --editable "${PROJECT_ROOT}"
+fi
+
+cd "${PROJECT_ROOT}"
+exec "${PYTHON_PATH}" -m nevermore_packages.cli "$@"

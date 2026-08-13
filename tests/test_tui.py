@@ -7,7 +7,8 @@ import pytest
 textual = pytest.importorskip("textual")
 
 from nevermore_packages.manager import PackageManager
-from nevermore_packages.tui import PackageManagerApp
+from nevermore_packages.tui import CreatePackageScreen, PackageManagerApp
+from textual.widgets import Input
 
 
 @pytest.mark.asyncio
@@ -30,5 +31,11 @@ async def test_tui_search_filters_packages(tmp_path: Path) -> None:
         await pilot.click("#search")
         await pilot.press(*"missing")
         assert app.query_one("#packages").row_count == 0
-        await pilot.press("ctrl+a", "backspace", *"reactive")
+        app.query_one("#search", Input).value = "reactive"
+        await pilot.pause()
         assert app.query_one("#packages").row_count == 1
+
+        app.action_create()
+        await pilot.pause()
+        assert isinstance(app.screen, CreatePackageScreen)
+        await pilot.press("escape")

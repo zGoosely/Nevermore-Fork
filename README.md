@@ -26,4 +26,6 @@ paths for siblings and parent siblings. Cross-package imports go through the fla
 
 Tests and private implementation modules stay inside their indexed package and do not receive flat wrappers.
 
-See [PACKAGE_WORKFLOW.md](PACKAGE_WORKFLOW.md) for the create, update, version, removal, and CI workflows.
+Install the terminal manager with `pip install -e .`, then run `nevermore-packages` to browse, create, edit, version,
+remove, synchronize, and validate packages. See [PACKAGE_WORKFLOW.md](PACKAGE_WORKFLOW.md) for scripted workflows,
+catalog sidecars, keyboard shortcuts, and CI checks.

@@ -100,3 +100,10 @@ def test_legacy_catalog_parser() -> None:
     assert entry.purpose == "Example purpose"
     assert entry.tags == ("data", "utility")
     assert entry.modules[0].path == "Example.luau"
+
+
+def test_project_mounts_surfaces_at_replicated_storage_packages() -> None:
+    project = json.loads(Path("default.project.json").read_text(encoding="utf-8"))
+    tree = project["tree"]
+    assert tree["$className"] == "DataModel"
+    assert tree["ReplicatedStorage"]["Packages"]["$path"] == "src"

@@ -73,6 +73,12 @@ export type ServiceBag =
 	))
 	& BaseObject.BaseObject<any>
 
+export type ServiceDefinition<T> = {
+	Init: (self: T, serviceBag: ServiceBag) -> (),
+}
+
+export type ServiceType<T> = ServiceDefinition<T> | ModuleScript
+
 --[=[
 	Constructs a new ServiceBag
 
@@ -125,8 +131,8 @@ end
 	Retrieves the service, ensuring initialization if we are in
 	the initialization phase.
 
-	The return type is inferred directly from the service definition passed to
-	this method, preserving its public methods and fields through package wrappers:
+	The return type is inferred from the service definition's `Init` self type,
+	so callers receive the initialized service rather than its definition table:
 
 	```lua
 	export type MyThing = typeof(setmetatable(
@@ -139,10 +145,10 @@ end
 	self._playerDataStoreService = self._serviceBag:GetService(PlayerDataStoreService)
 	```
 
-	@param serviceType T
+	@param serviceType ServiceDefinition<T>
 	@return T
 ]=]
-function ServiceBag.GetService<T>(self: ServiceBag, serviceType: T): T
+function ServiceBag.GetService<T>(self: ServiceBag, serviceType: ServiceType<T>): T
 	if typeof(serviceType) == "Instance" then
 		serviceType = (require :: any)(serviceType)
 	end

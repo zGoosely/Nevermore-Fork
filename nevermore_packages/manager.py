@@ -9,7 +9,7 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path
-from typing import Iterator, Sequence
+from typing import Sequence
 
 from .catalog import parse_legacy_catalog, read_catalog, validate_catalog, write_catalog
 from .models import CatalogEntry, CommandResult, ModuleEntry, OperationResult, PackageRecord

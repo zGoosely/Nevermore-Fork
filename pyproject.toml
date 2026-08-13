@@ -9,6 +9,9 @@ description = "Terminal package manager for the Nevermore fork"
 requires-python = ">=3.11"
 dependencies = ["textual==8.2.7"]
 
+[project.optional-dependencies]
+test = ["pytest>=9,<10", "pytest-asyncio>=1.4,<2"]
+
 [project.scripts]
 nevermore-packages = "nevermore_packages.cli:main"
 

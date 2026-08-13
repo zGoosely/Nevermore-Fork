@@ -1,15 +1,12 @@
 --!strict
 
-const ServiceBag = require("../src/ServiceBag")
+const ReplicatedStorage = game:GetService("ReplicatedStorage")
+const Packages = ReplicatedStorage.Packages
 
-type ExampleService = {
-	Init: (self: ExampleService, serviceBag: ServiceBag.ServiceBag) -> (),
-	GetValue: (self: ExampleService) -> number,
-}
+const GameConfigService = require(Packages.GameConfigService)
+const ServiceBag = require(Packages.ServiceBag)
 
-const ExampleService = {} :: ExampleService
 const serviceBag = ServiceBag.new()
-const resolved: ExampleService = serviceBag:GetService(ExampleService)
+const resolved = serviceBag:GetService(GameConfigService)
 
-const value: number = resolved:GetValue()
-return value
+return resolved:GetConfigPicker()
