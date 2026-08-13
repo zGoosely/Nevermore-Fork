@@ -11,7 +11,7 @@ Each package card is intentionally regular:
 
 The submodule table gives the exact file path, realm, module kind, and public responsibility for every production module. Use those paths when opening source files. Test specifications and tooling files are intentionally excluded.
 
-**Coverage:** 216 packages · 895 production modules
+**Coverage:** 217 packages · 896 production modules
 
 Every package below uses the same quick-reference card: purpose, source path, a short human-readable description, and searchable tags. The submodule table follows when a package has more than one public implementation detail.
 
@@ -198,6 +198,7 @@ Every package below uses the same quick-reference card: purpose, source path, a 
 | [secretservice](#secretservice)                           | `enums`, `game_service`, `security`, `serialization`                                                                                                                                          |       4 |
 | [serverlist](#serverlist)                                 | `data`, `enums`, `game_service`, `lifecycle`, `localization`, `player_service`, `reactive`, `serialization`, `utility`                                                                        |       9 |
 | [servicebag](#servicebag)                                 | `game_service`                                                                                                                                                                                |       2 |
+| [shimmerutils](#shimmerutils)                             | `animation`, `gui`, `lifecycle`, `reactive`, `utility`                                                                                                                                        |       1 |
 | [signal](#signal)                                         | `reactive`                                                                                                                                                                                    |       1 |
 | [simulatedcharacterservice](#simulatedcharacterservice)   | `animation`, `data`, `developer_tools`, `enums`, `game_service`, `localization`, `math`, `physics`, `player_service`, `reactive`, `security`, `serialization`, `utility`                      |      21 |
 | [singleton](#singleton)                                   | `shared`                                                                                                                                                                                      |       1 |
@@ -3022,6 +3023,19 @@ Every package below uses the same quick-reference card: purpose, source path, a 
 | ----------------------------------------------------------------- | ------ | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`ServiceBag.luau`](src/servicebag/ServiceBag.luau)               | shared | Service     | Service bags handle recursive initialization of services, and the retrieval of services from a given source. This allows the composition of services without the initialization of those services becoming a pain, which makes refactoring downstream services very easy. This also allows multiple copies of a service to exist at once, although many services right now are not designed for this. |
 | [`ServiceInitLogger.luau`](src/servicebag/ServiceInitLogger.luau) | shared | Class/model | Service Init Logger provides the class/model implementation used by the Servicebag package. Public entry points include `ServiceInitLogger.new`, `ServiceInitLogger.StartInitClock`, `ServiceInitLogger.Print`, `recurse`.                                                                                                                                                                            |
+
+# shimmerutils
+
+- **Purpose:** Attaches a lifecycle-safe, reactively controlled shimmer effect to Blend GUI objects.
+- **Path:** [`src/shimmerutils/`](src/shimmerutils/)
+- **Short Description:** Provides a Blend functional property that loops a shimmer while enabled and mirrors the target's corner and padding.
+- **Tags:** `animation`, `gui`, `lifecycle`, `reactive`, `utility`
+
+### Submodules
+
+| Module                                                    | Realm  | Kind    | Responsibility and public surface                                                                                      |
+| --------------------------------------------------------- | ------ | ------- | ---------------------------------------------------------------------------------------------------------------------- |
+| [`ShimmerUtils.luau`](src/shimmerutils/ShimmerUtils.luau) | shared | Utility | Attaches a reactive shimmer to a Blend-mounted GuiObject. Public entry points include `ShimmerUtils.shimmer`.         |
 
 # signal
 
