@@ -10,7 +10,6 @@ const require = require("../Loader").load()
 const BanServiceUtils = require("BanServiceUtils")
 const CmdrService = require("CmdrService")
 const Maid = require("Maid")
-const PlayerDataStoreService = require("PlayerDataStoreService")
 const Promise = require("Promise")
 const ServiceBag = require("ServiceBag")
 const t = require("t")
@@ -33,20 +32,17 @@ export type BanService = typeof(setmetatable(
 		_serviceBag: ServiceBag.ServiceBag,
 		_maid: Maid.Maid,
 
-		_playerDataStoreService: PlayerDataStoreService.PlayerDataStoreService,
 		_cmdrService: CmdrService.CmdrService,
 	},
 	{} :: typeof({ __index = BanService })
 ))
 
-function BanService.Init(self: BanService, serviceBag: ServiceBag.ServiceBag)
+function BanService.Init(self: BanService, serviceBag: ServiceBag.ServiceBag): ()
 	assert(not (self :: any)._serviceBag, "Already initialized")
-	self._serviceBag = assert(serviceBag, "No serviceBag")
+	assert(t.table(serviceBag), "Bad serviceBag")
+	self._serviceBag = serviceBag
 	self._maid = Maid.new()
 
-	self._playerDataStoreService = self._serviceBag:HasService(PlayerDataStoreService)
-			and self._serviceBag:GetService(PlayerDataStoreService)
-		or nil :: any
 	self._cmdrService = self._serviceBag:GetService(CmdrService)
 
 	self._cmdrService:RegisterCommand({
@@ -185,11 +181,6 @@ end
 
 function BanService._banAsync(self: BanService, player: Player, duration: number): Promise.Promise<()>
 	return self._maid:GivePromise(Promise.new(function(resolve, reject)
-		if self._playerDataStoreService then
-			-- Not required for banning, hence why it's optional
-			self._playerDataStoreService:DeleteProfileAsync(player)
-		end
-
 		const success, resultOrError = pcall(function()
 			Players:BanAsync({
 				UserIds = { player.UserId },
