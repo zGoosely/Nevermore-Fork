@@ -10,12 +10,6 @@
     "**/package.json"
   ],
   "tree": {
-    "$className": "DataModel",
-    "ReplicatedStorage": {
-      "$className": "ReplicatedStorage",
-      "Packages": {
-        "$path": "src"
-      }
-    }
+    "$path": "src"
   }
 }
