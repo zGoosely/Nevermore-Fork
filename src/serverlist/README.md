@@ -53,7 +53,11 @@ const serverListService = serviceBag:GetService(ServerListService)
 serverListService:SetRegion("Europe", "configured")
 ```
 
-Use `nil, "unknown"` to clear it. The package does not call external geolocation services or infer a server region from players.
+Use `nil, "unknown"` to clear it. The package does not infer a server region from players.
+
+By default, `ServerListService` waits for `ServerRegionService` and publishes its
+approximate IP-geolocation result with the `external` source. Calling `SetRegion`
+can still replace that value with explicitly configured metadata.
 
 ## Joining
 

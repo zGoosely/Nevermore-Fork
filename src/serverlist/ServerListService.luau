@@ -13,17 +13,16 @@ const require = require("../Loader").load()
 const BindToCloseService = require("BindToCloseService")
 const GameVersionUtils = require("GameVersionUtils")
 const Maid = require("Maid")
-const PlayerUtils = require("PlayerUtils")
 const Promise = require("Promise")
 const RateLimiter = require("RateLimiter")
 const Rx = require("Rx")
-const RxPlayerUtils = require("RxPlayerUtils")
 const ServerListConstants = require("ServerListConstants")
 const ServerListNameUtils = require("ServerListNameUtils")
 const ServerListNetwork = require("ServerListNetwork")
 const ServerListRegistry = require("ServerListRegistry")
 const ServerListTypes = require("ServerListTypes")
 const ServerListUtils = require("ServerListUtils")
+const ServerRegionService = require("ServerRegionService")
 const ServiceBag = require("ServiceBag")
 const TeleportServiceUtils = require("TeleportServiceUtils")
 const t = require("t")
@@ -41,6 +40,7 @@ export type ServerListService = typeof(setmetatable(
 		_serviceBag: ServiceBag.ServiceBag,
 		_maid: Maid.Maid,
 		_bindToCloseService: BindToCloseService.BindToCloseService,
+		_serverRegionService: ServerRegionService.ServerRegionService,
 		_registry: ServerListRegistry.ServerListRegistry,
 		_cache: { ServerMetadata },
 		_subscribers: { [Player]: true },
@@ -63,6 +63,7 @@ function ServerListService.Init(self: ServerListService, serviceBag: ServiceBag.
 	self._serviceBag = serviceBag
 	self._maid = Maid.new()
 	self._bindToCloseService = self._serviceBag:GetService(BindToCloseService)
+	self._serverRegionService = self._serviceBag:GetService(ServerRegionService)
 	self._registry = self._maid:Add(ServerListRegistry.new(game.PlaceId))
 	self._cache = ServerListUtils.createSnapshot({})
 	self._subscribers = {}
@@ -86,31 +87,12 @@ end
 function ServerListService.Start(self: ServerListService): ()
 	self:_listenToNetwork()
 
-	self._maid:Add(RxPlayerUtils.observePlayers()
-		:Pipe({
-			Rx.first() :: any,
-			Rx.switchMap(function(player: Player): any
-				return Rx.fromPromise(PlayerUtils.getPlayerRegionAsync(player)):Pipe({
-					Rx.catchError(function(errorMessage)
-						warn(`[ServerListService] - Failed to resolve player region ({errorMessage})`)
-						return Rx.EMPTY
-					end) :: any,
-				}) :: any
-			end) :: any,
-			Rx.where(function(region: string): boolean
-				if region == "" or #region > ServerListConstants.MAX_REGION_LENGTH then
-					warn(`[ServerListService] - Ignoring invalid player region code ({region})`)
-					return false
-				end
-				return true
-			end) :: any,
-		})
-		:Subscribe(function(region: string)
-			self:SetRegion(region, "audience")
-			self:_publishAsync():Catch(function(errorMessage)
-				warn(`[ServerListService] - Publish failed after region update ({errorMessage})`)
-			end)
-		end))
+	self._maid:Add(self._serverRegionService:PromiseRegion():Then(function(region: string)
+		self:SetRegion(region, "external")
+		self:_publishAsync():Catch(function(errorMessage)
+			warn(`[ServerListService] - Publish failed after region update ({errorMessage})`)
+		end)
+	end))
 
 	self._maid:Add(Players.PlayerRemoving:Connect(function(player: Player)
 		self:_setSubscribed(player, false)

@@ -197,6 +197,7 @@ Every package below uses the same quick-reference card: purpose, source path, a 
 | [seatutils](#seatutils)                                   | `reactive`, `utility`                                                                                                                                                                         |       1 |
 | [secretservice](#secretservice)                           | `enums`, `game_service`, `security`, `serialization`                                                                                                                                          |       4 |
 | [serverlist](#serverlist)                                 | `data`, `enums`, `game_service`, `lifecycle`, `localization`, `player_service`, `reactive`, `serialization`, `utility`                                                                        |       9 |
+| [serverregionservice](#serverregionservice)               | `data`, `game_service`, `lifecycle`, `localization`, `utility`                                                                                                                               |       5 |
 | [servicebag](#servicebag)                                 | `game_service`                                                                                                                                                                                |       2 |
 | [uishimmerutils](#uishimmerutils)                         | `animation`, `gui`, `lifecycle`, `reactive`, `utility`                                                                                                                                        |       1 |
 | [signal](#signal)                                         | `reactive`                                                                                                                                                                                    |       1 |
@@ -3009,6 +3010,23 @@ Every package below uses the same quick-reference card: purpose, source path, a 
 | [`Shared/ServerListNetwork.luau`](src/serverlist/Shared/ServerListNetwork.luau)     | shared | Network     | Typed transport for lazy server-directory subscriptions, snapshots, and joins.                                                                                                                                                                                                                                                                                                               |
 | [`Shared/ServerListTypes.luau`](src/serverlist/Shared/ServerListTypes.luau)         | shared | Types       | Shared server-directory contracts.                                                                                                                                                                                                                                                                                                                                                           |
 | [`Shared/ServerListUtils.luau`](src/serverlist/Shared/ServerListUtils.luau)         | shared | Utility     | Validates, bounds, and snapshots server-directory metadata. Public entry points include `ServerListUtils.isServerMetadata`, `ServerListUtils.isRegionSource`, `ServerListUtils.isRegionConfiguration`, `ServerListUtils.isServerType`, `ServerListUtils.isListedServerType`, `ServerListUtils.isThisMyServer`, `ServerListUtils.getMapName`, `ServerListUtils.isFresh`.                      |
+
+# serverregionservice
+
+- **Purpose:** Resolves one approximate server region through IP geolocation and replicates it as an attribute on `ReplicatedStorage`.
+- **Path:** [`src/serverregionservice/`](src/serverregionservice/)
+- **Short Description:** Provides server and client access to a shared server-region attribute, including a promise that waits for replication.
+- **Tags:** `data`, `game_service`, `lifecycle`, `localization`, `utility`
+
+### Submodules
+
+| Module                                                                                                            | Realm  | Kind      | Responsibility and public surface                                                                                                                |
+| ----------------------------------------------------------------------------------------------------------------- | ------ | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [`Server/ServerRegionGeolocationUtils.luau`](src/serverregionservice/Server/ServerRegionGeolocationUtils.luau)    | server | Utility   | Resolves and validates the approximate region associated with the server's outbound IP address. Public entry points include `promiseRegion`.      |
+| [`ServerRegionService.luau`](src/serverregionservice/ServerRegionService.luau)                                    | server | Service   | Resolves and publishes the server region. Public entry points include `ServerRegionService.GetRegion` and `ServerRegionService.PromiseRegion`.    |
+| [`ServerRegionServiceClient.luau`](src/serverregionservice/ServerRegionServiceClient.luau)                        | client | Service   | Reads the replicated server region. Public entry points include `ServerRegionServiceClient.GetRegion` and `ServerRegionServiceClient.PromiseRegion`. |
+| [`Shared/ServerRegionServiceConstants.luau`](src/serverregionservice/Shared/ServerRegionServiceConstants.luau)    | shared | Constants | Defines the geolocation endpoint, replicated attribute name, and validation bounds.                                                              |
+| [`Shared/ServerRegionServiceUtils.luau`](src/serverregionservice/Shared/ServerRegionServiceUtils.luau)            | shared | Utility   | Validates, formats, reads, and promises replicated region values. Public entry points include `isRegion`, `formatGeolocationResponse`, `getRegion`, and `promiseRegion`. |
 
 # servicebag
 
