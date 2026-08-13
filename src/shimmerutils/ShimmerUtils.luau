@@ -28,6 +28,8 @@ const require = require("../Loader").load()
 
 const Maid = require("Maid")
 const Observable = require("Observable")
+const Rx = require("Rx")
+const RxInstanceUtils = require("RxInstanceUtils")
 const ValueObject = require("ValueObject")
 const t = require("t")
 
@@ -120,15 +122,14 @@ const function syncPadding(maid: Maid.Maid, target: GuiObject, frame: Frame): ()
 		return
 	end
 
-	const function update(): ()
+	paddingMaid:Add(Rx.combineLatest({
+		bottom = RxInstanceUtils.observeProperty(padding, "PaddingBottom"),
+		left = RxInstanceUtils.observeProperty(padding, "PaddingLeft"),
+		right = RxInstanceUtils.observeProperty(padding, "PaddingRight"),
+		top = RxInstanceUtils.observeProperty(padding, "PaddingTop"),
+	}):Subscribe(function()
 		updatePaddingBounds(frame, padding)
-	end
-
-	paddingMaid:Add(padding:GetPropertyChangedSignal("PaddingBottom"):Connect(update))
-	paddingMaid:Add(padding:GetPropertyChangedSignal("PaddingLeft"):Connect(update))
-	paddingMaid:Add(padding:GetPropertyChangedSignal("PaddingRight"):Connect(update))
-	paddingMaid:Add(padding:GetPropertyChangedSignal("PaddingTop"):Connect(update))
-	update()
+	end))
 end
 
 const function createShimmerFrame(target: GuiObject): (Frame, UIGradient)
