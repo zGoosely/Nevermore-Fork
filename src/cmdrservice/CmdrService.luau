@@ -16,6 +16,7 @@ const HttpService = game:GetService("HttpService")
 const require = require("../Loader").load()
 
 const CmdrServiceUtils = require("CmdrServiceUtils")
+const CmdrServiceNetwork = require("CmdrServiceNetwork")
 const CmdrTemplateProviderServer = require("CmdrTemplateProviderServer")
 const Maid = require("Maid")
 const PermissionService = require("PermissionService")
@@ -79,6 +80,7 @@ function CmdrService.Init(self: CmdrService, serviceBag: ServiceBag.ServiceBag)
 		end)
 
 		if success then
+			cmdr:SetNetwork(CmdrServiceNetwork)
 			resolve(cmdr)
 		else
 			reject(resultOrError)

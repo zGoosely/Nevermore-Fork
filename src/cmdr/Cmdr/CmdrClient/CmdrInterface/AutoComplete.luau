@@ -1,6 +1,10 @@
+--!strict
 -- luacheck: ignore 212
+
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
+
+local CmdrInterfaceUtils = require(script.Parent.CmdrInterfaceUtils)
 
 return function(Cmdr)
 	local AutoComplete = {
@@ -16,9 +20,36 @@ return function(Cmdr)
 	local Title = Gui:WaitForChild("Title")
 	local Description = Gui:WaitForChild("Description")
 	local Entry = Gui.Parent:WaitForChild("Frame"):WaitForChild("Entry")
+	local GhostText = Entry.TextBox:WaitForChild("GhostText")
 	AutoItem.Parent = nil
 
 	local defaultBarThickness = Gui.ScrollBarThickness
+
+	function AutoComplete.GetCompletionText(self: any): string
+		local item = self:GetSelectedItem()
+		if not item then
+			return Entry.TextBox.Text
+		end
+
+		return CmdrInterfaceUtils.getCompletionText(item, self.Command, self.Arg, self.NumArgs, self.IsPartial)
+	end
+
+	function AutoComplete.UpdateGhostText(self: any): ()
+		if not Gui.Visible then
+			GhostText.Text = ""
+			return
+		end
+
+		local item = self:GetSelectedItem()
+		if not item then
+			GhostText.Text = ""
+			return
+		end
+
+		const typedText = Entry.TextBox.Text
+		const ghostCompletion = CmdrInterfaceUtils.getGhostCompletionText(typedText, item, self:GetCompletionText())
+		GhostText.Text = CmdrInterfaceUtils.getGhostRichText(typedText, ghostCompletion)
+	end
 
 	-- Helper function that sets text and resizes labels
 	local function SetText(obj, textObj, text, sizeFromContents)
@@ -85,7 +116,7 @@ return function(Cmdr)
 	-- options.description?: The description for the currently active info box
 	-- options.invalid?: If true, description is shown in red.
 	-- options.isLast?: If true, auto complete won't keep going after this argument.
-	function AutoComplete:Show(items, options)
+	function AutoComplete.Show(self: any, items: any, options: any): ()
 		options = options or {}
 
 		-- Remove old options.
@@ -124,7 +155,6 @@ return function(Cmdr)
 				.. string.rep(" ", #leftText)
 				.. string.sub(rightText, stop + 1)
 
-
 			btn.Parent = Gui
 			btn.LayoutOrder = i
 
@@ -152,32 +182,34 @@ return function(Cmdr)
 			UDim2.new(0, Entry.TextBox.AbsolutePosition.X - 10 + extra, 0, Entry.TextBox.AbsolutePosition.Y + 30)
 		Gui.Size = UDim2.new(0, autocompleteWidth, 0, Gui.UIListLayout.AbsoluteContentSize.Y)
 		Gui.Visible = true
+		self:UpdateGhostText()
 
 		-- Finally, update thge info display
 		UpdateInfoDisplay(self.Items[1] and self.Items[1].options or options)
 	end
 
 	--- Returns the selected item in the auto complete
-	function AutoComplete:GetSelectedItem()
+	function AutoComplete.GetSelectedItem(self: any): any
 		if Gui.Visible == false then
 			return nil
 		end
 
-		return AutoComplete.Items[AutoComplete.SelectedItem]
+		return self.Items[self.SelectedItem]
 	end
 
 	--- Hides the auto complete
-	function AutoComplete:Hide()
+	function AutoComplete.Hide(_self: any): ()
 		Gui.Visible = false
+		GhostText.Text = ""
 	end
 
 	--- Returns if the menu is visible
-	function AutoComplete:IsVisible()
+	function AutoComplete.IsVisible(_self: any): boolean
 		return Gui.Visible
 	end
 
 	--- Changes the user's item selection by the given delta
-	function AutoComplete:Select(delta)
+	function AutoComplete.Select(self: any, delta: number): ()
 		if not Gui.Visible then
 			return
 		end
@@ -208,6 +240,8 @@ return function(Cmdr)
 		if self.Items[self.SelectedItem] and self.Items[self.SelectedItem].options then
 			UpdateInfoDisplay(self.Items[self.SelectedItem].options or {})
 		end
+
+		self:UpdateGhostText()
 	end
 
 	Gui.Parent:GetPropertyChangedSignal("AbsoluteSize"):Connect(UpdateContainerSize)

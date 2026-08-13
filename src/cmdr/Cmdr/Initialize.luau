@@ -1,40 +1,29 @@
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local StarterGui = game:GetService("StarterGui")
-local CreateGui = require(script.Parent.CreateGui)
+--!strict
+
+const ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 --- Handles initial preparation of the game server-side.
-return function (cmdr)
-	local ReplicatedRoot, RemoteFunction, RemoteEvent
+return function(cmdr: any): ()
+	local replicatedRoot = script.Parent.CmdrClient
 
-	local function Create (class, name, parent)
-		local object = Instance.new(class)
+	local function create(class: string, name: string, parent: Instance?): Instance
+		const object = Instance.new(class)
 		object.Name = name
-		object.Parent = parent or ReplicatedRoot
+		object.Parent = parent or replicatedRoot
 
 		return object
 	end
 
-	ReplicatedRoot = script.Parent.CmdrClient
-	ReplicatedRoot.Parent = ReplicatedStorage
+	replicatedRoot.Parent = ReplicatedStorage
+	create("Folder", "Commands")
+	create("Folder", "Types")
 
-	RemoteFunction = Create("RemoteFunction", "CmdrFunction")
-	RemoteEvent = Create("RemoteEvent", "CmdrEvent")
+	script.Parent.Shared.Parent = replicatedRoot
 
-	Create("Folder", "Commands")
-	Create("Folder", "Types")
-
-	script.Parent.Shared.Parent = ReplicatedRoot
-
-	cmdr.ReplicatedRoot = ReplicatedRoot
-	cmdr.RemoteFunction = RemoteFunction
-	cmdr.RemoteEvent = RemoteEvent
+	cmdr.ReplicatedRoot = replicatedRoot
 
 	cmdr:RegisterTypesIn(script.Parent.BuiltInTypes)
 
 	script.Parent.BuiltInTypes:Destroy()
 	script.Parent.BuiltInCommands.Name = "Server commands"
-
-	if StarterGui:FindFirstChild("Cmdr") == nil then
-		CreateGui()
-	end
 end
