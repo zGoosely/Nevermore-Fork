@@ -1,0 +1,13 @@
+{
+  "name": "quenty/rxcollectionserviceutils",
+  "version": "0.0.1",
+  "exports": {
+    "RxCollectionServiceUtils": "RxCollectionServiceUtils"
+  },
+  "dependencies": [
+    "quenty/brio@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/rx@0.0.1"
+  ],
+  "externals": []
+}

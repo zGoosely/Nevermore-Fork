@@ -1,0 +1,9 @@
+{
+  "name": "quenty/cubictweenutils",
+  "version": "0.0.1",
+  "exports": {
+    "CubicTweenUtils": "CubicTweenUtils"
+  },
+  "dependencies": [],
+  "externals": []
+}

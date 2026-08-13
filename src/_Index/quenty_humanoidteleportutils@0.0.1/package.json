@@ -1,0 +1,12 @@
+{
+  "name": "quenty/humanoidteleportutils",
+  "version": "0.0.1",
+  "exports": {
+    "HumanoidTeleportUtils": "HumanoidTeleportUtils"
+  },
+  "dependencies": [
+    "quenty/promise@0.0.1",
+    "quenty/raycaster@0.0.1"
+  ],
+  "externals": []
+}

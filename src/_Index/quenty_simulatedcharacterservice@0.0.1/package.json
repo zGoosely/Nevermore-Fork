@@ -1,0 +1,29 @@
+{
+  "name": "quenty/simulatedcharacterservice",
+  "version": "0.0.1",
+  "exports": {
+    "SimulatedCharacterService": "SimulatedCharacterService",
+    "SimulatedCharacterServiceClient": "SimulatedCharacterServiceClient",
+    "SimulatedCharacterTemplateProvider": "SimulatedCharacterTemplateProvider"
+  },
+  "dependencies": [
+    "quenty/animationutils@0.0.1",
+    "quenty/bytenet@0.0.1",
+    "quenty/draw@0.0.1",
+    "quenty/enums@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/mathutils@0.0.1",
+    "quenty/promise@0.0.1",
+    "quenty/random@0.0.1",
+    "quenty/randomutils@0.0.1",
+    "quenty/rbxassetutils@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/signal@0.0.1",
+    "quenty/tableutils@0.0.1",
+    "quenty/templateprovider@0.0.1",
+    "quenty/timesyncservice@0.0.1"
+  ],
+  "externals": [
+    "ClientCulling"
+  ]
+}

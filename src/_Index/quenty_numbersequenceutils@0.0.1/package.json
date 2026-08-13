@@ -1,0 +1,11 @@
+{
+  "name": "quenty/numbersequenceutils",
+  "version": "0.0.1",
+  "exports": {
+    "NumberSequenceUtils": "NumberSequenceUtils"
+  },
+  "dependencies": [
+    "quenty/mathutils@0.0.1"
+  ],
+  "externals": []
+}

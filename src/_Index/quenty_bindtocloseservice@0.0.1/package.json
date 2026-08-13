@@ -1,0 +1,15 @@
+{
+  "name": "quenty/bindtocloseservice",
+  "version": "0.0.1",
+  "exports": {
+    "BindToCloseService": "BindToCloseService"
+  },
+  "dependencies": [
+    "quenty/maid@0.0.1",
+    "quenty/promise@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/symbol@0.0.1",
+    "quenty/t@0.0.1"
+  ],
+  "externals": []
+}

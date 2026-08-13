@@ -1,0 +1,16 @@
+{
+  "name": "quenty/brine",
+  "version": "0.0.1",
+  "exports": {
+    "Brine": "Brine",
+    "BrineTypes": "BrineTypes"
+  },
+  "dependencies": [
+    "quenty/memorizeutils@0.0.1",
+    "quenty/stringutils@0.0.1",
+    "quenty/symbol@0.0.1"
+  ],
+  "externals": [
+    "BufferEncoder"
+  ]
+}

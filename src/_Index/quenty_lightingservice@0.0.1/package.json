@@ -1,0 +1,15 @@
+{
+  "name": "quenty/lightingservice",
+  "version": "0.0.1",
+  "exports": {},
+  "dependencies": [
+    "quenty/baseobject@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/statestack@0.0.1",
+    "quenty/t@0.0.1"
+  ],
+  "externals": [
+    "Jest"
+  ]
+}

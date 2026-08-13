@@ -1,0 +1,11 @@
+{
+  "name": "quenty/datetimeutils",
+  "version": "0.0.1",
+  "exports": {
+    "DateTimeUtils": "DateTimeUtils"
+  },
+  "dependencies": [
+    "quenty/t@0.0.1"
+  ],
+  "externals": []
+}

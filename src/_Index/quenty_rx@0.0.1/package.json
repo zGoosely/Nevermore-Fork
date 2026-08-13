@@ -1,0 +1,22 @@
+{
+  "name": "quenty/rx",
+  "version": "0.0.1",
+  "exports": {
+    "Observable": "Observable",
+    "ObservableSubscriptionTable": "ObservableSubscriptionTable",
+    "Rx": "Rx",
+    "RxSignal": "RxSignal",
+    "Subscription": "Subscription"
+  },
+  "dependencies": [
+    "quenty/cancellabledelay@0.0.1",
+    "quenty/canceltoken@0.0.1",
+    "quenty/ducktype@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/promise@0.0.1",
+    "quenty/signal@0.0.1",
+    "quenty/symbol@0.0.1",
+    "quenty/throttle@0.0.1"
+  ],
+  "externals": []
+}

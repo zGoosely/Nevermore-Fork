@@ -1,0 +1,25 @@
+{
+  "name": "quenty/cull",
+  "version": "0.0.1",
+  "exports": {
+    "ClientCullingConstants": "ClientCullingConstants",
+    "ClientCullingModel": "ClientCullingModel",
+    "ClientCullingRegistry": "ClientCullingRegistry",
+    "ClientCullingService": "ClientCullingService",
+    "ClientCullingSpatialIndex": "ClientCullingSpatialIndex",
+    "ClientCullingTypes": "ClientCullingTypes",
+    "ClientCullingUtils": "ClientCullingUtils",
+    "ClientCullingVisibilityState": "ClientCullingVisibilityState"
+  },
+  "dependencies": [
+    "quenty/binder@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/t@0.0.1",
+    "quenty/tableutils@0.0.1",
+    "quenty/transparency@0.0.1"
+  ],
+  "externals": [
+    "Jest"
+  ]
+}

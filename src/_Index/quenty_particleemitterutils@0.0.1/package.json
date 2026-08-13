@@ -1,0 +1,12 @@
+{
+  "name": "quenty/particleemitterutils",
+  "version": "0.0.1",
+  "exports": {
+    "ParticleEmitterUtils": "ParticleEmitterUtils"
+  },
+  "dependencies": [
+    "quenty/maid@0.0.1",
+    "quenty/numberutils@0.0.1"
+  ],
+  "externals": []
+}

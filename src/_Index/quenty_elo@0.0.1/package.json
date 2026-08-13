@@ -1,0 +1,13 @@
+{
+  "name": "quenty/elo",
+  "version": "0.0.1",
+  "exports": {
+    "EloMatchResult": "EloMatchResult",
+    "EloMatchResultUtils": "EloMatchResultUtils",
+    "EloUtils": "EloUtils"
+  },
+  "dependencies": [
+    "quenty/probability@0.0.1"
+  ],
+  "externals": []
+}

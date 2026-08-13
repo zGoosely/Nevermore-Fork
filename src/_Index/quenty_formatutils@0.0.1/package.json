@@ -1,0 +1,11 @@
+{
+  "name": "quenty/formatutils",
+  "version": "0.0.1",
+  "exports": {
+    "FormatUtils": "FormatUtils"
+  },
+  "dependencies": [
+    "quenty/t@0.0.1"
+  ],
+  "externals": []
+}

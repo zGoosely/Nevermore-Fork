@@ -1,0 +1,31 @@
+{
+  "name": "quenty/ragdoll",
+  "version": "0.0.1",
+  "exports": {},
+  "dependencies": [
+    "quenty/adorneedata@0.0.1",
+    "quenty/attribute@0.0.1",
+    "quenty/baseobject@0.0.1",
+    "quenty/binder@0.0.1",
+    "quenty/brio@0.0.1",
+    "quenty/cancellabledelay@0.0.1",
+    "quenty/characterutils@0.0.1",
+    "quenty/clientcamera@0.0.1",
+    "quenty/enumutils@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/motor6d@0.0.1",
+    "quenty/promise@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/rxbinderutils@0.0.1",
+    "quenty/rxbrioutils@0.0.1",
+    "quenty/rxinstanceutils@0.0.1",
+    "quenty/rxphysicsutils@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/spring@0.0.1",
+    "quenty/t@0.0.1",
+    "quenty/tableutils@0.0.1",
+    "quenty/tie@0.0.1",
+    "quenty/valueobject@0.0.1"
+  ],
+  "externals": []
+}

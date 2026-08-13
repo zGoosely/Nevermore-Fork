@@ -1,0 +1,12 @@
+{
+  "name": "quenty/lipsumutils",
+  "version": "0.0.1",
+  "exports": {
+    "LipsumUtils": "LipsumUtils"
+  },
+  "dependencies": [
+    "quenty/randomutils@0.0.1",
+    "quenty/stringutils@0.0.1"
+  ],
+  "externals": []
+}

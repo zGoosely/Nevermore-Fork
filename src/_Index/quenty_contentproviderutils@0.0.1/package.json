@@ -1,0 +1,14 @@
+{
+  "name": "quenty/contentproviderutils",
+  "version": "0.0.1",
+  "exports": {
+    "ContentProviderUtils": "ContentProviderUtils"
+  },
+  "dependencies": [
+    "quenty/animationutils@0.0.1",
+    "quenty/promise@0.0.1",
+    "quenty/rbxassetutils@0.0.1",
+    "quenty/soundutils@0.0.1"
+  ],
+  "externals": []
+}

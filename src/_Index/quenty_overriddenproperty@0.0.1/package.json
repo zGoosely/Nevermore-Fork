@@ -1,0 +1,12 @@
+{
+  "name": "quenty/overriddenproperty",
+  "version": "0.0.1",
+  "exports": {
+    "OverriddenProperty": "OverriddenProperty"
+  },
+  "dependencies": [
+    "quenty/baseobject@0.0.1",
+    "quenty/throttle@0.0.1"
+  ],
+  "externals": []
+}

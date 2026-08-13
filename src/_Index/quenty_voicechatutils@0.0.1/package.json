@@ -1,0 +1,11 @@
+{
+  "name": "quenty/voicechatutils",
+  "version": "0.0.1",
+  "exports": {
+    "VoiceChatUtils": "VoiceChatUtils"
+  },
+  "dependencies": [
+    "quenty/promise@0.0.1"
+  ],
+  "externals": []
+}

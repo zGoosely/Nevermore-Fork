@@ -1,0 +1,9 @@
+{
+  "name": "quenty/humanoidkillerutils",
+  "version": "0.0.1",
+  "exports": {
+    "HumanoidKillerUtils": "HumanoidKillerUtils"
+  },
+  "dependencies": [],
+  "externals": []
+}

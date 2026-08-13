@@ -1,0 +1,17 @@
+{
+  "name": "quenty/attributeutils",
+  "version": "0.0.1",
+  "exports": {
+    "AttributeUtils": "AttributeUtils",
+    "RxAttributeUtils": "RxAttributeUtils"
+  },
+  "dependencies": [
+    "quenty/brio@0.0.1",
+    "quenty/canceltoken@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/promise@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/symbol@0.0.1"
+  ],
+  "externals": []
+}

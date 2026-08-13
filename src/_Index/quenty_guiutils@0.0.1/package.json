@@ -1,0 +1,26 @@
+{
+  "name": "quenty/guiutils",
+  "version": "0.0.1",
+  "exports": {
+    "GuiScalingUtils": "GuiScalingUtils",
+    "GuiUltrawideContainerUtils": "GuiUltrawideContainerUtils",
+    "JumpButtonUtils": "JumpButtonUtils",
+    "PlayerGuiUtils": "PlayerGuiUtils",
+    "RxGuiInteractionUtils": "RxGuiInteractionUtils",
+    "UIAlignmentUtils": "UIAlignmentUtils",
+    "UICornerUtils": "UICornerUtils"
+  },
+  "dependencies": [
+    "quenty/attributeutils@0.0.1",
+    "quenty/brio@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/observablecollection@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/rxbrioutils@0.0.1",
+    "quenty/rxcollectionserviceutils@0.0.1",
+    "quenty/rxinstanceutils@0.0.1",
+    "quenty/spring@0.0.1",
+    "quenty/valueobject@0.0.1"
+  ],
+  "externals": []
+}

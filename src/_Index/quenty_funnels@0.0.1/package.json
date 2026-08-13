@@ -1,0 +1,12 @@
+{
+  "name": "quenty/funnels",
+  "version": "0.0.1",
+  "exports": {
+    "FunnelStepTracker": "FunnelStepTracker"
+  },
+  "dependencies": [
+    "quenty/baseobject@0.0.1",
+    "quenty/signal@0.0.1"
+  ],
+  "externals": []
+}

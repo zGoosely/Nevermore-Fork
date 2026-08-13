@@ -1,0 +1,14 @@
+{
+  "name": "quenty/enabledmixin",
+  "version": "0.0.1",
+  "exports": {
+    "EnabledMixin": "EnabledMixin"
+  },
+  "dependencies": [
+    "quenty/maid@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/signal@0.0.1",
+    "quenty/valueobject@0.0.1"
+  ],
+  "externals": []
+}

@@ -1,0 +1,17 @@
+{
+  "name": "quenty/timedtween",
+  "version": "0.0.1",
+  "exports": {
+    "TimedTween": "TimedTween"
+  },
+  "dependencies": [
+    "quenty/basicpane@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/mathutils@0.0.1",
+    "quenty/promise@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/steputils@0.0.1",
+    "quenty/valueobject@0.0.1"
+  ],
+  "externals": []
+}

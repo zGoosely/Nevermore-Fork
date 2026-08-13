@@ -1,0 +1,14 @@
+{
+  "name": "quenty/coreguienabler",
+  "version": "0.0.1",
+  "exports": {
+    "CoreGuiEnabler": "CoreGuiEnabler"
+  },
+  "dependencies": [
+    "quenty/characterutils@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/symbol@0.0.1"
+  ],
+  "externals": []
+}

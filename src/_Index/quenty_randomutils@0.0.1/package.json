@@ -1,0 +1,9 @@
+{
+  "name": "quenty/randomutils",
+  "version": "0.0.1",
+  "exports": {
+    "RandomUtils": "RandomUtils"
+  },
+  "dependencies": [],
+  "externals": []
+}

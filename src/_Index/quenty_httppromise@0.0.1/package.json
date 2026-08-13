@@ -1,0 +1,11 @@
+{
+  "name": "quenty/httppromise",
+  "version": "0.0.1",
+  "exports": {
+    "HttpPromise": "HttpPromise"
+  },
+  "dependencies": [
+    "quenty/promise@0.0.1"
+  ],
+  "externals": []
+}

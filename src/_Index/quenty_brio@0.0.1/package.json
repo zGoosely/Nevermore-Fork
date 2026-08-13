@@ -1,0 +1,12 @@
+{
+  "name": "quenty/brio",
+  "version": "0.0.1",
+  "exports": {
+    "Brio": "Brio"
+  },
+  "dependencies": [
+    "quenty/maid@0.0.1",
+    "quenty/signal@0.0.1"
+  ],
+  "externals": []
+}

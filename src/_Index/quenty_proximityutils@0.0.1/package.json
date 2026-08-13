@@ -1,0 +1,13 @@
+{
+  "name": "quenty/proximityutils",
+  "version": "0.0.1",
+  "exports": {
+    "ProximityUtils": "ProximityUtils"
+  },
+  "dependencies": [
+    "quenty/brio@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/rx@0.0.1"
+  ],
+  "externals": []
+}

@@ -1,0 +1,15 @@
+{
+  "name": "quenty/soundutils",
+  "version": "0.0.1",
+  "exports": {
+    "SoundPromiseUtils": "SoundPromiseUtils",
+    "SoundUtils": "SoundUtils"
+  },
+  "dependencies": [
+    "quenty/instancetreeutils@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/promise@0.0.1",
+    "quenty/rbxassetutils@0.0.1"
+  ],
+  "externals": []
+}

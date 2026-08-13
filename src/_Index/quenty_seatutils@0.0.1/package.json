@@ -1,0 +1,15 @@
+{
+  "name": "quenty/seatutils",
+  "version": "0.0.1",
+  "exports": {
+    "RxSeatUtils": "RxSeatUtils"
+  },
+  "dependencies": [
+    "quenty/brio@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/rxbrioutils@0.0.1",
+    "quenty/rxinstanceutils@0.0.1",
+    "quenty/rxstatestackutils@0.0.1"
+  ],
+  "externals": []
+}

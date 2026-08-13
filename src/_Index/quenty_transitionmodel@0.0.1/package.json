@@ -1,0 +1,22 @@
+{
+  "name": "quenty/transitionmodel",
+  "version": "0.0.1",
+  "exports": {
+    "SpringTransitionModel": "SpringTransitionModel",
+    "TimedTransitionModel": "TimedTransitionModel",
+    "TransitionModel": "TransitionModel"
+  },
+  "dependencies": [
+    "quenty/basicpane@0.0.1",
+    "quenty/ducktype@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/promise@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/signal@0.0.1",
+    "quenty/spring@0.0.1",
+    "quenty/springutils@0.0.1",
+    "quenty/timedtween@0.0.1",
+    "quenty/valueobject@0.0.1"
+  ],
+  "externals": []
+}

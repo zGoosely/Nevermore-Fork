@@ -1,0 +1,25 @@
+{
+  "name": "quenty/binder",
+  "version": "0.0.1",
+  "exports": {
+    "Binder": "Shared/Binder",
+    "BinderProvider": "Shared/BinderProvider",
+    "PlayerBinder": "Shared/Internal/PlayerBinder",
+    "PlayerHumanoidBinder": "Shared/Internal/PlayerHumanoidBinder"
+  },
+  "dependencies": [
+    "quenty/baseobject@0.0.1",
+    "quenty/binderutils@0.0.1",
+    "quenty/brio@0.0.1",
+    "quenty/canceltoken@0.0.1",
+    "quenty/humanoidtracker@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/promise@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/signal@0.0.1",
+    "quenty/tableutils@0.0.1",
+    "quenty/valueobject@0.0.1"
+  ],
+  "externals": []
+}

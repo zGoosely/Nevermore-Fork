@@ -1,0 +1,14 @@
+{
+  "name": "quenty/rxstatestackutils",
+  "version": "0.0.1",
+  "exports": {
+    "RxStateStackUtils": "RxStateStackUtils"
+  },
+  "dependencies": [
+    "quenty/brio@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/statestack@0.0.1"
+  ],
+  "externals": []
+}

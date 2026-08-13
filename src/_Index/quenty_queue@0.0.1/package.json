@@ -1,0 +1,9 @@
+{
+  "name": "quenty/queue",
+  "version": "0.0.1",
+  "exports": {
+    "Queue": "Queue"
+  },
+  "dependencies": [],
+  "externals": []
+}

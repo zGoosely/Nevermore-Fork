@@ -1,0 +1,14 @@
+{
+  "name": "quenty/marketplaceutils",
+  "version": "0.0.1",
+  "exports": {
+    "MarketplaceServiceCache": "MarketplaceServiceCache",
+    "MarketplaceUtils": "MarketplaceUtils"
+  },
+  "dependencies": [
+    "quenty/maid@0.0.1",
+    "quenty/promise@0.0.1",
+    "quenty/servicebag@0.0.1"
+  ],
+  "externals": []
+}

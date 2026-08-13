@@ -1,0 +1,25 @@
+{
+  "name": "quenty/soundplayer",
+  "version": "0.0.1",
+  "exports": {},
+  "dependencies": [
+    "quenty/baseobject@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/numberrangeutils@0.0.1",
+    "quenty/promise@0.0.1",
+    "quenty/random@0.0.1",
+    "quenty/randomutils@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/rxinstanceutils@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/signal@0.0.1",
+    "quenty/sortedlist@0.0.1",
+    "quenty/soundgroup@0.0.1",
+    "quenty/soundutils@0.0.1",
+    "quenty/t@0.0.1",
+    "quenty/tableutils@0.0.1",
+    "quenty/transitionmodel@0.0.1",
+    "quenty/valueobject@0.0.1"
+  ],
+  "externals": []
+}

@@ -1,0 +1,19 @@
+{
+  "name": "quenty/datastore",
+  "version": "0.0.1",
+  "exports": {
+    "DataStore": "DataStore",
+    "DataStorePromises": "DataStorePromises",
+    "GameDataStoreService": "GameDataStoreService",
+    "PrivateServerDataStoreService": "PrivateServerDataStoreService"
+  },
+  "dependencies": [
+    "quenty/bindtocloseservice@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/promise@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/t@0.0.1",
+    "quenty/tableutils@0.0.1"
+  ],
+  "externals": []
+}

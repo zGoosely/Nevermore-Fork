@@ -1,0 +1,11 @@
+{
+  "name": "quenty/tableutils",
+  "version": "0.0.1",
+  "exports": {
+    "Set": "Set",
+    "SetUtils": "SetUtils",
+    "TableUtils": "TableUtils"
+  },
+  "dependencies": [],
+  "externals": []
+}

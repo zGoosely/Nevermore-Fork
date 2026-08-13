@@ -1,0 +1,17 @@
+{
+  "name": "quenty/conditions",
+  "version": "0.0.1",
+  "exports": {
+    "AdorneeConditionUtils": "AdorneeConditionUtils"
+  },
+  "dependencies": [
+    "quenty/attributeutils@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/rxbrioutils@0.0.1",
+    "quenty/rxinstanceutils@0.0.1",
+    "quenty/statestack@0.0.1",
+    "quenty/tie@0.0.1"
+  ],
+  "externals": []
+}

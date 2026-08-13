@@ -1,0 +1,11 @@
+{
+  "name": "quenty/region3utils",
+  "version": "0.0.1",
+  "exports": {
+    "Region3Utils": "Region3Utils"
+  },
+  "dependencies": [
+    "quenty/boundingboxutils@0.0.1"
+  ],
+  "externals": []
+}

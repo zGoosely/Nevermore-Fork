@@ -1,0 +1,9 @@
+{
+  "name": "quenty/listindexutils",
+  "version": "0.0.1",
+  "exports": {
+    "ListIndexUtils": "ListIndexUtils"
+  },
+  "dependencies": [],
+  "externals": []
+}

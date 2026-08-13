@@ -1,0 +1,14 @@
+{
+  "name": "quenty/ratelimiter",
+  "version": "0.0.1",
+  "exports": {
+    "RateLimiter": "RateLimiter"
+  },
+  "dependencies": [
+    "quenty/baseobject@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/t@0.0.1",
+    "quenty/valueobject@0.0.1"
+  ],
+  "externals": []
+}

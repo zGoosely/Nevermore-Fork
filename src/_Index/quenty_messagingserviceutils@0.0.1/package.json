@@ -1,0 +1,11 @@
+{
+  "name": "quenty/messagingserviceutils",
+  "version": "0.0.1",
+  "exports": {
+    "MessagingServiceUtils": "MessagingServiceUtils"
+  },
+  "dependencies": [
+    "quenty/promise@0.0.1"
+  ],
+  "externals": []
+}

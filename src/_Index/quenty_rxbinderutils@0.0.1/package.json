@@ -1,0 +1,17 @@
+{
+  "name": "quenty/rxbinderutils",
+  "version": "0.0.1",
+  "exports": {
+    "RxBinderUtils": "RxBinderUtils"
+  },
+  "dependencies": [
+    "quenty/binder@0.0.1",
+    "quenty/brio@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/rxbrioutils@0.0.1",
+    "quenty/rxinstanceutils@0.0.1",
+    "quenty/rxlinkutils@0.0.1"
+  ],
+  "externals": []
+}

@@ -1,0 +1,12 @@
+{
+  "name": "quenty/humanoiddescriptionutils",
+  "version": "0.0.1",
+  "exports": {
+    "HumanoidDescriptionUtils": "HumanoidDescriptionUtils"
+  },
+  "dependencies": [
+    "quenty/insertserviceutils@0.0.1",
+    "quenty/promise@0.0.1"
+  ],
+  "externals": []
+}

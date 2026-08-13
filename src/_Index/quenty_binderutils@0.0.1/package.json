@@ -1,0 +1,11 @@
+{
+  "name": "quenty/binderutils",
+  "version": "0.0.1",
+  "exports": {
+    "BinderUtils": "BinderUtils"
+  },
+  "dependencies": [
+    "quenty/binder@0.0.1"
+  ],
+  "externals": []
+}

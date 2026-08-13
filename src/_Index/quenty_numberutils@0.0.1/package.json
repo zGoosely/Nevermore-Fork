@@ -1,0 +1,11 @@
+{
+  "name": "quenty/numberutils",
+  "version": "0.0.1",
+  "exports": {
+    "NumberUtils": "NumberUtils"
+  },
+  "dependencies": [
+    "quenty/mathutils@0.0.1"
+  ],
+  "externals": []
+}

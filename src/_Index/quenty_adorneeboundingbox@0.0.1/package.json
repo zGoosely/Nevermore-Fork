@@ -1,0 +1,20 @@
+{
+  "name": "quenty/adorneeboundingbox",
+  "version": "0.0.1",
+  "exports": {
+    "AdorneeBoundingBox": "AdorneeBoundingBox",
+    "AdorneeModelBoundingBox": "AdorneeModelBoundingBox",
+    "AdorneePartBoundingBox": "AdorneePartBoundingBox",
+    "RxPartBoundingBoxUtils": "RxPartBoundingBoxUtils"
+  },
+  "dependencies": [
+    "quenty/baseobject@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/observablecollection@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/rxbrioutils@0.0.1",
+    "quenty/rxinstanceutils@0.0.1",
+    "quenty/valueobject@0.0.1"
+  ],
+  "externals": []
+}

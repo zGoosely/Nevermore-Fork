@@ -1,0 +1,17 @@
+{
+  "name": "quenty/buttondragmodel",
+  "version": "0.0.1",
+  "exports": {
+    "ButtonDragModel": "ButtonDragModel"
+  },
+  "dependencies": [
+    "quenty/baseobject@0.0.1",
+    "quenty/brio@0.0.1",
+    "quenty/inputobjectutils@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/signal@0.0.1",
+    "quenty/valueobject@0.0.1"
+  ],
+  "externals": []
+}

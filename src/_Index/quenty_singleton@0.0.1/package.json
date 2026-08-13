@@ -1,0 +1,11 @@
+{
+  "name": "quenty/singleton",
+  "version": "0.0.1",
+  "exports": {
+    "Singleton": "Singleton"
+  },
+  "dependencies": [
+    "quenty/servicebag@0.0.1"
+  ],
+  "externals": []
+}

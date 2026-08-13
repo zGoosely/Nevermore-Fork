@@ -1,0 +1,19 @@
+{
+  "name": "quenty/hintscoringutils",
+  "version": "0.0.1",
+  "exports": {
+    "HintScoringUtils": "HintScoringUtils"
+  },
+  "dependencies": [
+    "quenty/adorneeutils@0.0.1",
+    "quenty/boundingboxutils@0.0.1",
+    "quenty/clientcamera@0.0.1",
+    "quenty/draw@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/mathutils@0.0.1",
+    "quenty/raycaster@0.0.1",
+    "quenty/region3utils@0.0.1",
+    "quenty/vector3utils@0.0.1"
+  ],
+  "externals": []
+}

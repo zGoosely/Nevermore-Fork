@@ -1,0 +1,663 @@
+{
+  "name": "_Index",
+  "tree": {
+    "$className": "Folder",
+    "quenty/acceltween@0.0.1": {
+      "$path": "quenty_acceltween@0.0.1"
+    },
+    "quenty/access@0.0.1": {
+      "$path": "quenty_access@0.0.1"
+    },
+    "quenty/actionexecutionservice@0.0.1": {
+      "$path": "quenty_actionexecutionservice@0.0.1"
+    },
+    "quenty/actionmanager@0.0.1": {
+      "$path": "quenty_actionmanager@0.0.1"
+    },
+    "quenty/adorneeboundingbox@0.0.1": {
+      "$path": "quenty_adorneeboundingbox@0.0.1"
+    },
+    "quenty/adorneedata@0.0.1": {
+      "$path": "quenty_adorneedata@0.0.1"
+    },
+    "quenty/adorneeutils@0.0.1": {
+      "$path": "quenty_adorneeutils@0.0.1"
+    },
+    "quenty/adorneevalue@0.0.1": {
+      "$path": "quenty_adorneevalue@0.0.1"
+    },
+    "quenty/aggregator@0.0.1": {
+      "$path": "quenty_aggregator@0.0.1"
+    },
+    "quenty/animationgrouputils@0.0.1": {
+      "$path": "quenty_animationgrouputils@0.0.1"
+    },
+    "quenty/animationutils@0.0.1": {
+      "$path": "quenty_animationutils@0.0.1"
+    },
+    "quenty/assetserviceutils@0.0.1": {
+      "$path": "quenty_assetserviceutils@0.0.1"
+    },
+    "quenty/asyncsemaphore@0.0.1": {
+      "$path": "quenty_asyncsemaphore@0.0.1"
+    },
+    "quenty/attribute@0.0.1": {
+      "$path": "quenty_attribute@0.0.1"
+    },
+    "quenty/attributeindex@0.0.1": {
+      "$path": "quenty_attributeindex@0.0.1"
+    },
+    "quenty/attributeutils@0.0.1": {
+      "$path": "quenty_attributeutils@0.0.1"
+    },
+    "quenty/badgeutils@0.0.1": {
+      "$path": "quenty_badgeutils@0.0.1"
+    },
+    "quenty/banservice@0.0.1": {
+      "$path": "quenty_banservice@0.0.1"
+    },
+    "quenty/baseobject@0.0.1": {
+      "$path": "quenty_baseobject@0.0.1"
+    },
+    "quenty/basicpane@0.0.1": {
+      "$path": "quenty_basicpane@0.0.1"
+    },
+    "quenty/basicpaneutils@0.0.1": {
+      "$path": "quenty_basicpaneutils@0.0.1"
+    },
+    "quenty/bezierutils@0.0.1": {
+      "$path": "quenty_bezierutils@0.0.1"
+    },
+    "quenty/binarysearchutils@0.0.1": {
+      "$path": "quenty_binarysearchutils@0.0.1"
+    },
+    "quenty/binder@0.0.1": {
+      "$path": "quenty_binder@0.0.1"
+    },
+    "quenty/binderutils@0.0.1": {
+      "$path": "quenty_binderutils@0.0.1"
+    },
+    "quenty/bindtocloseservice@0.0.1": {
+      "$path": "quenty_bindtocloseservice@0.0.1"
+    },
+    "quenty/blend@0.0.1": {
+      "$path": "quenty_blend@0.0.1"
+    },
+    "quenty/boundingboxutils@0.0.1": {
+      "$path": "quenty_boundingboxutils@0.0.1"
+    },
+    "quenty/brine@0.0.1": {
+      "$path": "quenty_brine@0.0.1"
+    },
+    "quenty/brio@0.0.1": {
+      "$path": "quenty_brio@0.0.1"
+    },
+    "quenty/brioutils@0.0.1": {
+      "$path": "quenty_brioutils@0.0.1"
+    },
+    "quenty/buttondragmodel@0.0.1": {
+      "$path": "quenty_buttondragmodel@0.0.1"
+    },
+    "quenty/bytenet@0.0.1": {
+      "$path": "quenty_bytenet@0.0.1"
+    },
+    "quenty/cancellabledelay@0.0.1": {
+      "$path": "quenty_cancellabledelay@0.0.1"
+    },
+    "quenty/canceltoken@0.0.1": {
+      "$path": "quenty_canceltoken@0.0.1"
+    },
+    "quenty/cframeutils@0.0.1": {
+      "$path": "quenty_cframeutils@0.0.1"
+    },
+    "quenty/characterutils@0.0.1": {
+      "$path": "quenty_characterutils@0.0.1"
+    },
+    "quenty/clientcamera@0.0.1": {
+      "$path": "quenty_clientcamera@0.0.1"
+    },
+    "quenty/clientranslator@0.0.1": {
+      "$path": "quenty_clientranslator@0.0.1"
+    },
+    "quenty/clipcharacters@0.0.1": {
+      "$path": "quenty_clipcharacters@0.0.1"
+    },
+    "quenty/cmdr@0.0.1": {
+      "$path": "quenty_cmdr@0.0.1"
+    },
+    "quenty/cmdrservice@0.0.1": {
+      "$path": "quenty_cmdrservice@0.0.1"
+    },
+    "quenty/color3utils@0.0.1": {
+      "$path": "quenty_color3utils@0.0.1"
+    },
+    "quenty/colorpicker@0.0.1": {
+      "$path": "quenty_colorpicker@0.0.1"
+    },
+    "quenty/colorsequenceutils@0.0.1": {
+      "$path": "quenty_colorsequenceutils@0.0.1"
+    },
+    "quenty/conditions@0.0.1": {
+      "$path": "quenty_conditions@0.0.1"
+    },
+    "quenty/contentproviderutils@0.0.1": {
+      "$path": "quenty_contentproviderutils@0.0.1"
+    },
+    "quenty/cooldownservice@0.0.1": {
+      "$path": "quenty_cooldownservice@0.0.1"
+    },
+    "quenty/coreguienabler@0.0.1": {
+      "$path": "quenty_coreguienabler@0.0.1"
+    },
+    "quenty/coreguiutils@0.0.1": {
+      "$path": "quenty_coreguiutils@0.0.1"
+    },
+    "quenty/counter@0.0.1": {
+      "$path": "quenty_counter@0.0.1"
+    },
+    "quenty/cubicsplineutils@0.0.1": {
+      "$path": "quenty_cubicsplineutils@0.0.1"
+    },
+    "quenty/cubictweenutils@0.0.1": {
+      "$path": "quenty_cubictweenutils@0.0.1"
+    },
+    "quenty/cull@0.0.1": {
+      "$path": "quenty_cull@0.0.1"
+    },
+    "quenty/datastore@0.0.1": {
+      "$path": "quenty_datastore@0.0.1"
+    },
+    "quenty/datetimeutils@0.0.1": {
+      "$path": "quenty_datetimeutils@0.0.1"
+    },
+    "quenty/daynightutils@0.0.1": {
+      "$path": "quenty_daynightutils@0.0.1"
+    },
+    "quenty/deathreport@0.0.1": {
+      "$path": "quenty_deathreport@0.0.1"
+    },
+    "quenty/debounce@0.0.1": {
+      "$path": "quenty_debounce@0.0.1"
+    },
+    "quenty/defaultvalueutils@0.0.1": {
+      "$path": "quenty_defaultvalueutils@0.0.1"
+    },
+    "quenty/deviceutils@0.0.1": {
+      "$path": "quenty_deviceutils@0.0.1"
+    },
+    "quenty/draw@0.0.1": {
+      "$path": "quenty_draw@0.0.1"
+    },
+    "quenty/ducktype@0.0.1": {
+      "$path": "quenty_ducktype@0.0.1"
+    },
+    "quenty/ellipticcurvecryptography@0.0.1": {
+      "$path": "quenty_ellipticcurvecryptography@0.0.1"
+    },
+    "quenty/elo@0.0.1": {
+      "$path": "quenty_elo@0.0.1"
+    },
+    "quenty/enabledmixin@0.0.1": {
+      "$path": "quenty_enabledmixin@0.0.1"
+    },
+    "quenty/enums@0.0.1": {
+      "$path": "quenty_enums@0.0.1"
+    },
+    "quenty/enumutils@0.0.1": {
+      "$path": "quenty_enumutils@0.0.1"
+    },
+    "quenty/errorreportingservice@0.0.1": {
+      "$path": "quenty_errorreportingservice@0.0.1"
+    },
+    "quenty/experiencecalculatorutils@0.0.1": {
+      "$path": "quenty_experiencecalculatorutils@0.0.1"
+    },
+    "quenty/fakeskybox@0.0.1": {
+      "$path": "quenty_fakeskybox@0.0.1"
+    },
+    "quenty/formatutils@0.0.1": {
+      "$path": "quenty_formatutils@0.0.1"
+    },
+    "quenty/funnels@0.0.1": {
+      "$path": "quenty_funnels@0.0.1"
+    },
+    "quenty/fzy@0.0.1": {
+      "$path": "quenty_fzy@0.0.1"
+    },
+    "quenty/gameconfig@0.0.1": {
+      "$path": "quenty_gameconfig@0.0.1"
+    },
+    "quenty/gameproductservice@0.0.1": {
+      "$path": "quenty_gameproductservice@0.0.1"
+    },
+    "quenty/gameversionutils@0.0.1": {
+      "$path": "quenty_gameversionutils@0.0.1"
+    },
+    "quenty/genericscreenguiprovider@0.0.1": {
+      "$path": "quenty_genericscreenguiprovider@0.0.1"
+    },
+    "quenty/gifting@0.0.1": {
+      "$path": "quenty_gifting@0.0.1"
+    },
+    "quenty/grouputils@0.0.1": {
+      "$path": "quenty_grouputils@0.0.1"
+    },
+    "quenty/guiutils@0.0.1": {
+      "$path": "quenty_guiutils@0.0.1"
+    },
+    "quenty/guivisiblemanager@0.0.1": {
+      "$path": "quenty_guivisiblemanager@0.0.1"
+    },
+    "quenty/hapticfeedbackutils@0.0.1": {
+      "$path": "quenty_hapticfeedbackutils@0.0.1"
+    },
+    "quenty/hide@0.0.1": {
+      "$path": "quenty_hide@0.0.1"
+    },
+    "quenty/highlight@0.0.1": {
+      "$path": "quenty_highlight@0.0.1"
+    },
+    "quenty/hintscoringutils@0.0.1": {
+      "$path": "quenty_hintscoringutils@0.0.1"
+    },
+    "quenty/httppromise@0.0.1": {
+      "$path": "quenty_httppromise@0.0.1"
+    },
+    "quenty/humanoiddescriptionutils@0.0.1": {
+      "$path": "quenty_humanoiddescriptionutils@0.0.1"
+    },
+    "quenty/humanoidkillerutils@0.0.1": {
+      "$path": "quenty_humanoidkillerutils@0.0.1"
+    },
+    "quenty/humanoidmovedirectiontuils@0.0.1": {
+      "$path": "quenty_humanoidmovedirectiontuils@0.0.1"
+    },
+    "quenty/humanoidteleportutils@0.0.1": {
+      "$path": "quenty_humanoidteleportutils@0.0.1"
+    },
+    "quenty/humanoidtracker@0.0.1": {
+      "$path": "quenty_humanoidtracker@0.0.1"
+    },
+    "quenty/idleservice@0.0.1": {
+      "$path": "quenty_idleservice@0.0.1"
+    },
+    "quenty/inputcategorizer@0.0.1": {
+      "$path": "quenty_inputcategorizer@0.0.1"
+    },
+    "quenty/inputkeymapdatastoreservice@0.0.1": {
+      "$path": "quenty_inputkeymapdatastoreservice@0.0.1"
+    },
+    "quenty/inputkeymaputils@0.0.1": {
+      "$path": "quenty_inputkeymaputils@0.0.1"
+    },
+    "quenty/inputmode@0.0.1": {
+      "$path": "quenty_inputmode@0.0.1"
+    },
+    "quenty/inputobjectutils@0.0.1": {
+      "$path": "quenty_inputobjectutils@0.0.1"
+    },
+    "quenty/insertserviceutils@0.0.1": {
+      "$path": "quenty_insertserviceutils@0.0.1"
+    },
+    "quenty/instancetreeutils@0.0.1": {
+      "$path": "quenty_instancetreeutils@0.0.1"
+    },
+    "quenty/jsonutils@0.0.1": {
+      "$path": "quenty_jsonutils@0.0.1"
+    },
+    "quenty/lightingservice@0.0.1": {
+      "$path": "quenty_lightingservice@0.0.1"
+    },
+    "quenty/linear@0.0.1": {
+      "$path": "quenty_linear@0.0.1"
+    },
+    "quenty/linearsystemssolverutils@0.0.1": {
+      "$path": "quenty_linearsystemssolverutils@0.0.1"
+    },
+    "quenty/linkutils@0.0.1": {
+      "$path": "quenty_linkutils@0.0.1"
+    },
+    "quenty/lipsumutils@0.0.1": {
+      "$path": "quenty_lipsumutils@0.0.1"
+    },
+    "quenty/listindexutils@0.0.1": {
+      "$path": "quenty_listindexutils@0.0.1"
+    },
+    "quenty/lockservice@0.0.1": {
+      "$path": "quenty_lockservice@0.0.1"
+    },
+    "quenty/maid@0.0.1": {
+      "$path": "quenty_maid@0.0.1"
+    },
+    "quenty/marketplaceutils@0.0.1": {
+      "$path": "quenty_marketplaceutils@0.0.1"
+    },
+    "quenty/mathutils@0.0.1": {
+      "$path": "quenty_mathutils@0.0.1"
+    },
+    "quenty/memorizeutils@0.0.1": {
+      "$path": "quenty_memorizeutils@0.0.1"
+    },
+    "quenty/memorystoreutils@0.0.1": {
+      "$path": "quenty_memorystoreutils@0.0.1"
+    },
+    "quenty/messagingserviceutils@0.0.1": {
+      "$path": "quenty_messagingserviceutils@0.0.1"
+    },
+    "quenty/modelappearance@0.0.1": {
+      "$path": "quenty_modelappearance@0.0.1"
+    },
+    "quenty/motor6d@0.0.1": {
+      "$path": "quenty_motor6d@0.0.1"
+    },
+    "quenty/multipleclickutils@0.0.1": {
+      "$path": "quenty_multipleclickutils@0.0.1"
+    },
+    "quenty/networkownerutils@0.0.1": {
+      "$path": "quenty_networkownerutils@0.0.1"
+    },
+    "quenty/numberrangeutils@0.0.1": {
+      "$path": "quenty_numberrangeutils@0.0.1"
+    },
+    "quenty/numbersequenceutils@0.0.1": {
+      "$path": "quenty_numbersequenceutils@0.0.1"
+    },
+    "quenty/numberutils@0.0.1": {
+      "$path": "quenty_numberutils@0.0.1"
+    },
+    "quenty/observablecollection@0.0.1": {
+      "$path": "quenty_observablecollection@0.0.1"
+    },
+    "quenty/offsetvalue@0.0.1": {
+      "$path": "quenty_offsetvalue@0.0.1"
+    },
+    "quenty/overriddenproperty@0.0.1": {
+      "$path": "quenty_overriddenproperty@0.0.1"
+    },
+    "quenty/pagesutils@0.0.1": {
+      "$path": "quenty_pagesutils@0.0.1"
+    },
+    "quenty/panemanager@0.0.1": {
+      "$path": "quenty_panemanager@0.0.1"
+    },
+    "quenty/particleemitterutils@0.0.1": {
+      "$path": "quenty_particleemitterutils@0.0.1"
+    },
+    "quenty/permissionservice@0.0.1": {
+      "$path": "quenty_permissionservice@0.0.1"
+    },
+    "quenty/playerdatastoreservice@0.0.1": {
+      "$path": "quenty_playerdatastoreservice@0.0.1"
+    },
+    "quenty/playeridservice@0.0.1": {
+      "$path": "quenty_playeridservice@0.0.1"
+    },
+    "quenty/playerinputmode@0.0.1": {
+      "$path": "quenty_playerinputmode@0.0.1"
+    },
+    "quenty/playerinputservice@0.0.1": {
+      "$path": "quenty_playerinputservice@0.0.1"
+    },
+    "quenty/playermock@0.0.1": {
+      "$path": "quenty_playermock@0.0.1"
+    },
+    "quenty/playerthumbnailutils@0.0.1": {
+      "$path": "quenty_playerthumbnailutils@0.0.1"
+    },
+    "quenty/playerutils@0.0.1": {
+      "$path": "quenty_playerutils@0.0.1"
+    },
+    "quenty/preferredparentutils@0.0.1": {
+      "$path": "quenty_preferredparentutils@0.0.1"
+    },
+    "quenty/probability@0.0.1": {
+      "$path": "quenty_probability@0.0.1"
+    },
+    "quenty/profilestore@0.0.1": {
+      "$path": "quenty_profilestore@0.0.1"
+    },
+    "quenty/promise@0.0.1": {
+      "$path": "quenty_promise@0.0.1"
+    },
+    "quenty/promptqueue@0.0.1": {
+      "$path": "quenty_promptqueue@0.0.1"
+    },
+    "quenty/propertyvalue@0.0.1": {
+      "$path": "quenty_propertyvalue@0.0.1"
+    },
+    "quenty/proximityutils@0.0.1": {
+      "$path": "quenty_proximityutils@0.0.1"
+    },
+    "quenty/queue@0.0.1": {
+      "$path": "quenty_queue@0.0.1"
+    },
+    "quenty/ragdoll@0.0.1": {
+      "$path": "quenty_ragdoll@0.0.1"
+    },
+    "quenty/random@0.0.1": {
+      "$path": "quenty_random@0.0.1"
+    },
+    "quenty/randomutils@0.0.1": {
+      "$path": "quenty_randomutils@0.0.1"
+    },
+    "quenty/ratelimiter@0.0.1": {
+      "$path": "quenty_ratelimiter@0.0.1"
+    },
+    "quenty/raycaster@0.0.1": {
+      "$path": "quenty_raycaster@0.0.1"
+    },
+    "quenty/rbxassetutils@0.0.1": {
+      "$path": "quenty_rbxassetutils@0.0.1"
+    },
+    "quenty/rbxthumbutils@0.0.1": {
+      "$path": "quenty_rbxthumbutils@0.0.1"
+    },
+    "quenty/receiptprocessing@0.0.1": {
+      "$path": "quenty_receiptprocessing@0.0.1"
+    },
+    "quenty/rectutils@0.0.1": {
+      "$path": "quenty_rectutils@0.0.1"
+    },
+    "quenty/region3utils@0.0.1": {
+      "$path": "quenty_region3utils@0.0.1"
+    },
+    "quenty/remotefunctionutils@0.0.1": {
+      "$path": "quenty_remotefunctionutils@0.0.1"
+    },
+    "quenty/rigbuilderutils@0.0.1": {
+      "$path": "quenty_rigbuilderutils@0.0.1"
+    },
+    "quenty/roguehumanoid@0.0.1": {
+      "$path": "quenty_roguehumanoid@0.0.1"
+    },
+    "quenty/rogueproperty@0.0.1": {
+      "$path": "quenty_rogueproperty@0.0.1"
+    },
+    "quenty/rx@0.0.1": {
+      "$path": "quenty_rx@0.0.1"
+    },
+    "quenty/rxbinderutils@0.0.1": {
+      "$path": "quenty_rxbinderutils@0.0.1"
+    },
+    "quenty/rxbrioutils@0.0.1": {
+      "$path": "quenty_rxbrioutils@0.0.1"
+    },
+    "quenty/rxcollectionserviceutils@0.0.1": {
+      "$path": "quenty_rxcollectionserviceutils@0.0.1"
+    },
+    "quenty/rxinstanceutils@0.0.1": {
+      "$path": "quenty_rxinstanceutils@0.0.1"
+    },
+    "quenty/rxlinkutils@0.0.1": {
+      "$path": "quenty_rxlinkutils@0.0.1"
+    },
+    "quenty/rxphysicsutils@0.0.1": {
+      "$path": "quenty_rxphysicsutils@0.0.1"
+    },
+    "quenty/rxstatestackutils@0.0.1": {
+      "$path": "quenty_rxstatestackutils@0.0.1"
+    },
+    "quenty/rxvaluebaseutils@0.0.1": {
+      "$path": "quenty_rxvaluebaseutils@0.0.1"
+    },
+    "quenty/saveslot@0.0.1": {
+      "$path": "quenty_saveslot@0.0.1"
+    },
+    "quenty/scoredactionservice@0.0.1": {
+      "$path": "quenty_scoredactionservice@0.0.1"
+    },
+    "quenty/seatutils@0.0.1": {
+      "$path": "quenty_seatutils@0.0.1"
+    },
+    "quenty/secretservice@0.0.1": {
+      "$path": "quenty_secretservice@0.0.1"
+    },
+    "quenty/serverlist@0.0.1": {
+      "$path": "quenty_serverlist@0.0.1"
+    },
+    "quenty/serverregionservice@0.0.1": {
+      "$path": "quenty_serverregionservice@0.0.1"
+    },
+    "quenty/servicebag@0.0.1": {
+      "$path": "quenty_servicebag@0.0.1"
+    },
+    "quenty/signal@0.0.1": {
+      "$path": "quenty_signal@0.0.1"
+    },
+    "quenty/simulatedcharacterservice@0.0.1": {
+      "$path": "quenty_simulatedcharacterservice@0.0.1"
+    },
+    "quenty/singleton@0.0.1": {
+      "$path": "quenty_singleton@0.0.1"
+    },
+    "quenty/socialserviceutils@0.0.1": {
+      "$path": "quenty_socialserviceutils@0.0.1"
+    },
+    "quenty/softshutdown@0.0.1": {
+      "$path": "quenty_softshutdown@0.0.1"
+    },
+    "quenty/sortedlist@0.0.1": {
+      "$path": "quenty_sortedlist@0.0.1"
+    },
+    "quenty/sortfunctionutils@0.0.1": {
+      "$path": "quenty_sortfunctionutils@0.0.1"
+    },
+    "quenty/soundgroup@0.0.1": {
+      "$path": "quenty_soundgroup@0.0.1"
+    },
+    "quenty/soundplayer@0.0.1": {
+      "$path": "quenty_soundplayer@0.0.1"
+    },
+    "quenty/soundutils@0.0.1": {
+      "$path": "quenty_soundutils@0.0.1"
+    },
+    "quenty/spring@0.0.1": {
+      "$path": "quenty_spring@0.0.1"
+    },
+    "quenty/springutils@0.0.1": {
+      "$path": "quenty_springutils@0.0.1"
+    },
+    "quenty/sprites@0.0.1": {
+      "$path": "quenty_sprites@0.0.1"
+    },
+    "quenty/squash@0.0.1": {
+      "$path": "quenty_squash@0.0.1"
+    },
+    "quenty/statestack@0.0.1": {
+      "$path": "quenty_statestack@0.0.1"
+    },
+    "quenty/steputils@0.0.1": {
+      "$path": "quenty_steputils@0.0.1"
+    },
+    "quenty/stringutils@0.0.1": {
+      "$path": "quenty_stringutils@0.0.1"
+    },
+    "quenty/sunpositionutils@0.0.1": {
+      "$path": "quenty_sunpositionutils@0.0.1"
+    },
+    "quenty/symbol@0.0.1": {
+      "$path": "quenty_symbol@0.0.1"
+    },
+    "quenty/t@0.0.1": {
+      "$path": "quenty_t@0.0.1"
+    },
+    "quenty/tableutils@0.0.1": {
+      "$path": "quenty_tableutils@0.0.1"
+    },
+    "quenty/teleportserviceutils@0.0.1": {
+      "$path": "quenty_teleportserviceutils@0.0.1"
+    },
+    "quenty/templateprovider@0.0.1": {
+      "$path": "quenty_templateprovider@0.0.1"
+    },
+    "quenty/textfilterservice@0.0.1": {
+      "$path": "quenty_textfilterservice@0.0.1"
+    },
+    "quenty/textfilterutils@0.0.1": {
+      "$path": "quenty_textfilterutils@0.0.1"
+    },
+    "quenty/textserviceutils@0.0.1": {
+      "$path": "quenty_textserviceutils@0.0.1"
+    },
+    "quenty/throttle@0.0.1": {
+      "$path": "quenty_throttle@0.0.1"
+    },
+    "quenty/tie@0.0.1": {
+      "$path": "quenty_tie@0.0.1"
+    },
+    "quenty/timedtween@0.0.1": {
+      "$path": "quenty_timedtween@0.0.1"
+    },
+    "quenty/timesyncservice@0.0.1": {
+      "$path": "quenty_timesyncservice@0.0.1"
+    },
+    "quenty/toolutils@0.0.1": {
+      "$path": "quenty_toolutils@0.0.1"
+    },
+    "quenty/transitionmodel@0.0.1": {
+      "$path": "quenty_transitionmodel@0.0.1"
+    },
+    "quenty/transparency@0.0.1": {
+      "$path": "quenty_transparency@0.0.1"
+    },
+    "quenty/tuple@0.0.1": {
+      "$path": "quenty_tuple@0.0.1"
+    },
+    "quenty/uishimmerutils@0.0.1": {
+      "$path": "quenty_uishimmerutils@0.0.1"
+    },
+    "quenty/undostack@0.0.1": {
+      "$path": "quenty_undostack@0.0.1"
+    },
+    "quenty/userserviceutils@0.0.1": {
+      "$path": "quenty_userserviceutils@0.0.1"
+    },
+    "quenty/valuebase@0.0.1": {
+      "$path": "quenty_valuebase@0.0.1"
+    },
+    "quenty/valuebaseutils@0.0.1": {
+      "$path": "quenty_valuebaseutils@0.0.1"
+    },
+    "quenty/valueobject@0.0.1": {
+      "$path": "quenty_valueobject@0.0.1"
+    },
+    "quenty/valueobjectutils@0.0.1": {
+      "$path": "quenty_valueobjectutils@0.0.1"
+    },
+    "quenty/vector3int16utils@0.0.1": {
+      "$path": "quenty_vector3int16utils@0.0.1"
+    },
+    "quenty/vector3utils@0.0.1": {
+      "$path": "quenty_vector3utils@0.0.1"
+    },
+    "quenty/voicechatutils@0.0.1": {
+      "$path": "quenty_voicechatutils@0.0.1"
+    },
+    "quenty/webhook@0.0.1": {
+      "$path": "quenty_webhook@0.0.1"
+    },
+    "quenty/weldconstraintutils@0.0.1": {
+      "$path": "quenty_weldconstraintutils@0.0.1"
+    }
+  }
+}

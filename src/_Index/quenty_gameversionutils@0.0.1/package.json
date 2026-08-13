@@ -1,0 +1,9 @@
+{
+  "name": "quenty/gameversionutils",
+  "version": "0.0.1",
+  "exports": {
+    "GameVersionUtils": "GameVersionUtils"
+  },
+  "dependencies": [],
+  "externals": []
+}

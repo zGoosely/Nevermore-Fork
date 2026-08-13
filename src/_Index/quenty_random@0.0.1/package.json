@@ -1,0 +1,17 @@
+{
+  "name": "quenty/random",
+  "version": "0.0.1",
+  "exports": {
+    "LuckyWeightedRandomChooser": "LuckyWeightedRandomChooser",
+    "RandomSampler": "RandomSampler",
+    "WeightedRandomChooser": "WeightedRandomChooser"
+  },
+  "dependencies": [
+    "quenty/maid@0.0.1",
+    "quenty/randomutils@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/t@0.0.1",
+    "quenty/valueobject@0.0.1"
+  ],
+  "externals": []
+}

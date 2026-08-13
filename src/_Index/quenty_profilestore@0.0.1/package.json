@@ -1,0 +1,9 @@
+{
+  "name": "quenty/profilestore",
+  "version": "0.0.1",
+  "exports": {
+    "ProfileStore": "ProfileStore"
+  },
+  "dependencies": [],
+  "externals": []
+}

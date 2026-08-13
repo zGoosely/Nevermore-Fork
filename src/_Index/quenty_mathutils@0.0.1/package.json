@@ -1,0 +1,9 @@
+{
+  "name": "quenty/mathutils",
+  "version": "0.0.1",
+  "exports": {
+    "MathUtils": "MathUtils"
+  },
+  "dependencies": [],
+  "externals": []
+}

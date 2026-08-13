@@ -1,0 +1,14 @@
+{
+  "name": "quenty/inputobjectutils",
+  "version": "0.0.1",
+  "exports": {
+    "InputObjectUtils": "InputObjectUtils",
+    "MultipleClicksUtils": "MultipleClicksUtils"
+  },
+  "dependencies": [
+    "quenty/maid@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/signal@0.0.1"
+  ],
+  "externals": []
+}

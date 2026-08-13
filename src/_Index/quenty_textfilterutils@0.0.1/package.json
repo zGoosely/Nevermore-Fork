@@ -1,0 +1,11 @@
+{
+  "name": "quenty/textfilterutils",
+  "version": "0.0.1",
+  "exports": {
+    "TextFilterUtils": "TextFilterUtils"
+  },
+  "dependencies": [
+    "quenty/promise@0.0.1"
+  ],
+  "externals": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "quenty/colorsequenceutils",
+  "version": "0.0.1",
+  "exports": {
+    "ColorSequenceUtils": "ColorSequenceUtils"
+  },
+  "dependencies": [
+    "quenty/mathutils@0.0.1"
+  ],
+  "externals": []
+}

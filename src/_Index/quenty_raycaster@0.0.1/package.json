@@ -1,0 +1,9 @@
+{
+  "name": "quenty/raycaster",
+  "version": "0.0.1",
+  "exports": {
+    "Raycaster": "Raycaster"
+  },
+  "dependencies": [],
+  "externals": []
+}

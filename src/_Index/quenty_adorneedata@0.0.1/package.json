@@ -1,0 +1,19 @@
+{
+  "name": "quenty/adorneedata",
+  "version": "0.0.1",
+  "exports": {
+    "AdorneeData": "AdorneeData",
+    "AdorneeDataEntry": "AdorneeDataEntry",
+    "AdorneeDataValue": "AdorneeDataValue"
+  },
+  "dependencies": [
+    "quenty/attribute@0.0.1",
+    "quenty/attributeutils@0.0.1",
+    "quenty/defaultvalueutils@0.0.1",
+    "quenty/ducktype@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/t@0.0.1",
+    "quenty/valueobject@0.0.1"
+  ],
+  "externals": []
+}

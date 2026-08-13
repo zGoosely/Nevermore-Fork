@@ -1,0 +1,12 @@
+{
+  "name": "quenty/rbxthumbutils",
+  "version": "0.0.1",
+  "exports": {
+    "RbxThumbUtils": "RbxThumbUtils",
+    "RbxThumbnailTypes": "RbxThumbnailTypes"
+  },
+  "dependencies": [
+    "quenty/enums@0.0.1"
+  ],
+  "externals": []
+}

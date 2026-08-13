@@ -1,0 +1,11 @@
+{
+  "name": "quenty/enums",
+  "version": "0.0.1",
+  "exports": {
+    "Enums": "Enums"
+  },
+  "dependencies": [
+    "quenty/t@0.0.1"
+  ],
+  "externals": []
+}

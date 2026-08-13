@@ -1,0 +1,18 @@
+{
+  "name": "quenty/panemanager",
+  "version": "0.0.1",
+  "exports": {
+    "PaneManager": "PaneManager"
+  },
+  "dependencies": [
+    "quenty/basicpane@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/singleton@0.0.1",
+    "quenty/symbol@0.0.1",
+    "quenty/t@0.0.1"
+  ],
+  "externals": [
+    "Jest"
+  ]
+}

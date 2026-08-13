@@ -1,0 +1,9 @@
+{
+  "name": "quenty/adorneeutils",
+  "version": "0.0.1",
+  "exports": {
+    "AdorneeUtils": "AdorneeUtils"
+  },
+  "dependencies": [],
+  "externals": []
+}

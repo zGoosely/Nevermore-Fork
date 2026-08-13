@@ -1,0 +1,10 @@
+{
+  "name": "quenty/boundingboxutils",
+  "version": "0.0.1",
+  "exports": {
+    "BoundingBoxUtils": "BoundingBoxUtils",
+    "CompiledBoundingBoxUtils": "CompiledBoundingBoxUtils"
+  },
+  "dependencies": [],
+  "externals": []
+}

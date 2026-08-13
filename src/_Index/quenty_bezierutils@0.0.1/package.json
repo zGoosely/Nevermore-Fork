@@ -1,0 +1,9 @@
+{
+  "name": "quenty/bezierutils",
+  "version": "0.0.1",
+  "exports": {
+    "BezierUtils": "BezierUtils"
+  },
+  "dependencies": [],
+  "externals": []
+}

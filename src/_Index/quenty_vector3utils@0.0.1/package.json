@@ -1,0 +1,12 @@
+{
+  "name": "quenty/vector3utils",
+  "version": "0.0.1",
+  "exports": {
+    "RandomVector3Utils": "RandomVector3Utils",
+    "Vector3Utils": "Vector3Utils"
+  },
+  "dependencies": [
+    "quenty/mathutils@0.0.1"
+  ],
+  "externals": []
+}

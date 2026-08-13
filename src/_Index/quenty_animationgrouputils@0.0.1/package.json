@@ -1,0 +1,11 @@
+{
+  "name": "quenty/animationgrouputils",
+  "version": "0.0.1",
+  "exports": {
+    "AnimationGroupUtils": "AnimationGroupUtils"
+  },
+  "dependencies": [
+    "quenty/animationutils@0.0.1"
+  ],
+  "externals": []
+}

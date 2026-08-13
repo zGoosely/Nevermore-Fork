@@ -1,0 +1,9 @@
+{
+  "name": "quenty/fzy",
+  "version": "0.0.1",
+  "exports": {
+    "Fzy": "Fzy"
+  },
+  "dependencies": [],
+  "externals": []
+}

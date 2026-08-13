@@ -1,0 +1,11 @@
+{
+  "name": "quenty/modelappearance",
+  "version": "0.0.1",
+  "exports": {
+    "ModelAppearance": "ModelAppearance"
+  },
+  "dependencies": [
+    "quenty/mathutils@0.0.1"
+  ],
+  "externals": []
+}

@@ -1,0 +1,84 @@
+--!strict
+--[=[
+	Utility functions to configure a proximity prompt based upon the
+	input key map given.
+	@class ProximityPromptInputUtils
+]=]
+local InputKeyMap = require("./InputKeyMap")
+local InputKeyMapList = require("./InputKeyMapList")
+local InputModeType = require("@game/ReplicatedStorage/Packages/InputModeType")
+local InputModeTypes = require("@game/ReplicatedStorage/Packages/InputModeTypes")
+local InputTypeUtils = require("./Types/InputTypeUtils")
+local SlottedTouchButtonUtils = require("./Types/SlottedTouchButtonUtils")
+
+local ProximityPromptInputUtils = {}
+
+--[=[
+	Creates an InputKeyMapList from a proximity prompt.
+
+	@param prompt ProximityPrompt
+	@return InputKeyMapList
+]=]
+function ProximityPromptInputUtils.newInputKeyMapFromPrompt(prompt: ProximityPrompt): InputKeyMapList.InputKeyMapList
+	assert(typeof(prompt) == "Instance" and prompt:IsA("ProximityPrompt"), "Bad prompt")
+
+	return InputKeyMapList.new("custom", {
+		InputKeyMap.new(InputModeTypes.Gamepads, { prompt.GamepadKeyCode }),
+		InputKeyMap.new(InputModeTypes.KeyboardAndMouse, { prompt.KeyboardKeyCode }),
+		InputKeyMap.new(InputModeTypes.Touch, { SlottedTouchButtonUtils.createSlottedTouchButton("primary1") }),
+	}, {
+		bindingName = prompt.ActionText,
+		rebindable = false,
+	})
+end
+
+--[=[
+	Sets the key codes for a proximity prompt to match an inputKeyMapList
+
+	@param prompt ProximityPrompt
+	@param inputKeyMapList InputKeyMapList
+]=]
+function ProximityPromptInputUtils.configurePromptFromInputKeyMap(
+	prompt: ProximityPrompt,
+	inputKeyMapList: InputKeyMapList.InputKeyMapList
+)
+	assert(typeof(prompt) == "Instance", "Bad prompt")
+	assert(type(inputKeyMapList) == "table", "Bad inputKeyMapList")
+
+	local keyboard = ProximityPromptInputUtils.getFirstInputKeyCode(inputKeyMapList, InputModeTypes.KeyboardAndMouse)
+	local gamepad = ProximityPromptInputUtils.getFirstInputKeyCode(inputKeyMapList, InputModeTypes.Gamepads)
+
+	if keyboard then
+		prompt.KeyboardKeyCode = keyboard
+	end
+
+	if gamepad then
+		prompt.GamepadKeyCode = gamepad
+	end
+end
+
+--[=[
+	Picks the first keyCode that matches the inputModeType.
+
+	@param inputKeyMapList InputKeyMapList
+	@param inputModeType InputModeType
+	@return KeyCode?
+]=]
+function ProximityPromptInputUtils.getFirstInputKeyCode(
+	inputKeyMapList: InputKeyMapList.InputKeyMapList,
+	inputModeType: InputModeType.InputModeType
+): Enum.KeyCode?
+	assert(type(inputKeyMapList) == "table", "Bad inputKeyMapList")
+	assert(InputModeType.isInputModeType(inputModeType), "Bad inputModeType")
+
+	local inputTypesForInputMode: { InputTypeUtils.InputType } = inputKeyMapList:GetInputTypesList(inputModeType)
+	for _, entry in inputTypesForInputMode do
+		if typeof(entry) == "EnumItem" and entry.EnumType == Enum.KeyCode then
+			return entry :: any
+		end
+	end
+
+	return nil
+end
+
+return ProximityPromptInputUtils

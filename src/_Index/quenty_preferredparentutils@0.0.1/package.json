@@ -1,0 +1,9 @@
+{
+  "name": "quenty/preferredparentutils",
+  "version": "0.0.1",
+  "exports": {
+    "PreferredParentUtils": "PreferredParentUtils"
+  },
+  "dependencies": [],
+  "externals": []
+}

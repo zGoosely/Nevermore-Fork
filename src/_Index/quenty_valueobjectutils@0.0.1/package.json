@@ -1,0 +1,14 @@
+{
+  "name": "quenty/valueobjectutils",
+  "version": "0.0.1",
+  "exports": {
+    "ValueObjectUtils": "ValueObjectUtils"
+  },
+  "dependencies": [
+    "quenty/brio@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/valueobject@0.0.1"
+  ],
+  "externals": []
+}

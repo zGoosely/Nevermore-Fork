@@ -1,0 +1,13 @@
+{
+  "name": "quenty/cframeutils",
+  "version": "0.0.1",
+  "exports": {
+    "CFrameSerializer": "CFrameSerializer",
+    "CFrameUtils": "CFrameUtils",
+    "getRotationInXZPlane": "getRotationInXZPlane"
+  },
+  "dependencies": [
+    "quenty/mathutils@0.0.1"
+  ],
+  "externals": []
+}

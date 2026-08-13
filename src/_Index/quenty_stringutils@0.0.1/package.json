@@ -1,0 +1,11 @@
+{
+  "name": "quenty/stringutils",
+  "version": "0.0.1",
+  "exports": {
+    "String": "String",
+    "StringUtils": "StringUtils",
+    "UTF8Utils": "UTF8Utils"
+  },
+  "dependencies": [],
+  "externals": []
+}

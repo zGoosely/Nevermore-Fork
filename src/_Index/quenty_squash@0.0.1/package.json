@@ -1,0 +1,9 @@
+{
+  "name": "quenty/squash",
+  "version": "0.0.1",
+  "exports": {
+    "Squash": "Squash"
+  },
+  "dependencies": [],
+  "externals": []
+}

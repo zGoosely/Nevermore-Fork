@@ -1,0 +1,12 @@
+{
+  "name": "quenty/springutils",
+  "version": "0.0.1",
+  "exports": {
+    "SpringUtils": "SpringUtils"
+  },
+  "dependencies": [
+    "quenty/linear@0.0.1",
+    "quenty/spring@0.0.1"
+  ],
+  "externals": []
+}

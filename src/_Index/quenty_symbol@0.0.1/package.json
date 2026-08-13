@@ -1,0 +1,9 @@
+{
+  "name": "quenty/symbol",
+  "version": "0.0.1",
+  "exports": {
+    "Symbol": "Symbol"
+  },
+  "dependencies": [],
+  "externals": []
+}

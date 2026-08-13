@@ -1,0 +1,9 @@
+{
+  "name": "quenty/debounce",
+  "version": "0.0.1",
+  "exports": {
+    "Debounce": "Debounce"
+  },
+  "dependencies": [],
+  "externals": []
+}

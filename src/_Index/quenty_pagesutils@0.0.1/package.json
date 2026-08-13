@@ -1,0 +1,12 @@
+{
+  "name": "quenty/pagesutils",
+  "version": "0.0.1",
+  "exports": {
+    "PagesUtils": "PagesUtils"
+  },
+  "dependencies": [
+    "quenty/ducktype@0.0.1",
+    "quenty/promise@0.0.1"
+  ],
+  "externals": []
+}

@@ -1,0 +1,9 @@
+{
+  "name": "quenty/enumutils",
+  "version": "0.0.1",
+  "exports": {
+    "EnumUtils": "EnumUtils"
+  },
+  "dependencies": [],
+  "externals": []
+}

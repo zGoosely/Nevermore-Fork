@@ -1,0 +1,20 @@
+{
+  "name": "quenty/playeridservice",
+  "version": "0.0.1",
+  "exports": {
+    "PlayerIdService": "PlayerIdService",
+    "PlayerIdServiceClient": "PlayerIdServiceClient",
+    "PlayerIdServiceUtils": "Shared/PlayerIdServiceUtils"
+  },
+  "dependencies": [
+    "quenty/attributeutils@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/playerutils@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/t@0.0.1",
+    "quenty/tableutils@0.0.1",
+    "quenty/tie@0.0.1"
+  ],
+  "externals": []
+}

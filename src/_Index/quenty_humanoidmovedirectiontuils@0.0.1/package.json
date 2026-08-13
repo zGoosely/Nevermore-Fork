@@ -1,0 +1,11 @@
+{
+  "name": "quenty/humanoidmovedirectiontuils",
+  "version": "0.0.1",
+  "exports": {
+    "HumanoidMoveDirectionUtils": "HumanoidMoveDirectionUtils"
+  },
+  "dependencies": [
+    "quenty/cframeutils@0.0.1"
+  ],
+  "externals": []
+}

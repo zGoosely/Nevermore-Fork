@@ -1,0 +1,11 @@
+{
+  "name": "quenty/linear",
+  "version": "0.0.1",
+  "exports": {
+    "LinearValue": "LinearValue"
+  },
+  "dependencies": [
+    "quenty/ducktype@0.0.1"
+  ],
+  "externals": []
+}

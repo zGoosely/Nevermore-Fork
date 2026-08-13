@@ -1,0 +1,14 @@
+{
+  "name": "quenty/rigbuilderutils",
+  "version": "0.0.1",
+  "exports": {
+    "RigBuilderUtils": "RigBuilderUtils"
+  },
+  "dependencies": [
+    "quenty/assetserviceutils@0.0.1",
+    "quenty/humanoiddescriptionutils@0.0.1",
+    "quenty/insertserviceutils@0.0.1",
+    "quenty/promise@0.0.1"
+  ],
+  "externals": []
+}

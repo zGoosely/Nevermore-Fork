@@ -1,0 +1,9 @@
+{
+  "name": "quenty/instancetreeutils",
+  "version": "0.0.1",
+  "exports": {
+    "InstanceTreeUtils": "InstanceTreeUtils"
+  },
+  "dependencies": [],
+  "externals": []
+}

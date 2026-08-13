@@ -1,0 +1,29 @@
+{
+  "name": "quenty/clientcamera",
+  "version": "0.0.1",
+  "exports": {
+    "CameraStack": "CameraStack",
+    "CameraStackService": "CameraStackService",
+    "CameraState": "CameraState",
+    "CameraUtils": "Utility/CameraUtils",
+    "QFrame": "Utility/QFrame"
+  },
+  "dependencies": [
+    "quenty/acceltween@0.0.1",
+    "quenty/baseobject@0.0.1",
+    "quenty/cframeutils@0.0.1",
+    "quenty/cubicsplineutils@0.0.1",
+    "quenty/draw@0.0.1",
+    "quenty/ducktype@0.0.1",
+    "quenty/inputobjectutils@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/mathutils@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/spring@0.0.1",
+    "quenty/springutils@0.0.1",
+    "quenty/valueobject@0.0.1",
+    "quenty/vector3utils@0.0.1"
+  ],
+  "externals": []
+}

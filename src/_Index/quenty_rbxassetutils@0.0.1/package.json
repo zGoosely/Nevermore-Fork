@@ -1,0 +1,9 @@
+{
+  "name": "quenty/rbxassetutils",
+  "version": "0.0.1",
+  "exports": {
+    "RbxAssetUtils": "RbxAssetUtils"
+  },
+  "dependencies": [],
+  "externals": []
+}

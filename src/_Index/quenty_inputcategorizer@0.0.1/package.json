@@ -1,0 +1,13 @@
+{
+  "name": "quenty/inputcategorizer",
+  "version": "0.0.1",
+  "exports": {
+    "InputCategorizer": "InputCategorizer",
+    "InputCategoryTypes": "InputCategoryTypes"
+  },
+  "dependencies": [
+    "quenty/enums@0.0.1",
+    "quenty/signal@0.0.1"
+  ],
+  "externals": []
+}

@@ -1,0 +1,9 @@
+{
+  "name": "quenty/sortfunctionutils",
+  "version": "0.0.1",
+  "exports": {
+    "SortFunctionUtils": "SortFunctionUtils"
+  },
+  "dependencies": [],
+  "externals": []
+}

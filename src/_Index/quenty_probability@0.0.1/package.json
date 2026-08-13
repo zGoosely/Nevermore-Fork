@@ -1,0 +1,9 @@
+{
+  "name": "quenty/probability",
+  "version": "0.0.1",
+  "exports": {
+    "Probability": "Probability"
+  },
+  "dependencies": [],
+  "externals": []
+}

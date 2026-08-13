@@ -1,0 +1,11 @@
+{
+  "name": "quenty/memorystoreutils",
+  "version": "0.0.1",
+  "exports": {
+    "MemoryStoreUtils": "MemoryStoreUtils"
+  },
+  "dependencies": [
+    "quenty/promise@0.0.1"
+  ],
+  "externals": []
+}

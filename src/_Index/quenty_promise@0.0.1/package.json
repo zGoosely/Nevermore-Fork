@@ -1,0 +1,20 @@
+{
+  "name": "quenty/promise",
+  "version": "0.0.1",
+  "exports": {
+    "Promise": "Promise",
+    "PromiseInstanceUtils": "Utility/PromiseInstanceUtils",
+    "PromiseMaidUtils": "PromiseMaidUtils",
+    "PromiseRetryUtils": "PromiseRetryUtils",
+    "PromiseTestUtils": "PromiseTestUtils",
+    "PromiseUtils": "PromiseUtils",
+    "promiseChild": "Utility/promiseChild",
+    "promisePropertyValue": "Utility/promisePropertyValue"
+  },
+  "dependencies": [
+    "quenty/maid@0.0.1",
+    "quenty/mathutils@0.0.1",
+    "quenty/signal@0.0.1"
+  ],
+  "externals": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "quenty/coreguiutils",
+  "version": "0.0.1",
+  "exports": {
+    "CoreGuiUtils": "CoreGuiUtils"
+  },
+  "dependencies": [
+    "quenty/promise@0.0.1"
+  ],
+  "externals": []
+}

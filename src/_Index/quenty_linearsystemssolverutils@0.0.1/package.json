@@ -1,0 +1,9 @@
+{
+  "name": "quenty/linearsystemssolverutils",
+  "version": "0.0.1",
+  "exports": {
+    "LinearSystemsSolverUtils": "LinearSystemsSolverUtils"
+  },
+  "dependencies": [],
+  "externals": []
+}

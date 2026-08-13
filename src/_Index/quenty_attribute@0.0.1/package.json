@@ -1,0 +1,13 @@
+{
+  "name": "quenty/attribute",
+  "version": "0.0.1",
+  "exports": {
+    "AttributeValue": "AttributeValue"
+  },
+  "dependencies": [
+    "quenty/attributeutils@0.0.1",
+    "quenty/brio@0.0.1",
+    "quenty/rx@0.0.1"
+  ],
+  "externals": []
+}

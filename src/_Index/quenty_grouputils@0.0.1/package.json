@@ -1,0 +1,11 @@
+{
+  "name": "quenty/grouputils",
+  "version": "0.0.1",
+  "exports": {
+    "GroupUtils": "GroupUtils"
+  },
+  "dependencies": [
+    "quenty/promise@0.0.1"
+  ],
+  "externals": []
+}

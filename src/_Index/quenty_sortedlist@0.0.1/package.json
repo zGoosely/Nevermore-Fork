@@ -1,0 +1,23 @@
+{
+  "name": "quenty/sortedlist",
+  "version": "0.0.1",
+  "exports": {
+    "ChangedSpanTracker": "ChangedSpanTracker",
+    "ObservableSortedList": "ObservableSortedList",
+    "SortedNode": "SortedNode",
+    "SortedNodeValue": "SortedNodeValue"
+  },
+  "dependencies": [
+    "quenty/binarysearchutils@0.0.1",
+    "quenty/brio@0.0.1",
+    "quenty/ducktype@0.0.1",
+    "quenty/listindexutils@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/signal@0.0.1",
+    "quenty/sortfunctionutils@0.0.1",
+    "quenty/tableutils@0.0.1",
+    "quenty/valueobject@0.0.1"
+  ],
+  "externals": []
+}

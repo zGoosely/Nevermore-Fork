@@ -1,0 +1,9 @@
+{
+  "name": "quenty/vector3int16utils",
+  "version": "0.0.1",
+  "exports": {
+    "Vector3int16Utils": "Vector3int16Utils"
+  },
+  "dependencies": [],
+  "externals": []
+}

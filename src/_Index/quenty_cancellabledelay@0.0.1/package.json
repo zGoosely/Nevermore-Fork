@@ -1,0 +1,9 @@
+{
+  "name": "quenty/cancellabledelay",
+  "version": "0.0.1",
+  "exports": {
+    "cancellableDelay": "cancellableDelay"
+  },
+  "dependencies": [],
+  "externals": []
+}

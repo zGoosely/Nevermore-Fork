@@ -1,0 +1,9 @@
+{
+  "name": "quenty/steputils",
+  "version": "0.0.1",
+  "exports": {
+    "StepUtils": "StepUtils"
+  },
+  "dependencies": [],
+  "externals": []
+}

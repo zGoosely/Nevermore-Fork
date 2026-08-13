@@ -1,0 +1,12 @@
+{
+  "name": "quenty/networkownerutils",
+  "version": "0.0.1",
+  "exports": {
+    "NetworkOwnerUtils": "NetworkOwnerUtils",
+    "NetworkRopeUtils": "NetworkRopeUtils"
+  },
+  "dependencies": [
+    "quenty/maid@0.0.1"
+  ],
+  "externals": []
+}

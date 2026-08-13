@@ -1,0 +1,17 @@
+{
+  "name": "quenty/transparency",
+  "version": "0.0.1",
+  "exports": {
+    "ModelTransparencyEffect": "ModelTransparencyEffect",
+    "TransparencyService": "TransparencyService"
+  },
+  "dependencies": [
+    "quenty/baseobject@0.0.1",
+    "quenty/mathutils@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/spring@0.0.1",
+    "quenty/steputils@0.0.1",
+    "quenty/t@0.0.1"
+  ],
+  "externals": []
+}

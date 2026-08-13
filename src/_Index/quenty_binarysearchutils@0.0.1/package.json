@@ -1,0 +1,9 @@
+{
+  "name": "quenty/binarysearchutils",
+  "version": "0.0.1",
+  "exports": {
+    "BinarySearchUtils": "BinarySearchUtils"
+  },
+  "dependencies": [],
+  "externals": []
+}

@@ -1,0 +1,14 @@
+{
+  "name": "quenty/aggregator",
+  "version": "0.0.1",
+  "exports": {
+    "Aggregator": "Aggregator",
+    "LRUCache": "LRUCache"
+  },
+  "dependencies": [
+    "quenty/baseobject@0.0.1",
+    "quenty/promise@0.0.1",
+    "quenty/rx@0.0.1"
+  ],
+  "externals": []
+}

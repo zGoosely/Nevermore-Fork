@@ -1,0 +1,234 @@
+--!strict
+--[=[
+	Utility methods to assist with rigging the ragdoll in real-time.
+
+	@class RxRagdollUtils
+]=]
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+
+local Brio = require("@game/ReplicatedStorage/Packages/Brio")
+local CharacterUtils = require("@game/ReplicatedStorage/Packages/CharacterUtils")
+local Maid = require("@game/ReplicatedStorage/Packages/Maid")
+local Observable = require("@game/ReplicatedStorage/Packages/Observable")
+local RagdollMotorUtils = require("./RagdollMotorUtils")
+local RxBrioUtils = require("@game/ReplicatedStorage/Packages/RxBrioUtils")
+local RxInstanceUtils = require("@game/ReplicatedStorage/Packages/RxInstanceUtils")
+local RxR15Utils = require("@game/ReplicatedStorage/Packages/RxR15Utils")
+
+local RxRagdollUtils = {}
+
+--[=[
+	Observes the RigType of a Humanoid.
+
+	@param humanoid Humanoid
+	@return Observable<Enum.RigType>
+]=]
+function RxRagdollUtils.observeRigType(humanoid: Humanoid): Observable.Observable<Enum.HumanoidRigType>
+	return RxInstanceUtils.observeProperty(humanoid, "RigType") :: any
+end
+
+--[=[
+	Observes the character of a Humanoid.
+
+	@param humanoid Humanoid
+	@return Observable<Model>
+]=]
+function RxRagdollUtils.observeCharacterBrio(humanoid: Humanoid): Observable.Observable<Brio.Brio<Model>>
+	return RxInstanceUtils.observePropertyBrio(humanoid, "Parent", function(value)
+		return value ~= nil
+	end) :: any
+end
+
+function RxRagdollUtils.suppressRootPartCollision(character: Model): Maid.Maid
+	assert(typeof(character) == "Instance" and character:IsA("Model"), "Bad character")
+
+	local topMaid = Maid.new()
+
+	topMaid:GiveTask(RxR15Utils.observeCharacterPartBrio(character, "HumanoidRootPart"):Subscribe(function(brio)
+		if brio:IsDead() then
+			return
+		end
+
+		local rootPart = brio:GetValue() :: BasePart
+		local maid = brio:ToMaid()
+
+		local oldProperties = rootPart.CustomPhysicalProperties
+		local current = oldProperties or PhysicalProperties.new(rootPart.Material)
+
+		-- Reduce impact of rootPart mass as much as possible.
+		rootPart.CustomPhysicalProperties = PhysicalProperties.new(
+			0.01,
+			current.Friction,
+			current.Elasticity,
+			current.FrictionWeight,
+			current.ElasticityWeight
+		)
+		rootPart.CanCollide = false
+		maid:GiveTask(function()
+			rootPart.CustomPhysicalProperties = oldProperties
+			rootPart.CanCollide = true
+		end)
+	end))
+
+	return topMaid
+end
+
+function RxRagdollUtils.enforceHeadCollision(character: Model): Maid.Maid
+	assert(typeof(character) == "Instance" and character:IsA("Model"), "Bad character")
+
+	local topMaid = Maid.new()
+
+	topMaid:GiveTask(RxR15Utils.observeCharacterPartBrio(character, "Head"):Subscribe(function(brio)
+		if brio:IsDead() then
+			return
+		end
+
+		local maid, head = brio:ToMaidAndValue()
+		local headPart = head :: BasePart
+		headPart.CanCollide = true
+
+		maid:GiveTask(function()
+			headPart.CanCollide = false
+		end)
+	end))
+
+	return topMaid
+end
+
+function RxRagdollUtils.enforceHumanoidStateMachineOff(character: Model, humanoid: Humanoid): Maid.Maid
+	assert(typeof(character) == "Instance" and character:IsA("Model"), "Bad character")
+
+	local topMaid = Maid.new()
+
+	topMaid:GiveTask(
+		RxInstanceUtils.observePropertyBrio(humanoid, "EvaluateStateMachine", function(evaluateStateMachine)
+			return not evaluateStateMachine
+		end):Subscribe(function(brio)
+			if brio:IsDead() then
+				return
+			end
+
+			local maid = brio:ToMaid()
+			maid:GiveTask(RxRagdollUtils.enforceLimbCollisions(character))
+		end)
+	)
+
+	return topMaid
+end
+
+function RxRagdollUtils.enforceLimbCollisions(character: Model): Maid.Maid
+	assert(typeof(character) == "Instance" and character:IsA("Model"), "Bad character")
+
+	local topMaid = Maid.new()
+
+	local LIMB_NAMES = {
+		-- R6
+		["Left Arm"] = true,
+		["Right Arm"] = true,
+		["Left Leg"] = true,
+		["Right Leg"] = true,
+
+		-- R15
+		["LeftUpperArm"] = true,
+		["LeftLowerArm"] = true,
+		["LeftHand"] = true,
+		["LeftUpperLeg"] = true,
+		["LeftLowerLeg"] = true,
+		["LeftFoot"] = true,
+		["RightUpperArm"] = true,
+		["RightLowerArm"] = true,
+		["RightHand"] = true,
+		["RightUpperLeg"] = true,
+		["RightLowerLeg"] = true,
+		["RightFoot"] = true,
+	}
+
+	topMaid:GiveTask(RxInstanceUtils.observeChildrenBrio(character, function(child)
+		return child:IsA("BasePart") and LIMB_NAMES[child.Name] == true
+	end):Subscribe(function(brio)
+		if brio:IsDead() then
+			return
+		end
+
+		local maid, part = brio:ToMaidAndValue()
+		local basePart = part :: BasePart
+		basePart.CanCollide = true
+		maid:GiveTask(function()
+			basePart.CanCollide = false
+		end)
+	end))
+
+	return topMaid
+end
+
+function RxRagdollUtils.runLocal(humanoid: Humanoid): Maid.Maid
+	local topMaid = Maid.new()
+
+	topMaid:GiveTask((RxBrioUtils.flatCombineLatest({
+		character = RxRagdollUtils.observeCharacterBrio(humanoid),
+		rigType = RxRagdollUtils.observeRigType(humanoid),
+	}) :: any):Subscribe(function(state)
+		if state.character and state.rigType then
+			local character = state.character
+			local rigType = state.rigType
+
+			local maid = Maid.new()
+
+			local player = CharacterUtils.getPlayerFromCharacter(humanoid)
+			-- This velocity work only really needs to occur on the network owner and on the server
+			-- since the server will replicate all changes over to the client.
+			if RunService:IsServer() or player == Players.LocalPlayer then
+				maid:GivePromise(RagdollMotorUtils.promiseVelocityRecordings(character, rigType))
+					:Then(function(velocityReadings)
+						debug.profilebegin("initragdoll")
+
+						maid:GiveTask(RxRagdollUtils.suppressRootPartCollision(character))
+						maid:GiveTask(RxRagdollUtils.enforceHeadCollision(character))
+						maid:GiveTask(RxRagdollUtils.enforceHumanoidStateMachineOff(character, humanoid))
+
+						-- Do motors
+						maid:GiveTask(RagdollMotorUtils.suppressMotors(character, rigType, velocityReadings))
+						maid:GiveTask(RxRagdollUtils.enforceHumanoidState(humanoid))
+
+						debug.profileend()
+					end)
+			else
+				debug.profilebegin("initragdoll_nonowner")
+
+				maid:GiveTask(RagdollMotorUtils.suppressJustRootPart(character, rigType))
+				maid:GiveTask(RxRagdollUtils.enforceHumanoidState(humanoid))
+
+				debug.profileend()
+			end
+
+			(topMaid :: any)._current = maid
+		else
+			(topMaid :: any)._current = nil
+		end
+	end))
+
+	return topMaid
+end
+
+function RxRagdollUtils.enforceHumanoidState(humanoid: Humanoid): Maid.Maid
+	local maid = Maid.new()
+	humanoid:ChangeState(Enum.HumanoidStateType.Physics); -- If you're holding a humanoid and jump, then the humanoid state -- changes to your humanoid's state.
+	(maid :: any)._keepAsPhysics = humanoid.StateChanged:Connect(function(_old, new)
+		if new ~= Enum.HumanoidStateType.Physics and new ~= Enum.HumanoidStateType.Dead then
+			humanoid:ChangeState(Enum.HumanoidStateType.Physics)
+		end
+	end)
+
+	maid:GiveTask(function()
+		(maid :: any)._keepAsPhysics = nil
+
+		if humanoid:GetState() ~= Enum.HumanoidStateType.Dead then
+			humanoid:ChangeState(Enum.HumanoidStateType.GettingUp)
+		end
+	end)
+
+	return maid
+end
+
+return RxRagdollUtils

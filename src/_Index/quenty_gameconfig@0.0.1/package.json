@@ -1,0 +1,37 @@
+{
+  "name": "quenty/gameconfig",
+  "version": "0.0.1",
+  "exports": {
+    "GameConfigAssetTypes": "Shared/Config/AssetTypes/GameConfigAssetTypes",
+    "GameConfigService": "Server/GameConfigService",
+    "GameConfigServiceClient": "Client/GameConfigServiceClient"
+  },
+  "dependencies": [
+    "quenty/attribute@0.0.1",
+    "quenty/attributeutils@0.0.1",
+    "quenty/badgeutils@0.0.1",
+    "quenty/baseobject@0.0.1",
+    "quenty/binder@0.0.1",
+    "quenty/brio@0.0.1",
+    "quenty/canceltoken@0.0.1",
+    "quenty/clientranslator@0.0.1",
+    "quenty/cmdrservice@0.0.1",
+    "quenty/enums@0.0.1",
+    "quenty/errorreportingservice@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/marketplaceutils@0.0.1",
+    "quenty/observablecollection@0.0.1",
+    "quenty/playerutils@0.0.1",
+    "quenty/preferredparentutils@0.0.1",
+    "quenty/promise@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/rxbinderutils@0.0.1",
+    "quenty/rxbrioutils@0.0.1",
+    "quenty/rxinstanceutils@0.0.1",
+    "quenty/rxstatestackutils@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/stringutils@0.0.1",
+    "quenty/tableutils@0.0.1"
+  ],
+  "externals": []
+}

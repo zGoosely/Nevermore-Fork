@@ -1,0 +1,9 @@
+{
+  "name": "quenty/playermock",
+  "version": "0.0.1",
+  "exports": {
+    "PlayerMock": "PlayerMock"
+  },
+  "dependencies": [],
+  "externals": []
+}

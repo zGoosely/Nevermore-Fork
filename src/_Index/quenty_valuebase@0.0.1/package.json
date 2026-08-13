@@ -1,0 +1,14 @@
+{
+  "name": "quenty/valuebase",
+  "version": "0.0.1",
+  "exports": {
+    "ValueBaseValue": "ValueBaseValue"
+  },
+  "dependencies": [
+    "quenty/brio@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/rxvaluebaseutils@0.0.1",
+    "quenty/valuebaseutils@0.0.1"
+  ],
+  "externals": []
+}

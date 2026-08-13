@@ -1,0 +1,13 @@
+{
+  "name": "quenty/cubicsplineutils",
+  "version": "0.0.1",
+  "exports": {
+    "CubicSplineUtils": "CubicSplineUtils"
+  },
+  "dependencies": [
+    "quenty/binarysearchutils@0.0.1",
+    "quenty/cubictweenutils@0.0.1",
+    "quenty/linearsystemssolverutils@0.0.1"
+  ],
+  "externals": []
+}

@@ -1,0 +1,11 @@
+{
+  "name": "quenty/insertserviceutils",
+  "version": "0.0.1",
+  "exports": {
+    "InsertServiceUtils": "InsertServiceUtils"
+  },
+  "dependencies": [
+    "quenty/promise@0.0.1"
+  ],
+  "externals": []
+}

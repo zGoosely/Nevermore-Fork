@@ -1,0 +1,30 @@
+{
+  "name": "quenty/observablecollection",
+  "version": "0.0.1",
+  "exports": {
+    "FilteredObservableListView": "FilteredObservableListView",
+    "ObservableCountingMap": "ObservableCountingMap",
+    "ObservableInstance": "ObservableInstance",
+    "ObservableList": "ObservableList",
+    "ObservableMap": "ObservableMap",
+    "ObservableMapList": "ObservableMapList",
+    "ObservableMapSet": "ObservableMapSet",
+    "ObservableSet": "ObservableSet"
+  },
+  "dependencies": [
+    "quenty/baseobject@0.0.1",
+    "quenty/brio@0.0.1",
+    "quenty/ducktype@0.0.1",
+    "quenty/listindexutils@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/rxbrioutils@0.0.1",
+    "quenty/signal@0.0.1",
+    "quenty/sortedlist@0.0.1",
+    "quenty/sortfunctionutils@0.0.1",
+    "quenty/symbol@0.0.1",
+    "quenty/tableutils@0.0.1",
+    "quenty/valueobject@0.0.1"
+  ],
+  "externals": []
+}

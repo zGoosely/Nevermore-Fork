@@ -1,0 +1,13 @@
+{
+  "name": "quenty/color3utils",
+  "version": "0.0.1",
+  "exports": {
+    "Color3Utils": "Color3Utils",
+    "LuvColor3Utils": "LuvColor3Utils",
+    "LuvUtils": "LuvUtils"
+  },
+  "dependencies": [
+    "quenty/mathutils@0.0.1"
+  ],
+  "externals": []
+}

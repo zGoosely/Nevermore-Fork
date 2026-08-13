@@ -1,0 +1,12 @@
+{
+  "name": "quenty/socialserviceutils",
+  "version": "0.0.1",
+  "exports": {
+    "SocialServiceUtils": "SocialServiceUtils"
+  },
+  "dependencies": [
+    "quenty/maid@0.0.1",
+    "quenty/promise@0.0.1"
+  ],
+  "externals": []
+}

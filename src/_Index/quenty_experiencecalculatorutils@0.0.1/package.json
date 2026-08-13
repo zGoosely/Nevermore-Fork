@@ -1,0 +1,9 @@
+{
+  "name": "quenty/experiencecalculatorutils",
+  "version": "0.0.1",
+  "exports": {
+    "ExperienceCalculatorUtils": "ExperienceCalculatorUtils"
+  },
+  "dependencies": [],
+  "externals": []
+}

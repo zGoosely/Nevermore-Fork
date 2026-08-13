@@ -1,0 +1,10 @@
+{
+  "name": "quenty/maid",
+  "version": "0.0.1",
+  "exports": {
+    "Maid": "Maid",
+    "MaidTaskUtils": "MaidTaskUtils"
+  },
+  "dependencies": [],
+  "externals": []
+}

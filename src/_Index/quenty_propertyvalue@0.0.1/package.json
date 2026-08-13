@@ -1,0 +1,13 @@
+{
+  "name": "quenty/propertyvalue",
+  "version": "0.0.1",
+  "exports": {
+    "PropertyValue": "PropertyValue"
+  },
+  "dependencies": [
+    "quenty/brio@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/rxinstanceutils@0.0.1"
+  ],
+  "externals": []
+}

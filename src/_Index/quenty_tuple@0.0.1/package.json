@@ -1,0 +1,12 @@
+{
+  "name": "quenty/tuple",
+  "version": "0.0.1",
+  "exports": {
+    "Tuple": "Tuple",
+    "TupleLookup": "TupleLookup"
+  },
+  "dependencies": [
+    "quenty/ducktype@0.0.1"
+  ],
+  "externals": []
+}

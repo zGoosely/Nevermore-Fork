@@ -1,0 +1,32 @@
+{
+  "name": "quenty/tie",
+  "version": "0.0.1",
+  "exports": {
+    "TieDefinition": "Shared/TieDefinition",
+    "TieRealmService": "Shared/Services/TieRealmService",
+    "TieRealms": "Shared/Realms/TieRealms",
+    "TieUtils": "Shared/Utils/TieUtils"
+  },
+  "dependencies": [
+    "quenty/attribute@0.0.1",
+    "quenty/attributeutils@0.0.1",
+    "quenty/baseobject@0.0.1",
+    "quenty/brio@0.0.1",
+    "quenty/enums@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/promise@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/rxbrioutils@0.0.1",
+    "quenty/rxcollectionserviceutils@0.0.1",
+    "quenty/rxinstanceutils@0.0.1",
+    "quenty/rxstatestackutils@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/stringutils@0.0.1",
+    "quenty/symbol@0.0.1",
+    "quenty/tableutils@0.0.1",
+    "quenty/tuple@0.0.1",
+    "quenty/valuebaseutils@0.0.1",
+    "quenty/valueobject@0.0.1"
+  ],
+  "externals": []
+}

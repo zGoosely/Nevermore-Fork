@@ -1,0 +1,9 @@
+{
+  "name": "quenty/bytenet",
+  "version": "0.0.1",
+  "exports": {
+    "ByteNet": "ByteNet"
+  },
+  "dependencies": [],
+  "externals": []
+}

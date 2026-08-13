@@ -1,0 +1,15 @@
+{
+  "name": "quenty/daynightutils",
+  "version": "0.0.1",
+  "exports": {
+    "DayNightConstants": "DayNightConstants",
+    "DayNightUtils": "DayNightUtils"
+  },
+  "dependencies": [
+    "quenty/rx@0.0.1",
+    "quenty/rxinstanceutils@0.0.1",
+    "quenty/t@0.0.1",
+    "quenty/tableutils@0.0.1"
+  ],
+  "externals": []
+}

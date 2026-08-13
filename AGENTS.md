@@ -1,15 +1,15 @@
 # Nevermore Fork conventions
 
-This is the target style for all new and changed code in `lib/`. Some packages are older ports and do not yet follow every rule below. Treat this document, not nearby legacy code, as the source of truth. Preserve an established public API unless a change explicitly includes a migration.
+This is the target style for all new and changed code in `src/_Index/`. Some packages are older ports and do not yet follow every rule below. Treat this document, not nearby legacy code, as the source of truth. Preserve an established public API unless a change explicitly includes a migration.
 
 ## Non-negotiable rules
 
-- Start every Luau module with `--!strict`. `lib/Loader.luau` is the only nonstrict exception.
+- Start every Luau module with `--!strict`.
 - Use `t` for runtime argument and value validation. Do not introduce `assert(type(...))`, `assert(typeof(...))`, or `assert(value:IsA(...))` checks.
 - Define methods with dot notation and an explicit typed `self`: `function Class.Method(self: Class, ...)`. Calls may use normal colon syntax.
 - Put stateless logic in a `*Utils` module. A private helper that does not read or mutate `self`, and does not need another instance method, does not belong on a service or class.
 - Resolve every service dependency in `Init`, store it on the service, and declare that field in the exported service type.
-- Check the packages already available in `lib/` before creating a module or implementing functionality from scratch.
+- Check `PKGINFO.md`, the flat exports in `src/`, and indexed packages in `src/_Index/` before creating a module or implementing functionality from scratch.
 - Format every changed Luau file with StyLua. Tabs, indentation, spacing, double quotes, and blank lines are part of correctness.
 - Keep service public APIs small. Services orchestrate lifecycle and dependencies; they are not miscellaneous function containers.
 - Do not add redundant `_isStarted` or `_isDestroyed` service fields. `ServiceBag` owns service lifecycle ordering, and the service's `Maid` owns cleanup; use those lifecycle mechanisms instead of tracking duplicate state.
@@ -32,7 +32,7 @@ If a module starts accumulating responsibilities from two rows, split it before 
 
 ### Before creating a module
 
-Search `lib/` by concept and by likely module name before writing anything. Reuse the established package that already owns the behavior, or compose existing packages, instead of adding a near-duplicate abstraction. Inspect its API and lifecycle rather than guessing from its filename.
+Search `PKGINFO.md` and `src/_Index/` by concept and likely module name before writing anything. Reuse the established package that already owns the behavior, or compose existing packages, instead of adding a near-duplicate abstraction. Inspect its API and lifecycle rather than guessing from its filename.
 
 Use the packages that match the job: `Maid` for owned cleanup, `Promise` for asynchronous completion, `Observable`/`Rx` for streams, `ValueObject` for reactive state, `Binder` for genuine tagged-instance ownership, `t` for runtime validation, and the existing utility packages for common transformations. Do not recreate these locally.
 
@@ -47,10 +47,11 @@ After implementation, perform a separate revision pass. Ask:
 
 ## Package layout
 
-Keep a small package flat:
+Keep a small indexed package flat:
 
 ```text
-lib/example/
+src/_Index/quenty_example@0.0.1/
+	package.json
 	Example.luau
 	ExampleUtils.luau
 ```
@@ -58,7 +59,8 @@ lib/example/
 Use realm folders and `Shared` once a package has both server and client behavior:
 
 ```text
-lib/exampleservice/
+src/_Index/quenty_exampleservice@0.0.1/
+	package.json
 	ExampleService.luau
 	ExampleServiceClient.luau
 	README.md
@@ -85,7 +87,7 @@ Split a service or class when it owns several independently describable workflow
 For a crowded service:
 
 ```text
-lib/coinservice/
+src/_Index/quenty_coinservice@0.0.1/
 	CoinService.luau          # Public facade; resolves and coordinates support services
 	CoinPickupService.luau    # Picks up coins
 	CoinObserveService.luau   # Watches coins
@@ -100,7 +102,7 @@ lib/coinservice/
 For a crowded class:
 
 ```text
-lib/quest/
+src/_Index/quenty_quest@0.0.1/
 	Quest.luau               # Main public class and coordinator
 	QuestTrackerModel.luau   # Tracks quest state
 	QuestCreatorModel.luau   # Creates quest state
@@ -125,17 +127,16 @@ Use this order consistently:
 1. `--!strict`, then `--!optimize 2` only for a measured hot path.
 2. One Moonwave module header.
 3. Roblox services from `game:GetService()`.
-4. The relative loader acquisition.
-5. Bare-name package requires.
-6. Exported/local types.
-7. Module constants and reusable validators.
-8. The module table and `ClassName` or `ServiceName` metadata.
-9. Exported class/service type.
-10. Constructor or `Init`, then `Start`.
-11. Public methods.
-12. Private stateful methods.
-13. `Destroy` when the module owns cleanup.
-14. The final `return`.
+4. Cross-package requires through `@game/ReplicatedStorage/Packages/<Export>` and package-local relative requires.
+5. Exported/local types.
+6. Module constants and reusable validators.
+7. The module table and `ClassName` or `ServiceName` metadata.
+8. Exported class/service type.
+9. Constructor or `Init`, then `Start`.
+10. Public methods.
+11. Private stateful methods.
+12. `Destroy` when the module owns cleanup.
+13. The final `return`.
 
 Separate those groups with one blank line. Sort requires; StyLua's `sort_requires` setting handles this. Put static module requires at module scope. Never call `require()` from `Start`, an ordinary public/private method, a callback, or a loop. If a module genuinely must be loaded per construction or delayed for registration, require it once at the beginning of the class's `.new()` or the service's `Init`; bind the result to a clearly named value instead of inlining `require()` inside another call.
 
@@ -152,22 +153,26 @@ Use the appropriate Moonwave tag:
 
 Use `@class` for services and stateful classes, `@util` for utility modules, `@types` for type collections, and `@network` for network definitions. Document every public non-lifecycle method with a short behavior description, `@within`, meaningful parameters, and its return value. Do not add empty prose such as "Does something." Never add method-level Moonwave documentation to `.new()`, `Init`, `Start`, `Destroy`, or private methods.
 
-## Requires and the loader
+## Requires and package exports
 
-Acquire the loader once, then import packages by bare module name:
+Require another package through its flat export under the canonical package root:
 
 ```luau
-const require = require("../Loader").load()
-
-const Maid = require("Maid")
-const t = require("t")
+const Maid = require("@game/ReplicatedStorage/Packages/Maid")
+const t = require("@game/ReplicatedStorage/Packages/t")
 ```
 
-Never convert bare-name imports into Roblox hierarchy paths. Match the relative path to `lib/Loader.luau`. Remember that an `init.luau` collapses its folder and therefore uses one fewer `../` segment than a regular file beside it.
+Use a relative string require for another module owned by the same indexed package:
+
+```luau
+const ExampleUtils = require("./ExampleUtils")
+```
+
+Each package lives at `src/_Index/quenty_<package>@0.0.1/` on disk and is mapped by Rojo to the direct `_Index` child `quenty/<package>@0.0.1`. Its `package.json` lists logical identity, public exports, package dependencies, and external game dependencies. Add a strict flat wrapper in `src/` only for a consumer-facing entrypoint or a module imported by another package. Do not expose tests or private helpers.
 
 Module loading and service resolution are different operations:
 
-- `require("SomeService")` loads the service module and normally belongs with the top-level imports.
+- `require("@game/ReplicatedStorage/Packages/SomeService")` loads the service module and normally belongs with the top-level imports.
 - `self._serviceBag:GetService(SomeService)` resolves the service instance and always belongs in `Init`.
 - A class constructs its owned dependencies in `.new()`.
 - Do not look up services lazily from `Start`, public methods, private methods, or callbacks.
@@ -190,7 +195,7 @@ Module loading and service resolution are different operations:
 Require `t` in every module that validates public inputs:
 
 ```luau
-const t = require("t")
+const t = require("@game/ReplicatedStorage/Packages/t")
 
 assert(t.string(name) and name ~= "", "Bad name")
 assert(t.numberPositive(duration), "Bad duration")
@@ -244,12 +249,10 @@ A service is constructed by `ServiceBag`; it does not expose `.new()`. It owns d
 	@server
 ]=]
 
-const require = require("../Loader").load()
-
-const CmdrService = require("CmdrService")
-const Maid = require("Maid")
-const ServiceBag = require("ServiceBag")
-const t = require("t")
+const CmdrService = require("@game/ReplicatedStorage/Packages/CmdrService")
+const Maid = require("@game/ReplicatedStorage/Packages/Maid")
+const ServiceBag = require("@game/ReplicatedStorage/Packages/ServiceBag")
+const t = require("@game/ReplicatedStorage/Packages/t")
 
 const ExampleService = {}
 ExampleService.ServiceName = "ExampleService"
@@ -313,10 +316,8 @@ Use a class when each constructed object has independent state or lifetime.
 	@class Example
 ]=]
 
-const require = require("../Loader").load()
-
-const Maid = require("Maid")
-const t = require("t")
+const Maid = require("@game/ReplicatedStorage/Packages/Maid")
+const t = require("@game/ReplicatedStorage/Packages/t")
 
 const Example = {}
 Example.ClassName = "Example"
@@ -378,9 +379,7 @@ Utilities are stateless module tables. They do not have `ClassName`, `.new()`, `
 	@util ExampleUtils
 ]=]
 
-const require = require("../Loader").load()
-
-const t = require("t")
+const t = require("@game/ReplicatedStorage/Packages/t")
 
 const ExampleUtils = {}
 
@@ -434,15 +433,15 @@ Run the checks that match the changed scope from the repository root:
 
 ```bash
 stylua path/to/ChangedFile.luau
-stylua --check lib/
-selene lib/
+stylua --check src/
+selene src/
 ```
 
 For a focused change, format and check the changed files first; run the full commands before handing off a package-wide change. Add targeted tests when the package has a test harness. At minimum, exercise serialization round trips, boundary validation, cleanup, and server/client ordering when those behaviors change.
 
 ## Review checklist
 
-- Did you search `lib/` and reuse the right existing packages before creating new code?
+- Did you search `PKGINFO.md` and `src/_Index/` and reuse the right existing package before creating new code?
 - Is this a service, stateful class, or stateless utility for the right reason?
 - Is the main service/class still focused, or should cohesive workflows become support services/models?
 - Did every new runtime type/shape assertion use `t`?
