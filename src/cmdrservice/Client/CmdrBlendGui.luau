@@ -12,6 +12,9 @@ const Maid = require("Maid")
 const Observable = require("Observable")
 const t = require("t")
 
+const HIDDEN_Y_OFFSET = 68
+const VISIBLE_Y_OFFSET = 56
+
 const CmdrBlendGui = {}
 
 const function textLabel(name: string, text: string, font: Enum.Font, textSize: number)
@@ -73,12 +76,14 @@ function CmdrBlendGui.mount(
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
 			BackgroundColor3 = Color3.fromRGB(15, 17, 22),
 			BackgroundTransparency = Blend.Computed(percentVisible, function(percent: number): number
-				return 1 - 0.92 * percent
+				return 1 - 0.92 * math.clamp(percent, 0, 1)
 			end),
 			BorderSizePixel = 0,
 			CanvasSize = UDim2.fromOffset(0, 0),
 			Position = Blend.Computed(percentVisible, function(percent: number): UDim2
-				return UDim2.new(0.025, 0, 0, 25 - 12 * (1 - percent))
+				const clampedPercent = math.clamp(percent, 0, 1)
+				const yOffset = HIDDEN_Y_OFFSET + (VISIBLE_Y_OFFSET - HIDDEN_Y_OFFSET) * clampedPercent
+				return UDim2.new(0.025, 0, 0, yOffset)
 			end),
 			ScrollBarImageColor3 = Color3.fromRGB(105, 113, 130),
 			ScrollBarThickness = 4,
@@ -90,7 +95,7 @@ function CmdrBlendGui.mount(
 			Blend.New("UICorner")({ CornerRadius = UDim.new(0, 6) }),
 			Blend.New("UIScale")({
 				Scale = Blend.Computed(percentVisible, function(percent: number): number
-					return 0.97 + 0.03 * percent
+					return 0.97 + 0.03 * math.clamp(percent, 0, 1)
 				end),
 			}),
 			Blend.New("UIStroke")({
@@ -175,20 +180,21 @@ function CmdrBlendGui.mount(
 		Blend.New("ScrollingFrame")({
 			Name = "Autocomplete",
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
-			BackgroundColor3 = Color3.fromRGB(31, 34, 42),
-			BackgroundTransparency = 0.04,
+			BackgroundColor3 = Color3.fromRGB(22, 24, 30),
+			BackgroundTransparency = 0.02,
 			BorderSizePixel = 0,
 			CanvasSize = UDim2.fromOffset(0, 0),
+			ClipsDescendants = true,
 			Position = UDim2.fromOffset(167, 75),
 			ScrollBarImageColor3 = Color3.fromRGB(105, 113, 130),
 			ScrollBarThickness = 4,
 			ScrollingDirection = Enum.ScrollingDirection.Y,
 			Selectable = false,
-			Size = UDim2.fromOffset(220, 200),
+			Size = UDim2.fromOffset(220, 190),
 			Visible = false,
 			ZIndex = 10,
 
-			Blend.New("UICorner")({ CornerRadius = UDim.new(0, 6) }),
+			Blend.New("UICorner")({ CornerRadius = UDim.new(0, 8) }),
 			Blend.New("UIStroke")({
 				Color = Color3.fromRGB(72, 78, 92),
 				Transparency = 0.25,
@@ -196,6 +202,7 @@ function CmdrBlendGui.mount(
 			}),
 			Blend.New("UIListLayout")({
 				Name = "UIListLayout",
+				Padding = UDim.new(0, 1),
 				SortOrder = Enum.SortOrder.LayoutOrder,
 			}),
 			Blend.New("Frame")({
@@ -204,7 +211,7 @@ function CmdrBlendGui.mount(
 				BackgroundTransparency = 0.1,
 				BorderSizePixel = 0,
 				LayoutOrder = -2,
-				Size = UDim2.new(1, 0, 0, 40),
+				Size = UDim2.new(1, 0, 0, 34),
 
 				Blend.New("UIPadding")({ PaddingLeft = UDim.new(0, 10) }),
 				Blend.New("TextLabel")({
@@ -212,10 +219,10 @@ function CmdrBlendGui.mount(
 					AutomaticSize = Enum.AutomaticSize.X,
 					BackgroundTransparency = 1,
 					Font = Enum.Font.SourceSansBold,
-					Size = UDim2.fromOffset(0, 40),
+					Size = UDim2.fromOffset(0, 34),
 					Text = "",
 					TextColor3 = Color3.fromRGB(245, 245, 245),
-					TextSize = 20,
+					TextSize = 18,
 					TextXAlignment = Enum.TextXAlignment.Left,
 
 					Blend.New("TextLabel")({
@@ -224,10 +231,10 @@ function CmdrBlendGui.mount(
 						BackgroundTransparency = 1,
 						Font = Enum.Font.SourceSans,
 						Position = UDim2.fromScale(1, 0),
-						Size = UDim2.fromOffset(0, 40),
+						Size = UDim2.fromOffset(0, 34),
 						Text = "",
 						TextColor3 = Color3.fromRGB(174, 181, 198),
-						TextSize = 15,
+						TextSize = 13,
 						TextXAlignment = Enum.TextXAlignment.Left,
 					}),
 				}),
@@ -237,6 +244,7 @@ function CmdrBlendGui.mount(
 				BackgroundColor3 = Color3.fromRGB(42, 46, 57),
 				BackgroundTransparency = 0.1,
 				BorderSizePixel = 0,
+				ClipsDescendants = true,
 				LayoutOrder = -1,
 				Size = UDim2.new(1, 0, 0, 20),
 
@@ -253,6 +261,7 @@ function CmdrBlendGui.mount(
 					Text = "",
 					TextColor3 = Color3.fromRGB(235, 235, 235),
 					TextSize = 16,
+					TextTruncate = Enum.TextTruncate.AtEnd,
 					TextWrapped = true,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Top,
@@ -260,16 +269,17 @@ function CmdrBlendGui.mount(
 			}),
 			Blend.New("TextButton")({
 				Name = "TextButton",
-				BackgroundColor3 = Color3.fromRGB(72, 78, 92),
-				BackgroundTransparency = 0.5,
+				BackgroundColor3 = Color3.fromRGB(61, 68, 84),
+				BackgroundTransparency = 0.18,
 				BorderSizePixel = 0,
 				Font = Enum.Font.Code,
-				Size = UDim2.new(1, 0, 0, 30),
+				Size = UDim2.new(1, 0, 0, 28),
 				Text = "",
 				ZIndex = 11,
 
+				Blend.New("UICorner")({ CornerRadius = UDim.new(0, 4) }),
 				Blend.New("UIPadding")({ PaddingLeft = UDim.new(0, 10) }),
-				textLabel("Suggest", "", Enum.Font.Code, 14),
+				textLabel("Suggest", "", Enum.Font.Code, 13),
 				Blend.New("TextLabel")({
 					Name = "Typed",
 					BackgroundTransparency = 1,
@@ -277,7 +287,7 @@ function CmdrBlendGui.mount(
 					Size = UDim2.fromScale(1, 1),
 					Text = "",
 					TextColor3 = Color3.fromRGB(131, 222, 255),
-					TextSize = 14,
+					TextSize = 13,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					ZIndex = 12,
 				}),
