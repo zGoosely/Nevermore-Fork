@@ -1,38 +1,29 @@
 --!strict
 --[=[
-	A BaseObject basically just adds the :Destroy() interface, and a _maid, along with an optional object it references.
+	Provides a common maid, optional referenced object, and destruction lifecycle for stateful classes.
+
 	@class BaseObject
 ]=]
-local Maid = require("@game/ReplicatedStorage/Packages/Maid")
+const Maid = require("@game/ReplicatedStorage/Packages/Maid")
 
-local BaseObject = {}
+const BaseObject = {}
 BaseObject.ClassName = "BaseObject"
 BaseObject.__index = BaseObject
 
-export type BaseObject<T> = typeof(setmetatable(
-	{} :: {
-		_obj: T?,
-		_maid: Maid.Maid,
-	},
-	{} :: typeof({ __index = BaseObject })
-))
+export type BaseObject<T> = {
+	_obj: T?,
+	_maid: Maid.Maid,
+	Destroy: (self: BaseObject<T>) -> (),
+}
 
---[=[
-	Constructs a new BaseObject
-
-	@param obj? Instance
-	@return BaseObject
-]=]
-function BaseObject.new<T>(obj: T?): BaseObject<T>
+function BaseObject.new<T>(obj: T?): any
+	-- Subclasses replace this metatable and add required fields before casting to their concrete type.
 	return setmetatable({
 		_maid = Maid.new(),
 		_obj = obj :: T?,
 	}, BaseObject)
 end
 
---[=[
-	Cleans up the BaseObject and sets the metatable to nil
-]=]
 function BaseObject.Destroy<T>(self: BaseObject<T>): ()
 	self._maid:DoCleaning()
 	setmetatable(self :: any, nil)
