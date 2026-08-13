@@ -5,6 +5,7 @@
     "Binder": "Shared/Binder",
     "BinderProvider": "Shared/BinderProvider",
     "PlayerBinder": "Shared/Internal/PlayerBinder",
+    "PlayerCharacterBinder": "Shared/Internal/PlayerCharacterBinder",
     "PlayerHumanoidBinder": "Shared/Internal/PlayerHumanoidBinder"
   },
   "dependencies": [
