@@ -2,14 +2,14 @@
 --[=[
 	Unit tests for the Blend-compatible shimmer utility.
 
-	@class ShimmerUtils.spec
+	@class UIShimmerUtils.spec
 ]=]
 
 const require = require("../Loader").load()
 
 const Blend = require("Blend")
 const Jest = require("Jest")
-const ShimmerUtils = require("ShimmerUtils")
+const UIShimmerUtils = require("UIShimmerUtils")
 
 const describe = Jest.Globals.describe
 const expect = Jest.Globals.expect
@@ -19,25 +19,25 @@ const function getShimmer(target: GuiObject): Frame
 	return target:FindFirstChild("UIShimmer") :: Frame
 end
 
-describe("ShimmerUtils", function()
+describe("UIShimmerUtils", function()
 	it("validates options", function()
 		expect(function()
-			ShimmerUtils.shimmer({
+			UIShimmerUtils.shimmer({
 				DelayTime = 0.25,
 				Duration = 2,
 			})
 		end).never.toThrow()
 		expect(function()
-			ShimmerUtils.shimmer({ Duration = 0 })
+			UIShimmerUtils.shimmer({ Duration = 0 })
 		end).toThrow()
 		expect(function()
-			ShimmerUtils.shimmer({ DelayTime = -1 })
+			UIShimmerUtils.shimmer({ DelayTime = -1 })
 		end).toThrow()
 		expect(function()
-			ShimmerUtils.shimmer({ Unknown = true } :: any)
+			UIShimmerUtils.shimmer({ Unknown = true } :: any)
 		end).toThrow()
 
-		const attach = ShimmerUtils.shimmer()
+		const attach = UIShimmerUtils.shimmer()
 		const invalidTarget = Instance.new("Folder")
 		const target = Instance.new("Frame")
 		expect(function()
@@ -54,7 +54,7 @@ describe("ShimmerUtils", function()
 		const target = Instance.new("Frame")
 		target.ZIndex = 4
 		const maid = Blend.mount(target, {
-			[ShimmerUtils.shimmer()] = true,
+			[UIShimmerUtils.shimmer()] = true,
 		})
 		const shimmer = getShimmer(target)
 		const gradient = shimmer:FindFirstChildOfClass("UIGradient") :: UIGradient
@@ -75,7 +75,7 @@ describe("ShimmerUtils", function()
 		target.Parent = root
 		const enabled = Blend.State(false)
 		const maid = Blend.mount(target, {
-			[ShimmerUtils.shimmer()] = enabled,
+			[UIShimmerUtils.shimmer()] = enabled,
 		})
 		const shimmer = getShimmer(target)
 		const gradient = shimmer:FindFirstChildOfClass("UIGradient") :: UIGradient
@@ -106,7 +106,7 @@ describe("ShimmerUtils", function()
 		padding.Parent = target
 
 		const maid = Blend.mount(target, {
-			[ShimmerUtils.shimmer()] = false,
+			[UIShimmerUtils.shimmer()] = false,
 		})
 		const shimmer = getShimmer(target)
 		const shimmerCorner = shimmer:FindFirstChildOfClass("UICorner") :: UICorner

@@ -19,7 +19,7 @@
 
 	Source: https://github.com/RyanLua/Shime
 
-	@util ShimmerUtils
+	@util UIShimmerUtils
 ]=]
 
 const TweenService = game:GetService("TweenService")
@@ -57,14 +57,14 @@ end, function(value: any): boolean
 	return ValueObject.isValueObject(value)
 end)
 
-export type ShimmerOptions = {
+export type UIShimmerOptions = {
 	DelayTime: number?,
 	Duration: number?,
 }
 
-export type ShimmerMountable = ValueObject.Mountable<boolean>
+export type UIShimmerMountable = ValueObject.Mountable<boolean>
 
-const ShimmerUtils = {}
+const UIShimmerUtils = {}
 
 const function applyDefaultBounds(frame: Frame): ()
 	frame.Position = DEFAULT_POSITION
@@ -165,7 +165,7 @@ end
 
 const function observeShimmer(
 	target: GuiObject,
-	isEnabled: ShimmerMountable,
+	isEnabled: UIShimmerMountable,
 	duration: number,
 	delayTime: number
 ): Observable.Observable<never>
@@ -234,24 +234,26 @@ end
 
 	```lua
 	Blend.New("Frame")({
-		[ShimmerUtils.shimmer({
+		[UIShimmerUtils.shimmer({
 			Duration = 1,
 			DelayTime = 0.25,
 		})] = isShimmering,
 	})
 	```
 
-	@within ShimmerUtils
-	@param options ShimmerOptions?
-	@return (GuiObject, ShimmerMountable) -> Observable<never>
+	@within UIShimmerUtils
+	@param options UIShimmerOptions?
+	@return (GuiObject, UIShimmerMountable) -> Observable<never>
 ]=]
-function ShimmerUtils.shimmer(options: ShimmerOptions?): (GuiObject, ShimmerMountable) -> Observable.Observable<never>
+function UIShimmerUtils.shimmer(
+	options: UIShimmerOptions?
+): (GuiObject, UIShimmerMountable) -> Observable.Observable<never>
 	assert(t.optional(isOptions)(options), "Bad options")
 
 	const duration = if options then options.Duration or DEFAULT_DURATION else DEFAULT_DURATION
 	const delayTime = if options then options.DelayTime or DEFAULT_DELAY_TIME else DEFAULT_DELAY_TIME
 
-	return function(target: GuiObject, isEnabled: ShimmerMountable): Observable.Observable<never>
+	return function(target: GuiObject, isEnabled: UIShimmerMountable): Observable.Observable<never>
 		assert(t.instanceIsA("GuiObject")(target), "Bad target")
 		assert(isBooleanMountable(isEnabled), "Bad isEnabled")
 
@@ -259,4 +261,4 @@ function ShimmerUtils.shimmer(options: ShimmerOptions?): (GuiObject, ShimmerMoun
 	end
 end
 
-return ShimmerUtils
+return UIShimmerUtils
