@@ -1,18 +1,6 @@
---!strict
 -- luacheck: ignore 212
-
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
-
-local CmdrInterfaceUtils = require(script.Parent.CmdrInterfaceUtils)
-
-const AUTOCOMPLETE_EDGE_PADDING = 12
-const AUTOCOMPLETE_MAX_HEIGHT = 190
-const AUTOCOMPLETE_MAX_WIDTH = 320
-const AUTOCOMPLETE_MIN_WIDTH = 220
-const AUTOCOMPLETE_VERTICAL_GAP = 16
-const DESCRIPTION_MAX_HEIGHT = 72
-const SELECTED_TRANSPARENCY = 0.18
 
 return function(Cmdr)
 	local AutoComplete = {
@@ -28,38 +16,9 @@ return function(Cmdr)
 	local Title = Gui:WaitForChild("Title")
 	local Description = Gui:WaitForChild("Description")
 	local Entry = Gui.Parent:WaitForChild("Frame"):WaitForChild("Entry")
-	local GhostText = Entry.TextBox:WaitForChild("GhostText")
 	AutoItem.Parent = nil
 
 	local defaultBarThickness = Gui.ScrollBarThickness
-	local autocompleteContentWidth = AUTOCOMPLETE_MIN_WIDTH
-	local autocompleteHorizontalOffset = 0
-
-	function AutoComplete.GetCompletionText(self: any): string
-		local item = self:GetSelectedItem()
-		if not item then
-			return Entry.TextBox.Text
-		end
-
-		return CmdrInterfaceUtils.getCompletionText(item, self.Command, self.Arg, self.NumArgs, self.IsPartial)
-	end
-
-	function AutoComplete.UpdateGhostText(self: any): ()
-		if not Gui.Visible then
-			GhostText.Text = ""
-			return
-		end
-
-		local item = self:GetSelectedItem()
-		if not item then
-			GhostText.Text = ""
-			return
-		end
-
-		const typedText = Entry.TextBox.Text
-		const ghostCompletion = CmdrInterfaceUtils.getGhostCompletionText(typedText, item, self:GetCompletionText())
-		GhostText.Text = CmdrInterfaceUtils.getGhostRichText(typedText, ghostCompletion)
-	end
 
 	-- Helper function that sets text and resizes labels
 	local function SetText(obj, textObj, text, sizeFromContents)
@@ -76,41 +35,13 @@ return function(Cmdr)
 		end
 	end
 
-	const function updateContainerPosition()
-		if not Gui.Visible then
-			return
-		end
-
-		const desiredX = Entry.TextBox.AbsolutePosition.X + autocompleteHorizontalOffset
-		const maxX = math.max(
-			AUTOCOMPLETE_EDGE_PADDING,
-			Gui.Parent.AbsoluteSize.X - Gui.AbsoluteSize.X - AUTOCOMPLETE_EDGE_PADDING
+	local function UpdateContainerSize()
+		Gui.Size = UDim2.new(
+			0,
+			math.max(Title.Field.TextBounds.X + Title.Field.Type.TextBounds.X, Gui.Size.X.Offset),
+			0,
+			math.min(Gui.UIListLayout.AbsoluteContentSize.Y, Gui.Parent.AbsoluteSize.Y - Gui.AbsolutePosition.Y - 10)
 		)
-		const xOffset = math.clamp(desiredX, AUTOCOMPLETE_EDGE_PADDING, maxX)
-		const entryBottom = math.max(
-			Entry.AbsolutePosition.Y + Entry.AbsoluteSize.Y,
-			Entry.TextBox.AbsolutePosition.Y + Entry.TextBox.AbsoluteSize.Y
-		)
-		const yOffset = entryBottom + AUTOCOMPLETE_VERTICAL_GAP
-
-		Gui.Position = UDim2.fromOffset(xOffset, yOffset)
-	end
-
-	const function updateContainerSize()
-		updateContainerPosition()
-
-		const maxAvailableWidth = math.max(1, Gui.Parent.AbsoluteSize.X - 2 * AUTOCOMPLETE_EDGE_PADDING)
-		const width = math.min(
-			math.max(Title.Field.TextBounds.X + Title.Field.Type.TextBounds.X + 28, autocompleteContentWidth),
-			AUTOCOMPLETE_MAX_WIDTH,
-			maxAvailableWidth
-		)
-		const availableHeight =
-			math.max(0, Gui.Parent.AbsoluteSize.Y - Gui.AbsolutePosition.Y - AUTOCOMPLETE_EDGE_PADDING)
-		const height = math.min(Gui.UIListLayout.AbsoluteContentSize.Y, AUTOCOMPLETE_MAX_HEIGHT, availableHeight)
-
-		Gui.Size = UDim2.fromOffset(width, height)
-		updateContainerPosition()
 	end
 
 	-- Update the info display (Name, type, and description) based on given options.
@@ -125,13 +56,13 @@ return function(Cmdr)
 		SetText(Description, Description.Label, options.description)
 
 		Description.Label.TextColor3 = options.invalid and Color3.fromRGB(255, 73, 73) or Color3.fromRGB(255, 255, 255)
-		Description.Size = UDim2.new(1, 0, 0, 34)
+		Description.Size = UDim2.new(1, 0, 0, 40)
 
 		-- Flow description text
-		while Description.Visible and not Description.Label.TextFits do
+		while not Description.Label.TextFits do
 			Description.Size = Description.Size + UDim2.new(0, 0, 0, 2)
 
-			if Description.Size.Y.Offset >= DESCRIPTION_MAX_HEIGHT then
+			if Description.Size.Y.Offset > 500 then
 				break
 			end
 		end
@@ -139,7 +70,7 @@ return function(Cmdr)
 		-- Update container
 		task.wait()
 		Gui.UIListLayout:ApplyLayout()
-		updateContainerSize()
+		UpdateContainerSize()
 		Gui.ScrollBarThickness = defaultBarThickness
 	end
 
@@ -154,7 +85,7 @@ return function(Cmdr)
 	-- options.description?: The description for the currently active info box
 	-- options.invalid?: If true, description is shown in red.
 	-- options.isLast?: If true, auto complete won't keep going after this argument.
-	function AutoComplete.Show(self: any, items: any, options: any): ()
+	function AutoComplete:Show(items, options)
 		options = options or {}
 
 		-- Remove old options.
@@ -175,7 +106,7 @@ return function(Cmdr)
 		self.IsPartial = options.isPartial
 
 		-- Generate the new option labels
-		local autocompleteWidth = AUTOCOMPLETE_MIN_WIDTH
+		local autocompleteWidth = 200
 
 		Gui.ScrollBarThickness = 0
 
@@ -185,13 +116,14 @@ return function(Cmdr)
 
 			local btn = AutoItem:Clone()
 			btn.Name = leftText .. rightText
-			btn.BackgroundTransparency = i == self.SelectedItem and SELECTED_TRANSPARENCY or 1
+			btn.BackgroundTransparency = i == self.SelectedItem and 0.5 or 1
 
 			local start, stop = string.find(rightText:lower(), leftText:lower(), 1, true)
 			btn.Typed.Text = string.rep(" ", start - 1) .. leftText
 			btn.Suggest.Text = string.sub(rightText, 0, start - 1)
 				.. string.rep(" ", #leftText)
 				.. string.sub(rightText, stop + 1)
+
 
 			btn.Parent = Gui
 			btn.LayoutOrder = i
@@ -204,12 +136,6 @@ return function(Cmdr)
 			item.gui = btn
 		end
 
-		autocompleteWidth = math.min(
-			autocompleteWidth,
-			AUTOCOMPLETE_MAX_WIDTH,
-			math.max(1, Gui.Parent.AbsoluteSize.X - 2 * AUTOCOMPLETE_EDGE_PADDING)
-		)
-		autocompleteContentWidth = autocompleteWidth
 		Gui.UIListLayout:ApplyLayout()
 
 		-- Todo: Use TextService to find accurate position for auto complete box
@@ -221,38 +147,37 @@ return function(Cmdr)
 		table.remove(words, #words)
 		local extra = (options.at and options.at or (#table.concat(words, " ") + 1)) * 7
 
-		autocompleteHorizontalOffset = extra
-		Gui.Size = UDim2.fromOffset(autocompleteWidth, AUTOCOMPLETE_MAX_HEIGHT)
+		-- Update the auto complete container
+		Gui.Position =
+			UDim2.new(0, Entry.TextBox.AbsolutePosition.X - 10 + extra, 0, Entry.TextBox.AbsolutePosition.Y + 30)
+		Gui.Size = UDim2.new(0, autocompleteWidth, 0, Gui.UIListLayout.AbsoluteContentSize.Y)
 		Gui.Visible = true
-		updateContainerSize()
-		self:UpdateGhostText()
 
 		-- Finally, update thge info display
 		UpdateInfoDisplay(self.Items[1] and self.Items[1].options or options)
 	end
 
 	--- Returns the selected item in the auto complete
-	function AutoComplete.GetSelectedItem(self: any): any
+	function AutoComplete:GetSelectedItem()
 		if Gui.Visible == false then
 			return nil
 		end
 
-		return self.Items[self.SelectedItem]
+		return AutoComplete.Items[AutoComplete.SelectedItem]
 	end
 
 	--- Hides the auto complete
-	function AutoComplete.Hide(_self: any): ()
+	function AutoComplete:Hide()
 		Gui.Visible = false
-		GhostText.Text = ""
 	end
 
 	--- Returns if the menu is visible
-	function AutoComplete.IsVisible(_self: any): boolean
+	function AutoComplete:IsVisible()
 		return Gui.Visible
 	end
 
 	--- Changes the user's item selection by the given delta
-	function AutoComplete.Select(self: any, delta: number): ()
+	function AutoComplete:Select(delta)
 		if not Gui.Visible then
 			return
 		end
@@ -266,7 +191,7 @@ return function(Cmdr)
 		end
 
 		for i, item in pairs(self.Items) do
-			item.gui.BackgroundTransparency = i == self.SelectedItem and SELECTED_TRANSPARENCY or 1
+			item.gui.BackgroundTransparency = i == self.SelectedItem and 0.5 or 1
 		end
 
 		Gui.CanvasPosition = Vector2.new(
@@ -283,14 +208,9 @@ return function(Cmdr)
 		if self.Items[self.SelectedItem] and self.Items[self.SelectedItem].options then
 			UpdateInfoDisplay(self.Items[self.SelectedItem].options or {})
 		end
-
-		self:UpdateGhostText()
 	end
 
-	Gui.Parent:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateContainerSize)
-	Gui.UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(updateContainerSize)
-	Entry.TextBox:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateContainerPosition)
-	Entry.TextBox:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateContainerPosition)
+	Gui.Parent:GetPropertyChangedSignal("AbsoluteSize"):Connect(UpdateContainerSize)
 
 	return AutoComplete
 end

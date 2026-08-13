@@ -1,11 +1,9 @@
---!strict
 -- Here be dragons
 -- luacheck: ignore 212
-
 local GuiService = game:GetService("GuiService")
-local Players = game:GetService("Players")
-local TextChatService = game:GetService("TextChatService")
 local UserInputService = game:GetService("UserInputService")
+local TextChatService = game:GetService("TextChatService")
+local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 
 local WINDOW_MAX_HEIGHT = 300
@@ -19,7 +17,6 @@ local Window = {
 	OnTextChanged = nil,
 	Cmdr = nil,
 	HistoryState = nil,
-	Pane = nil,
 }
 
 local Gui = Player:WaitForChild("PlayerGui"):WaitForChild("Cmdr"):WaitForChild("Frame")
@@ -71,14 +68,13 @@ function Window:AddLine(text, options)
 end
 
 --- Returns if the command bar is visible
-function Window.IsVisible(self: any): boolean
-	return self.Pane ~= nil and self.Pane:IsVisible() or false
+function Window:IsVisible()
+	return Gui.Visible
 end
 
 --- Sets the command bar visible or not
-function Window.SetVisible(self: any, visible: boolean): ()
-	assert(self.Pane, "Cmdr pane is not configured")
-	self.Pane:SetVisible(visible)
+function Window:SetVisible(visible)
+	Gui.Visible = visible
 
 	if visible then
 		self.PreviousChatWindowConfigurationEnabled = TextChatService.ChatWindowConfiguration.Enabled
@@ -94,12 +90,10 @@ function Window.SetVisible(self: any, visible: boolean): ()
 			UserInputService.MouseBehavior = Enum.MouseBehavior.Default
 		end
 	else
-		TextChatService.ChatWindowConfiguration.Enabled = if self.PreviousChatWindowConfigurationEnabled ~= nil
-			then self.PreviousChatWindowConfigurationEnabled
-			else true
-		TextChatService.ChatInputBarConfiguration.Enabled = if self.PreviousChatInputBarConfigurationEnabled ~= nil
-			then self.PreviousChatInputBarConfigurationEnabled
-			else true
+		TextChatService.ChatWindowConfiguration.Enabled = if self.PreviousChatWindowConfigurationEnabled ~= nil then 
+			self.PreviousChatWindowConfigurationEnabled else true
+		TextChatService.ChatInputBarConfiguration.Enabled = if self.PreviousChatInputBarConfigurationEnabled ~= nil then 
+			self.PreviousChatInputBarConfigurationEnabled else true
 
 		Entry.TextBox:ReleaseFocus()
 		self.AutoComplete:Hide()
@@ -150,15 +144,15 @@ function Window:HideInvalidState()
 end
 
 --- Event handler for text box focus lost
-function Window.LoseFocus(self: any, submit: boolean): ()
+function Window:LoseFocus(submit)
 	local text = Entry.TextBox.Text
 
 	self:ClearHistoryState()
 
-	if self:IsVisible() and not GuiService.MenuIsOpen then
+	if Gui.Visible and not GuiService.MenuIsOpen then
 		-- self:SetEntryText("")
 		Entry.TextBox:CaptureFocus()
-	elseif GuiService.MenuIsOpen and self:IsVisible() then
+	elseif GuiService.MenuIsOpen and Gui.Visible then
 		self:Hide()
 	end
 
@@ -204,7 +198,7 @@ end
 local lastPressTime = 0
 local pressCount = 0
 --- Handles user input when the box is focused
-function Window.BeginInput(self: any, input: InputObject, gameProcessed: boolean): ()
+function Window:BeginInput(input, gameProcessed)
 	if GuiService.MenuIsOpen then
 		self:Hide()
 	end
@@ -264,10 +258,46 @@ function Window.BeginInput(self: any, input: InputObject, gameProcessed: boolean
 		local item = self.AutoComplete:GetSelectedItem()
 		local text = self:GetEntryText()
 		if item and not (text:sub(#text, #text):match("%s") and self.AutoComplete.LastItem) then
+			local replace = item[2]
+			local newText
+			local insertSpace = true
+			local command = self.AutoComplete.Command
+
+			if command then
+				local lastArg = self.AutoComplete.Arg
+
+				newText = command.Alias
+				insertSpace = self.AutoComplete.NumArgs ~= #command.ArgumentDefinitions
+					and self.AutoComplete.IsPartial == false
+
+				local args = command.Arguments
+				for i = 1, #args do
+					local arg = args[i]
+					local segments = arg.RawSegments
+					if arg == lastArg then
+						segments[#segments] = replace
+					end
+
+					local argText = arg.Prefix .. table.concat(segments, ",")
+
+					-- Put auto completion options in quotation marks if they have a space
+					if argText:find(" ") or argText == "" then
+						argText = ("%q"):format(argText)
+					end
+
+					newText = ("%s %s"):format(newText, argText)
+
+					if arg == lastArg then
+						break
+					end
+				end
+			else
+				newText = replace
+			end
 			-- need to wait a frame so we can eat the \t
 			wait()
 			-- Update the text box
-			self:SetEntryText(self.AutoComplete:GetCompletionText())
+			self:SetEntryText(newText .. (insertSpace and " " or ""))
 		else
 			-- Still need to eat the \t even if there is no auto-complete to show
 			wait()

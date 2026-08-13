@@ -7,8 +7,6 @@ const Players = game:GetService("Players")
 const ReplicatedStorage = game:GetService("ReplicatedStorage")
 const require = require("../Loader").load()
 
-const CmdrPane = require("CmdrPane")
-const CmdrServiceNetwork = require("CmdrServiceNetwork")
 const Maid = require("Maid")
 const PermissionServiceClient = require("PermissionServiceClient")
 const Promise = require("Promise")
@@ -30,7 +28,6 @@ export type CmdrServiceClient = typeof(setmetatable(
 
 		_cmdrPromise: Promise.Promise<any>,
 		_cmdrBindingMaid: Maid.Maid?,
-		_cmdrPane: CmdrPane.CmdrPane?,
 	},
 	{} :: typeof({ __index = CmdrServiceClient })
 ))
@@ -40,7 +37,6 @@ function CmdrServiceClient.Init(self: CmdrServiceClient, serviceBag: ServiceBag.
 	self._serviceBag = assert(serviceBag, "No serviceBag")
 	self._maid = Maid.new()
 	self._permissionServiceClient = self._serviceBag:GetService(PermissionServiceClient)
-	self._cmdrPane = nil
 
 	self:PromiseCmdr():Then(function(cmdrClient)
 		self:_watchReplicatedCommands(cmdrClient)
@@ -104,17 +100,11 @@ function CmdrServiceClient.PromiseCmdr(self: CmdrServiceClient)
 
 	self._cmdrPromise = PromiseInstanceUtils.promiseChild(ReplicatedStorage, "CmdrClient")
 		:Then(function(cmdrClient)
-			if not self._cmdrPane then
-				self._cmdrPane = self._maid:Add(CmdrPane.new(Player:WaitForChild("PlayerGui") :: PlayerGui))
-			end
-
 			return Promise.spawn(function(resolve)
 				return resolve(require(cmdrClient))
 			end)
 		end)
 		:Then(function(cmdrClient)
-			cmdrClient:SetNetwork(CmdrServiceNetwork)
-			cmdrClient:SetPane(assert(self._cmdrPane, "Cmdr pane was not created"))
 			return cmdrClient
 		end)
 		:Catch(error)
