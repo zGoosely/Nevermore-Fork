@@ -5,9 +5,9 @@
 	@class Webhook
 	@server
 ]=]
-const WebhookClient = require("./WebhookClient")
-const WebhookTypes = require("./WebhookTypes")
-const WebhookUtils = require("./WebhookUtils")
+const WebhookClient = require("@self/WebhookClient")
+const WebhookTypes = require("@self/WebhookTypes")
+const WebhookUtils = require("@self/WebhookUtils")
 
 return {
 	WebhookClient = WebhookClient,

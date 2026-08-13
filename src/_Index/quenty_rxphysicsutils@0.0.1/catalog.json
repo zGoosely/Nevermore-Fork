@@ -1,0 +1,16 @@
+{
+  "purpose": "Collects the rxphysicsutils runtime building blocks—Rx Physics Utils—and composes them for reuse in Roblox experiences.",
+  "description": "Collects the rxphysicsutils runtime building blocks—Rx Physics Utils—and composes them for reuse in Roblox experiences.",
+  "tags": [
+    "physics",
+    "reactive",
+    "utility"
+  ],
+  "modules": {
+    "RxPhysicsUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rx Physics Utils provides the class/model implementation used by the Rxphysicsutils package. Public entry points include `RxPhysicsUtils.observePartMass`, `update`."
+    }
+  }
+}

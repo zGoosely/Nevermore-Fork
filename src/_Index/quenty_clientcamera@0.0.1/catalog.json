@@ -1,0 +1,204 @@
+{
+  "purpose": "Holds camera states and allows for the last camera state to be retrieved. Also initializes an impulse and default camera as the bottom of the stack. Is a singleton.",
+  "description": "Holds camera states and allows for the last camera state to be retrieved. Also initializes an impulse and default camera as the bottom of the stack. Is a singleton.",
+  "tags": [
+    "animation",
+    "data",
+    "game_service",
+    "gui",
+    "input",
+    "math",
+    "physics",
+    "player_service",
+    "reactive",
+    "security",
+    "utility"
+  ],
+  "modules": {
+    "CameraStack.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Camera Stack provides the class/model implementation used by the Clientcamera package. Public entry points include `CameraStack.new`, `CameraStack.isCameraStack`, `CameraStack.PushDisable`, `CameraStack.PrintCameraStack`, `CameraStack.GetTopCamera`, `CameraStack.GetTopState`, `CameraStack.GetNewStateBelow`, `CameraStack.GetIndex`."
+    },
+    "CameraStackService.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "Holds camera states and allows for the last camera state to be retrieved. Also initializes an impulse and default camera as the bottom of the stack. Is a singleton. Public entry points include `CameraStackService.Init`, `CameraStackService.GetRenderPriority`, `CameraStackService.Start`, `CameraStackService.SetDoNotUseDefaultCamera`, `CameraStackService.PushDisable`, `CameraStackService.PrintCameraStack`,…"
+    },
+    "CameraState.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Data container for the state of a camera. Public entry points include `CameraState.new`, `CameraState.isCameraState`, `CameraState.Set`."
+    },
+    "Controls/CameraControls.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Camera Controls provides the class/model implementation used by the Clientcamera package. Public entry points include `rk4Integrator`, `acceleration`, `CameraControls.new`, `CameraControls.SetGamepadRotationAcceleration`, `CameraControls.GetKey`, `CameraControls.IsEnabled`, `CameraControls.Enable`, `CameraControls.Disable`."
+    },
+    "Controls/CameraGamepadInputUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility classes to work with gamepad thumbsticks Public entry points include `SCurveTranform`, `toSCurveSpace`, `fromSCurveSpace`, `onAxis`, `CameraGamepadInputUtils.outOfDeadZone`, `CameraGamepadInputUtils.gamepadLinearToCurve`."
+    },
+    "Controls/GamepadRotateModel.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rotation model for gamepad controls that uses Roblox's curve smoothing and other components. Public entry points include `GamepadRotateModel.new`, `GamepadRotateModel.SetAcceleration`, `GamepadRotateModel.GetThumbstickDeltaAngle`, `GamepadRotateModel.StopRotate`, `GamepadRotateModel.HandleThumbstickInput`."
+    },
+    "Effects/CameraEffectUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "A CameraEffect is something that can be resolved into a CameraState providing source."
+    },
+    "Effects/CustomCameraEffect.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "For effects that can be easily bound in scope Public entry points include `CustomCameraEffect.new`."
+    },
+    "Effects/DefaultCamera.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Hack to maintain default camera control by binding before and after the camera update cycle This allows other cameras to build off of the \"default\" camera while maintaining the same Roblox control scheme. This camera is automatically setup by the [CameraStackService](/api/CameraStackService)."
+    },
+    "Effects/FadeBetween/FadeBetweenCamera.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Add another layer of effects that can be faded in/out Public entry points include `FadeBetweenCamera.new`."
+    },
+    "Effects/FadeBetween/FadeBetweenCamera2.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Fade Between Camera2 provides the class/model implementation used by the Clientcamera package. Public entry points include `FadeBetweenCamera2.new`."
+    },
+    "Effects/FadeBetween/FadeBetweenCamera3.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Add another layer of effects that can be faded in/out Public entry points include `FadeBetweenCamera3.new`."
+    },
+    "Effects/FadeBetween/FadeBetweenCamera4.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Fade Between Camera4 provides the class/model implementation used by the Clientcamera package. Public entry points include `FadeBetweenCamera4.new`."
+    },
+    "Effects/FadingCamera.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Add another layer of effects that can be faded in/out Public entry points include `FadingCamera.new`."
+    },
+    "Effects/HeartbeatCamera.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Update on heartbeat, must GC this camera state, unlike others. This allows for camera effects to run on heartbeat and cache information once instead of potentially going deeep into a tree and getting invoked multiple times Public entry points include `HeartbeatCamera.new`, `HeartbeatCamera.ForceUpdateCache`, `HeartbeatCamera.Destroy`."
+    },
+    "Effects/ImpulseCamera.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Add another layer of effects over any other camera by allowing an \"impulse\" to be applied. Good for shockwaves, camera shake, and recoil. Public entry points include `ImpulseCamera.new`, `ImpulseCamera.Impulse`, `ImpulseCamera.ImpulseRandom`."
+    },
+    "Effects/InverseFader.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Be the inverse of a fading camera (makes scaling in cameras easy). Public entry points include `InverseFader.new`."
+    },
+    "Effects/LagPointCamera.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Point a current element but lag behind for a smoother experience Public entry points include `LagPointCamera.new`."
+    },
+    "Effects/OverrideDefaultCameraToo.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Allows you to override the default camera with this cameras information. Useful for custom camera controls that the user controls. Public entry points include `OverrideDefaultCameraToo.new`."
+    },
+    "Effects/PointCamera.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Point a current element Public entry points include `PointCamera.new`."
+    },
+    "Effects/PushCamera.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Like a rotated camera, except we end up pushing back to a default rotation. This same behavior is seen in Roblox vehicle seats Public entry points include `PushCamera.new`, `PushCamera.RotateXY`, `PushCamera.StopRotateBack`, `PushCamera.Reset`."
+    },
+    "Effects/RotatedCamera.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Allow freedom of movement around a current place, much like the classic script works now. Not intended to be use with the current character script. This is the rotation component. Intended to be used with a SummedCamera, relative. Public entry points include `RotatedCamera.new`, `RotatedCamera.RotateXY`."
+    },
+    "Effects/SmoothPositionCamera.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Lags the camera smoothly behind the position maintaining other components Public entry points include `SmoothPositionCamera.new`."
+    },
+    "Effects/SmoothRotatedCamera.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Allow freedom of movement around a current place, much like the classic script works now. Not intended to be use with the current character script. This is the rotation component. Intended to be used with a SummedCamera, relative. Public entry points include `SmoothRotatedCamera.new`, `SmoothRotatedCamera.RotateXY`, `SmoothRotatedCamera.SnapIntoBounds`, `SmoothRotatedCamera.GetPastBounds`."
+    },
+    "Effects/SmoothZoomedCamera.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Allow freedom of movement around a current place, much like the classic script works now. Not intended to be use with the current character script Intended to be used with a SummedCamera, relative. Public entry points include `SmoothZoomedCamera.new`, `SmoothZoomedCamera.ZoomIn`, `SmoothZoomedCamera.Impulse`."
+    },
+    "Effects/SummedCamera.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Add two cameras together Public entry points include `SummedCamera.new`, `SummedCamera.SetMode`."
+    },
+    "Effects/TrackCamera.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Track a current part, whether it be a model or part Public entry points include `TrackCamera.new`."
+    },
+    "Effects/XZPlaneLockCamera.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Lock camera to only XZPlane, preventing TrackerCameras from making players sick. Public entry points include `XZPlaneLockCamera.new`."
+    },
+    "Effects/ZoomedCamera.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Allow freedom of movement around a current place, much like the classic script works now. Not intended to be use with the current character script Intended to be used with a SummedCamera, relative. Assigning .Zoom will automatically clamp Public entry points include `ZoomedCamera.new`, `ZoomedCamera.ZoomIn`."
+    },
+    "Input/CameraInputUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Camera Input Utils provides the class/model implementation used by the Clientcamera package. Public entry points include `CameraInputUtils.getPanBy`, `CameraInputUtils.convertToPanDelta`, `CameraInputUtils.getInversionVector`, `CameraInputUtils.invertSensitivity`, `CameraInputUtils.isPortraitMode`, `CameraInputUtils.getCappedAspectRatio`."
+    },
+    "Input/CameraTouchInputUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility methods involving touch input and cameras. Public entry points include `CameraTouchInputUtils.adjustTouchSensitivity`."
+    },
+    "Utility/CameraFrame.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Represents a camera state at a certain point. Can perform math on this state. Public entry points include `CameraFrame.new`, `CameraFrame.isCameraFrame`."
+    },
+    "Utility/CameraStateTweener.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Makes transitions between states easier. Uses the `CameraStackService` to tween in and out a new camera state Call `:Show()` and `:Hide()` to do so, and make sure to call `:Destroy()` after usage Public entry points include `CameraStateTweener.new`, `CameraStateTweener.GetPercentVisible`, `CameraStateTweener.Show`, `CameraStateTweener.Hide`, `CameraStateTweener.IsFinishedHiding`,…"
+    },
+    "Utility/CameraSubjectUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Camera Subject Utils provides the class/model implementation used by the Clientcamera package. Public entry points include `CameraSubjectUtils.getRobloxCameraSubjectCFrame`."
+    },
+    "Utility/CameraUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility methods for cameras. These are great for viewport frames. Public entry points include `CameraUtils.getCubeoidDiameter`, `CameraUtils.fitBoundingBoxToCamera`, `CameraUtils.fitSphereToCamera`, `CameraUtils.isOnScreen`."
+    },
+    "Utility/FieldOfViewUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility functions involving field of view. Public entry points include `FieldOfViewUtils.fovToHeight`, `FieldOfViewUtils.heightToFov`, `FieldOfViewUtils.safeLog`, `FieldOfViewUtils.safeExp`, `FieldOfViewUtils.lerpInHeightSpace`."
+    },
+    "Utility/QFrame.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "CFrame representation as a quaternion. Alternative representation of a [CFrame]. Public entry points include `QFrame.new`, `QFrame.isQFrame`, `QFrame.fromCFrameClosestTo`, `QFrame.fromVector3`, `QFrame.toCFrame`, `QFrame.toPosition`, `QFrame.isNAN`."
+    }
+  }
+}

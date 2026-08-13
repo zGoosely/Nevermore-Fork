@@ -1,0 +1,59 @@
+{
+  "purpose": "`ClientCullingService` performs render-only distance culling for tagged world content on each client. It keeps tagged Instances in their original hierarchy, so culling does not change ancestry, collisions, raycasts, scripts, or Roblox streaming behavior.",
+  "description": "`ClientCullingService` performs render-only distance culling for tagged world content on each client. It keeps tagged Instances in their original hierarchy, so culling does not change ancestry, collisions, raycasts, scripts, or Roblox streaming behavior.",
+  "tags": [
+    "animation",
+    "data",
+    "developer_tools",
+    "enums",
+    "game_service",
+    "gui",
+    "math",
+    "physics",
+    "player_service",
+    "reactive",
+    "utility"
+  ],
+  "modules": {
+    "ClientCullingConstants.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Defines tags, attributes, defaults, and scheduler budgets for client culling."
+    },
+    "ClientCullingModel.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Owns one tagged Instance's configuration, cached bounds, and culling state. Public entry points include `ClientCullingModel.new`, `ClientCullingModel.IsCulled`, `ClientCullingModel.RefreshDynamicBounds`, `ClientCullingModel.SetCulled`, `ClientCullingModel.Destroy`."
+    },
+    "ClientCullingRegistry.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Coordinates indexed distance checks, dynamic refreshes, and visual work. Public entry points include `ClientCullingRegistry.new`, `ClientCullingRegistry.Start`, `ClientCullingRegistry.AddEntry`, `ClientCullingRegistry.UpdateEntry`, `ClientCullingRegistry.RemoveEntry`, `ClientCullingRegistry.AddDescendant`, `ClientCullingRegistry.RemoveDescendant`, `ClientCullingRegistry.SetEntryCulled`."
+    },
+    "ClientCullingService.luau": {
+      "realm": "client",
+      "kind": "Service",
+      "description": "Coordinates client-side distance culling for tagged world Instances. Public entry points include `ClientCullingService.Init`, `ClientCullingService.Start`, `ClientCullingService.IsCulled`, `ClientCullingService.AreShadowsCulled`, `ClientCullingService.Destroy`."
+    },
+    "ClientCullingSpatialIndex.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Maintains distance-bucketed 3D spatial cells for client culling entries. Public entry points include `ClientCullingSpatialIndex.new`, `ClientCullingSpatialIndex.AddOrUpdate`, `ClientCullingSpatialIndex.Remove`, `ClientCullingSpatialIndex.QueryNearby`, `ClientCullingSpatialIndex.Destroy`."
+    },
+    "ClientCullingTypes.luau": {
+      "realm": "shared",
+      "kind": "Types",
+      "description": "Shared internal type contracts for client culling."
+    },
+    "ClientCullingUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Validates culling configuration and performs bounds and distance math. Public entry points include `isFiniteNonnegativeNumber`, `deriveForPVInstance`, `deriveForAdornee`, `deriveForBeamLike`, `deriveForParent`, `ClientCullingUtils.getConfig`, `ClientCullingUtils.deriveBounds`, `ClientCullingUtils.shouldCull`."
+    },
+    "ClientCullingVisibilityState.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Applies frame-budgeted, overlap-safe local visibility mutations. Public entry points include `ClientCullingVisibilityState.new`, `ClientCullingVisibilityState.SetRootCulled`, `ClientCullingVisibilityState.AddDescendant`, `ClientCullingVisibilityState.RemoveDescendant`, `ClientCullingVisibilityState.RemoveOwner`, `ClientCullingVisibilityState.Step`, `ClientCullingVisibilityState.Destroy`."
+    }
+  }
+}

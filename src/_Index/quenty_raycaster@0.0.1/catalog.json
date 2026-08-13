@@ -1,0 +1,14 @@
+{
+  "purpose": "Repeats raycasting attempts while ignoring items via a filter function.",
+  "description": "Repeats raycasting attempts while ignoring items via a filter function.",
+  "tags": [
+    "physics"
+  ],
+  "modules": {
+    "Raycaster.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Repeats raycasting attempts while ignoring items via a filter function. Public entry points include `Raycaster.new`, `Raycaster.Ignore`, `Raycaster.FindPartOnRay`."
+    }
+  }
+}

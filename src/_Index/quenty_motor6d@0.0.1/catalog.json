@@ -1,0 +1,83 @@
+{
+  "purpose": "Helps transform or modify a Motor6D's CFrame over time, on top of Roblox's animation stack.",
+  "description": "Helps transform or modify a Motor6D's CFrame over time, on top of Roblox's animation stack.",
+  "tags": [
+    "animation",
+    "game_service",
+    "math",
+    "physics",
+    "player_service"
+  ],
+  "modules": {
+    "Client/Humanoid/Motor6DStackHumanoidClient.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Motor6DStack Humanoid Client provides the class/model implementation used by the Motor6d package. Public entry points include `Motor6DStackHumanoidClient.new`."
+    },
+    "Client/Motor6DServiceClient.luau": {
+      "realm": "client",
+      "kind": "Service",
+      "description": "Motor6DService Client provides the service implementation used by the Motor6d package. Public entry points include `Motor6DServiceClient.Init`."
+    },
+    "Client/Stack/Motor6DStackClient.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Motor6DStack Client provides the class/model implementation used by the Motor6d package. Public entry points include `Motor6DStackClient.new`."
+    },
+    "Server/Humanoid/Motor6DStackHumanoid.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Motor6DStack Humanoid provides the class/model implementation used by the Motor6d package. Public entry points include `Motor6DStackHumanoid.new`."
+    },
+    "Server/Motor6DService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Motor6DService provides the service implementation used by the Motor6d package. Public entry points include `Motor6DService.Init`."
+    },
+    "Server/Stack/Motor6DStack.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Motor6DStack provides the class/model implementation used by the Motor6d package. Public entry points include `Motor6DStack.new`."
+    },
+    "Shared/Animation/Motor6DAnimator.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Motor6DAnimator provides the class/model implementation used by the Motor6d package. Public entry points include `Motor6DAnimator.new`, `Motor6DAnimator.Push`."
+    },
+    "Shared/Animation/Motor6DPhysicsTransformer.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Motor6DPhysics Transformer provides the class/model implementation used by the Motor6d package. Public entry points include `Motor6DPhysicsTransformer.new`, `Motor6DPhysicsTransformer.SetSpeed`, `Motor6DPhysicsTransformer.Transform`."
+    },
+    "Shared/Animation/Motor6DSmoothTransformer.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Motor6DSmooth Transformer provides the class/model implementation used by the Motor6d package. Public entry points include `Motor6DSmoothTransformer.new`, `Motor6DSmoothTransformer.SetSpeed`, `Motor6DSmoothTransformer.SetTarget`, `Motor6DSmoothTransformer.Transform`."
+    },
+    "Shared/Animation/Motor6DTransformer.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Helps transform or modify a Motor6D's CFrame over time, on top of Roblox's animation stack. Public entry points include `Motor6DTransformer.new`, `Motor6DTransformer.Transform`, `Motor6DTransformer.FireFinished`."
+    },
+    "Shared/Humanoid/Motor6DStackHumanoidBase.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Motor6DStack Humanoid Base provides the class/model implementation used by the Motor6d package. Public entry points include `Motor6DStackHumanoidBase.new`, `Motor6DStackHumanoidBase.PushForEachMotor6D`, `Motor6DStackHumanoidBase.ObserveMotor6DsBrio`, `Motor6DStackHumanoidBase.ObserveMotor6DStacksBrio`."
+    },
+    "Shared/Humanoid/Motor6DStackHumanoidInterface.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Motor6DStack Humanoid Interface provides the class/model implementation used by the Motor6d package."
+    },
+    "Shared/Stack/Motor6DStackBase.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Motor6DStack Base provides the class/model implementation used by the Motor6d package. Public entry points include `Motor6DStackBase.new`, `Motor6DStackBase.TransformFromCFrame`, `Motor6DStackBase.Push`."
+    },
+    "Shared/Stack/Motor6DStackInterface.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Motor6DStack Interface provides the class/model implementation used by the Motor6d package."
+    }
+  }
+}

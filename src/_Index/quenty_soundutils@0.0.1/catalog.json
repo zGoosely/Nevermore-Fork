@@ -1,0 +1,21 @@
+{
+  "purpose": "Promise helpers for Roblox sounds and video frames.",
+  "description": "Promise helpers for Roblox sounds and video frames.",
+  "tags": [
+    "audio",
+    "lifecycle",
+    "utility"
+  ],
+  "modules": {
+    "SoundPromiseUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Promise helpers for Roblox sounds and video frames. Public entry points include `SoundPromiseUtils.promiseLoaded`, `SoundPromiseUtils.promisePlayed`, `SoundPromiseUtils.promiseLooped`, `SoundPromiseUtils.promiseAllSoundsLoaded`."
+    },
+    "SoundUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Helps plays back sounds in the Roblox engine. Public entry points include `SoundUtils.promiseLoaded`, `SoundUtils.playFromId`, `SoundUtils.cloneMerge`, `SoundUtils.createSoundFromId`, `SoundUtils.applyPropertiesFromId`, `SoundUtils.playFromIdInParent`, `SoundUtils.playFromIdInParentWithProperties`, `SoundUtils.playAtCFrame`."
+    }
+  }
+}

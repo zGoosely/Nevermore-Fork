@@ -1,0 +1,15 @@
+{
+  "purpose": "Utility functions affecting Brios.",
+  "description": "Utility functions affecting Brios.",
+  "tags": [
+    "reactive",
+    "utility"
+  ],
+  "modules": {
+    "BrioUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility functions affecting Brios. Public entry points include `BrioUtils.extend`, `BrioUtils.prepend`."
+    }
+  }
+}

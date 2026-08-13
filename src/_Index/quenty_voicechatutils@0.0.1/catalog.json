@@ -1,0 +1,15 @@
+{
+  "purpose": "Collects the voicechatutils runtime building blocks—Voice Chat Utils—and composes them for reuse in Roblox experiences.",
+  "description": "Collects the voicechatutils runtime building blocks—Voice Chat Utils—and composes them for reuse in Roblox experiences.",
+  "tags": [
+    "audio",
+    "utility"
+  ],
+  "modules": {
+    "VoiceChatUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Voice Chat Utils provides the class/model implementation used by the Voicechatutils package. Public entry points include `VoiceChatUtils.promiseIsVoiceEnabledForPlayer`, `VoiceChatUtils.promiseIsVoiceEnabledForUserId`."
+    }
+  }
+}

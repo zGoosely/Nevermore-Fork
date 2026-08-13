@@ -1,0 +1,15 @@
+{
+  "purpose": "Provides a shared registry for panes, visibility categories, and close locks. Panes register themselves with the singleton after construction. The manager coordinates visibility requests but does not own or destroy the registered panes.",
+  "description": "Provides a shared registry for panes, visibility categories, and close locks. Panes register themselves with the singleton after construction. The manager coordinates visibility requests but does not own or destroy the registered panes.",
+  "tags": [
+    "gui",
+    "security"
+  ],
+  "modules": {
+    "PaneManager.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Provides a shared registry for panes, visibility categories, and close locks. Panes register themselves with the singleton after construction. The manager coordinates visibility requests but does not own or destroy the registered panes."
+    }
+  }
+}

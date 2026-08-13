@@ -1,0 +1,45 @@
+{
+  "purpose": "`TemplateProvider` is a named registry for cloneable Roblox instances. It keeps asset ownership on the server, advertises lightweight placeholders to clients, and transfers a template only when a client asks for it.",
+  "description": "`TemplateProvider` is a named registry for cloneable Roblox instances. It keeps asset ownership on the server, advertises lightweight placeholders to clients, and transfers a template only when a client asks for it.",
+  "tags": [
+    "animation",
+    "audio",
+    "data",
+    "developer_tools",
+    "game_service",
+    "gui",
+    "lifecycle",
+    "math",
+    "player_service",
+    "reactive",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "Shared/TemplateProviderNetwork.luau": {
+      "realm": "shared",
+      "kind": "Network",
+      "description": "Handles on-demand template requests from [TemplateProvider] clients. Clients can only request opaque template ids advertised by a provider's tombstones. The server validates the provider and template before temporarily replicating a clone to that player's PlayerGui."
+    },
+    "TaggedTemplateProvider.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Creates a [TemplateProvider] backed by CollectionService tags. Public entry points include `TaggedTemplateProvider.new`."
+    },
+    "TemplateProvider.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "Provides named Roblox instances as cloneable templates. Templates may be declared through containers, lists, or observables. The last registered template with a given name is canonical, which makes overrides straightforward. When initialized on the server, source templates are moved beneath a Camera so they do not replicate immediately. Lightweight tombstones advertise their names to clients."
+    },
+    "TemplateReplicationModes.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Replication modes used by [TemplateProvider]."
+    },
+    "TemplateReplicationModesUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Utilities for resolving the active [TemplateProvider] replication mode. Public entry points include `TemplateReplicationModesUtils.inferReplicationMode`."
+    }
+  }
+}

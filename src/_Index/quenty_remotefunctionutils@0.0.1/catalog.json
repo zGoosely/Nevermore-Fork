@@ -1,0 +1,15 @@
+{
+  "purpose": "Utility functions to wrap invoking a remote function with a promise",
+  "description": "Utility functions to wrap invoking a remote function with a promise",
+  "tags": [
+    "lifecycle",
+    "utility"
+  ],
+  "modules": {
+    "RemoteFunctionUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility functions to wrap invoking a remote function with a promise Public entry points include `RemoteFunctionUtils.promiseInvokeServer`, `RemoteFunctionUtils.promiseInvokeClient`, `RemoteFunctionUtils.promiseInvokeBindableFunction`, `RemoteFunctionUtils.fromPromiseYieldResult`."
+    }
+  }
+}

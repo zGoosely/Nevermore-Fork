@@ -1,0 +1,22 @@
+{
+  "purpose": "Caches MarketplaceService product-information promises for the lifetime of the server or client. Concurrent callers share one request, successful responses remain cached, and failed requests are removed so a later call can retry.",
+  "description": "Caches MarketplaceService product-information promises for the lifetime of the server or client. Concurrent callers share one request, successful responses remain cached, and failed requests are removed so a later call can retry.",
+  "tags": [
+    "commerce",
+    "game_service",
+    "lifecycle",
+    "utility"
+  ],
+  "modules": {
+    "MarketplaceServiceCache.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "Caches MarketplaceService product-information promises for the lifetime of the server or client. Concurrent callers share one request, successful responses remain cached, and failed requests are removed so a later call can retry."
+    },
+    "MarketplaceUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Provides utility methods for MarketplaceService Public entry points include `MarketplaceUtils.promiseProductInfo`, `MarketplaceUtils.promiseSubscriptionProductInfo`, `MarketplaceUtils.promiseUserSubscriptionStatus`, `MarketplaceUtils.promiseUserOwnsGamePass`, `MarketplaceUtils.promisePlayerOwnsAsset`, `MarketplaceUtils.promisePlayerOwnsBundle`."
+    }
+  }
+}

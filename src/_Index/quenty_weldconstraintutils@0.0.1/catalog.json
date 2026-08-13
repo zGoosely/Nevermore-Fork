@@ -1,0 +1,15 @@
+{
+  "purpose": "Utility functions to create WeldConstraint objects in Roblox.",
+  "description": "Utility functions to create WeldConstraint objects in Roblox.",
+  "tags": [
+    "physics",
+    "utility"
+  ],
+  "modules": {
+    "WeldConstraintUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility functions to create WeldConstraint objects in Roblox. Public entry points include `WeldConstraintUtils.namedBetween`, `WeldConstraintUtils.namedBetweenForceWeldConstraint`."
+    }
+  }
+}

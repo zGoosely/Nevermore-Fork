@@ -16,7 +16,7 @@ const Maid = require("@game/ReplicatedStorage/Packages/Maid")
 const ServiceBag = require("@game/ReplicatedStorage/Packages/ServiceBag")
 const Promise = require("@game/ReplicatedStorage/Packages/Promise")
 const Observable = require("@game/ReplicatedStorage/Packages/Observable")
-const PermissionProviderClient = require("./Providers/PermissionProviderClient")
+const PermissionProviderClient = require("@self/Providers/PermissionProviderClient")
 
 const PermissionServiceClient = {}
 PermissionServiceClient.ServiceName = "PermissionServiceClient"

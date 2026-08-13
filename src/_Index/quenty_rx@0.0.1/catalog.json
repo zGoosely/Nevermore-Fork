@@ -1,0 +1,35 @@
+{
+  "purpose": "Provides the reactive stream primitives and operators used throughout Nevermore for observable state and event composition.",
+  "description": "Provides the reactive stream primitives and operators used throughout Nevermore for observable state and event composition.",
+  "tags": [
+    "data",
+    "reactive"
+  ],
+  "modules": {
+    "Observable.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Observables are like an [signal](/api/Signal), except they do not execute code until the observable is subscribed to. This follows the standard Rx API surface for an observable. Observables use a [Subscription](/api/Subscription) to emit values."
+    },
+    "ObservableSubscriptionTable.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "This allows the storage of subscriptions for keys, such that something can subscribe onto a key, and events can be invoked onto keys."
+    },
+    "Rx.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "An empty observable that completes immediately Public entry points include `identity`, `Rx.pipe`, `Rx.failed`, `Rx.from`, `connectToSourceIfNeeded`, `disconnectFromSource`, `getEventsCopy`, `Rx.reduce`."
+    },
+    "RxSignal.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rx Signal provides the class/model implementation used by the Rx package."
+    },
+    "Subscription.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Subscriptions are used in the callback for an [Observable](/api/Observable). Standard usage is as follows."
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "purpose": "Collects the listindexutils runtime building blocks—List Index Utils—and composes them for reuse in Roblox experiences.",
+  "description": "Collects the listindexutils runtime building blocks—List Index Utils—and composes them for reuse in Roblox experiences.",
+  "tags": [
+    "utility"
+  ],
+  "modules": {
+    "ListIndexUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "List Index Utils provides the class/model implementation used by the Listindexutils package. Public entry points include `ListIndexUtils.toPositiveIndex`, `ListIndexUtils.toNegativeIndex`."
+    }
+  }
+}

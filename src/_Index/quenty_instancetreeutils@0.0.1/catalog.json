@@ -1,0 +1,14 @@
+{
+  "purpose": "Collects the instancetreeutils runtime building blocks—Instance Tree Utils—and composes them for reuse in Roblox experiences.",
+  "description": "Collects the instancetreeutils runtime building blocks—Instance Tree Utils—and composes them for reuse in Roblox experiences.",
+  "tags": [
+    "utility"
+  ],
+  "modules": {
+    "InstanceTreeUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Instance Tree Utils provides the class/model implementation used by the Instancetreeutils package. Public entry points include `iteratePathSegments`."
+    }
+  }
+}

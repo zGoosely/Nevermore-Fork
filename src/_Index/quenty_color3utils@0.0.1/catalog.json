@@ -1,0 +1,25 @@
+{
+  "purpose": "Utility methods for Roblox Color3 values",
+  "description": "Utility methods for Roblox Color3 values",
+  "tags": [
+    "data",
+    "utility"
+  ],
+  "modules": {
+    "Color3Utils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility methods for Roblox Color3 values Public entry points include `Color3Utils.serializeColor3`, `Color3Utils.serializeColor3fromRGB`, `Color3Utils.deserializeFromColor3`, `Color3Utils.mutateRGB`, `Color3Utils.mutateHSV`, `Color3Utils.lighten`, `Color3Utils.darken`, `Color3Utils.getRelativeLuminance`."
+    },
+    "LuvColor3Utils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Converts and interpolates Color3 values in perceptual HSLuv space. Public entry points include `LuvColor3Utils.lerp`, `LuvColor3Utils.desaturate`, `LuvColor3Utils.darken`, `LuvColor3Utils.fromColor3`, `LuvColor3Utils.toColor3`."
+    },
+    "LuvUtils.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Luv Utils provides the module implementation used by the Color3utils package. Public entry points include `distance_line_from_origin`, `length_of_ray_until_intersect`, `LuvUtils.get_bounds`, `LuvUtils.max_safe_chroma_for_l`, `LuvUtils.max_safe_chroma_for_lh`, `LuvUtils.dot_product`, `LuvUtils.from_linear`, `LuvUtils.to_linear`."
+    }
+  }
+}

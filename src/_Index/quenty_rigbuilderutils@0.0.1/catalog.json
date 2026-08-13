@@ -1,0 +1,15 @@
+{
+  "purpose": "Helps build player characters or other humanoid rigs for use in a variety of situations.",
+  "description": "Helps build player characters or other humanoid rigs for use in a variety of situations.",
+  "tags": [
+    "player_service",
+    "utility"
+  ],
+  "modules": {
+    "RigBuilderUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Helps build player characters or other humanoid rigs for use in a variety of situations. Public entry points include `jointBetween`, `addAttachment`, `RigBuilderUtils.disableAnimateScript`, `RigBuilderUtils.findAnimateScript`, `RigBuilderUtils.createR6BaseRig`, `RigBuilderUtils.createR6MeshRig`, `RigBuilderUtils.createR6MeshBoyRig`, `RigBuilderUtils.createR6MeshGirlRig`."
+    }
+  }
+}

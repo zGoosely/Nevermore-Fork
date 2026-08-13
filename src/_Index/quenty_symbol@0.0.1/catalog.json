@@ -1,0 +1,14 @@
+{
+  "purpose": "A `Symbol` is an opaque marker type. Symbols have the type `userdata`, but when printed to the console the name of the symbol is shown.",
+  "description": "A `Symbol` is an opaque marker type. Symbols have the type `userdata`, but when printed to the console the name of the symbol is shown.",
+  "tags": [
+    "data"
+  ],
+  "modules": {
+    "Symbol.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "A `Symbol` is an opaque marker type. Symbols have the type `userdata`, but when printed to the console the name of the symbol is shown. Public entry points include `Symbol.named`, `Symbol.isSymbol`."
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "purpose": "Utility functions involving NumberSequences on Roblox",
+  "description": "Utility functions involving NumberSequences on Roblox",
+  "tags": [
+    "math",
+    "utility"
+  ],
+  "modules": {
+    "NumberSequenceUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility functions involving NumberSequences on Roblox Public entry points include `NumberSequenceUtils.getValueGenerator`, `NumberSequenceUtils.forEachValue`, `NumberSequenceUtils.scale`, `NumberSequenceUtils.scaleTransparency`, `NumberSequenceUtils.stripe`."
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "purpose": "Fast and efficient extensible serialiation and deserialization library for Roblox with native instance support out of the box",
+  "description": "Fast and efficient extensible serialiation and deserialization library for Roblox with native instance support out of the box",
+  "tags": [
+    "data",
+    "enums",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "Brine.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Fast and efficient extensible serialiation and deserialization library for Roblox with native instance support out of the box Public entry points include `Brine.serialize`, `Brine.deserialize`."
+    },
+    "BrineTypes.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Brine Types provides the class/model implementation used by the Brine package."
+    },
+    "Context/BrineContext.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Brine Context provides the class/model implementation used by the Brine package. Public entry points include `BrineContext.new`, `BrineContext.FindSerialization`, `BrineContext.FindDeserialization`, `BrineContext.StoreSerialization`, `BrineContext.ReplaceInstancesWithSerializedInstances`, `encode`, `BrineContext.ReplaceSerializedInstancesWithInstances`, `decode`."
+    },
+    "Context/BrineOptionUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Brine Option Utils provides the class/model implementation used by the Brine package. Public entry points include `BrineOptionUtils.defaultOptions`."
+    },
+    "DataTypes/BrineInstanceEncoder.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Brine Instance Encoder provides the class/model implementation used by the Brine package. Public entry points include `BrineInstanceEncoder.encodeProperties`, `BrineInstanceEncoder.encodeInstance`, `BrineInstanceEncoder.encodeAttributes`, `BrineInstanceEncoder.encodeTags`, `BrineInstanceEncoder.encodeChildren`, `BrineInstanceEncoder.decodeInstance`, `BrineInstanceEncoder.decodeAttributes`,…"
+    },
+    "DataTypes/BrineInstanceReflection.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Brine Instance Reflection provides the class/model implementation used by the Brine package. Public entry points include `BrineInstanceReflection.canConstruct`, `BrineInstanceReflection.getEncodedProperties`."
+    }
+  }
+}

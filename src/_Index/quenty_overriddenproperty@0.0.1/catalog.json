@@ -1,0 +1,14 @@
+{
+  "purpose": "Sets properties on the client and then replicates them to the server",
+  "description": "Sets properties on the client and then replicates them to the server",
+  "tags": [
+    "data"
+  ],
+  "modules": {
+    "OverriddenProperty.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Sets properties on the client and then replicates them to the server."
+    }
+  }
+}

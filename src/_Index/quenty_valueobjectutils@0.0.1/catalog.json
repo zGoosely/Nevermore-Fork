@@ -1,0 +1,16 @@
+{
+  "purpose": "Utils that work with Roblox Value objects (and also ValueObject)",
+  "description": "Utils that work with Roblox Value objects (and also ValueObject)",
+  "tags": [
+    "data",
+    "reactive",
+    "utility"
+  ],
+  "modules": {
+    "ValueObjectUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utils that work with Roblox Value objects (and also ValueObject) Public entry points include `refire`."
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "purpose": "An animation group is a group of animations, such as the idle animations that Roblox plays. This utility functions are intended to help recreate a custom animation playback system with weighted values.",
+  "description": "An animation group is a group of animations, such as the idle animations that Roblox plays. This utility functions are intended to help recreate a custom animation playback system with weighted values.",
+  "tags": [
+    "animation",
+    "data",
+    "utility"
+  ],
+  "modules": {
+    "AnimationGroupUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "An animation group is a group of animations, such as the idle animations that Roblox plays. This utility functions are intended to help recreate a custom animation playback system with weighted values. Public entry points include `AnimationGroupUtils.createdWeightedTracks`, `AnimationGroupUtils.createdWeightedAnimation`, `AnimationGroupUtils.createdWeightedTrack`, `AnimationGroupUtils.selectFromWeightedTracks`."
+    }
+  }
+}

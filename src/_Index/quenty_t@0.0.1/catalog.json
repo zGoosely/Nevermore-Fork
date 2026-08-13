@@ -1,0 +1,14 @@
+{
+  "purpose": "Collects the t runtime building blocks—T—and composes them for reuse in Roblox experiences.",
+  "description": "Collects the t runtime building blocks—T—and composes them for reuse in Roblox experiences.",
+  "tags": [
+    "shared"
+  ],
+  "modules": {
+    "t.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "T provides the class/model implementation used by the T package. Public entry points include `t.type`, `t.typeof`, `t.any`, `t.number`, `t.nan`, `t.literal`, `t.keyOf`, `t.valueOf`."
+    }
+  }
+}

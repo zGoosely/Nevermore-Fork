@@ -1,0 +1,16 @@
+{
+  "purpose": "Utility functions to observe the state of Roblox. This is a very powerful way to query Roblox's state. Use RxInstanceUtils to program streaming enabled games, and make it easy to debug. This API surface lets you use Roblox as a source-of-truth which is very valuable.",
+  "description": "Utility functions to observe the state of Roblox. This is a very powerful way to query Roblox's state. Use RxInstanceUtils to program streaming enabled games, and make it easy to debug. This API surface lets you use Roblox as a source-of-truth which is very valuable.",
+  "tags": [
+    "developer_tools",
+    "reactive",
+    "utility"
+  ],
+  "modules": {
+    "RxInstanceUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility functions to observe the state of Roblox. This is a very powerful way to query Roblox's state. Use RxInstanceUtils to program streaming enabled games, and make it easy to debug. This API surface lets you use Roblox as a source-of-truth which is very valuable."
+    }
+  }
+}

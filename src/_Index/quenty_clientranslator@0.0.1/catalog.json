@@ -1,0 +1,57 @@
+{
+  "purpose": "Utility to build a localization table from json, intended to be used with rojo. Can also handle Rojo json objects turned into tables!",
+  "description": "Utility to build a localization table from json, intended to be used with rojo. Can also handle Rojo json objects turned into tables!",
+  "tags": [
+    "data",
+    "enums",
+    "game_service",
+    "input",
+    "localization",
+    "math",
+    "player_service",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "Conversion/LocalizationEntryParserUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility to build a localization table from json, intended to be used with rojo. Can also handle Rojo json objects turned into tables! Public entry points include `LocalizationEntryParserUtils.decodeFromInstance`, `LocalizationEntryParserUtils.decodeFromTable`."
+    },
+    "JSONTranslator.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "Utility function that loads a translator from a folder or a table. To get translations uploaded. 1. Run the game 2. On the client, check LocalizationService.GeneratedJSONTable 3. Right click > Save as CSV 4. Stop the game 5. In Studio, go to plugins > \"Localization Tools\" 6."
+    },
+    "Numbers/NumberLocalizationUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "NumberLocalizationUtils script from Roblox's player scripts in handling the leaderboard. Example locale-sensitive number formatting: https://docs.oracle.com/cd/E19455-01/806-0169/overview-9/index.html Locale specification: List section = abbreviations for language, in increasing order Missing features in this code: - No support for differences in number of digits per GROUP_DELIMITER."
+    },
+    "Numbers/RoundingBehaviourTypes.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rounding Behaviour Types provides the class/model implementation used by the Clientranslator package."
+    },
+    "TranslatorService.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "Handles selecting the right locale/translator for Studio, and Roblox games. Public entry points include `TranslatorService.Init`, `TranslatorService.GetLocalizationTable`, `TranslatorService.ObserveTranslator`, `TranslatorService.PromiseTranslator`, `TranslatorService.GetTranslator`, `TranslatorService.ObserveLocaleId`, `TranslatorService.GetLocaleId`, `TranslatorService.Destroy`."
+    },
+    "Utils/LocalizationServiceUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Localization Service Utils provides the class/model implementation used by the Clientranslator package. Public entry points include `LocalizationServiceUtils.promiseTranslatorForLocale`, `LocalizationServiceUtils.promisePlayerTranslator`."
+    },
+    "Utils/PseudoLocalize.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Pseudo localizes text. Useful for verifying translation without having actual translations available Public entry points include `PseudoLocalize.pseudoLocalize`, `PseudoLocalize.getDefaultPseudoLocaleId`, `PseudoLocalize.addToLocalizationTable`."
+    },
+    "Utils/TranslationKeyUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Translation Key Utils provides the class/model implementation used by the Clientranslator package. Public entry points include `TranslationKeyUtils.getTranslationKey`."
+    }
+  }
+}

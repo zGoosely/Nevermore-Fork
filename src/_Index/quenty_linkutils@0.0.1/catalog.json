@@ -1,0 +1,21 @@
+{
+  "purpose": "Utility functions for links. Links are an [ObjectValue] pointing to something else!",
+  "description": "Utility functions for links. Links are an [ObjectValue] pointing to something else!",
+  "tags": [
+    "data",
+    "reactive",
+    "utility"
+  ],
+  "modules": {
+    "LinkUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility functions for links. Links are an [ObjectValue] pointing to something else! Public entry points include `LinkUtils.createLink`, `LinkUtils.getAllLinkValues`, `LinkUtils.setSingleLinkValue`, `LinkUtils.getAllLinks`, `LinkUtils.getLinkValue`, `LinkUtils.promiseLinkValue`."
+    },
+    "RxLinkUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rx Link Utils provides the class/model implementation used by the Linkutils package. Public entry points include `RxLinkUtils.observeValidLinksBrio`, `RxLinkUtils.observeLinkValueBrio`, `RxLinkUtils.observeValidityBrio`, `updateValidity`."
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "purpose": "Attaches a lifecycle-safe, reactively controlled shimmer effect to Blend GUI objects.",
+  "description": "Provides a Blend functional property that loops a shimmer while enabled and mirrors the target's corner and padding.",
+  "tags": [
+    "animation",
+    "gui",
+    "lifecycle",
+    "reactive",
+    "utility"
+  ],
+  "modules": {
+    "UIShimmerUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Attaches a reactive shimmer to a Blend-mounted GuiObject. Public entry points include `UIShimmerUtils.shimmer`."
+    }
+  }
+}

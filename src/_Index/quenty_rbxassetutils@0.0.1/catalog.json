@@ -1,0 +1,14 @@
+{
+  "purpose": "Collects the rbxassetutils runtime building blocks—Rbx Asset Utils—and composes them for reuse in Roblox experiences.",
+  "description": "Collects the rbxassetutils runtime building blocks—Rbx Asset Utils—and composes them for reuse in Roblox experiences.",
+  "tags": [
+    "utility"
+  ],
+  "modules": {
+    "RbxAssetUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rbx Asset Utils provides the class/model implementation used by the Rbxassetutils package. Public entry points include `RbxAssetUtils.toRbxAssetId`, `RbxAssetUtils.isConvertableToRbxAsset`."
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "purpose": "Provides utility functions to work with attributes in Roblox",
+  "description": "Provides utility functions to work with attributes in Roblox",
+  "tags": [
+    "data",
+    "reactive",
+    "utility"
+  ],
+  "modules": {
+    "AttributeUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Provides utility functions to work with attributes in Roblox Public entry points include `AttributeUtils.isValidAttributeType`, `AttributeUtils.isValidAttributeName`, `AttributeUtils.setAttribute`, `AttributeUtils.promiseAttribute`, `AttributeUtils.bindToBinder`, `syncAttribute`, `syncBoundClass`, `AttributeUtils.initAttribute`."
+    },
+    "RxAttributeUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility functions involving attributes. Public entry points include `handleAttributeChanged`, `RxAttributeUtils.observeAttributeKeysBrio`, `RxAttributeUtils.observeAttributeKeys`."
+    }
+  }
+}

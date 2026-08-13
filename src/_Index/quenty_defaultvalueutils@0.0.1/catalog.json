@@ -1,0 +1,16 @@
+{
+  "purpose": "Helps get the default or zero value for value types in Roblox",
+  "description": "Helps get the default or zero value for value types in Roblox",
+  "tags": [
+    "data",
+    "enums",
+    "utility"
+  ],
+  "modules": {
+    "DefaultValueUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Helps get the default or zero value for value types in Roblox Public entry points include `DefaultValueUtils.getDefaultValueForType`, `DefaultValueUtils.toDefaultValue`."
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "purpose": "Utility for teleporting humanoids",
+  "description": "Utility for teleporting humanoids",
+  "tags": [
+    "game_service",
+    "player_service",
+    "utility"
+  ],
+  "modules": {
+    "HumanoidTeleportUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility for teleporting humanoids Public entry points include `getRotationInXZPlane`, `HumanoidTeleportUtils.identifySafePosition`, `HumanoidTeleportUtils.teleportRootPart`, `HumanoidTeleportUtils.teleportParts`, `HumanoidTeleportUtils.tryTeleportCharacter`, `HumanoidTeleportUtils.tryTeleportCharacterSafelyAsync`, `HumanoidTeleportUtils.getRootPartOffset`."
+    }
+  }
+}

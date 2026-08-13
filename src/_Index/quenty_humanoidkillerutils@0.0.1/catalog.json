@@ -1,0 +1,16 @@
+{
+  "purpose": "Tags and retrieves killer. This is the old API surface to register KOs in Roblox, and many legacy systems still use the creator tag. The contract is that an object value pointing to the killer will be put in the humanoid, and if it exists when the humanoid dies, then the killer is registered.",
+  "description": "Tags and retrieves killer. This is the old API surface to register KOs in Roblox, and many legacy systems still use the creator tag. The contract is that an object value pointing to the killer will be put in the humanoid, and if it exists when the humanoid dies, then the killer is registered.",
+  "tags": [
+    "data",
+    "player_service",
+    "utility"
+  ],
+  "modules": {
+    "HumanoidKillerUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Tags and retrieves killer. This is the old API surface to register KOs in Roblox, and many legacy systems still use the creator tag. The contract is that an object value pointing to the killer will be put in the humanoid, and if it exists when the humanoid dies, then the killer is registered."
+    }
+  }
+}

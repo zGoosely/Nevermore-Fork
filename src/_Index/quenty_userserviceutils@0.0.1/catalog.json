@@ -1,0 +1,26 @@
+{
+  "purpose": "Aggregates all requests into one big send request to deduplicate the request",
+  "description": "Aggregates all requests into one big send request to deduplicate the request",
+  "tags": [
+    "game_service",
+    "lifecycle",
+    "utility"
+  ],
+  "modules": {
+    "UserInfoAggregator.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Aggregates all requests into one big send request to deduplicate the request Public entry points include `UserInfoAggregator.new`, `UserInfoAggregator.PromiseUserInfo`, `UserInfoAggregator.PromiseDisplayName`, `UserInfoAggregator.PromiseUsername`, `UserInfoAggregator.PromiseHasVerifiedBadge`, `UserInfoAggregator.ObserveUserInfo`, `UserInfoAggregator.ObserveDisplayName`, `UserInfoAggregator.ObserveUsername`."
+    },
+    "UserInfoService.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "Centralized provider for user info so we can coordinate web requests. Public entry points include `UserInfoService.Init`, `UserInfoService.PromiseUserInfo`, `UserInfoService.ObserveUserInfo`, `UserInfoService.PromiseDisplayName`, `UserInfoService.PromiseUsername`, `UserInfoService.ObserveDisplayName`, `UserInfoService.Destroy`."
+    },
+    "UserServiceUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Wraps [UserService] API calls with [Promise]. Public entry points include `UserServiceUtils.promiseUserInfosByUserIds`, `UserServiceUtils.promiseUserInfo`, `UserServiceUtils.promiseDisplayName`, `UserServiceUtils.promiseUserName`."
+    }
+  }
+}

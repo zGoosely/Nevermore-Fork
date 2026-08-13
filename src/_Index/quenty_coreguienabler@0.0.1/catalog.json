@@ -1,0 +1,15 @@
+{
+  "purpose": "Key based CoreGuiEnabler, singleton Use this class to load/unload CoreGuis / other GUIs, by disabling based upon keys Keys are additive, so if you have more than 1 disabled, it's ok.",
+  "description": "Key based CoreGuiEnabler, singleton Use this class to load/unload CoreGuis / other GUIs, by disabling based upon keys Keys are additive, so if you have more than 1 disabled, it's ok.",
+  "tags": [
+    "enums",
+    "gui"
+  ],
+  "modules": {
+    "CoreGuiEnabler.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Key based CoreGuiEnabler, singleton Use this class to load/unload CoreGuis / other GUIs, by disabling based upon keys Keys are additive, so if you have more than 1 disabled, it's ok. Public entry points include `CoreGuiEnabler.new`, `CoreGuiEnabler.IsEnabled`, `CoreGuiEnabler.ObserveIsEnabled`, `CoreGuiEnabler.AddState`, `CoreGuiEnabler.Disable`, `CoreGuiEnabler.PushDisable`, `CoreGuiEnabler.Enable`."
+    }
+  }
+}

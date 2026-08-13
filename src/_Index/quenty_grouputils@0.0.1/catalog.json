@@ -1,0 +1,14 @@
+{
+  "purpose": "Helpful functions involving Roblox groups.",
+  "description": "Helpful functions involving Roblox groups.",
+  "tags": [
+    "utility"
+  ],
+  "modules": {
+    "GroupUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Helpful functions involving Roblox groups. Public entry points include `GroupUtils.promiseRankInGroup`, `GroupUtils.promiseRoleInGroup`, `GroupUtils.promiseGroupInfo`, `GroupUtils.promiseGroupRoleInfo`."
+    }
+  }
+}

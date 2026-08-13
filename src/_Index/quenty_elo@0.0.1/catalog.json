@@ -1,0 +1,27 @@
+{
+  "purpose": "Utilities to compute elo scores for players",
+  "description": "Utilities to compute elo scores for players",
+  "tags": [
+    "data",
+    "math",
+    "player_service",
+    "utility"
+  ],
+  "modules": {
+    "EloMatchResult.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Elo Match Result provides the class/model implementation used by the Elo package."
+    },
+    "EloMatchResultUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Elo Match Result Utils provides the class/model implementation used by the Elo package. Public entry points include `EloMatchResultUtils.isEloMatchResult`, `EloMatchResultUtils.isEloMatchResultList`."
+    },
+    "EloUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utilities to compute elo scores for players Public entry points include `EloUtils.createConfig`, `EloUtils.isEloConfig`, `EloUtils.getStandardDeviation`, `EloUtils.getPercentile`, `EloUtils.percentileToElo`, `EloUtils.getNewElo`, `EloUtils.getEloChange`, `EloUtils.getNewPlayerOneScore`."
+    }
+  }
+}

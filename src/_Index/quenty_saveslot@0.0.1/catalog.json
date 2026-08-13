@@ -1,0 +1,57 @@
+{
+  "purpose": "`SaveSlotService` adapts Nevermore's SaveSlot lifecycle to this fork's `PlayerDataStoreService`. It does not open another DataStore or ProfileStore session. Instead, each player's existing profile contains account-wide data plus a `SaveSlots` branch:",
+  "description": "`SaveSlotService` adapts Nevermore's SaveSlot lifecycle to this fork's `PlayerDataStoreService`. It does not open another DataStore or ProfileStore session. Instead, each player's existing profile contains account-wide data plus a `SaveSlots` branch:",
+  "tags": [
+    "commerce",
+    "data",
+    "developer_tools",
+    "enums",
+    "game_service",
+    "gui",
+    "lifecycle",
+    "localization",
+    "math",
+    "player_service",
+    "reactive",
+    "security",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "SaveSlotService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Provides player save slots on top of PlayerDataStoreService's single ProfileStore session. Account-wide data remains at the profile root; slot-scoped data is routed through `SaveSlots.Slots[slotId]` and never replicates to clients."
+    },
+    "SaveSlotServiceClient.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "Client-side save-slot metadata, selection, and lazy read-only active-slot API. Inactive slot contents remain server-only. Public entry points include `invokeMutationAsync`, `SaveSlotServiceClient.Init`, `SaveSlotServiceClient.Start`, `SaveSlotServiceClient.ReadyAsync`, `SaveSlotServiceClient.GetActiveSlotData`, `SaveSlotServiceClient.GetActiveSlotDataAsync`, `SaveSlotServiceClient.GetValueAsync`,…"
+    },
+    "Shared/SaveSlotConstants.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Constants shared by SaveSlotService and SaveSlotServiceClient."
+    },
+    "Shared/SaveSlotNetwork.luau": {
+      "realm": "shared",
+      "kind": "Network",
+      "description": "ByteNet transport for player-owned save-slot mutations and the local player's active-slot mirror. Inactive slot contents remain server-only."
+    },
+    "Shared/SaveSlotSerializationUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Schema-based serialization for SaveSlot network payloads. Public entry points include `getActiveSlotDataSchema`, `toU32`, `guidToBuffer`, `bufferToGuid`, `SaveSlotSerializationUtils.serializeSlotState`, `SaveSlotSerializationUtils.deserializeSlotState`, `SaveSlotSerializationUtils.serializeActiveSlotData`, `SaveSlotSerializationUtils.deserializeActiveSlotData`."
+    },
+    "Shared/SaveSlotTypes.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Shared SaveSlot types."
+    },
+    "Shared/SaveSlotUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Pure helpers for SaveSlot data and paths. Public entry points include `SaveSlotUtils.isSlotId`, `SaveSlotUtils.toOptionalSlotId`, `SaveSlotUtils.isDataPath`, `SaveSlotUtils.getSlotPath`, `SaveSlotUtils.getSlotList`, `SaveSlotUtils.getSlotMetadata`, `SaveSlotUtils.getSlotIdFromIndex`."
+    }
+  }
+}

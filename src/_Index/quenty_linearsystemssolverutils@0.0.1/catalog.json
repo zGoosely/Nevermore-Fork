@@ -1,0 +1,14 @@
+{
+  "purpose": "Collects the linearsystemssolverutils runtime building blocks—Linear Systems Solver Utils—and composes them for reuse in Roblox experiences.",
+  "description": "Collects the linearsystemssolverutils runtime building blocks—Linear Systems Solver Utils—and composes them for reuse in Roblox experiences.",
+  "tags": [
+    "utility"
+  ],
+  "modules": {
+    "LinearSystemsSolverUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Linear Systems Solver Utils provides the class/model implementation used by the Linearsystemssolverutils package. Public entry points include `LinearSystemsSolverUtils.solve`, `getValidRatio`, `LinearSystemsSolverUtils.solveTridiagonal`."
+    }
+  }
+}

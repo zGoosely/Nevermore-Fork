@@ -1,0 +1,14 @@
+{
+  "purpose": "Collects the profilestore runtime building blocks—Profile Store—and composes them for reuse in Roblox experiences.",
+  "description": "Collects the profilestore runtime building blocks—Profile Store—and composes them for reuse in Roblox experiences.",
+  "tags": [
+    "data"
+  ],
+  "modules": {
+    "ProfileStore.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Profile Store provides the module implementation used by the Profilestore package. Public entry points include `AcquireRunnerThreadAndCallEventHandler`, `RunEventHandlerInFreeThread`, `Connection.Disconnect`, `SignalClass.New`, `SignalClass.Connect`, `SignalClass.GetListenerCount`, `SignalClass.Fire`, `SignalClass.Wait`."
+    }
+  }
+}

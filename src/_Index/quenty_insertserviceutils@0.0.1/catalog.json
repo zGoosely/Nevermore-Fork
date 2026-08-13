@@ -1,0 +1,16 @@
+{
+  "purpose": "Collects the insertserviceutils runtime building blocks—Insert Service Utils—and composes them for reuse in Roblox experiences.",
+  "description": "Collects the insertserviceutils runtime building blocks—Insert Service Utils—and composes them for reuse in Roblox experiences.",
+  "tags": [
+    "game_service",
+    "utility",
+    "world"
+  ],
+  "modules": {
+    "InsertServiceUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Insert Service Utils provides the class/model implementation used by the Insertserviceutils package. Public entry points include `InsertServiceUtils.promiseAsset`."
+    }
+  }
+}

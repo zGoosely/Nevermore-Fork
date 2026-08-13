@@ -1,0 +1,30 @@
+{
+  "purpose": "A list that can be observed for blend and other components and maintains sorting order. This allows you to observe both an index, observe a value at an index, and more. This class is a red-black binary sorted tree. Unlike previous iterations of this class, we can add values in log(n) time, and remove in log(n) time, and it uses less memory. Previously we'd use O(n^2) processing time when constructing this class. We reuse the node itself as the indexing key. This class always prefers to add equivalent elements to the end of the list if they're not in the list. Otherwise it prefers minimal movement.",
+  "description": "A list that can be observed for blend and other components and maintains sorting order. This allows you to observe both an index, observe a value at an index, and more. This class is a red-black binary sorted tree. Unlike previous iterations of this class, we can add values in log(n) time, and remove in log(n) time, and it uses less memory. Previously we'd use O(n^2) processing time when constructing this class. We reuse the node itself as the indexing key. This class always prefers to add equivalent elements to the end of the list if they're not in the list. Otherwise it prefers minimal movement.",
+  "tags": [
+    "data",
+    "reactive"
+  ],
+  "modules": {
+    "ChangedSpanTracker.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Changed Span Tracker provides the class/model implementation used by the Sortedlist package. Public entry points include `ChangedSpanTracker.new`, `ChangedSpanTracker.Clear`, `ChangedSpanTracker.GetSpans`, `ChangedSpanTracker.AddSpans`, `ChangedSpanTracker.AddSpan`, `ChangedSpanTracker.GetAndClearSpans`, `ChangedSpanTracker.span`, `ChangedSpanTracker.isIndexInSpan`."
+    },
+    "ObservableSortedList.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "A list that can be observed for blend and other components and maintains sorting order. This allows you to observe both an index, observe a value at an index, and more. This class is a red-black binary sorted tree. Unlike previous iterations of this class, we can add values in log(n) time, and remove in log(n) time, and it uses less memory. Previously we'd use O(n^2) processing time when constructing this class."
+    },
+    "SortedNode.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Used by [ObservableSortedList] to maintain a red-black binary search tree. Public entry points include `SortedNode.isSortedNode`, `recurse`."
+    },
+    "SortedNodeValue.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Simplifies comparison logic Public entry points include `SortedNodeValue.isSortedNodeValue`."
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "purpose": "Master clock on the server",
+  "description": "Master clock on the server",
+  "tags": [
+    "animation",
+    "enums",
+    "game_service",
+    "security",
+    "utility"
+  ],
+  "modules": {
+    "Clocks/BaseClock.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Base Clock provides the module implementation used by the Timesyncservice package."
+    },
+    "Clocks/MasterClock.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Master clock on the server Public entry points include `MasterClock.new`, `handleRequestSync`, `handleDelayRequest`, `MasterClock.GetClockFunction`, `MasterClock.ObservePing`, `MasterClock.IsSynced`, `MasterClock.GetPing`, `MasterClock.GetTime`."
+    },
+    "Clocks/SlaveClock.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Slave clock on the client Public entry points include `SlaveClock.new`, `handleSyncPulse`, `SlaveClock.GetClockFunction`, `SlaveClock.ObservePing`, `SlaveClock.TickToSyncedTime`, `SlaveClock.GetTime`, `SlaveClock.IsSynced`, `SlaveClock.GetPing`."
+    },
+    "Constants/TimeSyncConstants.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Time Sync Constants provides the class/model implementation used by the Timesyncservice package."
+    },
+    "TimeSyncService.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "Syncronizes time between the server and client. This creates a shared timestamp that can be used to reasonably time events between the server and client. Public entry points include `TimeSyncService.Init`, `TimeSyncService.IsSynced`, `buildMockClock`, `mock.IsSynced`, `mock.GetTime`, `mock.GetPing`, `mock.GetClockFunction`, `mock.ObservePing`."
+    },
+    "Util/TimeSyncUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Helper functions for the TimeSyncService. Public entry points include `TimeSyncUtils.promiseClockSynced`."
+    }
+  }
+}

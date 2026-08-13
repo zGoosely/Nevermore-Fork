@@ -1,0 +1,59 @@
+{
+  "purpose": "Elliptic curve arithmetic Field Size: 168 bits Field Modulus (p): 481 _ 2^159 + 3 Equation: x^2 + y^2 = 1 + 122 _ x^2 _ y^2 Parameters: Edwards Curve with d = 122 Curve Order (n): 351491143778082151827986174289773107581916088585564 Cofactor (h): 4 Generator Order (q): 87872785944520537956996543572443276895479022146391 Current best attack security: 81.777 bits (Small Subgroup + Rho) Rho Security: log2(0.884 _ sqrt(q)) = 82.777 bits Transfer Security? Yes: p ~= q; k > 20 Field Discriminant Security? Yes: t = 27978492958645335688000168 s = 10 |D| = 6231685068753619775430107799412237267322159383147 > 2^100 Rigidity? No, not at all. XZ/YZ Ladder Security? No: Single coordinate ladders are insecure. Small Subgroup Security? No. Invalid Curve Security? Yes: Points are checked before every operation. Invalid Curve Twist Security? No: Don't use single coordinate ladders. Completeness? Yes: The curve is complete. Indistinguishability? Yes (Elligator 2), but not implemented.",
+  "description": "Elliptic curve arithmetic Field Size: 168 bits Field Modulus (p): 481 _ 2^159 + 3 Equation: x^2 + y^2 = 1 + 122 _ x^2 _ y^2 Parameters: Edwards Curve with d = 122 Curve Order (n): 351491143778082151827986174289773107581916088585564 Cofactor (h): 4 Generator Order (q): 87872785944520537956996543572443276895479022146391 Current best attack security: 81.777 bits (Small Subgroup + Rho) Rho Security: log2(0.884 _ sqrt(q)) = 82.777 bits Transfer Security? Yes: p ~= q; k > 20 Field Discriminant Security? Yes: t = 27978492958645335688000168 s = 10 |D| = 6231685068753619775430107799412237267322159383147 > 2^100 Rigidity? No, not at all. XZ/YZ Ladder Security? No: Single coordinate ladders are insecure. Small Subgroup Security? No. Invalid Curve Security? Yes: Points are checked before every operation. Invalid Curve Twist Security? No: Don't use single coordinate ladders. Completeness? Yes: The curve is complete. Indistinguishability? Yes (Elligator 2), but not implemented.",
+  "tags": [
+    "math"
+  ],
+  "modules": {
+    "EllipticCurveCryptography/arith.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Arith provides the module implementation used by the Ellipticcurvecryptography package. Public entry points include `isEqual`, `compare`, `add`, `sub`, `rShift`, `addDouble`, `mult`, `square`."
+    },
+    "EllipticCurveCryptography/chacha20.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Chacha20 provides the module implementation used by the Ellipticcurvecryptography package. Public entry points include `rotl`, `quarterRound`, `hashBlock`, `LE_toInt`, `initState`, `serialize`, `crypt`."
+    },
+    "EllipticCurveCryptography/curve.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Elliptic curve arithmetic Field Size: 168 bits Field Modulus (p): 481 _ 2^159 + 3 Equation: x^2 + y^2 = 1 + 122 _ x^2 _ y^2 Parameters: Edwards Curve with d = 122 Curve Order (n): 351491143778082151827986174289773107581916088585564 Cofactor (h): 4 Generator Order (q): 87872785944520537956996543572443276895479022146391 Current best attack security: 81.777 bits (Small Subgroup + Rho) Rho Security: log2(0.884 _ sqrt(. | D   | = 6231685068753619775430107799412237267322159383147 > 2^100 Rigidity? No, not at all. XZ/YZ Ladder Security? No: Single coordinate ladders are insecure. Small Subgroup Security? No. Invalid Curve Security? Yes: Points are checked before every operation. Invalid Curve Twist Security? No: Don't use single coordinate ladders. Completeness? Yes: The curve is complete. Indistinguishability? Yes (Elligator 2), but not implemented. Public entry points include `pointDouble`, `pointAdd`, `pointNeg`, `pointSub`, `pointScale`, `pointIsEqual`, `pointIsOnCurve`, `pointIsInf`."
+    },
+    "EllipticCurveCryptography/init.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Elliptic Curve Cryptography Guessing the source is here: https://www.computercraft.info/forums2/index.php?/topic/29803-elliptic-curve-cryptography/ Public entry points include `EllipticCurveCryptography.isByteTable`, `EllipticCurveCryptography.createByteTable`, `EllipticCurveCryptography.encrypt`, `EllipticCurveCryptography.decrypt`, `EllipticCurveCryptography.keypair`, `EllipticCurveCryptography.exchange`, `Ellip."
+    },
+    "EllipticCurveCryptography/modp.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Modp provides the module implementation used by the Ellipticcurvecryptography package. Public entry points include `multByP`, `reduceModP`, `addModP`, `subModP`, `REDC`, `multModP`, `squareModP`, `montgomeryModP`."
+    },
+    "EllipticCurveCryptography/modq.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Modq provides the module implementation used by the Ellipticcurvecryptography package. Public entry points include `reduceModQ`, `addModQ`, `subModQ`, `REDC`, `multModQ`, `squareModQ`, `montgomeryModQ`, `inverseMontgomeryModQ`."
+    },
+    "EllipticCurveCryptography/random.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Random provides the module implementation used by the Ellipticcurvecryptography package. Public entry points include `feed`, `digest`, `ensureEntropyInit`, `random.save`, `random.seed`, `random.random`."
+    },
+    "EllipticCurveCryptography/sha256.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Sha256 provides the module implementation used by the Ellipticcurvecryptography package. Public entry points include `rrotate`, `brshift`, `counter`, `BE_toInt`, `preprocess`, `digestblock`, `toBytes`, `digest`."
+    },
+    "EllipticCurveCryptography/twoPower.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Two Power provides the module implementation used by the Ellipticcurvecryptography package."
+    },
+    "EllipticCurveCryptography/util.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Util provides the module implementation used by the Ellipticcurvecryptography package. Public entry points include `util.stringToByteArray`."
+    }
+  }
+}

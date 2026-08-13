@@ -1,0 +1,15 @@
+{
+  "purpose": "Collects the basicpaneutils runtime building blocks—Basic Pane Utils—and composes them for reuse in Roblox experiences.",
+  "description": "Collects the basicpaneutils runtime building blocks—Basic Pane Utils—and composes them for reuse in Roblox experiences.",
+  "tags": [
+    "gui",
+    "utility"
+  ],
+  "modules": {
+    "BasicPaneUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Basic Pane Utils provides the class/model implementation used by the Basicpaneutils package. Public entry points include `BasicPaneUtils.observeVisible`, `BasicPaneUtils.whenVisibleBrio`, `ensurePane`, `BasicPaneUtils.observePercentVisible`, `BasicPaneUtils.observeShow`."
+    }
+  }
+}

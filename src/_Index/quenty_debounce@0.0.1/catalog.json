@@ -1,0 +1,14 @@
+{
+  "purpose": "debounce a existing function by timeout",
+  "description": "debounce a existing function by timeout",
+  "tags": [
+    "shared"
+  ],
+  "modules": {
+    "Debounce.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "debounce a existing function by timeout."
+    }
+  }
+}

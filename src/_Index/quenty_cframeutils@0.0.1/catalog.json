@@ -1,0 +1,27 @@
+{
+  "purpose": "Optimized these functions for speed as well as preserving fidality. In the future, use Roblox's orthogonal angle format.",
+  "description": "Optimized these functions for speed as well as preserving fidality. In the future, use Roblox's orthogonal angle format.",
+  "tags": [
+    "data",
+    "math",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "CFrameSerializer.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Optimized these functions for speed as well as preserving fidality. In the future, use Roblox's orthogonal angle format. Public entry points include `CFrameSerializer.outputRotationAzure`, `CFrameSerializer.toJSONString`, `CFrameSerializer.isRotationAzure`, `CFrameSerializer.fromJSONString`, `CFrameSerializer.readPosition`, `CFrameSerializer.readRotationAzure`."
+    },
+    "CFrameUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Useful utility functions involving CFrame values. Public entry points include `CFrameUtils.lookAt`, `CFrameUtils.cframeFromTo`, `CFrameUtils.redirectLocalAxis`, `CFrameUtils.axisAngleToCFrame`, `CFrameUtils.fromUpRight`, `CFrameUtils.scalePosition`, `reflect`, `CFrameUtils.mirror`."
+    },
+    "getRotationInXZPlane.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility function to get rotation in the XZ plane. Public entry points include `getRotationInXZPlane`."
+    }
+  }
+}

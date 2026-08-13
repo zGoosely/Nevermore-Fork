@@ -1,0 +1,62 @@
+{
+  "purpose": "Provides cancellable asynchronous composition, chaining, retry helpers, instance utilities, and Maid integration.",
+  "description": "Provides cancellable asynchronous composition, chaining, retry helpers, instance utilities, and Maid integration.",
+  "tags": [
+    "data",
+    "lifecycle",
+    "reactive",
+    "utility"
+  ],
+  "modules": {
+    "Promise.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Promises, but without error handling as this screws with stack traces, using Roblox signals See: https://promisesaplus.com/ Public entry points include `Promise.isPromise`, `resolve`, `reject`, `Promise.delayed`, `returnSelf`, `syncronize`."
+    },
+    "PromiseMaidUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Helper functions for maids and promises."
+    },
+    "PromiseRetryUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Promise Retry Utils provides the class/model implementation used by the Promise package."
+    },
+    "PromiseTestUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility functions for links. Links are an [ObjectValue] pointing to something else! Public entry points include `LinkUtils.createLink`, `LinkUtils.getAllLinkValues`, `LinkUtils.setSingleLinkValue`, `LinkUtils.getAllLinks`, `LinkUtils.getLinkValue`, `LinkUtils.promiseLinkValue`."
+    },
+    "PromiseUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility methods for promise Public entry points include `resolve`, `reject`, `PromiseUtils.delayed`, `syncronize`, `PromiseUtils.combine`."
+    },
+    "Utility/PendingPromiseTracker.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Tracks pending promises."
+    },
+    "Utility/PromiseInstanceUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Promise-based utilities for working with Roblox instances. Provides async operations for waiting on children, descendants, attributes, and more. Public entry points include `PromiseInstanceUtils.promiseChildOfClass`, `PromiseInstanceUtils.promiseDescendantOfClass`, `PromiseInstanceUtils.promiseChild`, `PromiseInstanceUtils.promiseDescendant`, `PromiseInstanceUtils.promiseChildOfClassWithName`,…"
+    },
+    "Utility/promiseChild.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Wraps the WaitForChild API with a promise."
+    },
+    "Utility/promisePropertyValue.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Promises a property value."
+    },
+    "Utility/promiseWait.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Wraps the task.delay() API in a promise."
+    }
+  }
+}

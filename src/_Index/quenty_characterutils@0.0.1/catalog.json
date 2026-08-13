@@ -1,0 +1,53 @@
+{
+  "purpose": "Utility for replacing default Roblox character sounds with custom sounds. Replaces sounds like: - Death - Running/Walking - Jumping - Landing - Swimming - Climbing - Falling - Getting Up - Splash - FreeFalling",
+  "description": "Utility for replacing default Roblox character sounds with custom sounds. Replaces sounds like: - Death - Running/Walking - Jumping - Landing - Swimming - Climbing - Falling - Getting Up - Splash - FreeFalling",
+  "tags": [
+    "audio",
+    "data",
+    "player_service",
+    "reactive",
+    "utility"
+  ],
+  "modules": {
+    "CharacterSoundUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility for replacing default Roblox character sounds with custom sounds. Replaces sounds like: - Death - Running/Walking - Jumping - Landing - Swimming - Climbing - Falling - Getting Up - Splash - FreeFalling Public entry points include `CharacterSoundUtils.waitForSoundsLoadedAsync`, `CharacterSoundUtils.replaceSound`, `CharacterSoundUtils.replaceSounds`, `CharacterSoundUtils.replaceAllSounds`,…"
+    },
+    "CharacterUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "General character utility code. Public entry points include `CharacterUtils.setReplicationId`, `CharacterUtils.getByReplicationId`, `CharacterUtils.getPlayerHumanoid`, `CharacterUtils.getAlivePlayerHumanoid`, `CharacterUtils.getAlivePlayerRootPart`, `CharacterUtils.getPlayerRootPart`, `CharacterUtils.unequipTools`, `CharacterUtils.getPlayerFromCharacter`."
+    },
+    "DisableHatParticles.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Disable Hat Particles provides the class/model implementation used by the Characterutils package. Public entry points include `DisableHatParticles.new`."
+    },
+    "R15Utils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility methods for R15 Characters. R15 is a specific Roblox character specification. Public entry points include `R15Utils.isAnimationConstraintOrMotor6D`, `R15Utils.searchForRigAttachment`, `R15Utils.getRigMotor`, `R15Utils.getUpperTorso`, `R15Utils.getLowerTorso`, `R15Utils.getBodyPart`, `R15Utils.getWaistJoint`, `R15Utils.getNeckJoint`."
+    },
+    "RxCharacterUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utilities for observing characters and their humanoids. Public entry points include `RxCharacterUtils.observeLastCharacterBrio`, `RxCharacterUtils.observeCharacter`, `RxCharacterUtils.observeCharacterBrio`, `RxCharacterUtils.observeIsOfLocalCharacter`, `RxCharacterUtils.observeIsOfLocalCharacterBrio`, `RxCharacterUtils.observeLocalPlayerCharacter`, `RxCharacterUtils.observeLastHumanoidBrio`,…"
+    },
+    "RxHumanoidUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rx Humanoid Utils provides the class/model implementation used by the Characterutils package. Public entry points include `RxHumanoidUtils.observeRunningSpeed`, `emitRunningSpeed`, `RxHumanoidUtils.observeHumanoidStateType`, `emitStateType`, `RxHumanoidUtils.observeHumanoidHealth`, `RxHumanoidUtils.observeHumanoidHealthAsBrio`."
+    },
+    "RxR15Utils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility methods to query components of an R15 character. Public entry points include `RxR15Utils.observeRigAttachmentBrio`, `RxR15Utils.observeRigMotorBrio`, `RxR15Utils.observeRigWeldBrio`, `RxR15Utils.observeCharacterPartBrio`, `RxR15Utils.observeHumanoidBrio`, `RxR15Utils.observeHumanoidScaleValueObject`, `RxR15Utils.observeHumanoidScaleProperty`, `RxR15Utils.observeShoulderRigAttachmentBrio`."
+    },
+    "RxRootPartUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rx Root Part Utils provides the class/model implementation used by the Characterutils package. Public entry points include `RxRootPartUtils.observeHumanoidRootPartBrio`, `RxRootPartUtils.observeHumanoidRootPartBrioFromHumanoid`."
+    }
+  }
+}

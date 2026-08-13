@@ -1,0 +1,15 @@
+{
+  "purpose": "Collects the rxstatestackutils runtime building blocks—Rx State Stack Utils—and composes them for reuse in Roblox experiences.",
+  "description": "Collects the rxstatestackutils runtime building blocks—Rx State Stack Utils—and composes them for reuse in Roblox experiences.",
+  "tags": [
+    "reactive",
+    "utility"
+  ],
+  "modules": {
+    "RxStateStackUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rx State Stack Utils provides the class/model implementation used by the Rxstatestackutils package. Public entry points include `update`."
+    }
+  }
+}

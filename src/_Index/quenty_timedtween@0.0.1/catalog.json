@@ -1,0 +1,15 @@
+{
+  "purpose": "A zero-to-one linear tween with a configurable transition time.",
+  "description": "A zero-to-one linear tween with a configurable transition time.",
+  "tags": [
+    "animation",
+    "data"
+  ],
+  "modules": {
+    "TimedTween.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "A zero-to-one linear tween with a configurable transition time. Public entry points include `TimedTween.new`, `TimedTween.SetTransitionTime`, `TimedTween.GetTransitionTime`, `TimedTween.ObserveTransitionTime`, `TimedTween.ObserveRenderStepped`, `TimedTween.ObserveOnSignal`, `TimedTween.Observe`, `TimedTween.PromiseFinished`."
+    }
+  }
+}

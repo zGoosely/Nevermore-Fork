@@ -1,0 +1,207 @@
+{
+  "purpose": "The typed ByteNet schema and transport layer used by client/server packages.",
+  "description": "Defines and processes compact client/server packet and query schemas with typed serializers, namespaces, and transport handling.",
+  "tags": [
+    "data",
+    "enums",
+    "localization",
+    "math"
+  ],
+  "modules": {
+    "ByteNet/dataTypes/array.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Array provides the module implementation used by the Bytenet package."
+    },
+    "ByteNet/dataTypes/bool.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Bool provides the module implementation used by the Bytenet package."
+    },
+    "ByteNet/dataTypes/buff.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Buff provides the module implementation used by the Bytenet package."
+    },
+    "ByteNet/dataTypes/cframe.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Cframe provides the module implementation used by the Bytenet package."
+    },
+    "ByteNet/dataTypes/color3.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Color3 provides the module implementation used by the Bytenet package."
+    },
+    "ByteNet/dataTypes/float32.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Float32 provides the module implementation used by the Bytenet package."
+    },
+    "ByteNet/dataTypes/float64.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Float64 provides the module implementation used by the Bytenet package."
+    },
+    "ByteNet/dataTypes/inst.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Inst provides the module implementation used by the Bytenet package."
+    },
+    "ByteNet/dataTypes/int16.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Int16 provides the module implementation used by the Bytenet package."
+    },
+    "ByteNet/dataTypes/int32.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Int32 provides the module implementation used by the Bytenet package."
+    },
+    "ByteNet/dataTypes/int8.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Int8 provides the module implementation used by the Bytenet package."
+    },
+    "ByteNet/dataTypes/map.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Map provides the module implementation used by the Bytenet package."
+    },
+    "ByteNet/dataTypes/nothing.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Nothing provides the module implementation used by the Bytenet package."
+    },
+    "ByteNet/dataTypes/optional.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Optional provides the module implementation used by the Bytenet package."
+    },
+    "ByteNet/dataTypes/string.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "String provides the module implementation used by the Bytenet package."
+    },
+    "ByteNet/dataTypes/struct.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Struct provides the module implementation used by the Bytenet package."
+    },
+    "ByteNet/dataTypes/uint16.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Uint16 provides the module implementation used by the Bytenet package."
+    },
+    "ByteNet/dataTypes/uint32.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Uint32 provides the module implementation used by the Bytenet package."
+    },
+    "ByteNet/dataTypes/uint8.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Uint8 provides the module implementation used by the Bytenet package."
+    },
+    "ByteNet/dataTypes/unknown.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Unknown provides the module implementation used by the Bytenet package."
+    },
+    "ByteNet/dataTypes/vec2.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Vec2 provides the module implementation used by the Bytenet package."
+    },
+    "ByteNet/dataTypes/vec3.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Vec3 provides the module implementation used by the Bytenet package."
+    },
+    "ByteNet/init.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Byte Net provides the module implementation used by the Bytenet package."
+    },
+    "ByteNet/namespaces/namespace.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Namespace provides the module implementation used by the Bytenet package."
+    },
+    "ByteNet/namespaces/namespaceDependencies.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Namespace Dependencies provides the module implementation used by the Bytenet package. Public entry points include `namespacesDependencies.start`, `namespacesDependencies.add`, `namespacesDependencies.currentLength`, `namespacesDependencies.currentName`, `namespacesDependencies.empty`."
+    },
+    "ByteNet/namespaces/packetIDs.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Packet IDs provides the module implementation used by the Bytenet package. Public entry points include `packetIDs.set`, `packetIDs.ref`."
+    },
+    "ByteNet/namespaces/queryIDs.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Query IDs provides the module implementation used by the Bytenet package. Public entry points include `queryIDs.set`, `queryIDs.ref`."
+    },
+    "ByteNet/packets/definePacket.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Define Packet provides the module implementation used by the Bytenet package."
+    },
+    "ByteNet/packets/packet.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Packet provides the module implementation used by the Bytenet package. Public entry points include `exported.sendToList`, `exported.sendTo`, `exported.sendToAllExcept`, `exported.sendToAll`, `exported.send`, `exported.wait`, `exported.listen`, `exported.getListeners`."
+    },
+    "ByteNet/process/bufferWriter.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Buffer Writer provides the module implementation used by the Bytenet package. Public entry points include `alloc`, `dyn_alloc`, `bufferWriter.u8`, `bufferWriter.i8`, `bufferWriter.reference`, `bufferWriter.u16`, `bufferWriter.i16`, `bufferWriter.u32`."
+    },
+    "ByteNet/process/client.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Client provides the module implementation used by the Bytenet package. Public entry points include `onClientEvent`, `create`, `dump`, `clientProcess.sendReliable`, `clientProcess.sendUnreliable`, `clientProcess.invoke`, `clientProcess.start`."
+    },
+    "ByteNet/process/read.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Read provides the module implementation used by the Bytenet package. Public entry points include `functionPasser`, `yielder`, `runListener`."
+    },
+    "ByteNet/process/readRefs.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Read Refs provides the module implementation used by the Bytenet package. Public entry points include `readRefs.set`, `readRefs.get`."
+    },
+    "ByteNet/process/server.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Server provides the module implementation used by the Bytenet package. Public entry points include `create`, `dump`, `onServerEvent`, `onServerInvoke`, `playerAdded`, `serverProcess.sendAllReliable`, `serverProcess.sendAllUnreliable`, `serverProcess.sendPlayerReliable`."
+    },
+    "ByteNet/queries/defineQuery.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Define Query provides the module implementation used by the Bytenet package."
+    },
+    "ByteNet/queries/query.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Query provides the module implementation used by the Bytenet package. Public entry points include `exported.invoke`, `exported.wait`, `exported.listen`, `exported.getListeners`."
+    },
+    "ByteNet/replicated/replicatedValue.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Replicated Value provides the module implementation used by the Bytenet package. Public entry points include `replicatedValuePrototype.write`, `replicatedValuePrototype.read`."
+    },
+    "ByteNet/replicated/values.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Values provides the module implementation used by the Bytenet package. Public entry points include `values.start`, `values.access`."
+    },
+    "ByteNet/types.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Types provides the module implementation used by the Bytenet package."
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "purpose": "Utility functions involving brios and rx. Brios encapsulate the lifetime of resources, which could be expired by the time a subscription occurs. These functions allow us to manipulate the state of these at a higher order.",
+  "description": "Utility functions involving brios and rx. Brios encapsulate the lifetime of resources, which could be expired by the time a subscription occurs. These functions allow us to manipulate the state of these at a higher order.",
+  "tags": [
+    "reactive",
+    "utility"
+  ],
+  "modules": {
+    "RxBrioUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility functions involving brios and rx. Brios encapsulate the lifetime of resources, which could be expired by the time a subscription occurs. These functions allow us to manipulate the state of these at a higher order."
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "purpose": "Declarative UI system inspired by Fusion.",
+  "description": "Declarative UI system inspired by Fusion.",
+  "tags": [
+    "shared"
+  ],
+  "modules": {
+    "Blend.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Declarative UI system inspired by Fusion. Public entry points include `Blend.New`, `Blend.Dynamic`, `Blend.Computed`, `Blend.OnChange`, `Blend.OnEvent`, `Blend.Attached`, `Blend.ComputedPairs`, `Blend.AccelTween`."
+    },
+    "BlendDefaultProps.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Blend Default Props provides the module implementation used by the Blend package."
+    }
+  }
+}

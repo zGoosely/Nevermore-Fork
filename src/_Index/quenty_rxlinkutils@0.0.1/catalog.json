@@ -1,0 +1,15 @@
+{
+  "purpose": "Collects the rxlinkutils runtime building blocks—Rx Link Utils—and composes them for reuse in Roblox experiences.",
+  "description": "Collects the rxlinkutils runtime building blocks—Rx Link Utils—and composes them for reuse in Roblox experiences.",
+  "tags": [
+    "reactive",
+    "utility"
+  ],
+  "modules": {
+    "RxLinkUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rx Link Utils provides the class/model implementation used by the Rxlinkutils package. Public entry points include `RxLinkUtils.observeValidLinksBrio`, `RxLinkUtils.observeLinkValueBrio`, `RxLinkUtils.observeValidityBrio`, `updateValidity`."
+    }
+  }
+}

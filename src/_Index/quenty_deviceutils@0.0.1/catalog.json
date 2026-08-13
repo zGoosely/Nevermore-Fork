@@ -1,0 +1,14 @@
+{
+  "purpose": "Collects the deviceutils runtime building blocks—Device Utils—and composes them for reuse in Roblox experiences.",
+  "description": "Collects the deviceutils runtime building blocks—Device Utils—and composes them for reuse in Roblox experiences.",
+  "tags": [
+    "utility"
+  ],
+  "modules": {
+    "DeviceUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Device Utils provides the class/model implementation used by the Deviceutils package. Public entry points include `DeviceUtils.Observe`, `DeviceUtils.ObserveBrio`, `DeviceUtils.IsGamepad`, `DeviceUtils.IsKeyboardMouse`, `DeviceUtils.IsTouch`."
+    }
+  }
+}

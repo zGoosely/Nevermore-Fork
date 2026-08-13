@@ -1,0 +1,14 @@
+{
+  "purpose": "Provides deterministic UTC date buckets and timestamp calculations.",
+  "description": "Provides deterministic UTC date buckets and timestamp calculations.",
+  "tags": [
+    "utility"
+  ],
+  "modules": {
+    "DateTimeUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Provides deterministic UTC date buckets and timestamp calculations. Public entry points include `assertUnixTimestamp`, `DateTimeUtils.getStartOfUtcDay`, `DateTimeUtils.getStartOfUtcWeek`, `DateTimeUtils.getStartOfUtcMonth`, `DateTimeUtils.getUtcDayKey`, `DateTimeUtils.getUtcWeekKey`, `DateTimeUtils.getUtcMonthKey`, `DateTimeUtils.getTimeUntil`."
+    }
+  }
+}

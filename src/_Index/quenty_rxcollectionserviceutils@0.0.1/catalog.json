@@ -1,0 +1,16 @@
+{
+  "purpose": "Collects the rxcollectionserviceutils runtime building blocks—Rx Collection Service Utils—and composes them for reuse in Roblox experiences.",
+  "description": "Collects the rxcollectionserviceutils runtime building blocks—Rx Collection Service Utils—and composes them for reuse in Roblox experiences.",
+  "tags": [
+    "game_service",
+    "reactive",
+    "utility"
+  ],
+  "modules": {
+    "RxCollectionServiceUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rx Collection Service Utils provides the class/model implementation used by the Rxcollectionserviceutils package. Public entry points include `RxCollectionServiceUtils.observeTaggedBrio`, `handleItemAdded`, `RxCollectionServiceUtils.observeTagged`, `RxCollectionServiceUtils.observeTaggedList`."
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "purpose": "`PlayerInputModeServiceClient` converts local InputMode activity into one of three public control families:",
+  "description": "`PlayerInputModeServiceClient` converts local InputMode activity into one of three public control families:",
+  "tags": [
+    "commerce",
+    "data",
+    "enums",
+    "game_service",
+    "gui",
+    "input",
+    "lifecycle",
+    "player_service",
+    "reactive",
+    "security",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "PlayerInputModeService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Validates input-mode reports from each client and exposes the result through a replicated Player attribute. Public entry points include `PlayerInputModeService.Init`, `PlayerInputModeService.Start`, `PlayerInputModeService.GetPlayerInputModeType`, `PlayerInputModeService.GetPlayerInputModeAsync`, `PlayerInputModeService.ObservePlayerInputType`, `PlayerInputModeService.Destroy`."
+    },
+    "PlayerInputModeServiceClient.luau": {
+      "realm": "client",
+      "kind": "Service",
+      "description": "Selects the local player's active control family, reports it to the server over ByteNet, and exposes every player's replicated input-mode attribute. Public entry points include `PlayerInputModeServiceClient.Init`, `PlayerInputModeServiceClient.Start`, `PlayerInputModeServiceClient.ObservePlayerInputType`, `PlayerInputModeServiceClient.GetPlayerInputModeType`, `PlayerInputModeServiceClient.GetSelector`,…"
+    },
+    "Shared/PlayerInputModeNetwork.luau": {
+      "realm": "shared",
+      "kind": "Network",
+      "description": "ByteNet protocol used to report the local player's selected input mode to the server. The payload is one uint8; the server validates the code before setting the replicated Player attribute."
+    },
+    "Shared/PlayerInputModeServiceConstants.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Constants shared by PlayerInputModeService and its client."
+    },
+    "Shared/PlayerInputModeTypes.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Input-mode values exposed on Player attributes."
+    },
+    "Shared/PlayerInputModeUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Utilities for reading, observing, and encoding the input mode replicated on a Player attribute. Public entry points include `PlayerInputModeUtils.getPlayerInputModeType`, `PlayerInputModeUtils.observePlayerInputModeType`, `PlayerInputModeUtils.getPlayerInputModeAsync`, `PlayerInputModeUtils.isInputModeType`, `PlayerInputModeUtils.setPlayerInputModeType`, `PlayerInputModeUtils.toNetworkCode`,…"
+    }
+  }
+}

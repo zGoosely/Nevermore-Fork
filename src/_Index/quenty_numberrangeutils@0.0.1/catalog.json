@@ -1,0 +1,16 @@
+{
+  "purpose": "Utilities for Roblox `NumberRange` values.",
+  "description": "Utilities for Roblox `NumberRange` values.",
+  "tags": [
+    "data",
+    "math",
+    "utility"
+  ],
+  "modules": {
+    "NumberRangeUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Utilities for Roblox `NumberRange` values. Public entry points include `NumberRangeUtils.scale`, `NumberRangeUtils.getValue`."
+    }
+  }
+}

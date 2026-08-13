@@ -1,0 +1,15 @@
+{
+  "purpose": "Smooth motion with an explicit acceleration limit.",
+  "description": "Provides a means to, with both a continuous position and velocity, accelerate from its current position to a target position in minimum time given a maximum acceleration. See [Spring] for another version of this. Author: TreyReynolds/AxisAngles",
+  "tags": [
+    "animation",
+    "math"
+  ],
+  "modules": {
+    "AccelTween.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Provides a means to, with both a continuous position and velocity, accelerate from its current position to a target position in minimum time given a maximum acceleration. See [Spring] for another version of this. Author: TreyReynolds/AxisAngles Public entry points include `AccelTween.new`, `AccelTween.SetTarget`."
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "purpose": "Utility method to check interface is equivalent for two implementations",
+  "description": "Utility method to check interface is equivalent for two implementations",
+  "tags": [
+    "utility"
+  ],
+  "modules": {
+    "DuckTypeUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility method to check interface is equivalent for two implementations Public entry points include `DuckTypeUtils.isImplementation`."
+    }
+  }
+}

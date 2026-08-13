@@ -1,0 +1,14 @@
+{
+  "purpose": "Utility functions to automatically detect the version a game is running at",
+  "description": "Utility functions to automatically detect the version a game is running at",
+  "tags": [
+    "utility"
+  ],
+  "modules": {
+    "GameVersionUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility functions to automatically detect the version a game is running at Public entry points include `GameVersionUtils.getBuild`, `GameVersionUtils.getBuildWithServerType`, `GameVersionUtils.getServerType`, `GameVersionUtils.isVIPServer`."
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "purpose": "Canonical RbxThumbnailTypes",
+  "description": "Canonical RbxThumbnailTypes",
+  "tags": [
+    "enums",
+    "utility"
+  ],
+  "modules": {
+    "RbxThumbUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Wraps the rbxthumb URL api surface to generate a URL for a thumbnail on the cloud. These thumbnails are automatically batched for performance. Public entry points include `RbxThumbUtils.getThumbnailUrl`, `RbxThumbUtils.avatarItemTypeToThumbnailType`, `RbxThumbUtils.getAssetThumbnailUrl`, `RbxThumbUtils.getAvatarThumbnailUrl`, `RbxThumbUtils.getAvatarHeadShotThumbnailUrl`, `RbxThumbUtils.getBadgeIconThumbnailUrl`,…"
+    },
+    "RbxThumbnailTypes.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Canonical RbxThumbnailTypes."
+    }
+  }
+}

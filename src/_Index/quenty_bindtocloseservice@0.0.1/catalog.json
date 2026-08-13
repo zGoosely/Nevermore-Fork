@@ -1,0 +1,14 @@
+{
+  "purpose": "Collects the bindtocloseservice runtime building blocks—Bind To Close Service—and composes them for reuse in Roblox experiences.",
+  "description": "Collects the bindtocloseservice runtime building blocks—Bind To Close Service—and composes them for reuse in Roblox experiences.",
+  "tags": [
+    "game_service"
+  ],
+  "modules": {
+    "BindToCloseService.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "Bind To Close Service provides the service implementation used by the Bindtocloseservice package. Public entry points include `BindToCloseService.Init`, `BindToCloseService.Start`, `BindToCloseService.RegisterPromiseOnCloseCallback`, `BindToCloseService.Destroy`."
+    }
+  }
+}

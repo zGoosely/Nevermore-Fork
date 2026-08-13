@@ -1,0 +1,16 @@
+{
+  "purpose": "Wraps MemoryService APIs",
+  "description": "Wraps MemoryService APIs",
+  "tags": [
+    "data",
+    "game_service",
+    "utility"
+  ],
+  "modules": {
+    "MemoryStoreUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Wraps MemoryService APIs Public entry points include `MemoryStoreUtils.promiseAdd`, `MemoryStoreUtils.promiseRead`, `MemoryStoreUtils.promiseRemove`."
+    }
+  }
+}

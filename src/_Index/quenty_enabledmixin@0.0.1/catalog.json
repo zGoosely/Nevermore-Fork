@@ -1,0 +1,14 @@
+{
+  "purpose": "Adds Enabled/Disabled state to class",
+  "description": "Adds Enabled/Disabled state to class",
+  "tags": [
+    "reactive"
+  ],
+  "modules": {
+    "EnabledMixin.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Adds Enabled/Disabled state to class Public entry points include `EnabledMixin.Add`, `EnabledMixin.InitEnabledMixin`, `EnabledMixin.IsEnabled`, `EnabledMixin.Enable`, `EnabledMixin.Disable`, `EnabledMixin.ObserveIsEnabled`, `EnabledMixin.SetEnabled`."
+    }
+  }
+}

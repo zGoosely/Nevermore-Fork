@@ -1,0 +1,15 @@
+{
+  "purpose": "Standard playback of particles using `EmitDelay` and `EmitCount` attributes that most standard particle editors emit.",
+  "description": "Standard playback of particles using `EmitDelay` and `EmitCount` attributes that most standard particle editors emit.",
+  "tags": [
+    "data",
+    "utility"
+  ],
+  "modules": {
+    "ParticleEmitterUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Standard playback of particles using `EmitDelay` and `EmitCount` attributes that most standard particle editors emit. Public entry points include `getAttachmentParentAndCenter`, `ParticleEmitterUtils.createAdorneeFor`, `ParticleEmitterUtils.moveEmittersToAdornee`, `ParticleEmitterUtils.scaleSize`, `ParticleEmitterUtils.playFromTemplate`, `ParticleEmitterUtils.playAllEmitters`, `ParticleEmitterUtils.playEmitter`,…"
+    }
+  }
+}

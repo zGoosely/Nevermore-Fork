@@ -1,0 +1,20 @@
+{
+  "purpose": "Tracks a player's character's humanoid",
+  "description": "Tracks a player's character's humanoid",
+  "tags": [
+    "game_service",
+    "player_service"
+  ],
+  "modules": {
+    "HumanoidTracker.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Tracks a player's character's humanoid Public entry points include `HumanoidTracker.new`, `HumanoidTracker.PromiseNextHumanoid`."
+    },
+    "HumanoidTrackerService.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "Centralized humanoid tracking service. Public entry points include `HumanoidTrackerService.Init`, `HumanoidTrackerService.GetHumanoidTracker`, `HumanoidTrackerService.GetHumanoid`, `HumanoidTrackerService.ObserveHumanoid`, `HumanoidTrackerService.ObserveHumanoidBrio`, `HumanoidTrackerService.GetAliveHumanoid`, `HumanoidTrackerService.ObserveAliveHumanoid`, `HumanoidTrackerService.ObserveAliveHumanoidBrio`."
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "purpose": "Utility methods involving cubic splines.",
+  "description": "Utility methods involving cubic splines.",
+  "tags": [
+    "math",
+    "utility"
+  ],
+  "modules": {
+    "CubicSplineUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility methods involving cubic splines. Public entry points include `sumIndex`."
+    }
+  }
+}

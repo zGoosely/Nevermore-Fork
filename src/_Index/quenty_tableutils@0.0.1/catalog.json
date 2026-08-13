@@ -1,0 +1,25 @@
+{
+  "purpose": "Utility functions involving sets, which are tables with the key as an index, and the value as a truthy value.",
+  "description": "Utility functions involving sets, which are tables with the key as an index, and the value as a truthy value.",
+  "tags": [
+    "data",
+    "utility"
+  ],
+  "modules": {
+    "Set.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Set provides the module implementation used by the Tableutils package."
+    },
+    "SetUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility functions involving sets, which are tables with the key as an index, and the value as a truthy value."
+    },
+    "TableUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Provide a variety of utility table operations Public entry points include `TableUtils.count`, `TableUtils.overwrite`, `TableUtils.deepEquivalent`, `errorOnIndex`, `TableUtils.isEmpty`."
+    }
+  }
+}

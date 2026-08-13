@@ -1,0 +1,16 @@
+{
+  "purpose": "Utility functions wrapping SocialService with promises",
+  "description": "Utility functions wrapping SocialService with promises",
+  "tags": [
+    "game_service",
+    "lifecycle",
+    "utility"
+  ],
+  "modules": {
+    "SocialServiceUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility functions wrapping SocialService with promises Public entry points include `SocialServiceUtils.promiseCanSendGameInvite`, `SocialServiceUtils.promisePromptGameInvite`."
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "purpose": "`LockService` provides server-local, non-queued locks identified by an owner `Instance` and string key. `ActionExecutionService` always uses the action's actor as this owner, so action locks never contend across different players.",
+  "description": "`LockService` provides server-local, non-queued locks identified by an owner `Instance` and string key. `ActionExecutionService` always uses the action's actor as this owner, so action locks never contend across different players.",
+  "tags": [
+    "data",
+    "enums",
+    "game_service",
+    "gui",
+    "lifecycle",
+    "localization",
+    "player_service",
+    "reactive",
+    "security",
+    "utility"
+  ],
+  "modules": {
+    "LockPermit.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Represents exclusive ownership of one owner/key lock until explicit release, timeout, or owner/holder destruction. Public entry points include `LockPermit.new`, `LockPermit.GetOwner`, `LockPermit.GetKey`, `LockPermit.GetHolder`, `LockPermit.IsReleased`, `LockPermit.GetReleaseReason`, `LockPermit.Release`, `LockPermit.Destroy`."
+    },
+    "LockService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Coordinates non-queued, non-reentrant locks identified by an owner Instance and key. Public entry points include `LockService.Init`, `LockService.TryAcquire`, `LockService.RunAsync`, `LockService.IsLocked`, `LockService.Destroy`."
+    },
+    "LockServiceTypes.luau": {
+      "realm": "shared",
+      "kind": "Types",
+      "description": "Shared contracts for keyed server lock acquisition."
+    },
+    "LockServiceUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Validates keyed lock configuration and identifiers. Public entry points include `LockServiceUtils.isTimeout`, `LockServiceUtils.isLockKey`, `LockServiceUtils.isReason`, `LockServiceUtils.isAcquireConfig`."
+    }
+  }
+}

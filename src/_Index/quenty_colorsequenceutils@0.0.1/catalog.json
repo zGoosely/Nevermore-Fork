@@ -1,0 +1,15 @@
+{
+  "purpose": "Utility functions for Color sequences in Roblox.",
+  "description": "Utility functions for Color sequences in Roblox.",
+  "tags": [
+    "math",
+    "utility"
+  ],
+  "modules": {
+    "ColorSequenceUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility functions for Color sequences in Roblox. Public entry points include `ColorSequenceUtils.getColor`, `ColorSequenceUtils.fromUnscaledTimesAndColors`, `ColorSequenceUtils.getSingleColorInSequence`, `ColorSequenceUtils.getAverageColor`, `ColorSequenceUtils.stripe`."
+    }
+  }
+}

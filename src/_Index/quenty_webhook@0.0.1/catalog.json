@@ -1,0 +1,34 @@
+{
+  "purpose": "Voyager provides a Promise-first, outbound Discord webhook client.",
+  "description": "Voyager provides a Promise-first, outbound Discord webhook client.",
+  "tags": [
+    "enums",
+    "game_service",
+    "lifecycle",
+    "security",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "WebhookClient.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Sends serialized Discord webhook payloads through a bounded, rate-limit-aware Promise queue. Public entry points include `WebhookClient.new`, `WebhookClient.SendMessageAsync`, `WebhookClient.SendMessageInThreadAsync`, `WebhookClient.EditMessageAsync`, `WebhookClient.EditMessageInThreadAsync`, `WebhookClient.DeleteMessageAsync`, `WebhookClient.DeleteMessageInThreadAsync`, `WebhookClient.Destroy`."
+    },
+    "WebhookTypes.luau": {
+      "realm": "server",
+      "kind": "Types",
+      "description": "Defines typed outbound webhook payloads and responses."
+    },
+    "WebhookUtils.luau": {
+      "realm": "server",
+      "kind": "Utility",
+      "description": "Validates and serializes outbound Discord webhook payloads. Public entry points include `isHttpUrl`, `isHttpsUrl`, `validateEmbed`, `getEmbedCharacterCount`, `serializeEmbed`, `WebhookUtils.validateMessageOptions`, `WebhookUtils.serializeMessage`, `WebhookUtils.resolveBaseUrl`."
+    },
+    "init.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Provides the Promise-first outbound webhook client and payload utilities."
+    }
+  }
+}

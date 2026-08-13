@@ -1,0 +1,25 @@
+{
+  "purpose": "A BasicPane transition driven by a linear `TimedTween`.",
+  "description": "A BasicPane transition driven by a linear `TimedTween`.",
+  "tags": [
+    "animation",
+    "gui"
+  ],
+  "modules": {
+    "SpringTransitionModel.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Spring Transition Model provides the class/model implementation used by the Transitionmodel package."
+    },
+    "TimedTransitionModel.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "A BasicPane transition driven by a linear `TimedTween`. Public entry points include `TimedTransitionModel.new`, `TimedTransitionModel.SetTransitionTime`, `TimedTransitionModel.IsShowingComplete`, `TimedTransitionModel.IsHidingComplete`, `TimedTransitionModel.ObserveIsShowingComplete`, `TimedTransitionModel.ObserveIsHidingComplete`, `TimedTransitionModel.BindToPaneVisbility`,…"
+    },
+    "TransitionModel.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "This model deduplicates and handles transitions for showing, hiding, and toggling. Inherits from [BasicPane]. See for more API. Public entry points include `TransitionModel.new`, `TransitionModel.isTransitionModel`, `TransitionModel.PromiseShow`, `TransitionModel.PromiseHide`, `TransitionModel.PromiseToggle`, `TransitionModel.IsShowingComplete`, `TransitionModel.IsHidingComplete`,…"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "purpose": "`CancelToken` is the read-only side of cooperative cancellation. `CancelTokenSource` owns the authority to request cancellation:",
+  "description": "`CancelToken` is the read-only side of cooperative cancellation. `CancelTokenSource` owns the authority to request cancellation:",
+  "tags": [
+    "lifecycle",
+    "math",
+    "reactive"
+  ],
+  "modules": {
+    "CancelToken.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Provides a read-only signal for cooperative cancellation. Cancellation authority belongs to the executor or a [CancelTokenSource]. Public entry points include `CancelToken.new`, `CancelToken.isCancelToken`, `CancelToken.fromMaid`, `CancelToken.fromSeconds`, `CancelToken.ErrorIfCancelled`, `CancelToken.IsCancelled`, `CancelToken.GetReason`."
+    },
+    "CancelTokenSource.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Owns cancellation authority for a read-only [CancelToken]. Public entry points include `CancelTokenSource.new`, `CancelTokenSource.GetToken`, `CancelTokenSource.Cancel`, `CancelTokenSource.IsCancelled`, `CancelTokenSource.Destroy`."
+    }
+  }
+}

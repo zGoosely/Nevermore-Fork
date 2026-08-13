@@ -1,0 +1,14 @@
+{
+  "purpose": "The lua implementation of the fzy string matching algorithm. This algorithm is optimized for matching stuff on the terminal, but should serve well as a baseline search algorithm within a game too. See: _ https://github.com/swarn/fzy-lua _ https://github.com/jhawthorn/fzy/blob/master/ALGORITHM.md Modified from the initial code to fit this codebase. While this definitely messes with some naming which may have been better, it also keeps usage of this library consistent with other libraries. Notes: _ A higher score is better than a lower score _ Scoring time is `O(n*m)` where `n` is the length of the needle and `m` is the length of the haystack. * Scoring memory is also `O(n*m)` \\* Should do quite well with small lists",
+  "description": "The lua implementation of the fzy string matching algorithm. This algorithm is optimized for matching stuff on the terminal, but should serve well as a baseline search algorithm within a game too. See: _ https://github.com/swarn/fzy-lua _ https://github.com/jhawthorn/fzy/blob/master/ALGORITHM.md Modified from the initial code to fit this codebase. While this definitely messes with some naming which may have been better, it also keeps usage of this library consistent with other libraries. Notes: _ A higher score is better than a lower score _ Scoring time is `O(n*m)` where `n` is the length of the needle and `m` is the length of the haystack. * Scoring memory is also `O(n*m)` \\* Should do quite well with small lists",
+  "tags": [
+    "localization"
+  ],
+  "modules": {
+    "Fzy.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "The lua implementation of the fzy string matching algorithm. This algorithm is optimized for matching stuff on the terminal, but should serve well as a baseline search algorithm within a game too. See: _ https://github.com/swarn/fzy-lua _ https://github.com/jhawthorn/fzy/blob/master/ALGORITHM.md Modified from the initial code to fit this codebase."
+    }
+  }
+}

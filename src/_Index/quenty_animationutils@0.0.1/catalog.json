@@ -1,0 +1,26 @@
+{
+  "purpose": "Utility functions for animations",
+  "description": "Utility functions for animations",
+  "tags": [
+    "animation",
+    "lifecycle",
+    "utility"
+  ],
+  "modules": {
+    "AnimationPromiseUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Animation Promise Utils provides the class/model implementation used by the Animationutils package. Public entry points include `AnimationPromiseUtils.promiseFinished`, `AnimationPromiseUtils.promiseLoaded`, `AnimationPromiseUtils.promiseKeyframeReached`."
+    },
+    "AnimationTrackUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility functions for animations Public entry points include `AnimationTrackUtils.loadAnimationFromId`, `AnimationTrackUtils.setWeightTargetIfNotSet`."
+    },
+    "AnimationUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility functions for animations with reactive programming support Public entry points include `AnimationUtils.loadAnimationFromId`, `AnimationUtils.setWeightTargetIfNotSet`, `AnimationUtils.getOrCreateAnimator`, `AnimationUtils.getOrCreateAnimationTrack`, `AnimationUtils.getOrCreateAnimationFromIdInAnimator`, `AnimationUtils.stopAnimations`, `AnimationUtils.stopAnimation`, `AnimationUtils.isPlayingAnimationTrack`."
+    }
+  }
+}

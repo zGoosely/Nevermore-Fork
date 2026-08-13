@@ -1,0 +1,38 @@
+{
+  "purpose": "`FakeSkybox` renders a client-side sky from six camera-centered parts, plus separate sun and moon parts. Unlike a normal `Sky`, it can spring-fade in and out, which makes it useful for transitions, local sky overrides, cutscenes, and preview cameras.",
+  "description": "`FakeSkybox` renders a client-side sky from six camera-centered parts, plus separate sun and moon parts. Unlike a normal `Sky`, it can spring-fade in and out, which makes it useful for transitions, local sky overrides, cutscenes, and preview cameras.",
+  "tags": [
+    "animation",
+    "data",
+    "game_service",
+    "gui",
+    "lifecycle",
+    "math",
+    "player_service",
+    "reactive",
+    "security",
+    "world"
+  ],
+  "modules": {
+    "Client/FakeSkybox.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Allow transitions between skyboxes Public entry points include `FakeSkybox.new`, `FakeSkybox.SetPartSize`, `FakeSkybox.SetSpeed`, `FakeSkybox.SetRenderMethod`, `FakeSkybox.SetSky`, `FakeSkybox.SetAtmosphere`, `FakeSkybox.SetCamera`, `FakeSkybox.SetViewportLightingArgs`."
+    },
+    "Client/FakeSkyboxRenderMethod.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Fake Skybox Render Method provides the class/model implementation used by the Fakeskybox package."
+    },
+    "Client/SkyboxRenderPart.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Skybox Render Part provides the class/model implementation used by the Fakeskybox package. Public entry points include `SkyboxRenderPart.new`, `SkyboxRenderPart.SetCFrame`, `SkyboxRenderPart.SetRenderMethod`, `SkyboxRenderPart.SetCanvasSize`, `SkyboxRenderPart.SetBrightness`, `SkyboxRenderPart.SetImageColor3`, `SkyboxRenderPart.SetImageGradientSequence`, `SkyboxRenderPart.SetSize`."
+    },
+    "Client/SkyboxSide.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Skybox Side provides the class/model implementation used by the Fakeskybox package. Public entry points include `SkyboxSide.new`, `SkyboxSide.SetRenderMethod`, `SkyboxSide.SetZOffset`, `SkyboxSide.SetSkyboxGradient`, `SkyboxSide.SetBrightness`, `SkyboxSide.SetPartSize`, `SkyboxSide.SetImage`, `SkyboxSide.SetTransparency`."
+    }
+  }
+}

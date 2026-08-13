@@ -1,0 +1,126 @@
+{
+  "purpose": "Converts physical input into rebinding-aware, semantic player actions.",
+  "description": "Processes semantic player actions from input maps, applies player-mode policy and rebinding, and coordinates client/server action state.",
+  "tags": [
+    "data",
+    "enums",
+    "game_service",
+    "gui",
+    "input",
+    "lifecycle",
+    "localization",
+    "math",
+    "player_service",
+    "reactive",
+    "security",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "Client/PlayerInputActionModel.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Binds one semantic action to its reactive InputKeyMapList and coalesces all physical sources into one Begin/End lifecycle. Public entry points include `PlayerInputActionModel.new`, `PlayerInputActionModel.TriggerInput`, `PlayerInputActionModel.IsHeld`, `PlayerInputActionModel.ForceRelease`, `PlayerInputActionModel.RefreshPolicy`, `PlayerInputActionModel.Destroy`."
+    },
+    "PlayerInputCooldownService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Automatically maps authoritative action cooldowns onto PlayerInputService restrictions and starts them from completed action executions. Public entry points include `PlayerInputCooldownService.Init`, `PlayerInputCooldownService.Start`, `PlayerInputCooldownService.Bind`, `PlayerInputCooldownService.BindAction`, `PlayerInputCooldownService.TryStartActionExecution`, `PlayerInputCooldownService.IsActionOnCooldown`,…"
+    },
+    "PlayerInputCooldownServiceClient.luau": {
+      "realm": "client",
+      "kind": "Service",
+      "description": "Automatically maps configured replicated or predicted cooldown state onto local PlayerInputServiceClient restrictions. Public entry points include `PlayerInputCooldownServiceClient.Init`, `PlayerInputCooldownServiceClient.Start`, `PlayerInputCooldownServiceClient.Bind`, `PlayerInputCooldownServiceClient.BindAction`, `PlayerInputCooldownServiceClient.IsActionOnCooldown`,…"
+    },
+    "PlayerInputService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Validates compact semantic input reports and provides authoritative contexts, restrictions, server binding overrides, and input observations. Public entry points include `PlayerInputService.Init`, `PlayerInputService.Start`, `PlayerInputService.RegisterActor`, `PlayerInputService.ObserveActorsBrio`, `PlayerInputService.SetGlobalServerInputRateLimit`, `PlayerInputService.SetGlobalNetworkRateLimit`,…"
+    },
+    "PlayerInputServiceClient.luau": {
+      "realm": "client",
+      "kind": "Service",
+      "description": "Binds the local player's semantic actions, applies local and server policy, and sends only explicitly allowed compact action events. Public entry points include `PlayerInputServiceClient.Init`, `PlayerInputServiceClient.Start`, `PlayerInputServiceClient.ObserveAllInputs`, `PlayerInputServiceClient.ObserveInput`, `PlayerInputServiceClient.IsInputHeld`, `PlayerInputServiceClient.ObserveIsInputHeld`,…"
+    },
+    "Server/PlayerInputActorModel.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Owns one Player or NPC Model's authoritative input policy, rate limiters, held action state, and optional player binding overrides. Public entry points include `PlayerInputActorModel.new`, `PlayerInputActorModel.ProcessInput`, `PlayerInputActorModel.TryInput`, `PlayerInputActorModel.PushContext`, `PlayerInputActorModel.PushRestriction`, `PlayerInputActorModel.IsInputHeld`, `PlayerInputActorModel.ForceRelease`,…"
+    },
+    "Server/PlayerInputServerModel.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Compatibility alias for [PlayerInputActorModel]."
+    },
+    "Shared/PlayerInputActionConditionModel.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Tracks whether one action's adornee conditions currently permit a player character or NPC actor. Public entry points include `PlayerInputActionConditionModel.new`, `PlayerInputActionConditionModel.AreConditionsMet`, `PlayerInputActionConditionModel.Destroy`."
+    },
+    "Shared/PlayerInputActionProvider.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "Defines a game's semantic input actions and publishes their InputKeyMapLists to the existing keymap registry. Public entry points include `PlayerInputActionProvider.new`, `PlayerInputActionProvider.Init`, `PlayerInputActionProvider.Start`, `PlayerInputActionProvider.AddAction`, `PlayerInputActionProvider.AddContext`, `PlayerInputActionProvider.GetProviderName`, `PlayerInputActionProvider.GetAction`,…"
+    },
+    "Shared/PlayerInputActionRegistryServiceShared.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "Registers PlayerInputActionProvider instances and validates the shared action catalog on both realms. Public entry points include `PlayerInputActionRegistryServiceShared.Init`, `PlayerInputActionRegistryServiceShared.Start`, `PlayerInputActionRegistryServiceShared.RegisterProvider`, `PlayerInputActionRegistryServiceShared.GetActionById`, `PlayerInputActionRegistryServiceShared.GetAction`,…"
+    },
+    "Shared/PlayerInputActorUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Validates actors accepted by the authoritative PlayerInputService. Public entry points include `PlayerInputActorUtils.isInputActor`."
+    },
+    "Shared/PlayerInputCooldownServiceConstants.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Defaults for the optional PlayerInput cooldown integration."
+    },
+    "Shared/PlayerInputCooldownServiceTypes.luau": {
+      "realm": "shared",
+      "kind": "Types",
+      "description": "Configuration contracts for the optional PlayerInput cooldown services."
+    },
+    "Shared/PlayerInputCooldownServiceUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Validates configuration for the optional PlayerInput cooldown services. Public entry points include `isActionList`, `PlayerInputCooldownServiceUtils.isActionCooldownConfigured`, `PlayerInputCooldownServiceUtils.getActionCooldownDefinition`, `PlayerInputCooldownServiceUtils.shouldStartActionCooldown`, `PlayerInputCooldownServiceUtils.isServerBindingConfig`, `PlayerInputCooldownServiceUtils.getServerBindingActor`,…"
+    },
+    "Shared/PlayerInputPolicyModel.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Resolves priority contexts and per-action restriction overlays for one local or server-owned actor policy. Public entry points include `PlayerInputPolicyModel.new`, `PlayerInputPolicyModel.PushContext`, `PlayerInputPolicyModel.PushRestriction`, `PlayerInputPolicyModel.IsActionAllowed`, `PlayerInputPolicyModel.GetActionDenialResult`, `PlayerInputPolicyModel.IsActionAllowedForPlayerMode`,…"
+    },
+    "Shared/PlayerInputResults.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Canonical results returned by authoritative actor input attempts."
+    },
+    "Shared/PlayerInputServiceConstants.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Protocol and policy constants for PlayerInputService."
+    },
+    "Shared/PlayerInputServiceNetwork.luau": {
+      "realm": "shared",
+      "kind": "Network",
+      "description": "Compact semantic input protocol for PlayerInputService. Clients can only send an action ID and Begin/End state."
+    },
+    "Shared/PlayerInputServiceTypes.luau": {
+      "realm": "shared",
+      "kind": "Types",
+      "description": "Shared contracts for PlayerInputService actions, contexts, restrictions, and binding overrides."
+    },
+    "Shared/PlayerInputServiceUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Validates PlayerInputService definitions and converts keymap values to compact, network-safe binding records. Public entry points include `createStringSet`, `inferPlayerInputModes`, `isKnownPlayerInputMode`, `isPositiveFiniteNumber`, `createCooldownValue`, `PlayerInputServiceUtils.getActionKey`, `PlayerInputServiceUtils.createAction`, `PlayerInputServiceUtils.toNetworkStateCode`."
+    },
+    "Shared/PlayerInputStates.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Input lifecycle states emitted by PlayerInputService."
+    }
+  }
+}

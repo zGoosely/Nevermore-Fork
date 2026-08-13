@@ -1,0 +1,21 @@
+{
+  "purpose": "Deduplicates and caches player thumbnail requests for one thumbnail type and size. Roblox does not expose a bulk thumbnail endpoint, so each queued user ID is requested independently through [PlayerThumbnailUtils].",
+  "description": "Deduplicates and caches player thumbnail requests for one thumbnail type and size. Roblox does not expose a bulk thumbnail endpoint, so each queued user ID is requested independently through [PlayerThumbnailUtils].",
+  "tags": [
+    "lifecycle",
+    "player_service",
+    "utility"
+  ],
+  "modules": {
+    "PlayerThumbnailAggregator.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Deduplicates and caches player thumbnail requests for one thumbnail type and size. Roblox does not expose a bulk thumbnail endpoint, so each queued user ID is requested independently through [PlayerThumbnailUtils]. Public entry points include `PlayerThumbnailAggregator.new`, `PlayerThumbnailAggregator.PromiseUserThumbnail`, `PlayerThumbnailAggregator.ObserveUserThumbnail`."
+    },
+    "PlayerThumbnailUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Reimplementation of Player:GetUserThumbnailAsync but as a promise with retry logic. Public entry points include `PlayerThumbnailUtils.promiseUserThumbnail`, `PlayerThumbnailUtils.promiseUserName`."
+    }
+  }
+}

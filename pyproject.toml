@@ -1,0 +1,16 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "nevermore-package-manager"
+version = "0.1.0"
+description = "Terminal package manager for the Nevermore fork"
+requires-python = ">=3.11"
+dependencies = ["textual==8.2.7"]
+
+[project.scripts]
+nevermore-packages = "nevermore_packages.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["nevermore_packages"]

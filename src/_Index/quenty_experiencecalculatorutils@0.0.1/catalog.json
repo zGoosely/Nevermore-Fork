@@ -1,0 +1,15 @@
+{
+  "purpose": "Calculate experience on an exponential curve and perform relevant calculations. Uses formulas from https://stackoverflow.com/questions/6954874/php-game-formula-to-calculate-a-level-based-on-exp",
+  "description": "Calculate experience on an exponential curve and perform relevant calculations. Uses formulas from https://stackoverflow.com/questions/6954874/php-game-formula-to-calculate-a-level-based-on-exp",
+  "tags": [
+    "data",
+    "utility"
+  ],
+  "modules": {
+    "ExperienceCalculatorUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Calculate experience on an exponential curve and perform relevant calculations. Uses formulas from https://stackoverflow.com/questions/6954874/php-game-formula-to-calculate-a-level-based-on-exp Public entry points include `ExperienceCalculatorUtils.createExperienceConfig`, `ExperienceCalculatorUtils.isExperienceConfig`, `ExperienceCalculatorUtils.getLevel`, `ExperienceCalculatorUtils.experienceFromLevel`,…"
+    }
+  }
+}

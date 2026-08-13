@@ -1,0 +1,25 @@
+{
+  "purpose": "This module provides utility functions for strings",
+  "description": "This module provides utility functions for strings",
+  "tags": [
+    "localization",
+    "utility"
+  ],
+  "modules": {
+    "String.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "String provides the module implementation used by the Stringutils package."
+    },
+    "StringUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "This module provides utility functions for strings Public entry points include `StringUtils.trim`, `StringUtils.toCamelCase`, `StringUtils.uppercaseFirstLetter`, `StringUtils.toLowerCamelCase`, `StringUtils.toPrivateCase`, `StringUtils.trimFront`, `StringUtils.checkNumOfCharacterInStringUtils`, `StringUtils.isEmptyOrWhitespaceOrNil`."
+    },
+    "UTF8Utils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "UTF8Utils utility functions Public entry points include `UTF8Utils.upper`, `UTF8Utils.lower`."
+    }
+  }
+}

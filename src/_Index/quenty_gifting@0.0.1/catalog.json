@@ -1,0 +1,66 @@
+{
+  "purpose": "`GiftingService` stores virtual pass and developer-product entitlements under a player's `Gifted` PlayerDataStoreService root. It uses GameConfig keys, enforces configurable social restrictions, keeps server and client caches, serializes the client projection with Squash, and can fulfill paid gifts through `GameProductService`.",
+  "description": "`GiftingService` stores virtual pass and developer-product entitlements under a player's `Gifted` PlayerDataStoreService root. It uses GameConfig keys, enforces configurable social restrictions, keeps server and client caches, serializes the client projection with Squash, and can fulfill paid gifts through `GameProductService`.",
+  "tags": [
+    "commerce",
+    "data",
+    "developer_tools",
+    "enums",
+    "game_service",
+    "lifecycle",
+    "localization",
+    "math",
+    "player_service",
+    "reactive",
+    "security",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "GiftingService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Persists GameConfig-backed pass and developer-product gifts, applies social restrictions, and integrates paid gift fulfillment with GameProductService. Public entry points include `GiftingService.Init`, `GiftingService.Start`, `GiftingService.SetPlayerGiftRestriction`, `GiftingService.GetPlayerGiftRestriction`, `GiftingService.RegisterGiftProduct`, `GiftingService.CanGiftAsync`, `GiftingService.GiftAsync`,…"
+    },
+    "GiftingServiceClient.luau": {
+      "realm": "client",
+      "kind": "Service",
+      "description": "Read-only local gift cache with map, per-gift, type-filtered, and Brio observation APIs. Public entry points include `GiftingServiceClient.Init`, `GiftingServiceClient.Start`, `GiftingServiceClient.ReadyAsync`, `GiftingServiceClient.GetGifts`, `GiftingServiceClient.GetGift`, `GiftingServiceClient.HasGift`, `GiftingServiceClient.HasEntitlementAsync`, `GiftingServiceClient.ObserveGifts`."
+    },
+    "Shared/GiftingAssetTypes.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Asset categories that can be persisted as gifts."
+    },
+    "Shared/GiftingConstants.luau": {
+      "realm": "shared",
+      "kind": "Constants",
+      "description": "Shared GiftingService constants."
+    },
+    "Shared/GiftingDuplicateBehavior.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Controls how GiftAsync handles an existing gift with the same key."
+    },
+    "Shared/GiftingNetwork.luau": {
+      "realm": "shared",
+      "kind": "Network",
+      "description": "Compact replication for the local player's gifts. Pending purchase intents and processed receipt IDs remain server-only."
+    },
+    "Shared/GiftingRestrictions.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Controls who a player may gift."
+    },
+    "Shared/GiftingSerializationUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Squash serialization for compact gift snapshots. Static field names never enter the network payload. Public entry points include `GiftingSerializationUtils.serialize`, `GiftingSerializationUtils.deserialize`."
+    },
+    "Shared/GiftingTypes.luau": {
+      "realm": "shared",
+      "kind": "Types",
+      "description": "Shared GiftingService contracts."
+    }
+  }
+}

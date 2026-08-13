@@ -20,7 +20,8 @@ Each indexed package contains a `package.json` manifest with:
 - dependencies on other indexed packages; and
 - external modules that must be supplied by a consuming game or test environment.
 
-Modules within one indexed package use relative string requires. Cross-package imports go through the flat
+An `init.luau` package module imports its children through `@self/<Child>`; ordinary modules use `./` and `../`
+paths for siblings and parent siblings. Cross-package imports go through the flat
 `ReplicatedStorage.Packages` exports. The old recursive Loader is not part of this layout.
 
 Tests and private implementation modules stay inside their indexed package and do not receive flat wrappers.

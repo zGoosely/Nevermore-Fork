@@ -127,7 +127,8 @@ Use this order consistently:
 1. `--!strict`, then `--!optimize 2` only for a measured hot path.
 2. One Moonwave module header.
 3. Roblox services from `game:GetService()`.
-4. Cross-package requires through `@game/ReplicatedStorage/Packages/<Export>` and package-local relative requires.
+4. Cross-package requires through `@game/ReplicatedStorage/Packages/<Export>`. Package-local `init.luau` modules use
+   `@self/<Child>` for children; ordinary modules use `./Sibling` and `../ParentSibling` paths.
 5. Exported/local types.
 6. Module constants and reusable validators.
 7. The module table and `ClassName` or `ServiceName` metadata.
@@ -162,11 +163,14 @@ const Maid = require("@game/ReplicatedStorage/Packages/Maid")
 const t = require("@game/ReplicatedStorage/Packages/t")
 ```
 
-Use a relative string require for another module owned by the same indexed package:
+Use `@self` when an `init.luau` module imports one of its children:
 
 ```luau
-const ExampleUtils = require("./ExampleUtils")
+const ExampleUtils = require("@self/ExampleUtils")
 ```
+
+An ordinary module imports a sibling with `./ExampleUtils`. The distinction follows the Roblox hierarchy: an
+`init.luau` file becomes the parent ModuleScript, while an ordinary file remains a sibling of nearby modules.
 
 Each package lives at `src/_Index/quenty_<package>@0.0.1/` on disk and is mapped by Rojo to the direct `_Index` child `quenty/<package>@0.0.1`. Its `package.json` lists logical identity, public exports, package dependencies, and external game dependencies. Add a strict flat wrapper in `src/` only for a consumer-facing entrypoint or a module imported by another package. Do not expose tests or private helpers.
 

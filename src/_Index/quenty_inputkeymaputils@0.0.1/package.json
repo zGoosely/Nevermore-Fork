@@ -5,6 +5,7 @@
     "InputChordUtils": "Shared/Types/InputChordUtils",
     "InputKeyMap": "Shared/InputKeyMap",
     "InputKeyMapList": "Shared/InputKeyMapList",
+    "InputKeyMapListProvider": "Shared/InputKeyMapListProvider",
     "InputKeyMapListUtils": "Client/InputKeyMapListUtils",
     "InputKeyMapRegistryServiceShared": "Shared/InputKeyMapRegistryServiceShared",
     "InputKeyMapService": "InputKeyMapService",

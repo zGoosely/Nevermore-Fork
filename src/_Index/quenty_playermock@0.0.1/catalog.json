@@ -1,0 +1,19 @@
+{
+  "purpose": "`PlayerMock` is an in-memory `Folder` marked with the `PlayerMock` CollectionService tag. It lets tests exercise code that expects a `Player` without trying to construct Roblox's non-constructible `Player` class.",
+  "description": "`PlayerMock` is an in-memory `Folder` marked with the `PlayerMock` CollectionService tag. It lets tests exercise code that expects a `Player` without trying to construct Roblox's non-constructible `Player` class.",
+  "tags": [
+    "commerce",
+    "data",
+    "game_service",
+    "math",
+    "player_service",
+    "reactive"
+  ],
+  "modules": {
+    "PlayerMock.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "In-memory stand-in for a Roblox `Player` used by tests. A real `Player` cannot be `Instance.new`'d and no client joins a headless Open Cloud test place, so this builds a `Folder` that carries the marker and identity attributes production code reads -- letting a \"player\" flow through guards and providers without a real join."
+    }
+  }
+}

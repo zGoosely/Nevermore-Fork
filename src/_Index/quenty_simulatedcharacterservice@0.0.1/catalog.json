@@ -1,0 +1,126 @@
+{
+  "purpose": "`SimulatedCharacterService` runs lightweight, server-authoritative NPC roots on a flat X/Z plane. The server stores numbers rather than physical character models. Each client clones, animates, interpolates, ragdolls, and culls its own visual models.",
+  "description": "`SimulatedCharacterService` runs lightweight, server-authoritative NPC roots on a flat X/Z plane. The server stores numbers rather than physical character models. Each client clones, animates, interpolates, ragdolls, and culls its own visual models.",
+  "tags": [
+    "animation",
+    "data",
+    "developer_tools",
+    "enums",
+    "game_service",
+    "localization",
+    "math",
+    "physics",
+    "player_service",
+    "reactive",
+    "security",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "Client/DefaultCharacterAnimationUtils.luau": {
+      "realm": "client",
+      "kind": "Utility",
+      "description": "Extracts the local character's default Animate configuration without cloning a LocalScript into every rendered NPC. Public entry points include `findAnimationId`, `toAssetId`, `DefaultCharacterAnimationUtils.getAnimationIdsFromAnimate`, `DefaultCharacterAnimationUtils.promiseAnimationIdsAsync`."
+    },
+    "Client/SimulatedCharacterClient.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "A lightweight client-side state buffer and optional visual renderer for one simulated character. Public entry points include `SimulatedCharacterClient.new`, `SimulatedCharacterClient.GetId`, `SimulatedCharacterClient.GetRenderCFrame`, `SimulatedCharacterClient.GetCullPosition`, `SimulatedCharacterClient.GetCullRadius`, `SimulatedCharacterClient.SetCulled`, `synchronizeTimePosition`,…"
+    },
+    "Client/SimulatedCharacterDebug.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Draw-based local visualization for SimulatedCharacterServiceClient. Public entry points include `setRayVisible`, `hideRays`, `updateRay`, `updateRing`, `updatePath`, `SimulatedCharacterDebug.new`, `SimulatedCharacterDebug.Destroy`."
+    },
+    "Server/SimulatedCharacter.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "A lightweight server-authoritative simulated character. Public entry points include `SimulatedCharacter.new`, `SimulatedCharacter.GetId`, `SimulatedCharacter.GetDefinitionName`, `SimulatedCharacter.GetTemplateName`, `SimulatedCharacter.GetCFrame`, `SimulatedCharacter.GetPosition`, `SimulatedCharacter.GetHitboxSize`, `SimulatedCharacter.SetReplicationDistance`."
+    },
+    "Server/SimulatedCharacterSpatialHash.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Maintains a lightweight planar spatial hash for simulated characters. Public entry points include `SimulatedCharacterSpatialHash.new`, `SimulatedCharacterSpatialHash.AddCharacter`, `SimulatedCharacterSpatialHash.RemoveCharacter`, `SimulatedCharacterSpatialHash.UpdateCharacter`, `SimulatedCharacterSpatialHash.UpdateCharacters`, `SimulatedCharacterSpatialHash.Query`, `SimulatedCharacterSpatialHash.Destroy`."
+    },
+    "Shared/Enums/SimulatedCharacterEnums.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "All enum lists used by SimulatedCharacterService registration."
+    },
+    "Shared/Enums/SimulatedCharacterFacingMode.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Facing policies supported by simulated characters."
+    },
+    "Shared/Enums/SimulatedCharacterMovementController.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Built-in planar movement controllers for simulated characters."
+    },
+    "Shared/Enums/SimulatedCharacterPlacementMode.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Placement anchors supported by SimulatedCharacterService."
+    },
+    "Shared/Enums/SimulatedCharacterTargetingMode.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Target acquisition modes supported by simulated characters."
+    },
+    "Shared/Enums/SimulatedCharacterVariantSelectionMode.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Template variant selection policies."
+    },
+    "Shared/SimulatedCharacterConstants.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Constants shared by SimulatedCharacterService runtimes."
+    },
+    "Shared/SimulatedCharacterFlocking.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Maintains lightweight server-side flock groups and computes planar crowd steering without allocating per simulation step. Public entry points include `SimulatedCharacterFlocking.new`, `SimulatedCharacterFlocking.AddCharacter`, `SimulatedCharacterFlocking.RemoveCharacter`, `SimulatedCharacterFlocking.Step`, `SimulatedCharacterFlocking.Destroy`."
+    },
+    "Shared/SimulatedCharacterNavigationGrid.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "A flat, tag-driven navigation grid with shared flow fields. The grid is rebuilt when an obstacle receives or loses the configured tag. Characters first use a direct grid line and only request a flow field when an obstacle blocks the target. Flow fields are cached by target key."
+    },
+    "Shared/SimulatedCharacterNetwork.luau": {
+      "realm": "shared",
+      "kind": "Network",
+      "description": "ByteNet protocol for SimulatedCharacterService."
+    },
+    "Shared/SimulatedCharacterStateCodec.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Packs the high-frequency X/Z motion state used by SimulatedCharacterService. Public entry points include `quantizeSigned`, `canQuantizePosition`, `canQuantizeDynamics`, `getRecordSize`, `SimulatedCharacterStateCodec.encode`, `SimulatedCharacterStateCodec.decode`."
+    },
+    "Shared/SimulatedCharacterTypes.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Shared public types for SimulatedCharacterService."
+    },
+    "Shared/SimulatedCharacterUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Shared math and definition helpers for SimulatedCharacterService. Public entry points include `SimulatedCharacterUtils.resolveDefinition`, `SimulatedCharacterUtils.resolveSpawnY`, `SimulatedCharacterUtils.toPlanarPosition`, `SimulatedCharacterUtils.lerpAngle`, `SimulatedCharacterUtils.moveAngleTowards`, `SimulatedCharacterUtils.toCFrame`."
+    },
+    "SimulatedCharacterService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Runs lightweight, server-authoritative simulated characters on a flat X/Z plane and replicates their render state to clients. Public entry points include `SimulatedCharacterService.Init`, `SimulatedCharacterService.SetTemplateContainer`, `SimulatedCharacterService.Start`, `SimulatedCharacterService.ConfigureNavigation`, `SimulatedCharacterService.RebuildNavigation`, `SimulatedCharacterService.RegisterCharacter`,…"
+    },
+    "SimulatedCharacterServiceClient.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "Receives simulated character state and renders only characters admitted by ClientCulling. Public entry points include `SimulatedCharacterServiceClient.Init`, `SimulatedCharacterServiceClient.Start`, `SimulatedCharacterServiceClient.SetDebug`, `SimulatedCharacterServiceClient.GetCharacter`, `SimulatedCharacterServiceClient.GetCharacters`, `handleCharacter`, `SimulatedCharacterServiceClient.Destroy`."
+    },
+    "SimulatedCharacterTemplateProvider/init.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Provides the client-rendered models used by SimulatedCharacterService. Template containers are discovered through the shared CollectionService tag owned by SimulatedCharacterConstants."
+    }
+  }
+}

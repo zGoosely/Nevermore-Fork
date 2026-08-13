@@ -1,0 +1,14 @@
+{
+  "purpose": "For when attributes don't work",
+  "description": "For when attributes don't work",
+  "tags": [
+    "data"
+  ],
+  "modules": {
+    "ValueBaseValue.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "For when attributes don't work Public entry points include `ValueBaseValue.new`, `ValueBaseValue.ObserveBrio`, `ValueBaseValue.Observe`."
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "purpose": "Provides utility functions to make it easy to work with network owners. This wraps this API because the API surface is actually quite bad. See also: [NetworkOwnerService]",
+  "description": "Provides utility functions to make it easy to work with network owners. This wraps this API because the API surface is actually quite bad. See also: [NetworkOwnerService]",
+  "tags": [
+    "game_service",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "NetworkOwnerUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Provides utility functions to make it easy to work with network owners. This wraps this API because the API surface is actually quite bad. See also: [NetworkOwnerService] Public entry points include `NetworkOwnerUtils.trySetNetworkOwner`, `NetworkOwnerUtils.getNetworkOwnerPlayer`, `NetworkOwnerUtils.isNetworkOwner`, `NetworkOwnerUtils.isServerNetworkOwner`, `NetworkOwnerUtils.tryToGetNetworkOwner`."
+    },
+    "NetworkRopeUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility function to create network ropes which hint to Roblox that two assemblies should be considered to be owned by the same network owner. Public entry points include `NetworkRopeUtils.hintSharedMechanism`, `NetworkRopeUtils.clearNetworkOwnerHints`."
+    }
+  }
+}

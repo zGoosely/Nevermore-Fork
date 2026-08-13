@@ -1,0 +1,14 @@
+{
+  "purpose": "A BaseObject basically just adds the :Destroy() interface, and a \\_maid, along with an optional object it references.",
+  "description": "A BaseObject basically just adds the :Destroy() interface, and a \\_maid, along with an optional object it references.",
+  "tags": [
+    "lifecycle"
+  ],
+  "modules": {
+    "BaseObject.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "A BaseObject basically just adds the :Destroy() interface, and a \\_maid, along with an optional object it references."
+    }
+  }
+}

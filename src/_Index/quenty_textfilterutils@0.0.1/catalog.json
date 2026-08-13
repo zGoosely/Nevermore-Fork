@@ -1,0 +1,16 @@
+{
+  "purpose": "Utility functions for filtering text wrapping [TextService] and legacy [Chat] API surfaces.",
+  "description": "Utility functions for filtering text wrapping [TextService] and legacy [Chat] API surfaces.",
+  "tags": [
+    "game_service",
+    "localization",
+    "utility"
+  ],
+  "modules": {
+    "TextFilterUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility functions for filtering text wrapping [TextService] and legacy [Chat] API surfaces. Public entry points include `TextFilterUtils.promiseNonChatStringForBroadcast`, `TextFilterUtils.promiseLegacyChatFilter`, `TextFilterUtils.promiseNonChatStringForUserAsync`, `TextFilterUtils.getNonChatStringForBroadcastAsync`, `TextFilterUtils.getNonChatStringForUserAsync`, `TextFilterUtils.hasNonFilteredText`,…"
+    }
+  }
+}

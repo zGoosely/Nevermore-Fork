@@ -1,0 +1,14 @@
+{
+  "purpose": "Queue system for prompts and other UI",
+  "description": "Queue system for prompts and other UI",
+  "tags": [
+    "shared"
+  ],
+  "modules": {
+    "PromptQueue.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Queue system for prompts and other UI Public entry points include `PromptQueue.new`, `PromptQueue.Queue`, `PromptQueue.HasItems`, `PromptQueue.Clear`, `PromptQueue.HideCurrent`, `PromptQueue.IsShowing`, `PromptQueue.ObserveIsShowing`."
+    }
+  }
+}

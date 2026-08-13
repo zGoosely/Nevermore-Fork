@@ -1,0 +1,14 @@
+{
+  "purpose": "Utilities for proximity-based queries and spatial operations",
+  "description": "Utilities for proximity-based queries and spatial operations",
+  "tags": [
+    "utility"
+  ],
+  "modules": {
+    "ProximityUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utilities for proximity-based queries and spatial operations Public entry points include `ProximityUtils.getPlayersNearPosition`, `ProximityUtils.getClosestPlayer`, `ProximityUtils.getPartsNearPosition`, `ProximityUtils.isWithinDistance`, `ProximityUtils.sortByDistance`, `ProximityUtils.getDistance`, `ProximityUtils.getPosition`, `ProximityUtils.getPlayersInPart`."
+    }
+  }
+}

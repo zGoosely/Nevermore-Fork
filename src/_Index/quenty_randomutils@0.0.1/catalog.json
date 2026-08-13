@@ -1,0 +1,16 @@
+{
+  "purpose": "Utility functions involving random variables. This is quite useful for a variety of game mechanics. Each method generally takes a random object in as the last argument, which can be used to seed the randomness. This is especially useful for reproducting state in testing.",
+  "description": "Utility functions involving random variables. This is quite useful for a variety of game mechanics. Each method generally takes a random object in as the last argument, which can be used to seed the randomness. This is especially useful for reproducting state in testing.",
+  "tags": [
+    "math",
+    "reactive",
+    "utility"
+  ],
+  "modules": {
+    "RandomUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility functions involving random variables. This is quite useful for a variety of game mechanics. Each method generally takes a random object in as the last argument, which can be used to seed the randomness. This is especially useful for reproducting state in testing. Public entry points include `RandomUtils.gaussianRandom`, `RandomUtils.randomUnitVector3`, `RandomUtils.randomNumber`."
+    }
+  }
+}

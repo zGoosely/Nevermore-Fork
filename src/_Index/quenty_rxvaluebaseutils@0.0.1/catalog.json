@@ -1,0 +1,16 @@
+{
+  "purpose": "Collects the rxvaluebaseutils runtime building blocks—Rx Value Base Utils—and composes them for reuse in Roblox experiences.",
+  "description": "Collects the rxvaluebaseutils runtime building blocks—Rx Value Base Utils—and composes them for reuse in Roblox experiences.",
+  "tags": [
+    "data",
+    "reactive",
+    "utility"
+  ],
+  "modules": {
+    "RxValueBaseUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rx Value Base Utils provides the class/model implementation used by the Rxvaluebaseutils package. Public entry points include `RxValueBaseUtils.observeBrio`, `RxValueBaseUtils.observe`, `RxValueBaseUtils.observeValue`."
+    }
+  }
+}

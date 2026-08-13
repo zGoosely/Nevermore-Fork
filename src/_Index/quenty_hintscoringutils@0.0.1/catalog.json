@@ -1,0 +1,19 @@
+{
+  "purpose": "Scores nearby 3D adornees for contextual hints using distance, view angle, screen visibility, bounding-box proximity, and optional line of sight.",
+  "description": "Finds and ranks nearby hint targets relative to a humanoid and the current camera.",
+  "tags": [
+    "gui",
+    "math",
+    "physics",
+    "player_service",
+    "utility",
+    "world"
+  ],
+  "modules": {
+    "HintScoringUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Finds adornees near a position and scores their suitability as contextual hint targets using distance, view angle, screen visibility, bounding boxes, and raycast line of sight. Public entry points include `HintScoringUtils.getHumanoidPositionDirection`, `HintScoringUtils.getAdorneeInRegionSet`, `HintScoringUtils.debugScore`, `HintScoringUtils.raycastToAdornee`, `HintScoringUtils.clampToBoundingBox`, `HintScoringUtils.scoreAdornee`, `HintScoringUtils.scoreDist`, `HintScoringUtils.scoreAngle`."
+    }
+  }
+}

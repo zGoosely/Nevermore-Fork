@@ -1,0 +1,31 @@
+{
+  "purpose": "Utility helpers for Roblox friend lists and friend presence.",
+  "description": "Utility helpers for Roblox friend lists and friend presence.",
+  "tags": [
+    "player_service",
+    "reactive",
+    "utility"
+  ],
+  "modules": {
+    "FriendUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility helpers for Roblox friend lists and friend presence. Public entry points include `FriendUtils.promiseFriendPages`, `FriendUtils.iterateFriendsYielding`, `FriendUtils.promiseAllFriends`, `FriendUtils.promiseOnlineFriends`, `FriendUtils.onlineFriends`, `FriendUtils.friendsWhoPlayed`, `FriendUtils.friendsInPlace`, `FriendUtils.friendsInCurrentPlace`."
+    },
+    "PlayerUtils.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Clears all tools from a player's backpack. Public entry points include `PlayerUtils.clearTools`, `PlayerUtils.safePlayerAdded`, `PlayerUtils.fzyFindPlayerFromText`, `PlayerUtils.formatNameWithDisplay`, `PlayerUtils.formatName`, `PlayerUtils.formatDisplayName`, `PlayerUtils.formatDisplayNameFromUserInfo`, `PlayerUtils.addVerifiedBadgeToName`."
+    },
+    "RxFriendUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utilities for observing the local player's friends. Public entry points include `RxFriendUtils.observeFriendsInServerAsBrios`, `handleFriendState`, `handleNewPlayerAsync`."
+    },
+    "RxPlayerUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utilities for observing players Public entry points include `RxPlayerUtils.observePlayersBrio`, `handlePlayer`, `RxPlayerUtils.observeCharactersBrio`, `RxPlayerUtils.observeHumanoidsBrio`, `RxPlayerUtils.observePlayers`, `RxPlayerUtils.observeBackpackToolsAdded`, `handleTool`, `RxPlayerUtils.observeBackpackToolsRemoved`."
+    }
+  }
+}

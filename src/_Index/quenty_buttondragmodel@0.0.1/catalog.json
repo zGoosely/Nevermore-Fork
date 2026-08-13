@@ -1,0 +1,15 @@
+{
+  "purpose": "Tracks mouse and touch dragging over a GuiButton and exposes normalized button position, accumulated drag delta, and pressed-state observables.",
+  "description": "Tracks mouse and touch dragging over a GuiButton and exposes normalized button position, accumulated drag delta, and pressed-state observables.",
+  "tags": [
+    "gui",
+    "reactive"
+  ],
+  "modules": {
+    "ButtonDragModel.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Tracks mouse and touch dragging over a GuiButton and exposes normalized button position, accumulated drag delta, and pressed-state observables. Public entry points include `ButtonDragModel.new`, `ButtonDragModel.IsPressed`, `ButtonDragModel.ObserveIsPressed`, `ButtonDragModel.ObserveIsPressedBrio`, `ButtonDragModel.ObserveDragDelta`, `ButtonDragModel.GetDragDelta`, `ButtonDragModel.GetDragPosition`,…"
+    }
+  }
+}

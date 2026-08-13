@@ -1,0 +1,14 @@
+{
+  "purpose": "Allows the appearance of a model to be overridden. Most commonly used when placing down an object in a building game.",
+  "description": "Allows the appearance of a model to be overridden. Most commonly used when placing down an object in a building game.",
+  "tags": [
+    "shared"
+  ],
+  "modules": {
+    "ModelAppearance.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Allows the appearance of a model to be overridden. Most commonly used when placing down an object in a building game. Public entry points include `ModelAppearance.new`, `ModelAppearance.DisableInteractions`, `ModelAppearance.SetCanCollide`, `ModelAppearance.ResetCanCollide`, `ModelAppearance.SetTransparency`, `ModelAppearance.ResetTransparency`, `ModelAppearance.SetColor`, `ModelAppearance.ResetColor`."
+    }
+  }
+}

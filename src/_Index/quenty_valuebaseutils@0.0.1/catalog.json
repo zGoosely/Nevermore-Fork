@@ -1,0 +1,15 @@
+{
+  "purpose": "Provides utilities for working with ValueBase objects, like [IntValue] or [ObjectValue] in Roblox.",
+  "description": "Provides utilities for working with ValueBase objects, like [IntValue] or [ObjectValue] in Roblox.",
+  "tags": [
+    "data",
+    "utility"
+  ],
+  "modules": {
+    "ValueBaseUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Provides utilities for working with ValueBase objects, like [IntValue] or [ObjectValue] in Roblox. Public entry points include `ValueBaseUtils.isValueBase`, `ValueBaseUtils.getValueBaseType`, `ValueBaseUtils.getClassNameFromType`, `ValueBaseUtils.getOrCreateValue`, `ValueBaseUtils.setValue`, `ValueBaseUtils.getValue`, `ValueBaseUtils.createGetSet`."
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "purpose": "A very simple enum implementation that makes typechecking boilerplate simpler.",
+  "description": "A very simple enum implementation that makes typechecking boilerplate simpler.",
+  "tags": [
+    "enums"
+  ],
+  "modules": {
+    "Enums.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "A very simple enum implementation that makes typechecking boilerplate simpler."
+    }
+  }
+}

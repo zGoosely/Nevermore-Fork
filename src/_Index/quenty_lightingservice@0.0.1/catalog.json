@@ -1,0 +1,22 @@
+{
+  "purpose": "`PostProcessingStackService` owns shared, named post-processing effects on the client. Each effect exposes property stacks backed by `StateStack`, so temporary overrides restore the previous value when their cleanup function is called.",
+  "description": "`PostProcessingStackService` owns shared, named post-processing effects on the client. Each effect exposes property stacks backed by `StateStack`, so temporary overrides restore the previous value when their cleanup function is called.",
+  "tags": [
+    "data",
+    "game_service",
+    "reactive",
+    "world"
+  ],
+  "modules": {
+    "Client/LightingEffect.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Owns a named post-processing effect and the stacks that control its properties. Public entry points include `LightingEffect.new`, `LightingEffect.GetName`, `LightingEffect.GetClassName`, `LightingEffect.GetInstance`."
+    },
+    "Client/PostProcessingStackService.luau": {
+      "realm": "client",
+      "kind": "Service",
+      "description": "Provides shared, named post-processing effects for the local client. Public entry points include `PostProcessingStackService.Init`, `PostProcessingStackService.GetOrCreateEffect`, `PostProcessingStackService.Destroy`."
+    }
+  }
+}

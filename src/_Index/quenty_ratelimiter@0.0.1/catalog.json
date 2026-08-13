@@ -1,0 +1,14 @@
+{
+  "purpose": "Implements a token-bucket rate limiter. Tokens refill continuously according to a monotonic clock and are consumed explicitly by callers.",
+  "description": "Implements a token-bucket rate limiter. Tokens refill continuously according to a monotonic clock and are consumed explicitly by callers.",
+  "tags": [
+    "security"
+  ],
+  "modules": {
+    "RateLimiter.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Implements a token-bucket rate limiter. Tokens refill continuously according to a monotonic clock and are consumed explicitly by callers. Public entry points include `RateLimiter.new`, `RateLimiter.GetCapacity`, `RateLimiter.GetRefillRate`, `RateLimiter.GetAvailableTokens`, `RateLimiter.TryConsume`, `RateLimiter.GetRetryAfter`, `RateLimiter.AddTokens`, `RateLimiter.Reset`."
+    }
+  }
+}

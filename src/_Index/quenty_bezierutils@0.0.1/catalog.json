@@ -1,0 +1,15 @@
+{
+  "purpose": "Make interpolation curves like CSS _ A good place to generate and test these out: http://cubic-bezier.com/ _ Based upon https://gist.github.com/gre/1926947#file-keyspline-js",
+  "description": "Make interpolation curves like CSS _ A good place to generate and test these out: http://cubic-bezier.com/ _ Based upon https://gist.github.com/gre/1926947#file-keyspline-js",
+  "tags": [
+    "math",
+    "utility"
+  ],
+  "modules": {
+    "BezierUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Make interpolation curves like CSS _ A good place to generate and test these out: http://cubic-bezier.com/ _ Based upon https://gist.github.com/gre/1926947#file-keyspline-js Public entry points include `BezierUtils.createBezierFactory`, `a`, `b`, `c`, `calculateBezier`, `getSlope`, `getTForX`."
+    }
+  }
+}

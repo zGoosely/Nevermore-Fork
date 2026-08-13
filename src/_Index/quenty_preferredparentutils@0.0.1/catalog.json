@@ -1,0 +1,14 @@
+{
+  "purpose": "Handles logic for creating a \"preferred\" parent container or erroring if it already exists.",
+  "description": "Handles logic for creating a \"preferred\" parent container or erroring if it already exists.",
+  "tags": [
+    "utility"
+  ],
+  "modules": {
+    "PreferredParentUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Handles logic for creating a \"preferred\" parent container or erroring if it already exists. Public entry points include `PreferredParentUtils.createPreferredParentRetriever`, `PreferredParentUtils.getPreferredParent`."
+    }
+  }
+}

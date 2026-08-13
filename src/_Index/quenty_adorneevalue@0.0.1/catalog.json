@@ -1,0 +1,14 @@
+{
+  "purpose": "Helper class to transform a an adornee into relative positions/information",
+  "description": "Helper class to transform a an adornee into relative positions/information",
+  "tags": [
+    "data"
+  ],
+  "modules": {
+    "AdorneeValue.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Helper class to transform a an adornee into relative positions/information Public entry points include `AdorneeValue.new`, `AdorneeValue.GetAdornee`, `AdorneeValue.Observe`, `AdorneeValue.ObserveBottomCFrame`, `AdorneeValue.ObserveCenterPosition`, `AdorneeValue.GetCenterPosition`, `AdorneeValue.ObserveRadius`, `AdorneeValue.GetRadius`."
+    }
+  }
+}

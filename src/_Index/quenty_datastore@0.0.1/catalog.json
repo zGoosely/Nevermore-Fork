@@ -1,0 +1,34 @@
+{
+  "purpose": "This package provides a small wrapper around Roblox data stores and two services that choose the scope and lifetime of that wrapper for you.",
+  "description": "This package provides a small wrapper around Roblox data stores and two services that choose the scope and lifetime of that wrapper for you.",
+  "tags": [
+    "data",
+    "game_service",
+    "lifecycle",
+    "math",
+    "player_service",
+    "reactive"
+  ],
+  "modules": {
+    "DataStore.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Wraps one key in a Roblox DataStore with cached reads, staged writes, atomic saves, and optional autosaving. This is the server-state datastore used by [GameDataStoreService] and Public entry points include `DataStore.new`, `DataStore.Store`, `DataStore.Load`, `DataStore.LoadAll`, `DataStore.Save`, `DataStore.Sync`, `DataStore.SetAutoSaveTimeSeconds`, `DataStore.GetAutoSaveTimeSeconds`."
+    },
+    "DataStorePromises.luau": {
+      "realm": "server",
+      "kind": "Utility",
+      "description": "Promise wrappers for Roblox DataStore operations. Public entry points include `DataStorePromises.isDataStore`, `DataStorePromises.promiseDataStore`, `DataStorePromises.getAsync`, `DataStorePromises.updateAsync`."
+    },
+    "GameDataStoreService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Provides a frequently synchronized datastore for game-wide server state. Public entry points include `GameDataStoreService.Init`, `GameDataStoreService.SetRobloxDataStore`, `GameDataStoreService.PromiseDataStore`, `GameDataStoreService.SetDataStoreKey`, `GameDataStoreService.Destroy`."
+    },
+    "PrivateServerDataStoreService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Provides server state keyed to the current private or reserved server. Public servers share the fallback key \"main\". Public entry points include `PrivateServerDataStoreService.Init`, `PrivateServerDataStoreService.PromiseDataStore`, `PrivateServerDataStoreService.PromiseDataStoreForKey`, `PrivateServerDataStoreService.SetCustomKey`, `PrivateServerDataStoreService.SetRobloxDataStore`,…"
+    }
+  }
+}

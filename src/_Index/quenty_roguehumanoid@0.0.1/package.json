@@ -1,7 +1,15 @@
 {
   "name": "quenty/roguehumanoid",
   "version": "0.0.1",
-  "exports": {},
+  "exports": {
+    "RogueHumanoid": "Server/RogueHumanoid",
+    "RogueHumanoidBase": "Shared/RogueHumanoidBase",
+    "RogueHumanoidClient": "Client/RogueHumanoidClient",
+    "RogueHumanoidInterface": "Shared/RogueHumanoidInterface",
+    "RogueHumanoidProperties": "Shared/RogueHumanoidProperties",
+    "RogueHumanoidService": "Server/RogueHumanoidService",
+    "RogueHumanoidServiceClient": "Client/RogueHumanoidServiceClient"
+  },
   "dependencies": [
     "quenty/attributeutils@0.0.1",
     "quenty/baseobject@0.0.1",

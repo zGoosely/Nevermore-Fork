@@ -12,6 +12,13 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from nevermore_packages.catalog import read_catalog, render_catalog, validate_catalog
+from nevermore_packages.models import PackageRecord
+
+
 SRC = ROOT / "src"
 INDEX = SRC / "_Index"
 CATALOG = ROOT / "PKGINFO.md"
@@ -136,6 +143,7 @@ def main() -> int:
 
     differences: list[Path] = []
     index_tree: dict[str, object] = {"$className": "Folder"}
+    records: list[PackageRecord] = []
 
     for package_name, (manifest_path, manifest) in sorted(manifests.items()):
         version = str(manifest["version"])
@@ -157,6 +165,19 @@ def main() -> int:
             differences,
         )
 
+        catalog_path = manifest_path.parent / "catalog.json"
+        catalog = read_catalog(catalog_path)
+        record = PackageRecord(
+            root=manifest_path.parent,
+            name=package_name,
+            version=version,
+            exports={str(alias): str(target) for alias, target in normalized_manifest["exports"].items()},
+            dependencies=tuple(str(item) for item in normalized_manifest["dependencies"]),
+            externals=tuple(str(item) for item in normalized_manifest["externals"]),
+            catalog=catalog,
+        )
+        records.append(record)
+
         for alias, target in normalized_manifest["exports"].items():
             implementation = resolve_module(manifest_path.parent, target)
             wrapper = render_wrapper(scoped_version, implementation, target)
@@ -164,6 +185,9 @@ def main() -> int:
 
     index_project = json.dumps({"name": "_Index", "tree": index_tree}, indent=2) + "\n"
     write_or_check(INDEX / "default.project.json", index_project, args.check, differences)
+
+    rendered_catalog = render_catalog(records)
+    write_or_check(CATALOG, rendered_catalog, args.check, differences)
 
     expected_wrappers = {f"{alias}.luau" for alias in alias_owners}
     unexpected_wrappers = [path for path in SRC.glob("*.luau") if path.name not in expected_wrappers]
@@ -173,24 +197,9 @@ def main() -> int:
             wrapper.unlink()
 
     if args.check:
-        catalog = CATALOG.read_text(encoding="utf-8")
-        catalog_packages = set(CATALOG_PACKAGE.findall(catalog))
-        indexed_packages = {name.removeprefix("quenty/") for name in manifests}
-        production_module_count = sum(
-            1
-            for path in INDEX.rglob("*")
-            if path.is_file()
-            and path.suffix in {".lua", ".luau"}
-            and not path.name.endswith((".spec.lua", ".spec.luau"))
-            and path.name not in {"jest.config.lua", "jest.config.luau"}
-        )
-        expected_coverage = (
-            f"**Coverage:** {len(indexed_packages)} packages · {production_module_count} production modules"
-        )
-        coverage_match = CATALOG_COVERAGE.search(catalog)
-        if catalog_packages != indexed_packages or not coverage_match or coverage_match.group(0) != expected_coverage:
-            if CATALOG not in differences:
-                differences.append(CATALOG)
+        for record in records:
+            if validate_catalog(record) and record.root / "catalog.json" not in differences:
+                differences.append(record.root / "catalog.json")
 
     if differences:
         action = "would update" if args.check else "updated"

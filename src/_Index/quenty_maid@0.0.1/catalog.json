@@ -1,0 +1,20 @@
+{
+  "purpose": "Owns cleanup tasks, connections, promises, and child objects so lifetimes are deterministic.",
+  "description": "Owns cleanup tasks, connections, promises, and child objects so lifetimes are deterministic.",
+  "tags": [
+    "lifecycle",
+    "utility"
+  ],
+  "modules": {
+    "Maid.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Maid provides the class/model implementation used by the Maid package. Public entry points include `Maid.new`, `Maid.isMaid`, `Maid.GivePromise`, `Maid.DoCleaning`."
+    },
+    "MaidTaskUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility methods involving maids and tasks. Public entry points include `MaidTaskUtils.isValidTask`, `MaidTaskUtils.doTask`, `MaidTaskUtils.delayed`."
+    }
+  }
+}

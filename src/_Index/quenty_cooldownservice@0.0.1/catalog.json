@@ -1,0 +1,96 @@
+{
+  "purpose": "`CooldownService` is a small, category-free cooldown package. A cooldown belongs to any `Instance` and a case-sensitive string key, so the same API can cover combat moves, tools, interactions, UI, matchmaking, or any other temporary lockout.",
+  "description": "`CooldownService` is a small, category-free cooldown package. A cooldown belongs to any `Instance` and a case-sensitive string key, so the same API can cover combat moves, tools, interactions, UI, matchmaking, or any other temporary lockout.",
+  "tags": [
+    "data",
+    "enums",
+    "game_service",
+    "gui",
+    "input",
+    "lifecycle",
+    "localization",
+    "math",
+    "player_service",
+    "reactive",
+    "security",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "Client/CooldownBindersClient.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Provides the replicated and predicted client Cooldown binder."
+    },
+    "Client/CooldownClient.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Read-only client model for one replicated or locally predicted cooldown. Public entry points include `CooldownClient.new`."
+    },
+    "CooldownService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Creates, queries, observes, and expires authoritative cooldowns attached to arbitrary Instance owners. Public entry points include `CooldownService.Init`, `CooldownService.StartCooldown`, `CooldownService.StartTypedCooldown`, `CooldownService.RestartCooldown`, `CooldownService.GetCooldown`, `CooldownService.IsOnCooldown`, `CooldownService.GetRemainingTime`, `CooldownService.ObserveCooldown`."
+    },
+    "CooldownServiceClient.luau": {
+      "realm": "client",
+      "kind": "Service",
+      "description": "Queries replicated cooldowns and owns optional local client predictions. Public entry points include `CooldownServiceClient.Init`, `CooldownServiceClient.GetCooldown`, `CooldownServiceClient.IsOnCooldown`, `CooldownServiceClient.GetRemainingTime`, `CooldownServiceClient.ObserveCooldown`, `CooldownServiceClient.ObserveIsOnCooldown`, `CooldownServiceClient.PredictCooldown`, `CooldownServiceClient.PredictTypedCooldown`."
+    },
+    "Server/Cooldown.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Authoritative server model for one tagged cooldown Folder. Public entry points include `Cooldown.new`, `Cooldown.Restart`, `Cooldown.AddTime`, `Cooldown.RemoveTime`, `Cooldown.Clear`."
+    },
+    "Server/CooldownBindersServer.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Provides the authoritative server Cooldown binder."
+    },
+    "Server/CooldownBurstTracker.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Tracks successful typed cooldown starts in rolling owner/key windows. Public entry points include `CooldownBurstTracker.new`, `CooldownBurstTracker.RecordUse`, `CooldownBurstTracker.Reset`, `CooldownBurstTracker.Destroy`."
+    },
+    "Shared/CooldownBase.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Shared read-only behavior for one tagged cooldown Folder. Public entry points include `CooldownBase.new`, `CooldownBase.GetFolder`, `CooldownBase.GetState`, `CooldownBase.GetOwner`, `CooldownBase.GetKey`, `CooldownBase.GetStartedAt`, `CooldownBase.GetEndsAt`, `CooldownBase.GetDuration`."
+    },
+    "Shared/CooldownClockService.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "Owns CooldownService's synchronized realm clock and hides TimeSyncService wiring from cooldown models and public helpers. Public entry points include `CooldownClockService.Init`, `CooldownClockService.GetTime`."
+    },
+    "Shared/CooldownExpiryScheduler.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Schedules all cooldown expirations through one minimum heap and one heartbeat. Public entry points include `CooldownExpiryScheduler.new`, `CooldownExpiryScheduler.Schedule`, `CooldownExpiryScheduler.Cancel`, `CooldownExpiryScheduler.Step`, `CooldownExpiryScheduler.Destroy`."
+    },
+    "Shared/CooldownRegistry.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Maintains constant-time owner/key cooldown lookup and reactive selection over all models produced by one realm's Cooldown binder. Public entry points include `CooldownRegistry.new`, `CooldownRegistry.Register`, `CooldownRegistry.Unregister`, `CooldownRegistry.Get`, `CooldownRegistry.Observe`, `CooldownRegistry.Destroy`."
+    },
+    "Shared/CooldownServiceConstants.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Shared attribute names, binder tag, and defaults for CooldownService."
+    },
+    "Shared/CooldownServiceTypes.luau": {
+      "realm": "shared",
+      "kind": "Types",
+      "description": "Shared contracts for cooldown state, clocks, and expiry scheduling."
+    },
+    "Shared/CooldownServiceUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Validates cooldown data, creates tagged cooldown Folders, and provides the small heap operations used by the shared expiry scheduler. Public entry points include `CooldownServiceUtils.isFiniteNumber`, `CooldownServiceUtils.isDuration`, `CooldownServiceUtils.isCooldownKey`, `CooldownServiceUtils.isDefaultCooldownValue`, `CooldownServiceUtils.isBurstCooldownValue`,…"
+    },
+    "Shared/CooldownTypes.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Canonical cooldown policy types."
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "purpose": "Utility functions involving RandomVector3Utils",
+  "description": "Utility functions involving RandomVector3Utils",
+  "tags": [
+    "math",
+    "utility"
+  ],
+  "modules": {
+    "RandomVector3Utils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility functions involving RandomVector3Utils Public entry points include `RandomVector3Utils.getRandomUnitVector`, `gaussianRandom`, `RandomVector3Utils.gaussianRandom`, `RandomVector3Utils.getDirectedRandomUnitVector`."
+    },
+    "Vector3Utils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utilities involving Vector3 objects in Roblox. Public entry points include `Vector3Utils.fromVector2XY`, `Vector3Utils.fromVector2XZ`, `Vector3Utils.getAngleRad`, `Vector3Utils.reflect`, `Vector3Utils.angleBetweenVectors`, `Vector3Utils.slerp`, `Vector3Utils.constrainToCone`, `Vector3Utils.round`."
+    }
+  }
+}

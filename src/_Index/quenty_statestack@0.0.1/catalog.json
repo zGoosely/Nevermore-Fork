@@ -1,0 +1,16 @@
+{
+  "purpose": "Stack of values that allows multiple systems to enable or disable a state.",
+  "description": "Stack of values that allows multiple systems to enable or disable a state.",
+  "tags": [
+    "data",
+    "lifecycle",
+    "reactive"
+  ],
+  "modules": {
+    "StateStack.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Stack of values that allows multiple systems to enable or disable a state."
+    }
+  }
+}

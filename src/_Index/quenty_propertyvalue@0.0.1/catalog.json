@@ -1,0 +1,14 @@
+{
+  "purpose": "Proxies a property in Roblox",
+  "description": "Proxies a property in Roblox",
+  "tags": [
+    "data"
+  ],
+  "modules": {
+    "PropertyValue.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Proxies a property in Roblox."
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "purpose": "An observable map that counts up/down and removes when the count is zero.",
+  "description": "An observable map that counts up/down and removes when the count is zero.",
+  "tags": [
+    "data",
+    "reactive"
+  ],
+  "modules": {
+    "FilteredObservableListView.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Filtered Observable List View provides the class/model implementation used by the Observablecollection package. Public entry points include `defaultCompare`."
+    },
+    "ObservableCountingMap.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "An observable map that counts up/down and removes when the count is zero. Public entry points include `ObservableCountingMap.isObservableMap`, `emit`, `handleValue`, `handleItem`."
+    },
+    "ObservableInstance.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "A reactive wrapper around Roblox instances that allows observing property changes. Public entry points include `ObservableInstance.new`, `ObservableInstance.fromInstance`, `ObservableInstance.Observe`, `ObservableInstance.GetValue`, `ObservableInstance.SetValue`, `ObservableInstance.GetInstance`, `ObservableInstance.SetProperties`, `ObservableInstance.ObserveProperties`."
+    },
+    "ObservableList.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "A list that can be observed for blend and other components Public entry points include `ObservableList.isObservableList`, `queueFire`, `handleItem`."
+    },
+    "ObservableMap.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "A list that can be observed for blend and other components Public entry points include `ObservableMap.isObservableMap`, `handleValue`, `cleanup`."
+    },
+    "ObservableMapList.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Holds a map of lists. This is good for list-based."
+    },
+    "ObservableMapSet.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Holds a map of sets. That is, for a given key, a set of all valid entries. This is great for looking up something that may have duplicate keys, like configurations or other things."
+    },
+    "ObservableSet.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "A list that can be observed for blend and other components Public entry points include `ObservableSet.isObservableSet`, `handleItem`."
+    }
+  }
+}

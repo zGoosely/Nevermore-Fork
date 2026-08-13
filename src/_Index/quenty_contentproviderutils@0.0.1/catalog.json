@@ -1,0 +1,15 @@
+{
+  "purpose": "Utilities for working with ContentProvider and preloading assets.",
+  "description": "Utilities for working with ContentProvider and preloading assets.",
+  "tags": [
+    "math",
+    "utility"
+  ],
+  "modules": {
+    "ContentProviderUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utilities for working with ContentProvider and preloading assets. Public entry points include `ContentProviderUtils.promisePreload`, `ContentProviderUtils.promisePreloadSoundIds`, `ContentProviderUtils.promisePreloadAnimations`."
+    }
+  }
+}

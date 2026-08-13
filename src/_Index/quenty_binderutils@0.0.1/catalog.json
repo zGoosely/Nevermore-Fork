@@ -1,0 +1,14 @@
+{
+  "purpose": "Utility methods for the binder object.",
+  "description": "Utility methods for the binder object.",
+  "tags": [
+    "utility"
+  ],
+  "modules": {
+    "BinderUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility methods for the binder object."
+    }
+  }
+}

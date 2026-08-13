@@ -1,0 +1,14 @@
+{
+  "purpose": "Collects the sortfunctionutils runtime building blocks—Sort Function Utils—and composes them for reuse in Roblox experiences.",
+  "description": "Collects the sortfunctionutils runtime building blocks—Sort Function Utils—and composes them for reuse in Roblox experiences.",
+  "tags": [
+    "utility"
+  ],
+  "modules": {
+    "SortFunctionUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Sort Function Utils provides the class/model implementation used by the Sortfunctionutils package. Public entry points include `SortFunctionUtils.default`, `SortFunctionUtils.emptyIterator`."
+    }
+  }
+}

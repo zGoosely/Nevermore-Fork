@@ -22,8 +22,8 @@ This creates `src/_Index/quenty_example@0.0.1/package.json` and registers the lo
    }
    ```
 
-3. Use relative imports between modules in the package and flat `@game/ReplicatedStorage/Packages/<Export>`
-   imports for other packages.
+3. Use `@self/<Child>` when importing a child of an `init.luau` package module. Ordinary modules use `./Sibling`
+   and `../ParentSibling` paths. Use flat `@game/ReplicatedStorage/Packages/<Export>` imports for other packages.
 4. Add the package to `PKGINFO.md`, including its directory row, package card, and production submodules.
 5. Run `python3 scripts/sync_packages.py` to generate typed surface modules and dependency metadata.
 
@@ -33,8 +33,10 @@ Edit its indexed implementation, tests, README, export map, and `PKGINFO.md` ent
 
 ```bash
 python3 scripts/sync_packages.py
+python3 scripts/normalize_package_requires.py
 stylua src
 selene src
+python3 scripts/normalize_package_requires.py --check
 python3 scripts/sync_packages.py --check
 ```
 
@@ -64,6 +66,7 @@ also deletes obsolete generated surface wrappers.
 
 ```bash
 python3 scripts/sync_packages.py --check
+python3 scripts/normalize_package_requires.py --check
 stylua --check src
 selene src
 rojo build default.project.json --output /tmp/nevermore.rbxm

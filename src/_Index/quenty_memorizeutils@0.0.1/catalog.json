@@ -1,0 +1,15 @@
+{
+  "purpose": "Collects the memorizeutils runtime building blocks—Memorize Utils—and composes them for reuse in Roblox experiences.",
+  "description": "Collects the memorizeutils runtime building blocks—Memorize Utils—and composes them for reuse in Roblox experiences.",
+  "tags": [
+    "developer_tools",
+    "utility"
+  ],
+  "modules": {
+    "MemorizeUtils.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Memorize Utils provides the module implementation used by the Memorizeutils package. Public entry points include `getMemoizeKey`, `MemorizeUtils.memoize`, `MemorizeUtils.timed`, `MemorizeUtils.lruMemoize`."
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "purpose": "Collects the squash runtime building blocks—Squash—and composes them for reuse in Roblox experiences.",
+  "description": "Collects the squash runtime building blocks—Squash—and composes them for reuse in Roblox experiences.",
+  "tags": [
+    "shared"
+  ],
+  "modules": {
+    "Squash.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Squash provides the module implementation used by the Squash package. Public entry points include `getbuf`, `setbuf`, `getpos`, `setpos`, `newcursor`, `frombuffer`, `tobuffer`, `tryrealloc`."
+    }
+  }
+}

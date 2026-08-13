@@ -1,0 +1,43 @@
+{
+  "purpose": "The highlight package creates spring-animated Roblox `Highlight` instances on the client. `HighlightServiceClient` is the normal entry point: it shares one `AnimatedHighlightGroup`, stacks competing highlight requests per adornee, and shows the request with the highest score.",
+  "description": "The highlight package creates spring-animated Roblox `Highlight` instances on the client. `HighlightServiceClient` is the normal entry point: it shares one `AnimatedHighlightGroup`, stacks competing highlight requests per adornee, and shows the request with the highest score.",
+  "tags": [
+    "animation",
+    "data",
+    "enums",
+    "game_service",
+    "gui",
+    "lifecycle",
+    "math",
+    "player_service",
+    "reactive",
+    "world"
+  ],
+  "modules": {
+    "Client/HighlightServiceClient.luau": {
+      "realm": "client",
+      "kind": "Service",
+      "description": "Centralized group Public entry points include `HighlightServiceClient.Init`, `HighlightServiceClient.GetAnimatedHighlightGroup`, `HighlightServiceClient.Highlight`, `HighlightServiceClient.Destroy`."
+    },
+    "Client/Stack/AnimatedHighlight.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Animated Highlight provides the class/model implementation used by the Highlight package. Public entry points include `AnimatedHighlight.new`, `AnimatedHighlight.isAnimatedHighlight`, `AnimatedHighlight.SetHighlightDepthMode`, `AnimatedHighlight.SetPropertiesFrom`, `transferSpringValue`, `AnimatedHighlight.SetTransparencySpeed`, `AnimatedHighlight.SetColorSpeed`, `AnimatedHighlight.SetSpeed`."
+    },
+    "Client/Stack/AnimatedHighlightGroup.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Animated Highlight Group provides the class/model implementation used by the Highlight package. Public entry points include `AnimatedHighlightGroup.new`, `AnimatedHighlightGroup.SetDefaultHighlightDepthMode`, `AnimatedHighlightGroup.SetDefaultFillTransparency`, `AnimatedHighlightGroup.SetDefaultOutlineTransparency`, `AnimatedHighlightGroup.SetDefaultFillColor`, `AnimatedHighlightGroup.GetDefaultFillColor`,…"
+    },
+    "Client/Stack/AnimatedHighlightModel.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Animated Highlight Model provides the class/model implementation used by the Highlight package. Public entry points include `AnimatedHighlightModel.new`, `AnimatedHighlightModel.isAnimatedHighlightModel`, `AnimatedHighlightModel.SetHighlightDepthMode`, `AnimatedHighlightModel.SetTransparencySpeed`, `AnimatedHighlightModel.SetColorSpeed`, `AnimatedHighlightModel.SetSpeed`, `AnimatedHighlightModel.SetFillColor`,…"
+    },
+    "Client/Stack/AnimatedHighlightStack.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Animated Highlight Stack provides the class/model implementation used by the Highlight package. Public entry points include `AnimatedHighlightStack.new`, `AnimatedHighlightStack.isAnimatedHighlightStack`, `AnimatedHighlightStack.SetPropertiesFrom`, `AnimatedHighlightStack.ObserveHasEntries`, `filterNil`, `AnimatedHighlightStack.GetHandle`."
+    }
+  }
+}

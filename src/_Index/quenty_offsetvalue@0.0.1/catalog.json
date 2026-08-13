@@ -1,0 +1,15 @@
+{
+  "purpose": "Sets a new base value",
+  "description": "Sets a new base value",
+  "tags": [
+    "data",
+    "math"
+  ],
+  "modules": {
+    "OffsetValue.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Sets a new base value."
+    }
+  }
+}

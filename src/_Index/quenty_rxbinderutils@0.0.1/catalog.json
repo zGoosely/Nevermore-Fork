@@ -1,0 +1,15 @@
+{
+  "purpose": "Utility methods to observe bound objects on instances. This is what makes the Rx library with binders really good. Using this API, you can query most game-state in very efficient ways, and react to the world changing in real-time. This makes programming streaming and other APIs really nice.",
+  "description": "Utility methods to observe bound objects on instances. This is what makes the Rx library with binders really good. Using this API, you can query most game-state in very efficient ways, and react to the world changing in real-time. This makes programming streaming and other APIs really nice.",
+  "tags": [
+    "reactive",
+    "utility"
+  ],
+  "modules": {
+    "RxBinderUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility methods to observe bound objects on instances. This is what makes the Rx library with binders really good. Using this API, you can query most game-state in very efficient ways, and react to the world changing in real-time. This makes programming streaming and other APIs really nice. Public entry points include `RxBinderUtils.observeBoundChildClassesBrio`, `handleClassChanged`, `handleNewClass`, `emit`."
+    }
+  }
+}

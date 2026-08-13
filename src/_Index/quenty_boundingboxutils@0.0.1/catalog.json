@@ -1,0 +1,20 @@
+{
+  "purpose": "Bounding box utilties. Prefer model:GetBoundingBox() in most cases. However, sometimes grouping isn't possible.",
+  "description": "Bounding box utilties. Prefer model:GetBoundingBox() in most cases. However, sometimes grouping isn't possible.",
+  "tags": [
+    "physics",
+    "utility"
+  ],
+  "modules": {
+    "BoundingBoxUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Bounding box utilties. Prefer model:GetBoundingBox() in most cases. However, sometimes grouping isn't possible. Public entry points include `BoundingBoxUtils.getPartsBoundingBox`, `BoundingBoxUtils.clampPointToBoundingBox`, `BoundingBoxUtils.pushPointToLieOnBoundingBox`, `BoundingBoxUtils.getChildrenBoundingBox`, `BoundingBoxUtils.axisAlignedBoxSize`, `BoundingBoxUtils.getBoundingBox`,…"
+    },
+    "CompiledBoundingBoxUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "See https://gist.github.com/Fraktality/4e394945c865263144263250d5a78f79 Public entry points include `CompiledBoundingBoxUtils.compileBBox`, `CompiledBoundingBoxUtils.testPointBBox`."
+    }
+  }
+}

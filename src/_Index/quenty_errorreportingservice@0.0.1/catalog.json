@@ -1,0 +1,24 @@
+{
+  "purpose": "`ErrorReportingService` observes server error output, enriches it with experience and server metadata, and posts bounded batches of Discord embeds. The Discord webhook URL is loaded from `SecretService` using the `ErrorReportingEndpoint` key by default.",
+  "description": "`ErrorReportingService` observes server error output, enriches it with experience and server metadata, and posts bounded batches of Discord embeds. The Discord webhook URL is loaded from `SecretService` using the `ErrorReportingEndpoint` key by default.",
+  "tags": [
+    "data",
+    "developer_tools",
+    "game_service",
+    "player_service",
+    "security",
+    "utility"
+  ],
+  "modules": {
+    "ErrorReportingService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Captures server errors and delivers bounded batches to a Discord webhook. Public entry points include `ErrorReportingService.Init`, `ErrorReportingService.Start`, `ErrorReportingService.SetEndpoint`, `ErrorReportingService.SetEndpointSecretKey`, `ErrorReportingService.SetAuthenticationSecretKey`, `promisePostReports`, `ErrorReportingService.Destroy`."
+    },
+    "ErrorReportingUtils.luau": {
+      "realm": "server",
+      "kind": "Utility",
+      "description": "Creates structured error reports and emits fatal errors for ErrorReportingService to observe. Public entry points include `truncate`, `formatCodeBlock`, `formatInlineValue`, `formatJsonValue`, `formatStackTrace`, `formatTitle`, `sanitizeValue`, `ErrorReportingUtils.sanitizeContext`."
+    }
+  }
+}

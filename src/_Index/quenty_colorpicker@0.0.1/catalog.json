@@ -1,0 +1,53 @@
+{
+  "purpose": "`ColorPicker` provides client-side HSV color controls built with Blend. The package creates its own GUI, supports mouse and touch dragging, exposes the selected color as both `Color3` and HSV, and automatically chooses contrasting cursor colors.",
+  "description": "`ColorPicker` provides client-side HSV color controls built with Blend. The package creates its own GUI, supports mouse and touch dragging, exposes the selected color as both `Color3` and HSV, and automatically chooses contrasting cursor colors.",
+  "tags": [
+    "data",
+    "gui",
+    "input",
+    "lifecycle",
+    "math",
+    "player_service",
+    "reactive",
+    "security",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "Client/ColorPickerUtils.luau": {
+      "realm": "client",
+      "kind": "Utility",
+      "description": "Color-picker presentation utilities. Public entry points include `ColorPickerUtils.getOutlineWithContrast`."
+    },
+    "Client/Cursor/ColorPickerCursorPreview.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Floating selected-color preview, primarily for touch input where a finger can occlude the picker. Public entry points include `ColorPickerCursorPreview.new`, `ColorPickerCursorPreview.HintBackgroundColor`, `ColorPickerCursorPreview.SetPosition`, `ColorPickerCursorPreview.GetPosition`, `ColorPickerCursorPreview.SetColor`, `ColorPickerCursorPreview.SetTransparency`."
+    },
+    "Client/Cursor/ColorPickerTriangle.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Contrast-aware triangular marker used by value pickers. Public entry points include `ColorPickerTriangle.new`, `ColorPickerTriangle.HintBackgroundColor`, `ColorPickerTriangle.GetSizeValue`, `ColorPickerTriangle.GetMeasureValue`, `ColorPickerTriangle.SetColor`, `ColorPickerTriangle.SetTransparency`."
+    },
+    "Client/Cursor/HSColorPickerCursor.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Crosshair cursor used by HSColorPicker. Public entry points include `HSColorPickerCursor.new`, `HSColorPickerCursor.HintBackgroundColor`, `HSColorPickerCursor.SetVerticalHairVisible`, `HSColorPickerCursor.SetHorizontalHairVisible`, `HSColorPickerCursor.SetHeight`, `HSColorPickerCursor.SetPosition`, `HSColorPickerCursor.GetPosition`, `HSColorPickerCursor.SetTransparency`."
+    },
+    "Client/HSV/HSColorPicker.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Selects hue and saturation in HSV color space. Use [HSVColorPicker] when value selection is also required. Public entry points include `HSColorPicker.new`, `HSColorPicker.ObserveIsPressed`, `HSColorPicker.SetHSVColor`, `HSColorPicker.GetHSVColor`, `HSColorPicker.SetColor`, `HSColorPicker.GetColor`, `HSColorPicker.GetSizeValue`, `HSColorPicker.GetMeasureValue`."
+    },
+    "Client/HSV/HSVColorPicker.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "A complete HSV color picker with hue, saturation, and value controls. Public entry points include `HSVColorPicker.new`, `HSVColorPicker.SetSize`, `HSVColorPicker.SyncValue`, `HSVColorPicker.HintBackgroundColor`, `HSVColorPicker.SetHSVColor`, `HSVColorPicker.GetHSVColor`, `HSVColorPicker.SetColor`, `HSVColorPicker.GetColor`."
+    },
+    "Client/HSV/ValueColorPicker.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Selects the value component of an HSV color. Public entry points include `ValueColorPicker.new`, `ValueColorPicker.SetSize`, `ValueColorPicker.HintBackgroundColor`, `ValueColorPicker.ObserveIsPressed`, `ValueColorPicker.SetHSVColor`, `ValueColorPicker.GetHSVColor`, `ValueColorPicker.SetColor`, `ValueColorPicker.GetColor`."
+    }
+  }
+}

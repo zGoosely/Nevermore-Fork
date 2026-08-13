@@ -1,0 +1,14 @@
+{
+  "purpose": "Throttles execution of a functon. Does both leading, and following",
+  "description": "Throttles execution of a functon. Does both leading, and following",
+  "tags": [
+    "shared"
+  ],
+  "modules": {
+    "Throttle.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Throttles execution of a functon. Does both leading, and following."
+    }
+  }
+}

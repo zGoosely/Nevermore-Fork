@@ -1,0 +1,15 @@
+{
+  "purpose": "Utility functions that are related to the Spring object",
+  "description": "Utility functions that are related to the Spring object",
+  "tags": [
+    "animation",
+    "utility"
+  ],
+  "modules": {
+    "SpringUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility functions that are related to the Spring object."
+    }
+  }
+}

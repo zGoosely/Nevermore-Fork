@@ -1,0 +1,15 @@
+{
+  "purpose": "Utility functions primarily used to bind animations into update loops of the Roblox engine.",
+  "description": "Utility functions primarily used to bind animations into update loops of the Roblox engine.",
+  "tags": [
+    "animation",
+    "utility"
+  ],
+  "modules": {
+    "StepUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility functions primarily used to bind animations into update loops of the Roblox engine. Public entry points include `StepUtils.bindToRenderStep`, `StepUtils.deferWait`, `StepUtils.bindToStepped`, `StepUtils.bindToSignal`, `disconnect`, `connect`, `StepUtils.onceAtRenderPriority`, `cleanup`."
+    }
+  }
+}

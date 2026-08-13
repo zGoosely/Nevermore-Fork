@@ -1,0 +1,14 @@
+{
+  "purpose": "Collects the counter runtime building blocks—Counter—and composes them for reuse in Roblox experiences.",
+  "description": "Collects the counter runtime building blocks—Counter—and composes them for reuse in Roblox experiences.",
+  "tags": [
+    "shared"
+  ],
+  "modules": {
+    "Counter.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Counter provides the class/model implementation used by the Counter package. Public entry points include `Counter.new`, `Counter.GetValue`, `Counter.Observe`, `Counter.Add`."
+    }
+  }
+}

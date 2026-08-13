@@ -1,0 +1,25 @@
+{
+  "purpose": "Chooses weighted options while applying a reactive pity value to options with luck influence. Pity increases after non-lucky choices and can reset after a lucky choice. Numeric weights have no luck influence; use a weight record to mark and boost lucky options. The adjusted weight is `weight * (1 + luckInfluence * pity)`.",
+  "description": "Chooses weighted options while applying a reactive pity value to options with luck influence. Pity increases after non-lucky choices and can reset after a lucky choice. Numeric weights have no luck influence; use a weight record to mark and boost lucky options. The adjusted weight is `weight * (1 + luckInfluence * pity)`.",
+  "tags": [
+    "data",
+    "math"
+  ],
+  "modules": {
+    "LuckyWeightedRandomChooser.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Chooses weighted options while applying a reactive pity value to options with luck influence. Pity increases after non-lucky choices and can reset after a lucky choice. Numeric weights have no luck influence; use a weight record to mark and boost lucky options. The adjusted weight is `weight * (1 + luckInfluence * pity)`."
+    },
+    "RandomSampler.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Random Sampler provides the class/model implementation used by the Random package."
+    },
+    "WeightedRandomChooser.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Weighted Random Chooser provides the class/model implementation used by the Random package."
+    }
+  }
+}

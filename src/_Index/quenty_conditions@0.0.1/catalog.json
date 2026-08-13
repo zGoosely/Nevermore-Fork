@@ -1,0 +1,15 @@
+{
+  "purpose": "Utility library that defines a generalized interface for scriptable conditions. These conditions are rooted in [Rx] and can be scripted by a variety of systems. For example, we may have conditions on what ammo we can consume, or whether or not an action can be activated. This library provides an interface for this to happen in. Conditions are marshalled through a BindableFunction and must be defined on both the client and server. However, these conditions can be reactive. It would be very simple to create a condition that also just links to a bool value if conditions should be only on the server.",
+  "description": "Utility library that defines a generalized interface for scriptable conditions. These conditions are rooted in [Rx] and can be scripted by a variety of systems. For example, we may have conditions on what ammo we can consume, or whether or not an action can be activated. This library provides an interface for this to happen in. Conditions are marshalled through a BindableFunction and must be defined on both the client and server. However, these conditions can be reactive. It would be very simple to create a condition that also just links to a bool value if conditions should be only on the server.",
+  "tags": [
+    "reactive",
+    "utility"
+  ],
+  "modules": {
+    "AdorneeConditionUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility library that defines a generalized interface for scriptable conditions. These conditions are rooted in [Rx] and can be scripted by a variety of systems. For example, we may have conditions on what ammo we can consume, or whether or not an action can be activated. This library provides an interface for this to happen in."
+    }
+  }
+}

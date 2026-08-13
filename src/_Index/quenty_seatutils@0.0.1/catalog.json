@@ -1,0 +1,15 @@
+{
+  "purpose": "Rx extension for seats specifically",
+  "description": "Rx extension for seats specifically",
+  "tags": [
+    "reactive",
+    "utility"
+  ],
+  "modules": {
+    "RxSeatUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rx extension for seats specifically Public entry points include `RxSeatUtils.observeOccupantBrio`, `RxSeatUtils.observeOccupant`."
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "purpose": "Utility functions involving NumberRanges and NumberSequences on Roblox",
+  "description": "Utility functions involving NumberRanges and NumberSequences on Roblox",
+  "tags": [
+    "math",
+    "utility"
+  ],
+  "modules": {
+    "NumberUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility functions involving NumberRanges and NumberSequences on Roblox Public entry points include `NumberUtils.scaleRange`, `NumberUtils.getRangeValue`, `NumberUtils.getSequenceValueGenerator`, `NumberUtils.forEachSequenceValue`, `NumberUtils.scaleSequence`, `NumberUtils.scaleSequenceTransparency`, `NumberUtils.stripeSequence`."
+    }
+  }
+}

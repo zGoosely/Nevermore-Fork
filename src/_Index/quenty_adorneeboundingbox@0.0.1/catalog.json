@@ -1,0 +1,31 @@
+{
+  "purpose": "This utility class can observe the bounding box (size + position) of any Roblox instance effectively. It handles anchored + unanchored instances, and tries to do it in a performance friendly way.",
+  "description": "This utility class can observe the bounding box (size + position) of any Roblox instance effectively. It handles anchored + unanchored instances, and tries to do it in a performance friendly way.",
+  "tags": [
+    "physics",
+    "reactive",
+    "utility"
+  ],
+  "modules": {
+    "AdorneeBoundingBox.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "This utility class can observe the bounding box (size + position) of any Roblox instance effectively. It handles anchored + unanchored instances, and tries to do it in a performance friendly way. Public entry points include `AdorneeBoundingBox.new`, `AdorneeBoundingBox.SetAdornee`, `AdorneeBoundingBox.ObserveBoundingBox`, `AdorneeBoundingBox.GetBoundingBox`, `AdorneeBoundingBox.ObserveCFrame`,…"
+    },
+    "AdorneeModelBoundingBox.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Adornee Model Bounding Box provides the class/model implementation used by the Adorneeboundingbox package. Public entry points include `AdorneeModelBoundingBox.new`, `AdorneeModelBoundingBox.ObserveCFrame`, `AdorneeModelBoundingBox.ObserveSize`."
+    },
+    "AdorneePartBoundingBox.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Adornee Part Bounding Box provides the class/model implementation used by the Adorneeboundingbox package. Public entry points include `AdorneePartBoundingBox.new`, `AdorneePartBoundingBox.ObserveCFrame`, `AdorneePartBoundingBox.ObserveSize`."
+    },
+    "RxPartBoundingBoxUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rx Part Bounding Box Utils provides the class/model implementation used by the Adorneeboundingbox package. Public entry points include `RxPartBoundingBoxUtils.observePartCFrame`."
+    }
+  }
+}

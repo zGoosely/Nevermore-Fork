@@ -1,0 +1,16 @@
+{
+  "purpose": "Utility functions to do a cubic spline. Don't use this directly.",
+  "description": "Utility functions to do a cubic spline. Don't use this directly.",
+  "tags": [
+    "animation",
+    "math",
+    "utility"
+  ],
+  "modules": {
+    "CubicTweenUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility functions to do a cubic spline. Don't use this directly. Public entry points include `CubicTweenUtils.getConstants`, `CubicTweenUtils.getDerivativeConstants`."
+    }
+  }
+}

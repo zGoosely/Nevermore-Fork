@@ -1,0 +1,15 @@
+{
+  "purpose": "Utilities involving an \"Adornee\" effectively, any Roblox instance. This is an extremely useful library to use as it lets you abstract applying effects to any Roblox instance instead of specifically switching for different Roblox types.",
+  "description": "Utilities involving an \"Adornee\" effectively, any Roblox instance. This is an extremely useful library to use as it lets you abstract applying effects to any Roblox instance instead of specifically switching for different Roblox types.",
+  "tags": [
+    "enums",
+    "utility"
+  ],
+  "modules": {
+    "AdorneeUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utilities involving an \"Adornee\" effectively, any Roblox instance. This is an extremely useful library to use as it lets you abstract applying effects to any Roblox instance instead of specifically switching for different Roblox types."
+    }
+  }
+}

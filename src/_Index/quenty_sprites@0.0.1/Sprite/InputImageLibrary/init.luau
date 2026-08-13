@@ -5,8 +5,8 @@
 
 	@class InputImageLibrary
 ]=]
-local Sprite = require("../Sprite")
-local Spritesheet = require("../Spritesheet")
+local Sprite = require("./Sprite")
+local Spritesheet = require("./Spritesheet")
 
 local UserInputService = game:GetService("UserInputService")
 

@@ -1,0 +1,14 @@
+{
+  "purpose": "Represents a value that can operate in linear space",
+  "description": "Represents a value that can operate in linear space",
+  "tags": [
+    "data"
+  ],
+  "modules": {
+    "LinearValue.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Represents a value that can operate in linear space Public entry points include `LinearValue.isLinear`, `convertUDim2`, `convertUDim`, `convertBoolean`, `convertColor3`, `operation`."
+    }
+  }
+}

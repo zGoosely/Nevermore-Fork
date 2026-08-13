@@ -1,0 +1,21 @@
+{
+  "purpose": "Utility to position the sun and to retrieve sun information specific to Roblox. Note this is not an accurate guess of where the sun would be on earth, but rather the computation to compute where Roblox is rendering the sun given the lighting properties set. https://raw.githubusercontent.com/iryl1/RBX_DOCUMENTATIONS/c0db57fedf0540db2cd9eb65404ad258c3e21295/lighting.md",
+  "description": "Utility to position the sun and to retrieve sun information specific to Roblox. Note this is not an accurate guess of where the sun would be on earth, but rather the computation to compute where Roblox is rendering the sun given the lighting properties set. https://raw.githubusercontent.com/iryl1/RBX_DOCUMENTATIONS/c0db57fedf0540db2cd9eb65404ad258c3e21295/lighting.md",
+  "tags": [
+    "game_service",
+    "utility",
+    "world"
+  ],
+  "modules": {
+    "GlobalLightSourceType.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Global Light Source Type provides the class/model implementation used by the Sunpositionutils package."
+    },
+    "SunPositionUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility to position the sun and to retrieve sun information specific to Roblox. Note this is not an accurate guess of where the sun would be on earth, but rather the computation to compute where Roblox is rendering the sun given the lighting properties set."
+    }
+  }
+}

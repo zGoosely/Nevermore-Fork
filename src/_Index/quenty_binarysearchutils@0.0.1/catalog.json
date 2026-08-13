@@ -1,0 +1,14 @@
+{
+  "purpose": "Binary search implementation for Roblox in pure Lua",
+  "description": "Binary search implementation for Roblox in pure Lua",
+  "tags": [
+    "utility"
+  ],
+  "modules": {
+    "BinarySearchUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Binary search implementation for Roblox in pure Lua Public entry points include `BinarySearchUtils.spanSearch`, `BinarySearchUtils.spanSearchNodes`, `BinarySearchUtils.spanSearchAnything`."
+    }
+  }
+}

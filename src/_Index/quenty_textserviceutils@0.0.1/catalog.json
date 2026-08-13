@@ -1,0 +1,16 @@
+{
+  "purpose": "Collects the textserviceutils runtime building blocks—Text Service Utils—and composes them for reuse in Roblox experiences.",
+  "description": "Collects the textserviceutils runtime building blocks—Text Service Utils—and composes them for reuse in Roblox experiences.",
+  "tags": [
+    "game_service",
+    "localization",
+    "utility"
+  ],
+  "modules": {
+    "TextServiceUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Text Service Utils provides the class/model implementation used by the Textserviceutils package. Public entry points include `TextFilterUtils.getSizeForLabel`, `TextFilterUtils.promiseTextBounds`, `TextFilterUtils.observeSizeForLabelProps`."
+    }
+  }
+}

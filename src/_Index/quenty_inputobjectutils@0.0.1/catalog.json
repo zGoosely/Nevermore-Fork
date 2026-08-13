@@ -1,0 +1,21 @@
+{
+  "purpose": "Provides utility functions involving input objects",
+  "description": "Provides utility functions involving input objects",
+  "tags": [
+    "developer_tools",
+    "input",
+    "utility"
+  ],
+  "modules": {
+    "InputObjectUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Provides utility functions involving input objects Public entry points include `InputObjectUtils.isMouseUserInputType`, `InputObjectUtils.isMouseButtonInputType`, `InputObjectUtils.isSameInputObject`."
+    },
+    "MultipleClicksUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility library for detecting multiple clicks or taps. Not good UX, but good for opening up a debug menus. Public entry points include `MultipleClickUtils.observeDoubleClick`, `MultipleClickUtils.getDoubleClickSignal`, `MultipleClickUtils.observeMultipleClicks`, `MultipleClickUtils.onMultipleClicks`, `MultipleClickUtils.getMultipleClickSignal`."
+    }
+  }
+}

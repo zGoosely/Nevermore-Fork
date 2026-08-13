@@ -1,0 +1,21 @@
+{
+  "purpose": "Helps track whether or not a player is idle and, if so, can show UI or other idle-related effects.",
+  "description": "Helps track whether or not a player is idle and, if so, can show UI or other idle-related effects.",
+  "tags": [
+    "animation",
+    "game_service",
+    "player_service"
+  ],
+  "modules": {
+    "Client/IdleServiceClient.luau": {
+      "realm": "client",
+      "kind": "Service",
+      "description": "Helps track whether or not a player is idle and, if so, can show UI or other idle-related effects. Public entry points include `IdleServiceClient.Init`, `IdleServiceClient.Start`, `IdleServiceClient.ObserveHumanoidMoveFromCurrentPosition`, `IdleServiceClient.IsHumanoidIdle`, `IdleServiceClient.IsMoving`, `IdleServiceClient.ObserveHumanoidIdle`, `IdleServiceClient.DoShowIdleUI`, `IdleServiceClient.ObserveShowIdleUI`."
+    },
+    "Client/IdleTargetCalculator.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Assists in calculating whether the player is idle while moving the camera around or aiming a gun. Public entry points include `IdleTargetCalculator.new`, `IdleTargetCalculator.GetShouldDisableContextUI`, `IdleTargetCalculator.ObserveShouldDisableContextUI`, `IdleTargetCalculator.SetTarget`."
+    }
+  }
+}

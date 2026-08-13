@@ -1,0 +1,15 @@
+{
+  "purpose": "Base UI object with visibility and a maid. BasicPane provides three points of utility. 1. BasicPane contain visibility API. It's very standard practice to use the VisibleChanged event and pass visibility up or down the entire stack. 2. BasicPane contains a maid which cleans up upon :Destroy(). This just saves some time typing. 3. Finally, BasicPanes, by convention (although not requirement), contain a .Gui object which can generally be safely reparented to another object.",
+  "description": "Base UI object with visibility and a maid. BasicPane provides three points of utility. 1. BasicPane contain visibility API. It's very standard practice to use the VisibleChanged event and pass visibility up or down the entire stack. 2. BasicPane contains a maid which cleans up upon :Destroy(). This just saves some time typing. 3. Finally, BasicPanes, by convention (although not requirement), contain a .Gui object which can generally be safely reparented to another object.",
+  "tags": [
+    "gui",
+    "lifecycle"
+  ],
+  "modules": {
+    "BasicPane.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Base UI object with visibility and a maid. BasicPane provides three points of utility. 1. BasicPane contain visibility API. It's very standard practice to use the VisibleChanged event and pass visibility up or down the entire stack. 2. BasicPane contains a maid which cleans up upon :Destroy(). This just saves some time typing. 3."
+    }
+  }
+}

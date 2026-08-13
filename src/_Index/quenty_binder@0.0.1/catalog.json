@@ -1,0 +1,71 @@
+{
+  "purpose": "Binds stateful classes to tagged Roblox Instances and owns their creation, observation, lookup, and cleanup lifecycles.",
+  "description": "Binds stateful classes to tagged Roblox Instances and owns their creation, observation, lookup, and cleanup lifecycles.",
+  "tags": [
+    "lifecycle",
+    "player_service",
+    "reactive"
+  ],
+  "modules": {
+    "Shared/Binder.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "Bind class to Roblox Instance Public entry points include `MyClass.new`, `MyClass.Destroy`, `Binder.isBinder`, `Binder.Init`, `handleNewClass`, `handleClassChanged`."
+    },
+    "Shared/BinderGroup.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Groups binders together into a list, and allows binders to be dynamically added or removed. Also allows their interface to be validated using a validation function. This ensures that all added objects are the same type, so they can be used for dynamic interactions. Public entry points include `BinderGroup.new`, `BinderGroup.AddList`, `BinderGroup.Add`, `BinderGroup.GetBinders`."
+    },
+    "Shared/BinderGroupProvider.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "Provides a basis for binderGroups that can be retrieved anywhere Public entry points include `BinderGroupProvider.new`, `BinderGroupProvider.PromiseGroupsAdded`, `BinderGroupProvider.Init`, `BinderGroupProvider.Start`, `BinderGroupProvider.Get`, `BinderGroupProvider.Add`, `BinderGroupProvider.Destroy`."
+    },
+    "Shared/BinderProvider.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "Provides a basis for binders that can be retrieved anywhere Public entry points include `BinderProvider.new`, `BinderProvider.isBinderProvider`, `BinderProvider.PromiseBinder`, `BinderProvider.Init`, `BinderProvider.PromiseBindersAdded`, `BinderProvider.PromiseBindersStarted`, `BinderProvider.Start`, `BinderProvider.Get`."
+    },
+    "Shared/Collection/BoundChildCollection.lua": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Tracks child of type of a binder."
+    },
+    "Shared/Collection/BoundChildCollection.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Tracks child of type of a binder."
+    },
+    "Shared/Internal/PlayerBinder.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Binds the given class to each player in the game Public entry points include `PlayerBinder.new`, `PlayerBinder.Start`."
+    },
+    "Shared/Internal/PlayerCharacterBinder.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Binder that will automatically bind to each player's character Public entry points include `PlayerCharacterBinder.new`, `PlayerCharacterBinder.Init`, `PlayerCharacterBinder.SetAutomaticTagging`, `PlayerCharacterBinder.ObserveAutomaticTagging`, `PlayerCharacterBinder.ObserveAutomaticTaggingBrio`, `PlayerCharacterBinder.Start`."
+    },
+    "Shared/Internal/PlayerHumanoidBinder.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Binder that will automatically bind to each player's humanoid Public entry points include `PlayerHumanoidBinder.new`, `PlayerHumanoidBinder.Init`, `PlayerHumanoidBinder.SetAutomaticTagging`, `PlayerHumanoidBinder.ObserveAutomaticTagging`, `PlayerHumanoidBinder.ObserveAutomaticTaggingBrio`, `PlayerHumanoidBinder.Start`."
+    },
+    "Shared/Promise/promiseBoundClass.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility function to promise a bound class on an object."
+    },
+    "Shared/Trackers/BoundAncestorTracker.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Tracks a parent bound to a specific binder Public entry points include `BoundAncestorTracker.new`."
+    },
+    "Shared/Trackers/BoundParentTracker.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Tracks a parent bound to a specific binder Public entry points include `BoundParentTracker.new`."
+    }
+  }
+}

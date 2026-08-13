@@ -1,0 +1,19 @@
+{
+  "purpose": "Holds single toggleable actions (like a tool system). This is legacy code and probably should not be used in new games.",
+  "description": "Holds single toggleable actions (like a tool system). This is legacy code and probably should not be used in new games.",
+  "tags": [
+    "reactive"
+  ],
+  "modules": {
+    "ActionManagerClient.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Holds single toggleable actions (like a tool system). This is legacy code and probably should not be used in new games. Public entry points include `ActionManager.new`, `ActionManager.StopCurrentAction`, `ActionManager.ActivateAction`, `ActionManager.GetAction`, `ActionManager.GetActions`, `ActionManager.AddAction`, `ActionManager.Destroy`."
+    },
+    "BaseAction.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "BaseAction state for [ActionManager]. Public entry points include `BaseAction.new`, `BaseAction.GetName`, `BaseAction.GetActivationMode`, `BaseAction.GetData`, `BaseAction.ToggleActivate`, `BaseAction.IsActive`, `BaseAction.Deactivate`, `BaseAction.Activate`."
+    }
+  }
+}

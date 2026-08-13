@@ -1,0 +1,119 @@
+{
+  "purpose": "Declares and implements typed cross-realm interfaces for methods, properties, and signals backed by Roblox Instances.",
+  "description": "Declares and implements typed cross-realm interfaces for methods, properties, and signals backed by Roblox Instances.",
+  "tags": [
+    "animation",
+    "data",
+    "enums",
+    "game_service",
+    "lifecycle",
+    "localization",
+    "math",
+    "reactive",
+    "security",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "Shared/Members/Methods/TieMethodDefinition.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Tie Method Definition provides the class/model implementation used by the Tie package. Public entry points include `TieMethodDefinition.new`, `TieMethodDefinition.GetFriendlyName`, `TieMethodDefinition.Implement`, `TieMethodDefinition.GetInterface`."
+    },
+    "Shared/Members/Methods/TieMethodImplementation.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Tie Method Implementation provides the class/model implementation used by the Tie package. Public entry points include `TieMethodImplementation.new`, `TieMethodImplementation.SetImplementation`."
+    },
+    "Shared/Members/Methods/TieMethodInterfaceUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Tie Method Interface Utils provides the class/model implementation used by the Tie package. Public entry points include `TieMethodInterfaceUtils.get`."
+    },
+    "Shared/Members/Properties/TiePropertyDefinition.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Tie Property Definition provides the class/model implementation used by the Tie package. Public entry points include `TiePropertyDefinition.new`, `TiePropertyDefinition.GetDefaultValue`, `TiePropertyDefinition.IsRequiredForImplementation`, `TiePropertyDefinition.Implement`, `TiePropertyDefinition.GetInterface`."
+    },
+    "Shared/Members/Properties/TiePropertyImplementation.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Tie Property Implementation provides the class/model implementation used by the Tie package. Public entry points include `TiePropertyImplementation.new`, `TiePropertyImplementation.SetImplementation`."
+    },
+    "Shared/Members/Properties/TiePropertyImplementationUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Tie Property Implementation Utils provides the class/model implementation used by the Tie package. Public entry points include `TiePropertyImplementationUtils.changeToClassIfNeeded`."
+    },
+    "Shared/Members/Properties/TiePropertyInterface.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Tie Property Interface provides the class/model implementation used by the Tie package. Public entry points include `TiePropertyInterface.new`, `TiePropertyInterface.ObserveBrio`, `TiePropertyInterface.Observe`, `update`."
+    },
+    "Shared/Members/Signals/TieSignalConnection.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Tie Signal Connection provides the class/model implementation used by the Tie package. Public entry points include `TieSignalConnection.new`, `TieSignalConnection.Disconnect`, `TieSignalConnection.Destroy`."
+    },
+    "Shared/Members/Signals/TieSignalDefinition.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Tie Signal Definition provides the class/model implementation used by the Tie package. Public entry points include `TieSignalDefinition.new`, `TieSignalDefinition.Implement`, `TieSignalDefinition.GetInterface`."
+    },
+    "Shared/Members/Signals/TieSignalImplementation.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Tie Signal Implementation provides the class/model implementation used by the Tie package. Public entry points include `TieSignalImplementation.new`, `TieSignalImplementation.SetImplementation`."
+    },
+    "Shared/Members/Signals/TieSignalInterface.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Tie Signal Interface provides the class/model implementation used by the Tie package. Public entry points include `TieSignalInterface.new`, `TieSignalInterface.Fire`, `TieSignalInterface.Connect`, `TieSignalInterface.Wait`, `TieSignalInterface.Once`, `TieSignalInterface.ObserveBindableEventBrio`."
+    },
+    "Shared/Members/TieMemberDefinition.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Base class for a member definition/declaration. Public entry points include `TieMemberDefinition.new`, `TieMemberDefinition.Implement`, `TieMemberDefinition.GetInterface`, `TieMemberDefinition.GetFriendlyName`, `TieMemberDefinition.IsRequiredForInterface`, `TieMemberDefinition.IsAllowedOnInterface`, `TieMemberDefinition.IsRequiredForImplementation`, `TieMemberDefinition.IsAllowedForImplementation`."
+    },
+    "Shared/Members/TieMemberInterface.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Tie Member Interface provides the class/model implementation used by the Tie package. Public entry points include `TieMemberInterface.new`, `TieMemberInterface.GetInterfaceTieRealm`, `TieMemberInterface.GetImplParent`, `TieMemberInterface.ObserveImplParentBrio`."
+    },
+    "Shared/Realms/TieRealmUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility methods to operate around [TieRealms] Public entry points include `TieRealmUtils.isTieRealm`, `TieRealmUtils.inferTieRealm`."
+    },
+    "Shared/Realms/TieRealms.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Realms sort of have to be a first class citizen."
+    },
+    "Shared/Services/TieRealmService.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "Tie Realm Service provides the service implementation used by the Tie package. Public entry points include `TieRealmService.Init`, `TieRealmService.SetTieRealm`, `TieRealmService.GetTieRealm`."
+    },
+    "Shared/TieDefinition.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Constructs a new interface declaration which allows for interface usage between both Roblox API users and OOP users, as well as without accessing a Also allows for extensibility via implementing interfaces. Public entry points include `update`."
+    },
+    "Shared/TieImplementation.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "This class represents the implementation for a given definition. For the lifetime of the class, this implementation will be exposed to consumption by both someone using the tie interface, and anyone invoking its methods via the normal Roblox API."
+    },
+    "Shared/TieInterface.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Tie interfaces can be retrieved from an implementation and allow access to a specific call into the interface."
+    },
+    "Shared/Utils/TieUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Tie Utils provides the class/model implementation used by the Tie package. Public entry points include `TieUtils.encode`, `TieUtils.encodeCallback`, `TieUtils.invokeEncodedBindableFunction`, `TieUtils.decode`."
+    }
+  }
+}

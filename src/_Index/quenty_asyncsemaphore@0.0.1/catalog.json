@@ -1,0 +1,20 @@
+{
+  "purpose": "Limits the number of asynchronous operations running concurrently. Waiting callers receive permits in FIFO order.",
+  "description": "Limits the number of asynchronous operations running concurrently. Waiting callers receive permits in FIFO order.",
+  "tags": [
+    "lifecycle",
+    "math"
+  ],
+  "modules": {
+    "AsyncSemaphore.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Limits the number of asynchronous operations running concurrently. Waiting callers receive permits in FIFO order. Public entry points include `AsyncSemaphore.new`, `AsyncSemaphore.GetMaxConcurrency`, `AsyncSemaphore.SetMaxConcurrency`, `AsyncSemaphore.GetActiveCount`, `AsyncSemaphore.GetAvailableCount`, `AsyncSemaphore.GetWaitingCount`, `AsyncSemaphore.TryAcquire`, `AsyncSemaphore.AcquireAsync`."
+    },
+    "AsyncSemaphorePermit.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Represents one acquired [AsyncSemaphore] permit. Releasing a permit is idempotent, and the permit may be given directly to a [Maid]. Public entry points include `AsyncSemaphorePermit.new`, `AsyncSemaphorePermit.Release`, `AsyncSemaphorePermit.IsReleased`, `AsyncSemaphorePermit.Destroy`."
+    }
+  }
+}

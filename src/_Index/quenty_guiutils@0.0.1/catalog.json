@@ -1,0 +1,47 @@
+{
+  "purpose": "Scale ratios for the UI on different devices",
+  "description": "Scale ratios for the UI on different devices",
+  "tags": [
+    "gui",
+    "player_service",
+    "reactive",
+    "utility"
+  ],
+  "modules": {
+    "GuiScalingUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Scale ratios for the UI on different devices Public entry points include `getViewportAlpha`, `GuiScalingUtils.getUIScale`, `GuiScalingUtils.observeUIScale`, `GuiScalingUtils.observeUIScaleForChild`, `GuiScalingUtils.createUIScale`, `GuiScalingUtils.createDialogPadding`, `GuiScalingUtils.observeDialogPadding`, `GuiScalingUtils.getDialogPadding`."
+    },
+    "GuiUltrawideContainerUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Creates a 1920x1080 scaling container to handle ultrawide monitors and screens in a reasonable way. This helps keep UI centered and available for ultrawide screens. Public entry points include `GuiUltrawideContainerUtils.createContainer`, `GuiUltrawideContainerUtils.scaleSizeConstraint`."
+    },
+    "JumpButtonUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility functions to deal with Roblox's mobile jump button and its position Public entry points include `JumpButtonUtils.getJumpButtonPositionAndSize`."
+    },
+    "PlayerGuiUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Helper methods for finding and retrieving the [PlayerGui] instance Public entry points include `PlayerGuiUtils.getPlayerGui`, `PlayerGuiUtils.findPlayerGui`."
+    },
+    "RxGuiInteractionUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rx Gui Interaction Utils provides the class/model implementation used by the Guiutils package. Public entry points include `GuiInteractionUtils.observeInteractionEnabled`, `GuiInteractionUtils.observeInteractionEnabledBrio`."
+    },
+    "UIAlignmentUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility methods for working with horizontal and vertical alignment Public entry points include `UIAlignmentUtils.toNumber`, `UIAlignmentUtils.verticalToHorizontalAlignment`, `UIAlignmentUtils.horizontalToVerticalAlignment`, `UIAlignmentUtils.toBias`, `UIAlignmentUtils.horizontalAlignmentToNumber`, `UIAlignmentUtils.horizontalAlignmentToBias`, `UIAlignmentUtils.verticalAlignmentToNumber`, `UIAlignmentUtils.vertical."
+    },
+    "UICornerUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "UICorner Utils provides the class/model implementation used by the Guiutils package. Public entry points include `UICornerUtils.fromScale`, `UICornerUtils.fromOffset`, `UICornerUtils.clampPositionToFrame`."
+    }
+  }
+}

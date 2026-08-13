@@ -1,0 +1,14 @@
+{
+  "purpose": "This class converts a class into a singleton",
+  "description": "This class converts a class into a singleton",
+  "tags": [
+    "shared"
+  ],
+  "modules": {
+    "Singleton.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "This class converts a class into a singleton."
+    }
+  }
+}

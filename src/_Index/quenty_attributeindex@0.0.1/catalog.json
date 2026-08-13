@@ -1,0 +1,16 @@
+{
+  "purpose": "Maintains a reactive index from one attribute value to the Instances carrying that value. Instances may be added directly or tracked through a CollectionService tag.",
+  "description": "Maintains a reactive index from one attribute value to the Instances carrying that value. Instances may be added directly or tracked through a CollectionService tag.",
+  "tags": [
+    "data",
+    "game_service",
+    "reactive"
+  ],
+  "modules": {
+    "AttributeIndex.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Maintains a reactive index from one attribute value to the Instances carrying that value. Instances may be added directly or tracked through a CollectionService tag. Public entry points include `AttributeIndex.new`, `AttributeIndex.Add`, `AttributeIndex.TrackTagged`, `AttributeIndex.Remove`, `AttributeIndex.IsTracking`, `AttributeIndex.GetFirst`, `AttributeIndex.GetAll`, `AttributeIndex.Observe`."
+    }
+  }
+}

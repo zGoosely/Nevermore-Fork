@@ -7,7 +7,7 @@
 
 	@class SimulatedCharacterTemplateProvider
 ]=]
-const SimulatedCharacterConstants = require("../Shared/SimulatedCharacterConstants")
+const SimulatedCharacterConstants = require("./Shared/SimulatedCharacterConstants")
 const TaggedTemplateProvider = require("@game/ReplicatedStorage/Packages/TaggedTemplateProvider")
 
 return TaggedTemplateProvider.new(script.Name, SimulatedCharacterConstants.TEMPLATE_CONTAINER_TAG)

@@ -1,0 +1,19 @@
+{
+  "purpose": "Tuple class for Lua",
+  "description": "Tuple class for Lua",
+  "tags": [
+    "math"
+  ],
+  "modules": {
+    "Tuple.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Tuple class for Lua Public entry points include `Tuple.isTuple`."
+    },
+    "TupleLookup.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Helps look up tuples that can be used as keys Public entry points include `TupleLookup.new`, `TupleLookup.isTupleImplementation`."
+    }
+  }
+}

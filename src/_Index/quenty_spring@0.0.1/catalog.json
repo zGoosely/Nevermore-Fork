@@ -1,0 +1,24 @@
+{
+  "purpose": "A physical model of a spring, useful in many applications. A spring is an object that will compute based upon Hooke's law. Properties only evaluate upon index making this model good for lazy applications. A good visualization can be found here, provided by Defaultio: https://www.desmos.com/calculator/hn2i9shxbz",
+  "description": "A physical model of a spring, useful in many applications. A spring is an object that will compute based upon Hooke's law. Properties only evaluate upon index making this model good for lazy applications. A good visualization can be found here, provided by Defaultio: https://www.desmos.com/calculator/hn2i9shxbz",
+  "tags": [
+    "animation",
+    "enums",
+    "game_service",
+    "input",
+    "math",
+    "reactive"
+  ],
+  "modules": {
+    "Spring.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "A physical model of a spring, useful in many applications. A spring is an object that will compute based upon Hooke's law. Properties only evaluate upon index making this model good for lazy applications. A good visualization can be found here, provided by Defaultio: https://www.desmos.com/calculator/hn2i9shxbz."
+    },
+    "SpringObject.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "This is like a [Spring], but it can be observed, and emits events. It handles [Observable]s and Public entry points include `SpringObject.isSpringObject`, `SpringObject.ObserveRenderStepped`, `SpringObject.Observe`, `SpringObject.ObserveTarget`, `SpringObject.ObserveVelocityOnRenderStepped`, `SpringObject.PromiseFinished`, `SpringObject.ObserveVelocityOnSignal`, `SpringObject.ObserveOnSignal`."
+    }
+  }
+}

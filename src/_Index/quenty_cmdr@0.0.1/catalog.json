@@ -1,0 +1,402 @@
+{
+  "purpose": "Provides the Cmdr command framework, including command registration, argument types, dispatch, built-in commands, and the client command console.",
+  "description": "Provides the Cmdr command framework, including command registration, argument types, dispatch, built-in commands, and the client command console.",
+  "tags": [
+    "data",
+    "developer_tools",
+    "enums",
+    "game_service",
+    "gui",
+    "input",
+    "math",
+    "player_service",
+    "serialization"
+  ],
+  "modules": {
+    "Cmdr/BuiltInCommands/Admin/announce.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Announce provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Admin/announceServer.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Announce Server provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Admin/gotoPlace.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Goto Place provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Admin/gotoPlaceServer.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Goto Place Server provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Admin/kick.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Kick provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Admin/kickServer.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Kick Server provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Admin/kill.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Kill provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Admin/killServer.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Kill Server provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Admin/respawn.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Respawn provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Admin/respawnServer.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Respawn Server provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Admin/teleport.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Teleport provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Admin/teleportServer.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Teleport Server provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Debug/blink.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Blink provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Debug/fetch.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Fetch provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Debug/fetchServer.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Fetch Server provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Debug/getPlayerPlaceInstance.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Get Player Place Instance provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Debug/getPlayerPlaceInstanceServer.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Get Player Place Instance Server provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Debug/position.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Position provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Debug/thru.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Thru provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Debug/uptime.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Uptime provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Debug/uptimeServer.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Uptime Server provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Debug/version.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Version provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Utility/alias.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Alias provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Utility/bind.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Bind provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Utility/clear.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Clear provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Utility/convertTimestamp.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Convert Timestamp provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Utility/echo.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Echo provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Utility/edit.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Edit provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Utility/history.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "History provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Utility/hover.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Hover provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Utility/jsonArrayDecode.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Json Array Decode provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Utility/jsonArrayEncode.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Json Array Encode provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Utility/len.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Len provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Utility/math.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Math provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Utility/pick.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Pick provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Utility/rand.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Rand provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Utility/replace.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Replace provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Utility/resolve.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Resolve provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Utility/run.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Run provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Utility/runLines.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Run Lines provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Utility/runif.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Runif provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Utility/unbind.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Unbind provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Utility/var.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Var provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Utility/varServer.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Var Server provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Utility/varSet.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Var Set provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Utility/varSetServer.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Var Set Server provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/help.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Help provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInTypes/BindableResource.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Bindable Resource provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInTypes/BrickColor.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Brick Color provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInTypes/Color3.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Color3 provides the module implementation used by the Cmdr package. Public entry points include `parseHexDigit`."
+    },
+    "Cmdr/BuiltInTypes/Command.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Command provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInTypes/ConditionFunction.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Condition Function provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInTypes/Duration.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Duration provides the module implementation used by the Cmdr package. Public entry points include `stringToSecondDuration`, `mapUnits`."
+    },
+    "Cmdr/BuiltInTypes/JSON.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "JSON provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInTypes/MathOperator.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Math Operator provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInTypes/Player.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Player provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInTypes/PlayerId.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Player Id provides the module implementation used by the Cmdr package. Public entry points include `getUserId`."
+    },
+    "Cmdr/BuiltInTypes/Primitives.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Primitives provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInTypes/StoredKey.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Stored Key provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInTypes/Team.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Team provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInTypes/Type.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Type provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInTypes/URL.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "URL provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInTypes/UserInput.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "User Input provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInTypes/Vector.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Vector provides the module implementation used by the Cmdr package. Public entry points include `validateVector`."
+    },
+    "Cmdr/CmdrClient/CmdrInterface/AutoComplete.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Auto Complete provides the module implementation used by the Cmdr package. Public entry points include `SetText`, `UpdateContainerSize`, `UpdateInfoDisplay`, `AutoComplete.Show`, `AutoComplete.GetSelectedItem`, `AutoComplete.Hide`, `AutoComplete.IsVisible`, `AutoComplete.Select`."
+    },
+    "Cmdr/CmdrClient/CmdrInterface/Window.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Window provides the module implementation used by the Cmdr package. Public entry points include `Window.UpdateLabel`, `Window.GetLabel`, `Window.UpdateWindowHeight`, `Window.AddLine`, `Window.IsVisible`, `Window.SetVisible`, `Window.Hide`, `Window.Show`."
+    },
+    "Cmdr/CmdrClient/CmdrInterface/init.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Cmdr Interface provides the module implementation used by the Cmdr package. Public entry points include `Window.ProcessEntry`, `Window.OnTextChanged`."
+    },
+    "Cmdr/CmdrClient/DefaultEventHandlers.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Default Event Handlers provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/CmdrClient/init.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Cmdr Client provides the module implementation used by the Cmdr package. Public entry points include `Cmdr.SetActivationKeys`, `Cmdr.SetPlaceName`, `Cmdr.SetEnabled`, `Cmdr.SetActivationUnlocksMouse`, `Cmdr.Show`, `Cmdr.Hide`, `Cmdr.Toggle`, `Cmdr.SetMashToEnable`."
+    },
+    "Cmdr/CreateGui.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Create Gui provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/Initialize.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Initialize provides the module implementation used by the Cmdr package. Public entry points include `Create`."
+    },
+    "Cmdr/Shared/Argument.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Argument provides the module implementation used by the Cmdr package. Public entry points include `unescapeOperators`, `Argument.new`, `Argument.GetDefaultAutocomplete`, `Argument.Transform`, `Argument.TransformSegment`, `Argument.GetTransformedValue`, `Argument.Validate`, `Argument.GetAutocomplete`."
+    },
+    "Cmdr/Shared/Command.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Command provides the module implementation used by the Cmdr package. Public entry points include `Command.new`, `Command.Parse`, `Command.Validate`, `Command.GetLastArgument`, `Command.GatherArgumentValues`, `Command.Run`, `Command.GetArgument`, `Command.GetData`."
+    },
+    "Cmdr/Shared/Dispatcher.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Dispatcher provides the module implementation used by the Cmdr package. Public entry points include `Dispatcher.Evaluate`, `Dispatcher.EvaluateAndRun`, `Dispatcher.Send`, `Dispatcher.Run`, `Dispatcher.RunHooks`, `Dispatcher.PushHistory`, `Dispatcher.GetHistory`."
+    },
+    "Cmdr/Shared/Registry.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Registry provides the module implementation used by the Cmdr package. Public entry points include `Registry.RegisterType`, `Registry.RegisterTypePrefix`, `Registry.RegisterTypeAlias`, `Registry.RegisterTypesIn`, `Registry.RegisterCommandObject`, `Registry.RegisterCommand`, `Registry.RegisterCommandsIn`, `Registry.RegisterDefaultCommands`."
+    },
+    "Cmdr/Shared/Util.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Util provides the module implementation used by the Cmdr package. Public entry points include `Util.MakeDictionary`, `Util.DictionaryKeys`, `transformInstanceSet`, `Util.MakeFuzzyFinder`, `Util.GetNames`, `Util.SplitStringSimple`, `charCode`, `Util.ParseEscapeSequences`."
+    },
+    "Cmdr/init.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Cmdr provides the module implementation used by the Cmdr package."
+    }
+  }
+}

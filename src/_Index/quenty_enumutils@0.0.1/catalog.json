@@ -1,0 +1,16 @@
+{
+  "purpose": "Helds encode Roblox enums into a string",
+  "description": "Helds encode Roblox enums into a string",
+  "tags": [
+    "enums",
+    "localization",
+    "utility"
+  ],
+  "modules": {
+    "EnumUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Helds encode Roblox enums into a string Public entry points include `EnumUtils.encodeAsString`, `EnumUtils.isOfType`, `EnumUtils.toEnum`, `EnumUtils.isEncodedEnum`, `EnumUtils.decodeFromString`."
+    }
+  }
+}

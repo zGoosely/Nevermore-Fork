@@ -1,0 +1,15 @@
+{
+  "purpose": "Utility functions to work with the CoreGui",
+  "description": "Utility functions to work with the CoreGui",
+  "tags": [
+    "gui",
+    "utility"
+  ],
+  "modules": {
+    "CoreGuiUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility functions to work with the CoreGui Public entry points include `CoreGuiUtils.promiseRetrySetCore`, `CoreGuiUtils.tryToSetCore`, `CoreGuiUtils.setCoreGuiEnabled`."
+    }
+  }
+}

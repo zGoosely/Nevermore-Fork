@@ -1,0 +1,17 @@
+{
+  "purpose": "Converts positions, oriented boxes, and radii into axis-aligned Roblox `Region3` values.",
+  "description": "Provides stateless constructors for common `Region3` bounds.",
+  "tags": [
+    "math",
+    "physics",
+    "utility",
+    "world"
+  ],
+  "modules": {
+    "Region3Utils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Builds axis-aligned regions from a position and size, an oriented box, or a radius. Public entry points include `Region3Utils.fromPositionSize`, `Region3Utils.fromBox`, `Region3Utils.fromRadius`."
+    }
+  }
+}

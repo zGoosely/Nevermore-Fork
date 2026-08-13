@@ -1,0 +1,15 @@
+{
+  "purpose": "Provides observable mutable values with cleanup-aware mounting and change notifications.",
+  "description": "Provides observable mutable values with cleanup-aware mounting and change notifications.",
+  "tags": [
+    "data",
+    "reactive"
+  ],
+  "modules": {
+    "ValueObject.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "To work like value objects in Roblox and track a single item, with `.Changed` events Public entry points include `ValueObject.isValueObject`, `handleNewValue`."
+    }
+  }
+}

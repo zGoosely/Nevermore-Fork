@@ -1,0 +1,16 @@
+{
+  "purpose": "Utility methods involving the AssetService",
+  "description": "Utility methods involving the AssetService",
+  "tags": [
+    "game_service",
+    "utility",
+    "world"
+  ],
+  "modules": {
+    "AssetServiceUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility methods involving the AssetService Public entry points include `AssetServiceUtils.promiseAssetIdsForPackage`, `AssetServiceUtils.promiseGamePlaces`, `AssetServiceUtils.promiseBundleDetails`."
+    }
+  }
+}

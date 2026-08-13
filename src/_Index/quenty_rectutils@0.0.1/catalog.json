@@ -1,0 +1,15 @@
+{
+  "purpose": "Utility method to work with the Roblox Rect data object.",
+  "description": "Utility method to work with the Roblox Rect data object.",
+  "tags": [
+    "data",
+    "utility"
+  ],
+  "modules": {
+    "RectUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility method to work with the Roblox Rect data object. Public entry points include `RectUtils.contains`."
+    }
+  }
+}

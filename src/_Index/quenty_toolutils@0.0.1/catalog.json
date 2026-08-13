@@ -1,0 +1,20 @@
+{
+  "purpose": "Collects the toolutils runtime building blocks—Rx Tool Utils, Tool Utils—and composes them for reuse in Roblox experiences.",
+  "description": "Collects the toolutils runtime building blocks—Rx Tool Utils, Tool Utils—and composes them for reuse in Roblox experiences.",
+  "tags": [
+    "reactive",
+    "utility"
+  ],
+  "modules": {
+    "RxToolUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rx Tool Utils provides the class/model implementation used by the Toolutils package. Public entry points include `RxToolUtils.observeEquippedHumanoidBrio`."
+    },
+    "ToolUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Tool Utils provides the class/model implementation used by the Toolutils package. Public entry points include `ToolUtils.getEquippedHumanoid`, `ToolUtils.getEquippedPlayer`."
+    }
+  }
+}

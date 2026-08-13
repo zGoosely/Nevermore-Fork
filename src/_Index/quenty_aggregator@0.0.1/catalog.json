@@ -1,0 +1,19 @@
+{
+  "purpose": "Aggregates all requests into one big send request to deduplicate the request",
+  "description": "Aggregates all requests into one big send request to deduplicate the request",
+  "tags": [
+    "shared"
+  ],
+  "modules": {
+    "Aggregator.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Aggregates all requests into one big send request to deduplicate the request."
+    },
+    "LRUCache.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "LRUCache provides the class/model implementation used by the Aggregator package. Public entry points include `LRUCache.new`, `cut`, `setNewest`, `del`, `makeFreeSpace`, `get`, `set`, `delete`."
+    }
+  }
+}

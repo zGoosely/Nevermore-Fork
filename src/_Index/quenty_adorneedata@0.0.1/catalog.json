@@ -1,0 +1,27 @@
+{
+  "purpose": "Bridges attributes and serializable data table. It's typical to need to define data in 3 ways. 1. Attributes on an instance for replication 2. Tables for Lua configuration 3. Within AttributeValues for writing regular code Providing all 3 Here's how the usage works: You can then use the data to retrieve values",
+  "description": "Bridges attributes and serializable data table. It's typical to need to define data in 3 ways. 1. Attributes on an instance for replication 2. Tables for Lua configuration 3. Within AttributeValues for writing regular code Providing all 3 Here's how the usage works: You can then use the data to retrieve values",
+  "tags": [
+    "data",
+    "math",
+    "reactive",
+    "security"
+  ],
+  "modules": {
+    "AdorneeData.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Bridges attributes and serializable data table. It's typical to need to define data in 3 ways. 1. Attributes on an instance for replication 2. Tables for Lua configuration 3. Within AttributeValues for writing regular code Providing all 3 Here's how the usage works: You can then use the data to retrieve values Public entry points include `AdorneeData.new`, `AdorneeData.IsStrictData`,…"
+    },
+    "AdorneeDataEntry.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Declaration for the adornee data value Public entry points include `AdorneeDataEntry.isAdorneeDataEntry`."
+    },
+    "AdorneeDataValue.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Allows access to an attribute like a ValueObject but in table form. Public entry points include `AdorneeDataValue.new`, `AdorneeDataValue.Observe`."
+    }
+  }
+}

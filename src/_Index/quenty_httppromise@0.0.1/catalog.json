@@ -1,0 +1,17 @@
+{
+  "purpose": "Provides a wrapper around HttpService with a promise API By combining functions in HttpPromise, we can get a generic request result in a very clean way.",
+  "description": "Provides a wrapper around HttpService with a promise API By combining functions in HttpPromise, we can get a generic request result in a very clean way.",
+  "tags": [
+    "data",
+    "game_service",
+    "lifecycle",
+    "serialization"
+  ],
+  "modules": {
+    "HttpPromise.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Provides a wrapper around HttpService with a promise API By combining functions in HttpPromise, we can get a generic request result in a very clean way. Public entry points include `logToDiscord`, `HttpPromise.request`, `HttpPromise.isHttpResponse`, `HttpPromise.convertHttpResponseToString`, `HttpPromise.json`, `HttpPromise.logFailedRequests`, `HttpPromise.decodeJson`."
+    }
+  }
+}

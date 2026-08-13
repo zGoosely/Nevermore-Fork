@@ -1,0 +1,25 @@
+{
+  "purpose": "Utilities to advance over the Roblox pagess API surface",
+  "description": "Utilities to advance over the Roblox pagess API surface",
+  "tags": [
+    "data",
+    "utility"
+  ],
+  "modules": {
+    "PagesUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utilities to advance over the Roblox pagess API surface Public entry points include `PagesUtils.promiseAdvanceToNextPage`."
+    },
+    "Proxy/PagesDatabase.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Pages Database provides the class/model implementation used by the Pagesutils package. Public entry points include `PagesDatabase.new`, `PagesDatabase.isPagesDatabase`, `PagesDatabase.IncrementToPageIdAsync`, `PagesDatabase.GetPage`, `PagesDatabase.GetIsFinished`."
+    },
+    "Proxy/PagesProxy.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Proxy pages and cache the results to allow for reuse Public entry points include `PagesProxy.new`, `PagesProxy.isPagesProxy`, `PagesProxy.AdvanceToNextPageAsync`, `PagesProxy.GetCurrentPage`, `PagesProxy.Clone`."
+    }
+  }
+}

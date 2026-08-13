@@ -1,0 +1,15 @@
+{
+  "purpose": "Holds utilty MathUtils functions not available on Roblox's MathUtils library.",
+  "description": "Holds utilty MathUtils functions not available on Roblox's MathUtils library.",
+  "tags": [
+    "math",
+    "utility"
+  ],
+  "modules": {
+    "MathUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Holds utilty MathUtils functions not available on Roblox's MathUtils library. Public entry points include `MathUtils.map`, `MathUtils.mapNonNegative`, `MathUtils.jitter`, `MathUtils.addCommas`, `MathUtils.nextOrder`, `MathUtils.isNaN`, `MathUtils.isFinite`, `MathUtils.lerp`."
+    }
+  }
+}

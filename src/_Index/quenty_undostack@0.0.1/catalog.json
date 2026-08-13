@@ -1,0 +1,19 @@
+{
+  "purpose": "Holds undo state",
+  "description": "Holds undo state",
+  "tags": [
+    "reactive"
+  ],
+  "modules": {
+    "UndoStack.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Undo Stack provides the class/model implementation used by the Undostack package. Public entry points include `UndoStack.new`, `UndoStack.ClearRedoStack`, `UndoStack.IsActionExecuting`, `UndoStack.ObserveHasUndoEntries`, `UndoStack.ObserveHasRedoEntries`, `UndoStack.HasUndoEntries`, `UndoStack.HasRedoEntries`, `UndoStack.Push`."
+    },
+    "UndoStackEntry.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Holds undo state Public entry points include `UndoStackEntry.new`, `UndoStackEntry.isUndoStackEntry`, `UndoStackEntry.SetPromiseUndo`, `UndoStackEntry.SetPromiseRedo`, `UndoStackEntry.HasUndo`, `UndoStackEntry.HasRedo`, `UndoStackEntry.PromiseUndo`, `UndoStackEntry.PromiseRedo`."
+    }
+  }
+}

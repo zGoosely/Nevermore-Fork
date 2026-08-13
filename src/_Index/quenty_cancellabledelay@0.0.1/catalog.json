@@ -1,0 +1,14 @@
+{
+  "purpose": "A version of `task.delay` that can be cancelled.",
+  "description": "A version of `task.delay` that can be cancelled.",
+  "tags": [
+    "lifecycle"
+  ],
+  "modules": {
+    "cancellableDelay.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "A version of `task.delay` that can be cancelled."
+    }
+  }
+}

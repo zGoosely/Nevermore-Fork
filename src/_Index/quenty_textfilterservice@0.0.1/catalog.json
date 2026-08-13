@@ -1,0 +1,33 @@
+{
+  "purpose": "Collects the textfilterservice runtime building blocks—Text Filter Constants, Text Filter Network, Text Filter Service, Text Filter Service Client—and composes them for reuse in Roblox experiences.",
+  "description": "Collects the textfilterservice runtime building blocks—Text Filter Constants, Text Filter Network, Text Filter Service, Text Filter Service Client—and composes them for reuse in Roblox experiences.",
+  "tags": [
+    "enums",
+    "game_service",
+    "localization",
+    "security",
+    "serialization"
+  ],
+  "modules": {
+    "Constants/TextFilterConstants.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Text Filter Constants provides the class/model implementation used by the Textfilterservice package."
+    },
+    "Constants/TextFilterNetwork.luau": {
+      "realm": "shared",
+      "kind": "Network",
+      "description": "Text Filter Network provides the network implementation used by the Textfilterservice package."
+    },
+    "TextFilterService.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "Text Filter Service provides the service implementation used by the Textfilterservice package. Public entry points include `TextFilterService.Init`, `TextFilterService.Start`, `TextFilterService.PromiseNonChatStringForUser`, `TextFilterService.PromiseNonChatStringForBroadcast`, `TextFilterService.PromisePreviewNonChatStringForBroadcast`."
+    },
+    "TextFilterServiceClient.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "Text Filter Service Client provides the service implementation used by the Textfilterservice package. Public entry points include `TextFilterServiceClient.Init`, `TextFilterServiceClient.PromiseFilteredTextFromLocalPlayer`, `TextFilterServiceClient.PromiseNonChatStringForUser`, `TextFilterServiceClient.PromiseNonChatStringForBroadcast`, `TextFilterServiceClient.PromisePreviewNonChatStringForBroadcast`."
+    }
+  }
+}

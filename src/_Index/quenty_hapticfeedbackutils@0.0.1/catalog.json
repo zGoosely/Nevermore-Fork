@@ -1,0 +1,14 @@
+{
+  "purpose": "Utility functions involving haptic feedback on gamepads.",
+  "description": "Utility functions involving haptic feedback on gamepads.",
+  "tags": [
+    "utility"
+  ],
+  "modules": {
+    "HapticFeedbackUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility functions involving haptic feedback on gamepads. Public entry points include `HapticFeedbackUtils.smallVibrate`, `HapticFeedbackUtils.setSmallVibration`, `HapticFeedbackUtils.setLargeVibration`, `HapticFeedbackUtils.setVibrationMotor`."
+    }
+  }
+}

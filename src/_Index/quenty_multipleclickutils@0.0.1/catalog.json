@@ -1,0 +1,16 @@
+{
+  "purpose": "Utility library for detecting multiple clicks or taps. Not good UX, but good for opening up a debug menus.",
+  "description": "Utility library for detecting multiple clicks or taps. Not good UX, but good for opening up a debug menus.",
+  "tags": [
+    "developer_tools",
+    "input",
+    "utility"
+  ],
+  "modules": {
+    "MultipleClickUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility library for detecting multiple clicks or taps. Not good UX, but good for opening up a debug menus. Public entry points include `MultipleClickUtils.observeDoubleClick`, `MultipleClickUtils.getDoubleClickSignal`, `MultipleClickUtils.observeMultipleClicks`, `MultipleClickUtils.onMultipleClicks`, `MultipleClickUtils.getMultipleClickSignal`."
+    }
+  }
+}

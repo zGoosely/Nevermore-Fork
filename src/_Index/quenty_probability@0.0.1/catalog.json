@@ -1,0 +1,14 @@
+{
+  "purpose": "Probability utility functions",
+  "description": "Probability utility functions",
+  "tags": [
+    "math"
+  ],
+  "modules": {
+    "Probability.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Probability utility functions Public entry points include `Probability.boxMuller`, `Probability.normal`, `Probability.boundedNormal`, `Probability.erf`, `Probability.cdf`, `Probability.erfinv`, `derivative`, `Probability.percentileToZScore`."
+    }
+  }
+}

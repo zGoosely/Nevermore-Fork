@@ -1,0 +1,153 @@
+{
+  "purpose": "Recreation of Nevermore Engine's soft shutdown service for restarting Roblox servers on update without losing players.",
+  "description": "Recreation of Nevermore Engine's soft shutdown service for restarting Roblox servers on update without losing players.",
+  "tags": [
+    "animation",
+    "data",
+    "enums",
+    "game_service",
+    "gui",
+    "localization",
+    "player_service",
+    "reactive",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "Client/SoftShutdownUI.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "UI pane for displaying soft shutdown status. Public entry points include `SoftShutdownUI.new`, `SoftShutdownUI.SetTitle`, `SoftShutdownUI.SetSubtitle`."
+    },
+    "Server/SoftShutdownServiceUtils.luau": {
+      "realm": "server",
+      "kind": "Utility",
+      "description": "Shared server-side rules for identifying soft-shutdown waiting servers. Public entry points include `SoftShutdownServiceUtils.isReservedServer`, `SoftShutdownServiceUtils.isLobbyTeleportPlayer`, `SoftShutdownServiceUtils.promiseIsLobby`, `SoftShutdownServiceUtils.containsPending`."
+    },
+    "Shared/SoftShutdownConstants.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Constants for soft shutdown."
+    },
+    "Shared/SoftShutdownTranslator/ar-001.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Ar 001 provides the module implementation used by the Softshutdown package."
+    },
+    "Shared/SoftShutdownTranslator/de-de.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "De de provides the module implementation used by the Softshutdown package."
+    },
+    "Shared/SoftShutdownTranslator/en-gb.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "En gb provides the module implementation used by the Softshutdown package."
+    },
+    "Shared/SoftShutdownTranslator/en-us.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "En us provides the module implementation used by the Softshutdown package."
+    },
+    "Shared/SoftShutdownTranslator/es-es.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Es es provides the module implementation used by the Softshutdown package."
+    },
+    "Shared/SoftShutdownTranslator/es-mx.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Es mx provides the module implementation used by the Softshutdown package."
+    },
+    "Shared/SoftShutdownTranslator/fr-ca.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Fr ca provides the module implementation used by the Softshutdown package."
+    },
+    "Shared/SoftShutdownTranslator/fr-fr.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Fr fr provides the module implementation used by the Softshutdown package."
+    },
+    "Shared/SoftShutdownTranslator/id-id.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Id id provides the module implementation used by the Softshutdown package."
+    },
+    "Shared/SoftShutdownTranslator/init.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Translation table for soft shutdown UI."
+    },
+    "Shared/SoftShutdownTranslator/it-it.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "It it provides the module implementation used by the Softshutdown package."
+    },
+    "Shared/SoftShutdownTranslator/ja-jp.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Ja jp provides the module implementation used by the Softshutdown package."
+    },
+    "Shared/SoftShutdownTranslator/ko-kr.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Ko kr provides the module implementation used by the Softshutdown package."
+    },
+    "Shared/SoftShutdownTranslator/pl-pl.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Pl pl provides the module implementation used by the Softshutdown package."
+    },
+    "Shared/SoftShutdownTranslator/pt-br.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Pt br provides the module implementation used by the Softshutdown package."
+    },
+    "Shared/SoftShutdownTranslator/pt-pt.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Pt pt provides the module implementation used by the Softshutdown package."
+    },
+    "Shared/SoftShutdownTranslator/ru-ru.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Ru ru provides the module implementation used by the Softshutdown package."
+    },
+    "Shared/SoftShutdownTranslator/th-th.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Th th provides the module implementation used by the Softshutdown package."
+    },
+    "Shared/SoftShutdownTranslator/tr-tr.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Tr tr provides the module implementation used by the Softshutdown package."
+    },
+    "Shared/SoftShutdownTranslator/vi-vn.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Vi vn provides the module implementation used by the Softshutdown package."
+    },
+    "Shared/SoftShutdownTranslator/zh-cn.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Zh cn provides the module implementation used by the Softshutdown package."
+    },
+    "Shared/SoftShutdownTranslator/zh-tw.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Zh tw provides the module implementation used by the Softshutdown package."
+    },
+    "SoftShutdownService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "This service lets you shut down servers without losing players. When game.OnClose is called, players in the server are teleported into a reserved lobby server. When the reserved server starts up, it teleports everyone back into updated servers. Public entry points include `SoftShutdownService.Init`, `SoftShutdownService.Start`, `handleLobbyStatus`, `SoftShutdownService.Destroy`."
+    },
+    "SoftShutdownServiceClient.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "Client service for handling soft shutdown notifications and UI. Public entry points include `SoftShutdownServiceClient.Init`, `SoftShutdownServiceClient.Start`, `handleChild`, `SoftShutdownServiceClient.Destroy`."
+    }
+  }
+}

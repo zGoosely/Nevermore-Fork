@@ -1,0 +1,15 @@
+{
+  "purpose": "Debug drawing library useful for debugging 3D abstractions. One of the more useful utility libraries. These functions are incredibly easy to invoke for quick debugging. This can make debugging any sort of 3D geometry really easy. This library should not be used to render things in production for normal players, as it is optimized for debug experience over performance.",
+  "description": "Debug drawing library useful for debugging 3D abstractions. One of the more useful utility libraries. These functions are incredibly easy to invoke for quick debugging. This can make debugging any sort of 3D geometry really easy. This library should not be used to render things in production for normal players, as it is optimized for debug experience over performance.",
+  "tags": [
+    "developer_tools",
+    "math"
+  ],
+  "modules": {
+    "Draw.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Debug drawing library useful for debugging 3D abstractions. One of the more useful utility libraries. These functions are incredibly easy to invoke for quick debugging. This can make debugging any sort of 3D geometry really easy. This library should not be used to render things in production for normal players, as it is optimized for debug experience over performance."
+    }
+  }
+}

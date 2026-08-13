@@ -1,0 +1,15 @@
+{
+  "purpose": "Help manage the visibility of Guis while only constructing the Gui while visible. See [BasicPaneUtils.whenVisibleBrio] for a version that is written in Rx.",
+  "description": "Help manage the visibility of Guis while only constructing the Gui while visible. See [BasicPaneUtils.whenVisibleBrio] for a version that is written in Rx.",
+  "tags": [
+    "gui",
+    "reactive"
+  ],
+  "modules": {
+    "GuiVisibleManager.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Help manage the visibility of Guis while only constructing the Gui while visible. See [BasicPaneUtils.whenVisibleBrio] for a version that is written in Rx. Public entry points include `GuiVisibleManager.new`, `GuiVisibleManager.IsVisible`, `GuiVisibleManager.BindToBoolValue`, `GuiVisibleManager.CreateShowHandle`, `updateVisible`."
+    }
+  }
+}

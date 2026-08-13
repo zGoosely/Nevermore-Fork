@@ -1,0 +1,16 @@
+{
+  "purpose": "Reactive, ValueObject-style access to an Instance attribute.",
+  "description": "Allows access to an attribute like a ValueObject.",
+  "tags": [
+    "data",
+    "reactive",
+    "security"
+  ],
+  "modules": {
+    "AttributeValue.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Allows access to an attribute like a ValueObject."
+    }
+  }
+}

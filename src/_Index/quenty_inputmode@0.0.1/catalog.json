@@ -1,0 +1,49 @@
+{
+  "purpose": "`InputModeServiceClient` classifies local Roblox input without reducing the player to a device or platform. A keyboard, mouse, touch surface, and gamepad can all be connected at once; the package tracks which input family was used most recently.",
+  "description": "`InputModeServiceClient` classifies local Roblox input without reducing the player to a device or platform. A keyboard, mouse, touch surface, and gamepad can all be connected at once; the package tracks which input family was used most recently.",
+  "tags": [
+    "animation",
+    "data",
+    "enums",
+    "game_service",
+    "gui",
+    "input",
+    "lifecycle",
+    "localization",
+    "player_service",
+    "reactive",
+    "serialization"
+  ],
+  "modules": {
+    "Client/InputMode.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Tracks when a static [InputModeType] is used. Public entry points include `InputMode.new`, `InputMode.isInputMode`, `InputMode.GetLastEnabledTime`, `InputMode.GetKeys`, `InputMode.IsValid`, `InputMode.Enable`, `InputMode.Evaluate`, `InputMode.Destroy`."
+    },
+    "Client/InputModeProcessor.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Evaluates InputObjects against a collection of [InputMode] states. Public entry points include `InputModeProcessor.new`, `InputModeProcessor.AddInputMode`, `InputModeProcessor.GetStates`, `InputModeProcessor.Evaluate`, `InputModeProcessor.Destroy`."
+    },
+    "Client/InputModeServiceClient.luau": {
+      "realm": "client",
+      "kind": "Service",
+      "description": "Centralizes local input processing and exposes reusable InputMode state. Public entry points include `InputModeServiceClient.Init`, `InputModeServiceClient.Start`, `InputModeServiceClient.GetInputMode`, `InputModeServiceClient.Destroy`."
+    },
+    "Client/InputModeTypeSelector.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Selects the most recently used mode from an ordered set of InputModeTypes. Public entry points include `InputModeTypeSelector.new`, `InputModeTypeSelector.fromObservableBrio`, `InputModeTypeSelector.GetActiveInputType`, `InputModeTypeSelector.ObserveActiveInputType`, `InputModeTypeSelector.IsActive`, `InputModeTypeSelector.ObserveIsActive`, `InputModeTypeSelector.Bind`, `onChange`."
+    },
+    "Shared/InputModeType.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Defines a static group of input keys used by [InputMode]. Definitions can include other InputModeTypes to form composite modes. Public entry points include `InputModeType.new`, `InputModeType.isInputModeType`, `InputModeType.IsValid`, `InputModeType.GetKeys`."
+    },
+    "Shared/InputModeTypes.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Predefined input mode definitions shared by input selectors and keybinding validation."
+    }
+  }
+}

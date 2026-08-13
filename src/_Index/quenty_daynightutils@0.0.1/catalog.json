@@ -1,0 +1,24 @@
+{
+  "purpose": "Shared constants describing the day/night cycle. Day is defined as the clock time window between sunrise and sunset; everything else is night.",
+  "description": "Shared constants describing the day/night cycle. Day is defined as the clock time window between sunrise and sunset; everything else is night.",
+  "tags": [
+    "animation",
+    "enums",
+    "game_service",
+    "security",
+    "utility",
+    "world"
+  ],
+  "modules": {
+    "DayNightConstants.luau": {
+      "realm": "shared",
+      "kind": "Constants",
+      "description": "Shared constants describing the day/night cycle. Day is defined as the clock time window between sunrise and sunset; everything else is night."
+    },
+    "DayNightUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Queries and observes whether it is currently day or night, and estimates how long until the next transition. Day/night is derived from `Lighting.ClockTime`: daytime is the window between sunrise and sunset (see [DayNightConstants]), and everything else is night. Time-until estimates are in real seconds and depend on how fast the game clock is advancing."
+    }
+  }
+}

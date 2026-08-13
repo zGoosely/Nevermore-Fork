@@ -1,0 +1,15 @@
+{
+  "purpose": "Utility methods for JSON",
+  "description": "Utility methods for JSON",
+  "tags": [
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "JSONUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility methods for JSON Public entry points include `JSONUtils.jsonDecode`, `JSONUtils.jsonEncode`, `JSONUtils.promiseJSONDecode`."
+    }
+  }
+}

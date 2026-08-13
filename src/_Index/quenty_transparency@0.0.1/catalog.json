@@ -1,0 +1,25 @@
+{
+  "purpose": "Allows a model to have transparent set locally on the client. Supports all BasePart types including: - Part - MeshPart - UnionOperation - TrussPart - WedgePart - CornerWedgePart Also supports Decals. Can optionally disable visual effects like ParticleEmitters, Lights, Beams, etc.",
+  "description": "Allows a model to have transparent set locally on the client. Supports all BasePart types including: - Part - MeshPart - UnionOperation - TrussPart - WedgePart - CornerWedgePart Also supports Decals. Can optionally disable visual effects like ParticleEmitters, Lights, Beams, etc.",
+  "tags": [
+    "enums",
+    "game_service"
+  ],
+  "modules": {
+    "ModelTransparencyEffect.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Allows a model to have transparent set locally on the client. Supports all BasePart types including: - Part - MeshPart - UnionOperation - TrussPart - WedgePart - CornerWedgePart Also supports Decals. Can optionally disable visual effects like ParticleEmitters, Lights, Beams, etc."
+    },
+    "ModelTransparencyEffectUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Identifies visual-effect instances supported by `ModelTransparencyEffect`. Public entry points include `ModelTransparencyEffectUtils.isVisualEffect`."
+    },
+    "TransparencyService.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "Service that orchistrates transparency setting from multiple colliding sources and handle the transparency appropriately. This means that 2 systems can work with transparency without knowing about each other. Public entry points include `TransparencyService.Init`, `TransparencyService.IsDead`, `TransparencyService.SetTransparency`, `TransparencyService.SetLocalTransparencyModifier`,…"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "purpose": "Collects the teleportserviceutils runtime building blocks—Teleport Service Utils—and composes them for reuse in Roblox experiences.",
+  "description": "Collects the teleportserviceutils runtime building blocks—Teleport Service Utils—and composes them for reuse in Roblox experiences.",
+  "tags": [
+    "game_service",
+    "utility"
+  ],
+  "modules": {
+    "TeleportServiceUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Teleport Service Utils provides the class/model implementation used by the Teleportserviceutils package. Public entry points include `TeleportServiceUtils.promiseReserveServer`, `TeleportServiceUtils.promiseTeleport`, `TeleportServiceUtils.promiseTeleportToPlaceInstance`, `TeleportServiceUtils.promiseTeleportToPrivateServer`, `TeleportServiceUtils.promiseTeleportToSpawnByName`."
+    }
+  }
+}

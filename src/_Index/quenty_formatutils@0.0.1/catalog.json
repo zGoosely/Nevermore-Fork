@@ -1,0 +1,17 @@
+{
+  "purpose": "Stateless utility for formatting numbers, durations, byte sizes, percentages, and ordinal rank strings.",
+  "description": "Stateless utility for formatting numbers, durations, byte sizes, percentages, and ordinal rank strings.",
+  "tags": [
+    "localization",
+    "math",
+    "reactive",
+    "utility"
+  ],
+  "modules": {
+    "FormatUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Stateless utility for formatting numbers, durations, byte sizes, percentages, and ordinal rank strings. Public entry points include `FormatUtils.formatCompact`, `FormatUtils.formatCommas`, `FormatUtils.formatDuration`, `FormatUtils.formatPercent`, `FormatUtils.formatOrdinal`, `FormatUtils.formatBytes`."
+    }
+  }
+}

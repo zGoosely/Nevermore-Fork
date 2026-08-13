@@ -1,0 +1,14 @@
+{
+  "purpose": "Queue class with better performance characteristics than table.remove()",
+  "description": "Queue class with better performance characteristics than table.remove()",
+  "tags": [
+    "player_service"
+  ],
+  "modules": {
+    "Queue.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Queue class with better performance characteristics than table.remove()."
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "purpose": "Fast, allocation-light signal implementation (forked from lemonsignal). Uses a free-thread pool and an intrusive linked list of connections. Kept `--!native`/`--!nocheck` and faithful to upstream — this is a hot path; restyling would risk both performance and correctness.",
+  "description": "Fast, allocation-light signal implementation (forked from lemonsignal). Uses a free-thread pool and an intrusive linked list of connections. Kept `--!native`/`--!nocheck` and faithful to upstream — this is a hot path; restyling would risk both performance and correctness.",
+  "tags": [
+    "reactive"
+  ],
+  "modules": {
+    "Signal.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Fast, allocation-light signal implementation (forked from lemonsignal). Uses a free-thread pool and an intrusive linked list of connections. Kept `--!native`/`--!nocheck` and faithful to upstream — this is a hot path; restyling would risk both performance and correctness. Public entry points include `runCallback`, `yielder`, `Signal.isSignal`."
+    }
+  }
+}

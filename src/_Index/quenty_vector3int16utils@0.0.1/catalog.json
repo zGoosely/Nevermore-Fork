@@ -1,0 +1,15 @@
+{
+  "purpose": "Module for working with Vector3int16.",
+  "description": "Module for working with Vector3int16.",
+  "tags": [
+    "math",
+    "utility"
+  ],
+  "modules": {
+    "Vector3int16Utils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Module for working with Vector3int16. Public entry points include `Vector3int16Utils.fromVector3`."
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "purpose": "InputImageLibrary with a variety of dark and light themed icons for inputs on keyboard, xbox, touched events, mouse, and more.",
+  "description": "InputImageLibrary with a variety of dark and light themed icons for inputs on keyboard, xbox, touched events, mouse, and more.",
+  "tags": [
+    "data",
+    "gui",
+    "input"
+  ],
+  "modules": {
+    "Sprite/InputImageLibrary/Spritesheets/Keyboard/Dark.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Dark provides the class/model implementation used by the Sprites package. Public entry points include `KeyboardDark.new`."
+    },
+    "Sprite/InputImageLibrary/Spritesheets/Keyboard/Light.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Light provides the class/model implementation used by the Sprites package. Public entry points include `KeyboardLight.new`."
+    },
+    "Sprite/InputImageLibrary/Spritesheets/PlayStation/Dark.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Dark provides the class/model implementation used by the Sprites package. Public entry points include `PS5Dark.new`."
+    },
+    "Sprite/InputImageLibrary/Spritesheets/Touch/All.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "All provides the class/model implementation used by the Sprites package. Public entry points include `Gestures.new`."
+    },
+    "Sprite/InputImageLibrary/Spritesheets/XBox/Dark.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Dark provides the class/model implementation used by the Sprites package. Public entry points include `XboxOneDark.new`."
+    },
+    "Sprite/InputImageLibrary/Spritesheets/XBox/Light.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Light provides the class/model implementation used by the Sprites package. Public entry points include `XboxOneLight.new`."
+    },
+    "Sprite/InputImageLibrary/init.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "InputImageLibrary with a variety of dark and light themed icons for inputs on keyboard, xbox, touched events, mouse, and more. Public entry points include `InputImageLibrary.new`, `InputImageLibrary.GetPreloadAssetIds`, `InputImageLibrary.GetSprite`, `InputImageLibrary.StyleImage`, `InputImageLibrary.GetScaledImageLabel`, `InputImageLibrary.PickSheet`, `findSheet`."
+    },
+    "Sprite/Sprite.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "A single image on a spritesheet. Public entry points include `Sprite.new`, `Sprite.Style`, `Sprite.Get`."
+    },
+    "Sprite/Spritesheet.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Data model for sprite sheets Public entry points include `Spritesheet.new`, `Spritesheet.GetPreloadAssetId`, `Spritesheet.AddSprite`, `Spritesheet.GetSprite`, `Spritesheet.HasSprite`."
+    }
+  }
+}

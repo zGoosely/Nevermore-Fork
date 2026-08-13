@@ -1,0 +1,127 @@
+{
+  "purpose": "`RogueProperty` is a reactive property system whose final value is computed from a base value plus an ordered list of temporary modifiers. It stores runtime state on Roblox Instances, exposes ValueObject-like access, supports nested tables and homogeneous arrays, and lets unrelated systems add or remove effects without overwriting each other.",
+  "description": "`RogueProperty` is a reactive property system whose final value is computed from a base value plus an ordered list of temporary modifiers. It stores runtime state on Roblox Instances, exposes ValueObject-like access, supports nested tables and homogeneous arrays, and lets unrelated systems add or remove effects without overwriting each other.",
+  "tags": [
+    "animation",
+    "audio",
+    "data",
+    "enums",
+    "game_service",
+    "input",
+    "lifecycle",
+    "localization",
+    "math",
+    "player_service",
+    "reactive",
+    "security",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "Shared/Array/RoguePropertyArrayConstants.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rogue Property Array Constants provides the class/model implementation used by the Rogueproperty package."
+    },
+    "Shared/Array/RoguePropertyArrayUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rogue Property Array Utils provides the class/model implementation used by the Rogueproperty package. Public entry points include `RoguePropertyArrayUtils.getNameFromIndex`, `RoguePropertyArrayUtils.getIndexFromName`, `RoguePropertyArrayUtils.createRequiredPropertyDefinitionFromArray`, `RoguePropertyArrayUtils.createRequiredTableDefinition`, `RoguePropertyArrayUtils.createRequiredPropertyDefinitionFromType`,…"
+    },
+    "Shared/Cache/RoguePropertyCache.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utility class that helps cache rogue properties per an instance."
+    },
+    "Shared/Cache/RoguePropertyCacheService.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "Constructing a new rogue property/rogue property table can be expensive. This caches it so frame-usage is cheap. Public entry points include `RoguePropertyCacheService.Init`, `RoguePropertyCacheService.GetCache`."
+    },
+    "Shared/Definition/RoguePropertyDefinition.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rogue Property Definition provides the class/model implementation used by the Rogueproperty package. Public entry points include `RoguePropertyDefinition.new`, `RoguePropertyDefinition.SetDefaultValue`, `RoguePropertyDefinition.isRoguePropertyDefinition`, `RoguePropertyDefinition.HasChildren`, `RoguePropertyDefinition.Get`, `RoguePropertyDefinition.GetOrCreateInstance`,…"
+    },
+    "Shared/Definition/RoguePropertyDefinitionArrayHelper.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rogue Property Definition Array Helper provides the class/model implementation used by the Rogueproperty package. Public entry points include `RoguePropertyDefinitionArrayHelper.new`, `RoguePropertyDefinitionArrayHelper.IsArray`, `RoguePropertyDefinitionArrayHelper.GetDefaultArrayData`, `RoguePropertyDefinitionArrayHelper.GetPropertyTableDefinition`, `RoguePropertyDefinitionArrayHelper.GetDefaultDefinitions`,…"
+    },
+    "Shared/Definition/RoguePropertyTableDefinition.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "This holds the definition for a variety of tables. Public entry points include `RoguePropertyTableDefinition.new`, `RoguePropertyTableDefinition.isRoguePropertyTableDefinition`, `RoguePropertyTableDefinition.SetDefaultValue`, `RoguePropertyTableDefinition.CanAssign`, `RoguePropertyTableDefinition.GetDefinitionArrayHelper`, `RoguePropertyTableDefinition.GetDefinitionMap`,…"
+    },
+    "Shared/Implementation/RogueProperty.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rogue Property provides the class/model implementation used by the Rogueproperty package. Public entry points include `RogueProperty.new`, `RogueProperty.SetCanInitialize`, `RogueProperty.GetAdornee`, `RogueProperty.CanInitialize`, `RogueProperty.GetBaseValueObject`, `RogueProperty.SetBaseValue`, `RogueProperty.PromiseBaseValue`, `RogueProperty.SetValue`."
+    },
+    "Shared/Implementation/RoguePropertyArrayHelper.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rogue Property Array Helper provides the class/model implementation used by the Rogueproperty package. Public entry points include `RoguePropertyArrayHelper.new`, `RoguePropertyArrayHelper.SetCanInitialize`, `RoguePropertyArrayHelper.GetArrayRogueProperty`, `RoguePropertyArrayHelper.GetArrayRogueProperties`, `RoguePropertyArrayHelper.SetArrayBaseData`, `RoguePropertyArrayHelper.SetArrayData`,…"
+    },
+    "Shared/Implementation/RoguePropertyTable.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rogue Property Table provides the class/model implementation used by the Rogueproperty package. Public entry points include `RoguePropertyTable.new`, `RoguePropertyTable.SetCanInitialize`, `RoguePropertyTable.ObserveContainerBrio`, `RoguePropertyTable.GetContainer`, `RoguePropertyTable.SetBaseValue`, `RoguePropertyTable.SetValue`, `RoguePropertyTable.GetRogueProperties`, `RoguePropertyTable.GetValue`."
+    },
+    "Shared/Implementation/RoguePropertyUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rogue Property Utils provides the class/model implementation used by the Rogueproperty package. Public entry points include `RoguePropertyUtils.decodeProperty`, `RoguePropertyUtils.encodeProperty`."
+    },
+    "Shared/Modifiers/Implementations/RogueAdditive.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rogue Additive provides the class/model implementation used by the Rogueproperty package. Public entry points include `RogueAdditive.new`, `RogueAdditive.GetModifiedVersion`, `RogueAdditive.GetInvertedVersion`, `RogueAdditive.ObserveModifiedVersion`."
+    },
+    "Shared/Modifiers/Implementations/RogueModifierBase.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rogue Modifier Base provides the class/model implementation used by the Rogueproperty package. Public entry points include `RogueModifierBase.new`, `RogueModifierBase.GetModifiedVersion`, `RogueModifierBase.ObserveModifiedVersion`."
+    },
+    "Shared/Modifiers/Implementations/RogueMultiplier.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rogue Multiplier provides the class/model implementation used by the Rogueproperty package. Public entry points include `RogueMultiplier.new`, `RogueMultiplier.GetModifiedVersion`, `RogueMultiplier.GetInvertedVersion`, `RogueMultiplier.ObserveModifiedVersion`."
+    },
+    "Shared/Modifiers/Implementations/RogueSetter.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rogue Setter provides the class/model implementation used by the Rogueproperty package. Public entry points include `RogueSetter.new`, `RogueSetter.GetModifiedVersion`, `RogueSetter.ObserveModifiedVersion`, `RogueSetter.GetInvertedVersion`."
+    },
+    "Shared/Modifiers/RogueModifierInterface.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rogue Modifier Interface provides the class/model implementation used by the Rogueproperty package."
+    },
+    "Shared/Modifiers/RoguePropertyModifierData.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rogue Property Modifier Data provides the class/model implementation used by the Rogueproperty package."
+    },
+    "Shared/RoguePropertyBaseValueTypeUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rogue Property Base Value Type Utils provides the class/model implementation used by the Rogueproperty package. Public entry points include `RoguePropertyBaseValueTypeUtils.isRoguePropertyBaseValueType`."
+    },
+    "Shared/RoguePropertyBaseValueTypes.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rogue Property Base Value Types provides the class/model implementation used by the Rogueproperty package."
+    },
+    "Shared/RoguePropertyConstants.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Rogue Property Constants provides the class/model implementation used by the Rogueproperty package."
+    },
+    "Shared/RoguePropertyService.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "This service handles the observable part of a rogue property which allows for us to listen for all of these additives and multipliers in a centralized location. Public entry points include `RoguePropertyService.Init`, `RoguePropertyService.CanInitializeProperties`, `RoguePropertyService.Destroy`."
+    }
+  }
+}
