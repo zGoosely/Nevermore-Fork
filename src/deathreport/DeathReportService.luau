@@ -8,11 +8,9 @@
 
 const require = require("../Loader").load()
 
-const DeathReportBindersServer = require("DeathReportBindersServer")
 const DeathReportNetwork = require("DeathReportNetwork")
 const DeathReportProcessor = require("DeathReportProcessor")
 const DeathReportUtils = require("DeathReportUtils")
-const DeathTrackedHumanoid = require("DeathTrackedHumanoid")
 const Maid = require("Maid")
 const Observable = require("Observable")
 const PlayerIdService = require("PlayerIdService")
@@ -46,6 +44,9 @@ export type DeathReportService = typeof(setmetatable(
 	@param serviceBag ServiceBag
 ]=]
 function DeathReportService.Init(self: DeathReportService, serviceBag: ServiceBag.ServiceBag): ()
+	const DeathReportBindersServer = require("DeathReportBindersServer")
+	const DeathTrackedHumanoid = require("DeathTrackedHumanoid")
+
 	assert(not (self :: any)._serviceBag, "Already initialized")
 	assert(t.table(serviceBag), "Bad serviceBag")
 
