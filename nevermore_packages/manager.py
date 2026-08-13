@@ -12,17 +12,19 @@ from pathlib import Path
 from typing import Sequence
 
 from .catalog import parse_legacy_catalog, read_catalog, validate_catalog, write_catalog
-from .models import CatalogEntry, CommandResult, ModuleEntry, OperationResult, PackageRecord
+from .models import CatalogEntry, CommandResult, ModuleEntry, OperationResult, PackageRecord, SnippetTemplate
+from .snippets import inject_package_requires, load_snippet_templates, render_snippet_template
 
 
 PACKAGE_NAME = re.compile(r"^[a-z0-9][a-z0-9-]*$")
 SEMVER = re.compile(r"^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$")
 EXPORT_NAME = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
 KINDS = {"utility", "class", "service", "types", "empty"}
+SERVICE_REALMS = {"server", "client", "both"}
 
 
 def _pascal_case(name: str) -> str:
-    return "".join(part[:1].upper() + part[1:] for part in re.split(r"[-_]", name) if part)
+    return "".join(part[:1].upper() + part[1:] for part in re.split(r"[-_\s]+", name) if part)
 
 
 def _file_digest(path: Path) -> str:
@@ -34,12 +36,23 @@ def _file_digest(path: Path) -> str:
 class PackageManager:
     """Owns package discovery, validation, and safe local mutations."""
 
-    def __init__(self, root: Path | None = None) -> None:
+    def __init__(self, root: Path | None = None, snippet_path: Path | None = None) -> None:
         self.root = (root or Path(__file__).resolve().parents[1]).resolve()
         self.src = self.root / "src"
         self.index = self.src / "_Index"
         self.catalog_path = self.root / "PKGINFO.md"
         self.scripts = self.root / "scripts"
+        self.snippet_path = snippet_path or self._find_snippet_path()
+
+    def list_snippet_templates(self) -> tuple[SnippetTemplate, ...]:
+        """Return complete module templates imported from Untitled Knife Game."""
+
+        return load_snippet_templates(self.snippet_path)
+
+    def list_dependency_aliases(self) -> tuple[str, ...]:
+        """Return public exports that a newly created package can require."""
+
+        return tuple(sorted({alias for record in self.list_packages() for alias in record.exports}, key=str.casefold))
 
     def list_packages(self) -> list[PackageRecord]:
         records = []
@@ -99,6 +112,9 @@ class PackageManager:
         purpose: str = "",
         description: str = "",
         tags: Sequence[str] = (),
+        template_name: str | None = None,
+        service_realm: str | None = None,
+        dependencies: Sequence[str] = (),
     ) -> OperationResult:
         try:
             short_name = self._validate_name(name.removeprefix("quenty/"))
@@ -106,10 +122,25 @@ class PackageManager:
             normalized_kind = kind.lower()
             if normalized_kind not in KINDS:
                 raise ValueError(f"Unknown package kind: {kind}")
+            if template_name and normalized_kind == "empty":
+                raise ValueError("A snippet template must create a non-empty package")
+            normalized_realm = (service_realm or "server").lower()
+            if normalized_kind == "service" and normalized_realm not in SERVICE_REALMS:
+                raise ValueError(f"Unknown service realm: {service_realm}")
+            if normalized_kind != "service" and service_realm is not None:
+                raise ValueError("Service realm options only apply to service templates")
+            dependency_aliases = tuple(dict.fromkeys(alias.strip() for alias in dependencies if alias.strip()))
+            if normalized_kind == "empty" and dependency_aliases:
+                raise ValueError("An empty package cannot require dependencies")
+            available_aliases = set(self.list_dependency_aliases())
+            unknown_aliases = sorted(set(dependency_aliases) - available_aliases)
+            if unknown_aliases:
+                raise ValueError(f"Unknown package exports: {', '.join(unknown_aliases)}")
             if list(self.index.glob(f"quenty_{short_name}@*")):
                 raise ValueError(f"Package already exists: quenty/{short_name}")
-            public_name = export_name or _pascal_case(short_name)
-            if normalized_kind != "empty" and not EXPORT_NAME.fullmatch(public_name):
+            public_name = _pascal_case(export_name or short_name)
+            module_specs = self._module_specs(normalized_kind, public_name, normalized_realm)
+            if any(not EXPORT_NAME.fullmatch(module_name) for module_name, _realm in module_specs):
                 raise ValueError("Export names must be valid Luau identifiers")
         except ValueError as error:
             return OperationResult(False, "Invalid package configuration", diagnostics=(str(error),))
@@ -118,7 +149,7 @@ class PackageManager:
         try:
             package_root = self.index / f"quenty_{short_name}@{version}"
             package_root.mkdir(parents=True)
-            exports = {} if normalized_kind == "empty" else {public_name: public_name}
+            exports = {module_name: module_name for module_name, _realm in module_specs}
             self._write_json(
                 package_root / "package.json",
                 {
@@ -129,26 +160,26 @@ class PackageManager:
                     "externals": [],
                 },
             )
-            modules: tuple[ModuleEntry, ...] = ()
-            if normalized_kind != "empty":
-                module_path = f"{public_name}.luau"
-                (package_root / module_path).write_text(
-                    self._render_template(normalized_kind, public_name), encoding="utf-8"
-                )
-                modules = (
+            modules = []
+            for module_name, realm in module_specs:
+                module_path = f"{module_name}.luau"
+                source = self._render_template(normalized_kind, module_name, template_name)
+                source = inject_package_requires(source, dependency_aliases)
+                (package_root / module_path).write_text(source, encoding="utf-8")
+                modules.append(
                     ModuleEntry(
                         module_path,
-                        "server" if normalized_kind == "service" else "shared",
+                        realm,
                         {
                             "utility": "Utility",
                             "class": "Class/model",
                             "service": "Service",
                             "types": "Types",
                         }[normalized_kind],
-                        description or purpose or f"Provides {public_name}.",
-                    ),
+                        description or purpose or f"Provides {module_name}.",
+                    )
                 )
-            else:
+            if normalized_kind == "empty":
                 placeholder = package_root / "README.md"
                 placeholder.write_text(
                     f"# {public_name}\n\nAdd strict Luau modules and exports through `nevermore-packages`.\n",
@@ -158,7 +189,7 @@ class PackageManager:
                 purpose=purpose or f"Provides the {public_name} package.",
                 description=description or purpose or f"Provides the {public_name} package.",
                 tags=tuple(sorted({tag.strip() for tag in tags if tag.strip()})),
-                modules=modules,
+                modules=tuple(modules),
             )
             write_catalog(package_root / "catalog.json", entry)
             sync_result = self._fast_sync()
@@ -441,7 +472,9 @@ class PackageManager:
                 return candidate
         raise ValueError(f"Cannot resolve export target {target!r}")
 
-    def _render_template(self, kind: str, public_name: str) -> str:
+    def _render_template(self, kind: str, public_name: str, template_name: str | None = None) -> str:
+        if template_name:
+            return render_snippet_template(self.snippet_path, template_name, public_name)
         if kind == "utility":
             return (
                 f'--!strict\n--[=[\n\tProvides stateless {public_name} helpers.\n\n\t@util {public_name}\n]=]\n\n'
@@ -479,3 +512,30 @@ class PackageManager:
                 f"return {public_name}\n"
             )
         raise ValueError(f"No source template for {kind}")
+
+    def _module_specs(self, kind: str, public_name: str, service_realm: str) -> tuple[tuple[str, str], ...]:
+        if kind == "empty":
+            return ()
+        if kind != "service":
+            return ((public_name, "shared"),)
+
+        base_name = public_name
+        if base_name.casefold().endswith("serviceclient"):
+            base_name = f"{base_name[:-13]}Service"
+        elif base_name.casefold().endswith("service"):
+            base_name = f"{base_name[:-7]}Service"
+        else:
+            base_name += "Service"
+        if service_realm == "server":
+            return ((base_name, "server"),)
+        if service_realm == "client":
+            return ((f"{base_name}Client", "client"),)
+        return ((base_name, "server"), (f"{base_name}Client", "client"))
+
+    def _find_snippet_path(self) -> Path:
+        relative = Path("Untitled Knife Game") / ".vscode" / "luau.code-snippets"
+        candidates = (
+            self.root.parent / relative,
+            Path(__file__).resolve().parents[2] / relative,
+        )
+        return next((path for path in candidates if path.is_file()), candidates[0])

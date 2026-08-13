@@ -6,10 +6,14 @@ import json
 from collections.abc import Callable
 from typing import Any
 
+from rich.markup import escape
 from textual import on, work
 from textual.app import App, ComposeResult
-from textual.containers import Horizontal, Vertical
+from textual.binding import Binding
+from textual.containers import Horizontal, Vertical, VerticalScroll
 from textual.screen import ModalScreen
+from textual.suggester import Suggester
+from textual.theme import Theme
 from textual.widgets import (
     Button,
     DataTable,
@@ -25,8 +29,63 @@ from textual.widgets import (
     TextArea,
 )
 
-from .manager import KINDS, PackageManager
-from .models import ModuleEntry, OperationResult, PackageRecord
+from .manager import PackageManager
+from .models import ModuleEntry, OperationResult, PackageRecord, SnippetTemplate
+
+
+GRUVBOX_THEME = Theme(
+    name="gruvbox",
+    primary="#d79921",
+    secondary="#689d6a",
+    warning="#fe8019",
+    error="#fb4934",
+    success="#b8bb26",
+    accent="#83a598",
+    foreground="#ebdbb2",
+    background="#282828",
+    surface="#1d2021",
+    panel="#3c3836",
+    boost="#504945",
+    dark=True,
+    variables={
+        "muted": "#928374",
+        "soft": "#a89984",
+        "purple": "#d3869b",
+    },
+)
+
+
+class DependencySuggester(Suggester):
+    """Complete the final alias in a comma-separated dependency input."""
+
+    def __init__(self, aliases: tuple[str, ...]) -> None:
+        super().__init__(case_sensitive=True)
+        self.aliases = aliases
+
+    async def get_suggestion(self, value: str) -> str | None:
+        prefix, separator, fragment = value.rpartition(",")
+        leading_space = fragment[: len(fragment) - len(fragment.lstrip())]
+        query = fragment.strip().casefold()
+        selected = {item.strip().casefold() for item in prefix.split(",") if item.strip()}
+        for alias in self.aliases:
+            if alias.casefold() in selected:
+                continue
+            if alias.casefold().startswith(query):
+                completed_prefix = f"{prefix}{separator}" if separator else ""
+                return f"{completed_prefix}{leading_space}{alias}"
+        return None
+
+
+class DependencyInput(Input):
+    """Accept dependency completions with Tab while preserving normal focus traversal."""
+
+    BINDINGS = [*Input.BINDINGS, Binding("tab", "accept_suggestion", show=False)]
+
+    def action_accept_suggestion(self) -> None:
+        if self.cursor_at_end and self._suggestion:
+            self.action_cursor_right()
+        else:
+            self.screen.focus_next()
 
 
 class FormScreen(ModalScreen[dict[str, Any] | None]):
@@ -41,33 +100,161 @@ class FormScreen(ModalScreen[dict[str, Any] | None]):
 class CreatePackageScreen(FormScreen):
     """Collect package scaffolding and initial catalog metadata."""
 
+    def __init__(self, templates: tuple[SnippetTemplate, ...], dependency_aliases: tuple[str, ...]) -> None:
+        super().__init__()
+        self.templates = {template.name: template for template in templates}
+        self.dependency_aliases = dependency_aliases
+
     def compose(self) -> ComposeResult:
         with Vertical(id="dialog"):
-            yield Label("Create package", classes="dialog-title")
-            yield Input(placeholder="package-name", id="name")
-            yield Input(value="0.0.1", placeholder="Version", id="version")
-            yield Select(((kind.title(), kind) for kind in sorted(KINDS)), value="utility", id="kind")
-            yield Input(placeholder="Public export (derived when empty)", id="export")
-            yield Input(placeholder="Purpose", id="purpose")
-            yield Input(placeholder="Short description", id="description")
-            yield Input(placeholder="Tags, comma separated", id="tags")
+            yield Label("New package", classes="dialog-title")
+            with Horizontal(classes="form-row"):
+                with Vertical(classes="field"):
+                    yield Label("Package", classes="field-label")
+                    yield Input(placeholder="package-name", id="name")
+                with Vertical(classes="field version-field"):
+                    yield Label("Version", classes="field-label")
+                    yield Input(value="0.0.1", placeholder="0.0.1", id="version")
+            options = [("Empty package", "")]
+            options.extend(
+                (
+                    self._template_label(template.name),
+                    template.name,
+                )
+                for template in self.templates.values()
+            )
+            default_template = (
+                "Define a new Library" if "Define a new Library" in self.templates else next(iter(self.templates), "")
+            )
+            with Horizontal(classes="form-row"):
+                with Vertical(classes="field"):
+                    yield Label("Template", classes="field-label")
+                    yield Select(options, value=default_template, prompt="Template", id="template")
+                with Vertical(classes="field"):
+                    yield Label("Public name", classes="field-label")
+                    yield Input(placeholder="Derived from package", id="export")
+            with Vertical(id="service-options"):
+                with Horizontal(classes="form-row"):
+                    with Vertical(classes="field realm-field"):
+                        yield Label("Realm", classes="field-label")
+                        yield Select(
+                            (("Server", "server"), ("Client", "client"), ("Server & Client", "both")),
+                            value="server",
+                            id="service-realm",
+                        )
+                    with Vertical(classes="field preview-field"):
+                        yield Label("Files", classes="field-label")
+                        yield Static("", id="service-name-preview")
+            with Horizontal(classes="form-row"):
+                with Vertical(classes="field"):
+                    yield Label("Purpose", classes="field-label")
+                    yield Input(placeholder="What does it provide?", id="purpose")
+                with Vertical(classes="field"):
+                    yield Label("Tags", classes="field-label")
+                    yield Input(placeholder="utility, data", id="tags")
+            with Vertical(classes="field full-field"):
+                yield Label("Description", classes="field-label")
+                yield Input(placeholder="A short package summary", id="description")
+            with Vertical(classes="field full-field dependency-field"):
+                yield Label("Dependencies · Tab to complete", classes="field-label")
+                yield DependencyInput(
+                    placeholder="Maid, Promise, ServiceBag",
+                    suggester=DependencySuggester(self.dependency_aliases),
+                    id="dependencies",
+                )
             with Horizontal(classes="dialog-actions"):
                 yield Button("Create", variant="primary", id="save")
                 yield Button("Cancel", id="cancel")
 
+    def on_mount(self) -> None:
+        self._update_template_options()
+
+    @on(Select.Changed, "#template")
+    def template_changed(self) -> None:
+        self._update_template_options()
+
+    @on(Select.Changed, "#service-realm")
+    def service_realm_changed(self) -> None:
+        self._update_service_preview()
+
+    @on(Input.Changed, "#name")
+    @on(Input.Changed, "#export")
+    def package_name_changed(self) -> None:
+        self._update_service_preview()
+
     @on(Button.Pressed, "#save")
     def save(self) -> None:
+        selected_template = self.query_one("#template", Select).value
+        template_name = selected_template if isinstance(selected_template, str) and selected_template else None
+        template = self.templates.get(template_name) if template_name else None
+        dependency_lookup = {alias.casefold(): alias for alias in self.dependency_aliases}
+        dependencies = tuple(
+            dict.fromkeys(
+                dependency_lookup.get(item.strip().casefold(), item.strip())
+                for item in self.query_one("#dependencies", Input).value.split(",")
+                if item.strip()
+            )
+        )
         self.dismiss(
             {
                 "name": self.query_one("#name", Input).value,
                 "version": self.query_one("#version", Input).value,
-                "kind": self.query_one("#kind", Select).value,
+                "kind": template.kind if template else "empty",
                 "export_name": self.query_one("#export", Input).value or None,
                 "purpose": self.query_one("#purpose", Input).value,
                 "description": self.query_one("#description", Input).value,
                 "tags": self.query_one("#tags", Input).value.split(","),
+                "template_name": template_name,
+                "service_realm": self.query_one("#service-realm", Select).value
+                if template and template.kind == "service"
+                else None,
+                "dependencies": dependencies,
             }
         )
+
+    def _update_template_options(self) -> None:
+        selected = self.query_one("#template", Select).value
+        template = self.templates.get(selected) if isinstance(selected, str) else None
+        self.query_one("#service-options", Vertical).styles.display = (
+            "block" if template and template.kind == "service" else "none"
+        )
+        self._update_service_preview()
+
+    def _update_service_preview(self) -> None:
+        preview = self.query_one("#service-name-preview", Static)
+        selected = self.query_one("#template", Select).value
+        template = self.templates.get(selected) if isinstance(selected, str) else None
+        if not template or template.kind != "service":
+            preview.update("")
+            return
+
+        explicit_name = self.query_one("#export", Input).value.strip()
+        package_name = self.query_one("#name", Input).value.strip()
+        base_name = explicit_name or "".join(
+            part[:1].upper() + part[1:]
+            for part in package_name.replace("_", "-").split("-")
+            if part
+        )
+        if base_name.casefold().endswith("serviceclient"):
+            base_name = f"{base_name[:-13]}Service"
+        elif base_name.casefold().endswith("service"):
+            base_name = f"{base_name[:-7]}Service"
+        elif base_name:
+            base_name += "Service"
+        base_name = base_name or "PackageService"
+        realm = self.query_one("#service-realm", Select).value
+        names = [base_name] if realm == "server" else [f"{base_name}Client"]
+        if realm == "both":
+            names = [base_name, f"{base_name}Client"]
+        preview.update("Creates " + " + ".join(f"{name}.luau" for name in names))
+
+    @staticmethod
+    def _template_label(name: str) -> str:
+        label = name.removeprefix("Define a new ")
+        label = label.removesuffix(" template")
+        if " " not in label:
+            return label[:1].upper() + label[1:]
+        return "".join(part[:1].upper() + part[1:] for part in label.split())
 
     @on(Button.Pressed, "#cancel")
     def cancel(self) -> None:
@@ -185,38 +372,271 @@ class PackageManagerApp(App[None]):
 
     TITLE = "Nevermore Packages"
     CSS = """
-    Screen { background: $surface; }
-    #toolbar { height: 3; padding: 0 1; }
-    #search { width: 1fr; }
-    #workspace { height: 1fr; }
-    #packages { width: 44%; min-width: 48; }
-    #details { width: 1fr; }
-    #actions { height: 3; padding: 0 1; }
-    #actions Button { margin-right: 1; }
-    #status { height: 1; padding: 0 1; color: $text-muted; }
-    #logs { height: 1fr; }
-    TabPane { padding: 1; }
-    #dialog { width: 70; height: auto; max-height: 90%; padding: 1 2; border: round $primary; background: $panel; }
-    .wide-dialog { width: 100; height: 90%; }
-    .wide-dialog TextArea { height: 10; }
-    .dialog-title { text-style: bold; margin-bottom: 1; }
-    .dialog-actions { height: 3; margin-top: 1; align-horizontal: right; }
-    .dialog-actions Button { margin-left: 1; }
-    FormScreen { align: center middle; background: rgba(0, 0, 0, 0.55); }
-    #form-error { color: $error; height: auto; }
+    Screen {
+        background: #282828;
+        color: #ebdbb2;
+    }
+
+    Header {
+        background: #1d2021;
+        color: #fabd2f;
+    }
+
+    Footer {
+        background: #1d2021;
+        color: #a89984;
+    }
+
+    #toolbar {
+        height: 4;
+        padding: 0 1 1 1;
+        background: #1d2021;
+        border-bottom: solid #504945;
+    }
+
+    #search {
+        width: 1fr;
+    }
+
+    Input, Select, TextArea {
+        background: #32302f;
+        color: #ebdbb2;
+        border: tall #504945;
+    }
+
+    Input:focus, Select:focus, TextArea:focus {
+        border: tall #d79921;
+    }
+
+    #create {
+        min-width: 15;
+        margin-left: 1;
+    }
+
+    #workspace {
+        height: 1fr;
+        padding: 1;
+    }
+
+    #browser {
+        width: 38%;
+        min-width: 36;
+        margin-right: 1;
+        background: #1d2021;
+        border: round #504945;
+    }
+
+    #browser-heading {
+        height: 2;
+        padding: 0 1;
+        color: #928374;
+        content-align: left middle;
+    }
+
+    #packages {
+        height: 1fr;
+        background: #1d2021;
+    }
+
+    DataTable > .datatable--header {
+        background: #3c3836;
+        color: #fabd2f;
+        text-style: bold;
+    }
+
+    DataTable > .datatable--cursor {
+        background: #504945;
+        color: #fbf1c7;
+    }
+
+    #details {
+        width: 1fr;
+        background: #1d2021;
+        border: round #504945;
+    }
+
+    #selection-header {
+        height: 3;
+        padding: 0 1;
+        border-bottom: solid #3c3836;
+    }
+
+    #selection-title {
+        width: 1fr;
+        color: #fabd2f;
+        text-style: bold;
+        content-align: left middle;
+    }
+
+    #detail-actions {
+        width: auto;
+        height: 3;
+    }
+
+    #detail-actions Button {
+        min-width: 9;
+        margin-left: 1;
+    }
+
+    Button {
+        background: #3c3836;
+        color: #ebdbb2;
+        border: none;
+    }
+
+    Button:hover, Button:focus {
+        background: #504945;
+        color: #fbf1c7;
+        text-style: bold;
+    }
+
+    Button.-primary {
+        background: #d79921;
+        color: #1d2021;
+    }
+
+    Button.-error {
+        background: #9d0006;
+        color: #fbf1c7;
+    }
+
+    Tabs {
+        background: #1d2021;
+        color: #928374;
+    }
+
+    Tab.-active {
+        color: #fabd2f;
+        text-style: bold;
+    }
+
+    Underline > .underline--bar {
+        color: #d79921;
+    }
+
+    TabPane {
+        padding: 1 2;
+        background: #1d2021;
+    }
+
+    #overview-scroll, #logs, #modules-table {
+        height: 1fr;
+    }
+
+    #overview {
+        height: auto;
+        color: #ebdbb2;
+    }
+
+    #dialog {
+        width: 82;
+        height: auto;
+        max-height: 90%;
+        padding: 1 2;
+        background: #282828;
+        border: round #d79921;
+    }
+
+    .wide-dialog {
+        width: 100;
+        height: 90%;
+    }
+
+    .wide-dialog TextArea {
+        height: 10;
+    }
+
+    .dialog-title {
+        height: 2;
+        color: #fabd2f;
+        text-style: bold;
+    }
+
+    .form-row {
+        height: 4;
+    }
+
+    .field {
+        width: 1fr;
+        height: 4;
+        margin-right: 1;
+    }
+
+    .field:last-child {
+        margin-right: 0;
+    }
+
+    .version-field, .realm-field {
+        width: 22;
+    }
+
+    .preview-field {
+        width: 1fr;
+    }
+
+    .full-field {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .dependency-field {
+        height: 4;
+    }
+
+    #service-options {
+        height: auto;
+        padding-left: 1;
+        border-left: solid #d79921;
+    }
+
+    #service-options .form-row, #service-options .field {
+        height: 5;
+    }
+
+    #service-name-preview {
+        height: 3;
+        padding: 1;
+        color: #928374;
+    }
+
+    .field-label {
+        height: 1;
+        color: #d5c4a1;
+    }
+
+    .dialog-actions {
+        height: 3;
+        align-horizontal: right;
+    }
+
+    .dialog-actions Button {
+        margin-left: 1;
+    }
+
+    FormScreen {
+        align: center middle;
+        background: rgba(29, 32, 33, 0.82);
+    }
+
+    #form-error {
+        height: auto;
+        color: #fb4934;
+    }
     """
     BINDINGS = [
-        ("ctrl+n", "create", "Create"),
-        ("ctrl+e", "edit", "Edit"),
-        ("ctrl+u", "version", "Version"),
-        ("delete", "remove", "Remove"),
+        Binding("ctrl+n", "create", "Create", show=False),
+        Binding("ctrl+e", "edit", "Edit", show=False),
+        Binding("ctrl+u", "version", "Version", show=False),
+        Binding("delete", "remove", "Remove", show=False),
         ("ctrl+s", "sync", "Sync"),
-        ("ctrl+r", "validate", "Validate"),
+        ("ctrl+r", "validate", "Check"),
         ("q", "quit", "Quit"),
     ]
 
     def __init__(self, manager: PackageManager) -> None:
         super().__init__()
+        self.register_theme(GRUVBOX_THEME)
+        self.theme = GRUVBOX_THEME.name
         self.manager = manager
         self.records: list[PackageRecord] = []
         self.selected_name: str | None = None
@@ -225,35 +645,32 @@ class PackageManagerApp(App[None]):
     def compose(self) -> ComposeResult:
         yield Header()
         with Horizontal(id="toolbar"):
-            yield Input(placeholder="Search names, descriptions, tags, or exports", id="search")
-            yield Button("Create", variant="primary", id="create")
-            yield Button("Sync", id="sync")
-            yield Button("Validate", id="validate")
+            yield Input(placeholder="Search packages", id="search")
+            yield Button("New package", variant="primary", id="create")
         with Horizontal(id="workspace"):
-            yield DataTable(id="packages", cursor_type="row", zebra_stripes=True)
+            with Vertical(id="browser"):
+                yield Static("Loading packages…", id="browser-heading")
+                yield DataTable(id="packages", cursor_type="row", zebra_stripes=True)
             with Vertical(id="details"):
+                with Horizontal(id="selection-header"):
+                    yield Static("Select a package", id="selection-title")
+                    with Horizontal(id="detail-actions"):
+                        yield Button("Edit", id="edit")
+                        yield Button("Version", id="version")
+                        yield Button("Delete", variant="error", id="remove")
                 with TabbedContent():
                     with TabPane("Overview", id="overview-tab"):
-                        yield Static("Select a package", id="overview")
-                    with TabPane("Exports", id="exports-tab"):
-                        yield DataTable(id="exports-table", zebra_stripes=True)
-                    with TabPane("Dependencies", id="dependencies-tab"):
-                        yield Static("", id="dependencies")
+                        with VerticalScroll(id="overview-scroll"):
+                            yield Static("Select a package", id="overview")
                     with TabPane("Modules", id="modules-tab"):
                         yield DataTable(id="modules-table", zebra_stripes=True)
-                    with TabPane("Logs", id="logs-tab"):
+                    with TabPane("Activity", id="activity-tab"):
                         yield RichLog(id="logs", wrap=True, markup=True)
-        with Horizontal(id="actions"):
-            yield Button("Edit", id="edit")
-            yield Button("Set version", id="version")
-            yield Button("Remove", variant="error", id="remove")
-        yield Static("Ready", id="status")
         yield Footer()
 
     def on_mount(self) -> None:
         packages = self.query_one("#packages", DataTable)
-        packages.add_columns("Package", "Version", "Tags", "Exports")
-        self.query_one("#exports-table", DataTable).add_columns("Alias", "Target")
+        packages.add_columns("Package", "Version")
         self.query_one("#modules-table", DataTable).add_columns("Module", "Realm", "Kind", "Description")
         self.refresh_packages()
 
@@ -265,17 +682,18 @@ class PackageManagerApp(App[None]):
         table.clear()
         for record in filtered:
             table.add_row(
-                record.name,
+                record.short_name,
                 record.version,
-                ", ".join(record.catalog.tags),
-                str(len(record.exports)),
                 key=record.name,
             )
+        package_word = "package" if len(filtered) == 1 else "packages"
+        self.query_one("#browser-heading", Static).update(f"{len(filtered)} {package_word}")
         if filtered:
             selected = next((record for record in filtered if record.name == self.selected_name), filtered[0])
             self.show_record(selected)
         else:
             self.selected_name = None
+            self.query_one("#selection-title", Static).update("No matching packages")
             self.query_one("#overview", Static).update("No packages match the current search.")
 
     @on(Input.Changed, "#search")
@@ -292,19 +710,33 @@ class PackageManagerApp(App[None]):
 
     def show_record(self, record: PackageRecord) -> None:
         self.selected_name = record.name
-        self.query_one("#overview", Static).update(
-            f"[b]{record.name}[/b]\n\nVersion: [cyan]{record.version}[/cyan]\n\n"
-            f"Purpose: {record.catalog.purpose}\n\n{record.catalog.description}\n\n"
-            f"Path: {record.root.relative_to(self.manager.root)}"
+        self.query_one("#selection-title", Static).update(record.name)
+
+        tags = "  ".join(f"[black on #d79921] {escape(tag)} [/black on #d79921]" for tag in record.catalog.tags)
+        exports = "\n".join(
+            f"[#83a598]{escape(alias)}[/#83a598]  [#928374]→[/#928374]  {escape(target)}"
+            for alias, target in sorted(record.exports.items())
+        ) or "[#928374]None[/#928374]"
+        dependencies = "\n".join(
+            f"[#b8bb26]•[/#b8bb26] {escape(dependency)}" for dependency in record.dependencies
         )
-        exports = self.query_one("#exports-table", DataTable)
-        exports.clear()
-        for alias, target in sorted(record.exports.items()):
-            exports.add_row(alias, target)
-        dependencies = [f"- `{dependency}`" for dependency in record.dependencies]
-        externals = [f"- `{external}` (external)" for external in record.externals]
-        self.query_one("#dependencies", Static).update(
-            "[b]Dependencies[/b]\n\n" + "\n".join(dependencies + externals or ["No dependencies."])
+        externals = "\n".join(
+            f"[#928374]• {escape(external)}  (external)[/#928374]" for external in record.externals
+        )
+        dependency_text = "\n".join(filter(None, (dependencies, externals))) or "[#928374]None[/#928374]"
+        relative_path = escape(str(record.root.relative_to(self.manager.root)))
+
+        self.query_one("#overview", Static).update(
+            f"[#fabd2f bold]PURPOSE[/#fabd2f bold]\n{escape(record.catalog.purpose)}\n\n"
+            f"[#a89984]{escape(record.catalog.description)}[/#a89984]\n\n"
+            f"[#fabd2f bold]PACKAGE[/#fabd2f bold]\n"
+            f"Version   [#83a598]{escape(record.version)}[/#83a598]\n"
+            f"Exports   [#83a598]{len(record.exports)}[/#83a598]\n"
+            f"Modules   [#83a598]{len(record.catalog.modules)}[/#83a598]\n"
+            f"{tags or '[#928374]No tags[/#928374]'}\n\n"
+            f"[#fabd2f bold]EXPORTS[/#fabd2f bold]\n{exports}\n\n"
+            f"[#fabd2f bold]DEPENDENCIES[/#fabd2f bold]\n{dependency_text}\n\n"
+            f"[#928374]{relative_path}[/#928374]"
         )
         modules = self.query_one("#modules-table", DataTable)
         modules.clear()
@@ -317,7 +749,15 @@ class PackageManagerApp(App[None]):
 
     def action_create(self) -> None:
         if not self.busy:
-            self.push_screen(CreatePackageScreen(), self._create_result)
+            try:
+                templates = self.manager.list_snippet_templates()
+            except ValueError as error:
+                self._show_error(str(error))
+                return
+            self.push_screen(
+                CreatePackageScreen(templates, self.manager.list_dependency_aliases()),
+                self._create_result,
+            )
 
     def _create_result(self, values: dict[str, Any] | None) -> None:
         if values:
@@ -364,17 +804,9 @@ class PackageManagerApp(App[None]):
                 "Removing package", lambda: self.manager.remove_package(values["name"], confirmed=True)
             )
 
-    @on(Button.Pressed, "#sync")
-    def sync_pressed(self) -> None:
-        self.action_sync()
-
     def action_sync(self) -> None:
         if not self.busy:
             self._execute("Synchronizing packages", self.manager.sync)
-
-    @on(Button.Pressed, "#validate")
-    def validate_pressed(self) -> None:
-        self.action_validate()
 
     def action_validate(self) -> None:
         if not self.busy:
@@ -382,7 +814,7 @@ class PackageManagerApp(App[None]):
 
     def _execute(self, label: str, operation: Callable[[], OperationResult]) -> None:
         self.busy = True
-        self.query_one("#status", Static).update(f"{label}…")
+        self.query_one("#browser-heading", Static).update(f"[#fabd2f]{label}…[/#fabd2f]")
         for button in self.query(Button):
             button.disabled = True
         self._run_operation(operation)
@@ -399,8 +831,7 @@ class PackageManagerApp(App[None]):
         self.busy = False
         for button in self.query(Button):
             button.disabled = False
-        color = "green" if result.ok else "red"
-        self.query_one("#status", Static).update(f"[{color}]{result.summary}[/{color}]")
+        color = "#b8bb26" if result.ok else "#fb4934"
         log = self.query_one("#logs", RichLog)
         log.write(f"[{color}]{result.summary}[/{color}]")
         for diagnostic in result.diagnostics:
@@ -408,6 +839,11 @@ class PackageManagerApp(App[None]):
         for output in result.logs:
             log.write(output)
         self.refresh_packages(self.query_one("#search", Input).value)
+        self.query_one("#browser-heading", Static).update(f"[{color}]{escape(result.summary)}[/{color}]")
+
+    def _show_error(self, message: str) -> None:
+        self.query_one("#logs", RichLog).write(f"[#fb4934]{escape(message)}[/#fb4934]")
+        self.query_one("#browser-heading", Static).update("[#fb4934]Unable to load templates[/#fb4934]")
 
     def _selected_record(self) -> PackageRecord | None:
         return self._find_record(self.selected_name) if self.selected_name else None

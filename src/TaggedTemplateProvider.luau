@@ -1,3 +1,3 @@
 --!strict
 
-return require(script.Parent._Index["quenty/templateprovider@0.0.1"]["TaggedTemplateProvider"])
+return require(script.Parent._Index["quenty/templateprovider@0.0.2"]["TaggedTemplateProvider"])

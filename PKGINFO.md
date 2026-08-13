@@ -3,7 +3,7 @@
 This file is generated from each package's `catalog.json` and `package.json`. Edit catalog metadata with
 `nevermore-packages` or by changing the sidecar, then run `python3 scripts/sync_packages.py`.
 
-**Coverage:** 219 packages · 902 production modules
+**Coverage:** 217 packages · 880 production modules
 
 ## Package directory
 
@@ -69,7 +69,6 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 | [deathreport](#deathreport) | `0.0.1` | `data`, `enums`, `game_service`, `lifecycle`, `localization`, `player_service`, `reactive`, `serialization`, `utility` | 18 |
 | [debounce](#debounce) | `0.0.1` | `shared` | 1 |
 | [defaultvalueutils](#defaultvalueutils) | `0.0.1` | `data`, `enums`, `utility` | 1 |
-| [deviceutils](#deviceutils) | `0.0.1` | `utility` | 1 |
 | [draw](#draw) | `0.0.1` | `developer_tools`, `math` | 1 |
 | [ducktype](#ducktype) | `0.0.1` | `utility` | 1 |
 | [ellipticcurvecryptography](#ellipticcurvecryptography) | `0.0.1` | `math` | 10 |
@@ -183,7 +182,6 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 | [serverregionservice](#serverregionservice) | `0.0.1` | `data`, `game_service`, `lifecycle`, `localization`, `utility` | 5 |
 | [servicebag](#servicebag) | `0.0.1` | `game_service` | 2 |
 | [signal](#signal) | `0.0.1` | `reactive` | 1 |
-| [simulatedcharacterservice](#simulatedcharacterservice) | `0.0.1` | `animation`, `data`, `developer_tools`, `enums`, `game_service`, `localization`, `math`, `physics`, `player_service`, `reactive`, `security`, `serialization`, `utility` | 21 |
 | [singleton](#singleton) | `0.0.1` | `shared` | 1 |
 | [socialserviceutils](#socialserviceutils) | `0.0.1` | `game_service`, `lifecycle`, `utility` | 1 |
 | [softshutdown](#softshutdown) | `0.0.1` | `animation`, `data`, `enums`, `game_service`, `gui`, `localization`, `player_service`, `reactive`, `serialization`, `utility` | 27 |
@@ -204,7 +202,7 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 | [t](#t) | `0.0.1` | `shared` | 1 |
 | [tableutils](#tableutils) | `0.0.1` | `data`, `utility` | 3 |
 | [teleportserviceutils](#teleportserviceutils) | `0.0.1` | `game_service`, `utility` | 1 |
-| [templateprovider](#templateprovider) | `0.0.1` | `animation`, `audio`, `data`, `developer_tools`, `game_service`, `gui`, `lifecycle`, `math`, `player_service`, `reactive`, `serialization`, `utility` | 5 |
+| [templateprovider](#templateprovider) | `0.0.2` | `animation`, `audio`, `data`, `developer_tools`, `game_service`, `gui`, `lifecycle`, `math`, `player_service`, `reactive`, `serialization`, `utility` | 5 |
 | [textfilterservice](#textfilterservice) | `0.0.1` | `enums`, `game_service`, `localization`, `security`, `serialization` | 4 |
 | [textfilterutils](#textfilterutils) | `0.0.1` | `game_service`, `localization`, `utility` | 1 |
 | [textserviceutils](#textserviceutils) | `0.0.1` | `game_service`, `localization`, `utility` | 1 |
@@ -1300,19 +1298,6 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 | Module | Realm | Kind | Responsibility and public surface |
 | --- | --- | --- | --- |
 | [`DefaultValueUtils.luau`](src/_Index/quenty_defaultvalueutils@0.0.1/DefaultValueUtils.luau) | shared | Class/model | Helps get the default or zero value for value types in Roblox Public entry points include `DefaultValueUtils.getDefaultValueForType`, `DefaultValueUtils.toDefaultValue`. |
-
-# deviceutils
-
-- **Purpose:** Collects the deviceutils runtime building blocks—Device Utils—and composes them for reuse in Roblox experiences.
-- **Path:** [`src/_Index/quenty_deviceutils@0.0.1/`](src/_Index/quenty_deviceutils@0.0.1/)
-- **Short Description:** Collects the deviceutils runtime building blocks—Device Utils—and composes them for reuse in Roblox experiences.
-- **Tags:** `utility`
-
-### Submodules
-
-| Module | Realm | Kind | Responsibility and public surface |
-| --- | --- | --- | --- |
-| [`DeviceUtils.luau`](src/_Index/quenty_deviceutils@0.0.1/DeviceUtils.luau) | shared | Class/model | Device Utils provides the class/model implementation used by the Deviceutils package. Public entry points include `DeviceUtils.Observe`, `DeviceUtils.ObserveBrio`, `DeviceUtils.IsGamepad`, `DeviceUtils.IsKeyboardMouse`, `DeviceUtils.IsTouch`. |
 
 # draw
 
@@ -3049,39 +3034,6 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 | --- | --- | --- | --- |
 | [`Signal.luau`](src/_Index/quenty_signal@0.0.1/Signal.luau) | shared | Class/model | Fast, allocation-light signal implementation (forked from lemonsignal). Uses a free-thread pool and an intrusive linked list of connections. Kept `--!native`/`--!nocheck` and faithful to upstream — this is a hot path; restyling would risk both performance and correctness. Public entry points include `runCallback`, `yielder`, `Signal.isSignal`. |
 
-# simulatedcharacterservice
-
-- **Purpose:** `SimulatedCharacterService` runs lightweight, server-authoritative NPC roots on a flat X/Z plane. The server stores numbers rather than physical character models. Each client clones, animates, interpolates, ragdolls, and culls its own visual models.
-- **Path:** [`src/_Index/quenty_simulatedcharacterservice@0.0.1/`](src/_Index/quenty_simulatedcharacterservice@0.0.1/)
-- **Short Description:** `SimulatedCharacterService` runs lightweight, server-authoritative NPC roots on a flat X/Z plane. The server stores numbers rather than physical character models. Each client clones, animates, interpolates, ragdolls, and culls its own visual models.
-- **Tags:** `animation`, `data`, `developer_tools`, `enums`, `game_service`, `localization`, `math`, `physics`, `player_service`, `reactive`, `security`, `serialization`, `utility`
-
-### Submodules
-
-| Module | Realm | Kind | Responsibility and public surface |
-| --- | --- | --- | --- |
-| [`Client/DefaultCharacterAnimationUtils.luau`](src/_Index/quenty_simulatedcharacterservice@0.0.1/Client/DefaultCharacterAnimationUtils.luau) | client | Utility | Extracts the local character's default Animate configuration without cloning a LocalScript into every rendered NPC. Public entry points include `findAnimationId`, `toAssetId`, `DefaultCharacterAnimationUtils.getAnimationIdsFromAnimate`, `DefaultCharacterAnimationUtils.promiseAnimationIdsAsync`. |
-| [`Client/SimulatedCharacterClient.luau`](src/_Index/quenty_simulatedcharacterservice@0.0.1/Client/SimulatedCharacterClient.luau) | client | Class/model | A lightweight client-side state buffer and optional visual renderer for one simulated character. Public entry points include `SimulatedCharacterClient.new`, `SimulatedCharacterClient.GetId`, `SimulatedCharacterClient.GetRenderCFrame`, `SimulatedCharacterClient.GetCullPosition`, `SimulatedCharacterClient.GetCullRadius`, `SimulatedCharacterClient.SetCulled`, `synchronizeTimePosition`,… |
-| [`Client/SimulatedCharacterDebug.luau`](src/_Index/quenty_simulatedcharacterservice@0.0.1/Client/SimulatedCharacterDebug.luau) | client | Class/model | Draw-based local visualization for SimulatedCharacterServiceClient. Public entry points include `setRayVisible`, `hideRays`, `updateRay`, `updateRing`, `updatePath`, `SimulatedCharacterDebug.new`, `SimulatedCharacterDebug.Destroy`. |
-| [`Server/SimulatedCharacter.luau`](src/_Index/quenty_simulatedcharacterservice@0.0.1/Server/SimulatedCharacter.luau) | server | Class/model | A lightweight server-authoritative simulated character. Public entry points include `SimulatedCharacter.new`, `SimulatedCharacter.GetId`, `SimulatedCharacter.GetDefinitionName`, `SimulatedCharacter.GetTemplateName`, `SimulatedCharacter.GetCFrame`, `SimulatedCharacter.GetPosition`, `SimulatedCharacter.GetHitboxSize`, `SimulatedCharacter.SetReplicationDistance`. |
-| [`Server/SimulatedCharacterSpatialHash.luau`](src/_Index/quenty_simulatedcharacterservice@0.0.1/Server/SimulatedCharacterSpatialHash.luau) | server | Class/model | Maintains a lightweight planar spatial hash for simulated characters. Public entry points include `SimulatedCharacterSpatialHash.new`, `SimulatedCharacterSpatialHash.AddCharacter`, `SimulatedCharacterSpatialHash.RemoveCharacter`, `SimulatedCharacterSpatialHash.UpdateCharacter`, `SimulatedCharacterSpatialHash.UpdateCharacters`, `SimulatedCharacterSpatialHash.Query`, `SimulatedCharacterSpatialHash.Destroy`. |
-| [`Shared/Enums/SimulatedCharacterEnums.luau`](src/_Index/quenty_simulatedcharacterservice@0.0.1/Shared/Enums/SimulatedCharacterEnums.luau) | shared | Class/model | All enum lists used by SimulatedCharacterService registration. |
-| [`Shared/Enums/SimulatedCharacterFacingMode.luau`](src/_Index/quenty_simulatedcharacterservice@0.0.1/Shared/Enums/SimulatedCharacterFacingMode.luau) | shared | Class/model | Facing policies supported by simulated characters. |
-| [`Shared/Enums/SimulatedCharacterMovementController.luau`](src/_Index/quenty_simulatedcharacterservice@0.0.1/Shared/Enums/SimulatedCharacterMovementController.luau) | shared | Class/model | Built-in planar movement controllers for simulated characters. |
-| [`Shared/Enums/SimulatedCharacterPlacementMode.luau`](src/_Index/quenty_simulatedcharacterservice@0.0.1/Shared/Enums/SimulatedCharacterPlacementMode.luau) | shared | Class/model | Placement anchors supported by SimulatedCharacterService. |
-| [`Shared/Enums/SimulatedCharacterTargetingMode.luau`](src/_Index/quenty_simulatedcharacterservice@0.0.1/Shared/Enums/SimulatedCharacterTargetingMode.luau) | shared | Class/model | Target acquisition modes supported by simulated characters. |
-| [`Shared/Enums/SimulatedCharacterVariantSelectionMode.luau`](src/_Index/quenty_simulatedcharacterservice@0.0.1/Shared/Enums/SimulatedCharacterVariantSelectionMode.luau) | shared | Class/model | Template variant selection policies. |
-| [`Shared/SimulatedCharacterConstants.luau`](src/_Index/quenty_simulatedcharacterservice@0.0.1/Shared/SimulatedCharacterConstants.luau) | shared | Class/model | Constants shared by SimulatedCharacterService runtimes. |
-| [`Shared/SimulatedCharacterFlocking.luau`](src/_Index/quenty_simulatedcharacterservice@0.0.1/Shared/SimulatedCharacterFlocking.luau) | shared | Class/model | Maintains lightweight server-side flock groups and computes planar crowd steering without allocating per simulation step. Public entry points include `SimulatedCharacterFlocking.new`, `SimulatedCharacterFlocking.AddCharacter`, `SimulatedCharacterFlocking.RemoveCharacter`, `SimulatedCharacterFlocking.Step`, `SimulatedCharacterFlocking.Destroy`. |
-| [`Shared/SimulatedCharacterNavigationGrid.luau`](src/_Index/quenty_simulatedcharacterservice@0.0.1/Shared/SimulatedCharacterNavigationGrid.luau) | shared | Class/model | A flat, tag-driven navigation grid with shared flow fields. The grid is rebuilt when an obstacle receives or loses the configured tag. Characters first use a direct grid line and only request a flow field when an obstacle blocks the target. Flow fields are cached by target key. |
-| [`Shared/SimulatedCharacterNetwork.luau`](src/_Index/quenty_simulatedcharacterservice@0.0.1/Shared/SimulatedCharacterNetwork.luau) | shared | Network | ByteNet protocol for SimulatedCharacterService. |
-| [`Shared/SimulatedCharacterStateCodec.luau`](src/_Index/quenty_simulatedcharacterservice@0.0.1/Shared/SimulatedCharacterStateCodec.luau) | shared | Utility | Packs the high-frequency X/Z motion state used by SimulatedCharacterService. Public entry points include `quantizeSigned`, `canQuantizePosition`, `canQuantizeDynamics`, `getRecordSize`, `SimulatedCharacterStateCodec.encode`, `SimulatedCharacterStateCodec.decode`. |
-| [`Shared/SimulatedCharacterTypes.luau`](src/_Index/quenty_simulatedcharacterservice@0.0.1/Shared/SimulatedCharacterTypes.luau) | shared | Class/model | Shared public types for SimulatedCharacterService. |
-| [`Shared/SimulatedCharacterUtils.luau`](src/_Index/quenty_simulatedcharacterservice@0.0.1/Shared/SimulatedCharacterUtils.luau) | shared | Utility | Shared math and definition helpers for SimulatedCharacterService. Public entry points include `SimulatedCharacterUtils.resolveDefinition`, `SimulatedCharacterUtils.resolveSpawnY`, `SimulatedCharacterUtils.toPlanarPosition`, `SimulatedCharacterUtils.lerpAngle`, `SimulatedCharacterUtils.moveAngleTowards`, `SimulatedCharacterUtils.toCFrame`. |
-| [`SimulatedCharacterService.luau`](src/_Index/quenty_simulatedcharacterservice@0.0.1/SimulatedCharacterService.luau) | server | Service | Runs lightweight, server-authoritative simulated characters on a flat X/Z plane and replicates their render state to clients. Public entry points include `SimulatedCharacterService.Init`, `SimulatedCharacterService.SetTemplateContainer`, `SimulatedCharacterService.Start`, `SimulatedCharacterService.ConfigureNavigation`, `SimulatedCharacterService.RebuildNavigation`, `SimulatedCharacterService.RegisterCharacter`,… |
-| [`SimulatedCharacterServiceClient.luau`](src/_Index/quenty_simulatedcharacterservice@0.0.1/SimulatedCharacterServiceClient.luau) | shared | Service | Receives simulated character state and renders only characters admitted by ClientCulling. Public entry points include `SimulatedCharacterServiceClient.Init`, `SimulatedCharacterServiceClient.Start`, `SimulatedCharacterServiceClient.SetDebug`, `SimulatedCharacterServiceClient.GetCharacter`, `SimulatedCharacterServiceClient.GetCharacters`, `handleCharacter`, `SimulatedCharacterServiceClient.Destroy`. |
-| [`SimulatedCharacterTemplateProvider/init.luau`](src/_Index/quenty_simulatedcharacterservice@0.0.1/SimulatedCharacterTemplateProvider/init.luau) | shared | Class/model | Provides the client-rendered models used by SimulatedCharacterService. Template containers are discovered through the shared CollectionService tag owned by SimulatedCharacterConstants. |
-
 # singleton
 
 - **Purpose:** This class converts a class into a singleton
@@ -3406,7 +3358,7 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 # templateprovider
 
 - **Purpose:** `TemplateProvider` is a named registry for cloneable Roblox instances. It keeps asset ownership on the server, advertises lightweight placeholders to clients, and transfers a template only when a client asks for it.
-- **Path:** [`src/_Index/quenty_templateprovider@0.0.1/`](src/_Index/quenty_templateprovider@0.0.1/)
+- **Path:** [`src/_Index/quenty_templateprovider@0.0.2/`](src/_Index/quenty_templateprovider@0.0.2/)
 - **Short Description:** `TemplateProvider` is a named registry for cloneable Roblox instances. It keeps asset ownership on the server, advertises lightweight placeholders to clients, and transfers a template only when a client asks for it.
 - **Tags:** `animation`, `audio`, `data`, `developer_tools`, `game_service`, `gui`, `lifecycle`, `math`, `player_service`, `reactive`, `serialization`, `utility`
 
@@ -3414,11 +3366,11 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 
 | Module | Realm | Kind | Responsibility and public surface |
 | --- | --- | --- | --- |
-| [`Shared/TemplateProviderNetwork.luau`](src/_Index/quenty_templateprovider@0.0.1/Shared/TemplateProviderNetwork.luau) | shared | Network | Handles on-demand template requests from [TemplateProvider] clients. Clients can only request opaque template ids advertised by a provider's tombstones. The server validates the provider and template before temporarily replicating a clone to that player's PlayerGui. |
-| [`TaggedTemplateProvider.luau`](src/_Index/quenty_templateprovider@0.0.1/TaggedTemplateProvider.luau) | shared | Class/model | Creates a [TemplateProvider] backed by CollectionService tags. Public entry points include `TaggedTemplateProvider.new`. |
-| [`TemplateProvider.luau`](src/_Index/quenty_templateprovider@0.0.1/TemplateProvider.luau) | shared | Service | Provides named Roblox instances as cloneable templates. Templates may be declared through containers, lists, or observables. The last registered template with a given name is canonical, which makes overrides straightforward. When initialized on the server, source templates are moved beneath a Camera so they do not replicate immediately. Lightweight tombstones advertise their names to clients. |
-| [`TemplateReplicationModes.luau`](src/_Index/quenty_templateprovider@0.0.1/TemplateReplicationModes.luau) | shared | Class/model | Replication modes used by [TemplateProvider]. |
-| [`TemplateReplicationModesUtils.luau`](src/_Index/quenty_templateprovider@0.0.1/TemplateReplicationModesUtils.luau) | shared | Utility | Utilities for resolving the active [TemplateProvider] replication mode. Public entry points include `TemplateReplicationModesUtils.inferReplicationMode`. |
+| [`Shared/TemplateProviderNetwork.luau`](src/_Index/quenty_templateprovider@0.0.2/Shared/TemplateProviderNetwork.luau) | shared | Network | Handles on-demand template requests from [TemplateProvider] clients. Clients can only request opaque template ids advertised by a provider's tombstones. The server validates the provider and template before temporarily replicating a clone to that player's PlayerGui. |
+| [`TaggedTemplateProvider.luau`](src/_Index/quenty_templateprovider@0.0.2/TaggedTemplateProvider.luau) | shared | Class/model | Creates a [TemplateProvider] backed by CollectionService tags. Public entry points include `TaggedTemplateProvider.new`. |
+| [`TemplateProvider.luau`](src/_Index/quenty_templateprovider@0.0.2/TemplateProvider.luau) | shared | Service | Provides named Roblox instances as cloneable templates. Templates may be declared through containers, lists, or observables. The last registered template with a given name is canonical, which makes overrides straightforward. When initialized on the server, source templates are moved beneath a Camera so they do not replicate immediately. Lightweight tombstones advertise their names to clients. |
+| [`TemplateReplicationModes.luau`](src/_Index/quenty_templateprovider@0.0.2/TemplateReplicationModes.luau) | shared | Class/model | Replication modes used by [TemplateProvider]. |
+| [`TemplateReplicationModesUtils.luau`](src/_Index/quenty_templateprovider@0.0.2/TemplateReplicationModesUtils.luau) | shared | Utility | Utilities for resolving the active [TemplateProvider] replication mode. Public entry points include `TemplateReplicationModesUtils.inferReplicationMode`. |
 
 # textfilterservice
 

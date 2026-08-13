@@ -182,9 +182,6 @@
     "quenty/defaultvalueutils@0.0.1": {
       "$path": "quenty_defaultvalueutils@0.0.1"
     },
-    "quenty/deviceutils@0.0.1": {
-      "$path": "quenty_deviceutils@0.0.1"
-    },
     "quenty/draw@0.0.1": {
       "$path": "quenty_draw@0.0.1"
     },
@@ -524,9 +521,6 @@
     "quenty/signal@0.0.1": {
       "$path": "quenty_signal@0.0.1"
     },
-    "quenty/simulatedcharacterservice@0.0.1": {
-      "$path": "quenty_simulatedcharacterservice@0.0.1"
-    },
     "quenty/singleton@0.0.1": {
       "$path": "quenty_singleton@0.0.1"
     },
@@ -587,8 +581,8 @@
     "quenty/teleportserviceutils@0.0.1": {
       "$path": "quenty_teleportserviceutils@0.0.1"
     },
-    "quenty/templateprovider@0.0.1": {
-      "$path": "quenty_templateprovider@0.0.1"
+    "quenty/templateprovider@0.0.2": {
+      "$path": "quenty_templateprovider@0.0.2"
     },
     "quenty/textfilterservice@0.0.1": {
       "$path": "quenty_textfilterservice@0.0.1"

@@ -93,6 +93,15 @@ class PackageRecord:
 
 
 @dataclass(frozen=True, slots=True)
+class SnippetTemplate:
+    """A complete package module available from an external VS Code snippet file."""
+
+    name: str
+    description: str
+    kind: str
+
+
+@dataclass(frozen=True, slots=True)
 class OperationResult:
     """Structured outcome returned by all manager operations."""
 

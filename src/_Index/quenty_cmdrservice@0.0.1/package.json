@@ -14,7 +14,7 @@
     "quenty/servicebag@0.0.1",
     "quenty/stringutils@0.0.1",
     "quenty/t@0.0.1",
-    "quenty/templateprovider@0.0.1"
+    "quenty/templateprovider@0.0.2"
   ],
   "externals": []
 }

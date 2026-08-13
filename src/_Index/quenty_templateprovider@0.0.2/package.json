@@ -1,6 +1,6 @@
 {
   "name": "quenty/templateprovider",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "exports": {
     "TaggedTemplateProvider": "TaggedTemplateProvider",
     "TemplateProvider": "TemplateProvider",

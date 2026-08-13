@@ -23,9 +23,10 @@ SRC = ROOT / "src"
 INDEX = SRC / "_Index"
 CATALOG = ROOT / "PKGINFO.md"
 DOCUMENTATION_NAMES = {"MyClass"}
-ABSOLUTE_REQUIRE = re.compile(
-    r'(?:\brequire|\(require\s*::\s*any\))\s*\(\s*["\']'
-    r'@game/ReplicatedStorage/Packages/(?P<alias>[A-Za-z_][A-Za-z0-9_]*)["\']\s*\)'
+PACKAGE_REQUIRE = re.compile(
+    r"(?:\brequire|\(require\s*::\s*any\))\s*\(\s*(?:"
+    r"[\"']@game/ReplicatedStorage/Packages/(?P<path_alias>[A-Za-z_][A-Za-z0-9_]*)[\"']"
+    r"|Packages\.(?P<property_alias>[A-Za-z_][A-Za-z0-9_]*))\s*\)"
 )
 TYPE_DECLARATION = re.compile(
     r"^export type\s+(?P<name>[A-Za-z_][A-Za-z0-9_]*)\s*(?P<generics><[^=\n]+>)?\s*=",
@@ -129,8 +130,8 @@ def main() -> int:
             if not source_path.is_file() or source_path.suffix not in {".lua", ".luau"}:
                 continue
             source = source_path.read_text(encoding="utf-8", errors="replace")
-            for match in ABSOLUTE_REQUIRE.finditer(source):
-                alias = match.group("alias")
+            for match in PACKAGE_REQUIRE.finditer(source):
+                alias = match.group("path_alias") or match.group("property_alias")
                 dependency = alias_owners.get(alias)
                 if dependency and dependency != package_name:
                     dependencies[package_name].add(dependency)

@@ -47,6 +47,93 @@ def test_create_version_and_remove_package(repository: Path) -> None:
     assert manager.list_packages() == []
 
 
+def test_create_package_from_vscode_snippet(repository: Path) -> None:
+    snippet_path = repository / "luau.code-snippets"
+    snippet_path.write_text(
+        """{
+            // The TUI reads VS Code's JSONC format directly.
+            "Define a new class": {
+                "body": [
+                    "--!strict",
+                    "const ${1:Class} = {}",
+                    "${1}.ClassName = \\\"${1}\\\"",
+                    "${2}",
+                    "return ${1}"
+                ],
+                "description": "Define a class",
+                "prefix": "class",
+            },
+        }
+        """,
+        encoding="utf-8",
+    )
+    manager = PackageManager(repository, snippet_path=snippet_path)
+
+    result = manager.create_package(
+        "example-class",
+        kind="class",
+        export_name="ExampleClass",
+        purpose="Represents an example.",
+        template_name="Define a new class",
+    )
+
+    assert result.ok, result.diagnostics
+    source = (manager.get_package("example-class").root / "ExampleClass.luau").read_text(encoding="utf-8")
+    assert 'ExampleClass.ClassName = "ExampleClass"' in source
+    assert "${" not in source
+
+
+def test_create_dual_realm_service_with_dependencies(repository: Path) -> None:
+    snippet_path = repository / "luau.code-snippets"
+    snippet_path.write_text(
+        """{
+            "Define a new service": {
+                "body": [
+                    "--!strict",
+                    "const ReplicatedStorage = game:GetService(\\\"ReplicatedStorage\\\")",
+                    "const Packages = ReplicatedStorage.Packages",
+                    "",
+                    "const ${1:Service} = {}",
+                    "${1}.ServiceName = \\\"${1}\\\"",
+                    "return ${1}"
+                ],
+                "description": "Define a service",
+                "prefix": "service"
+            }
+        }
+        """,
+        encoding="utf-8",
+    )
+    manager = PackageManager(repository, snippet_path=snippet_path)
+    assert manager.create_package("maid", kind="utility", export_name="Maid").ok
+
+    result = manager.create_package(
+        "example-service",
+        kind="service",
+        export_name="example service",
+        purpose="Coordinates examples.",
+        template_name="Define a new service",
+        service_realm="both",
+        dependencies=("Maid",),
+    )
+
+    assert result.ok, result.diagnostics
+    record = manager.get_package("example-service")
+    assert record.exports == {
+        "ExampleService": "ExampleService",
+        "ExampleServiceClient": "ExampleServiceClient",
+    }
+    assert record.dependencies == ("quenty/maid@0.0.1",)
+    assert {(module.path, module.realm) for module in record.catalog.modules} == {
+        ("ExampleService.luau", "server"),
+        ("ExampleServiceClient.luau", "client"),
+    }
+    for module_name in record.exports:
+        source = (record.root / f"{module_name}.luau").read_text(encoding="utf-8")
+        assert "const Maid = require(Packages.Maid)" in source
+        assert f'{module_name}.ServiceName = "{module_name}"' in source
+
+
 def test_remove_reports_reverse_dependencies(repository: Path) -> None:
     manager = PackageManager(repository)
     assert manager.create_package("base", purpose="Base.", description="Base.").ok
