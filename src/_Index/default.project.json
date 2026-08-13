@@ -1,5 +1,9 @@
 {
   "name": "_Index",
+  "globIgnorePaths": [
+    "**/catalog.json",
+    "**/package.json"
+  ],
   "tree": {
     "$className": "Folder",
     "quenty/acceltween@0.0.1": {

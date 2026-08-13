@@ -180,7 +180,14 @@ def main() -> int:
             wrapper = render_wrapper(scoped_version, implementation, target)
             write_or_check(SRC / f"{alias}.luau", wrapper, args.check, differences)
 
-    index_project = json.dumps({"name": "_Index", "tree": index_tree}, indent=2) + "\n"
+    index_project = json.dumps(
+        {
+            "name": "_Index",
+            "globIgnorePaths": ["**/catalog.json", "**/package.json"],
+            "tree": index_tree,
+        },
+        indent=2,
+    ) + "\n"
     write_or_check(INDEX / "default.project.json", index_project, args.check, differences)
 
     rendered_catalog = render_catalog(records)

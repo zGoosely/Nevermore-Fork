@@ -194,3 +194,8 @@ def test_project_mounts_surfaces_at_replicated_storage_packages() -> None:
     tree = project["tree"]
     assert tree["$className"] == "DataModel"
     assert tree["ReplicatedStorage"]["Packages"]["$path"] == "src"
+
+
+def test_index_project_excludes_package_metadata_from_rojo() -> None:
+    project = json.loads(Path("src/_Index/default.project.json").read_text(encoding="utf-8"))
+    assert project["globIgnorePaths"] == ["**/catalog.json", "**/package.json"]
