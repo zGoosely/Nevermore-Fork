@@ -10,7 +10,7 @@ const AUTOCOMPLETE_EDGE_PADDING = 12
 const AUTOCOMPLETE_MAX_HEIGHT = 190
 const AUTOCOMPLETE_MAX_WIDTH = 320
 const AUTOCOMPLETE_MIN_WIDTH = 220
-const AUTOCOMPLETE_VERTICAL_GAP = 8
+const AUTOCOMPLETE_VERTICAL_GAP = 16
 const DESCRIPTION_MAX_HEIGHT = 72
 const SELECTED_TRANSPARENCY = 0.18
 
@@ -32,6 +32,8 @@ return function(Cmdr)
 	AutoItem.Parent = nil
 
 	local defaultBarThickness = Gui.ScrollBarThickness
+	local autocompleteContentWidth = AUTOCOMPLETE_MIN_WIDTH
+	local autocompleteHorizontalOffset = 0
 
 	function AutoComplete.GetCompletionText(self: any): string
 		local item = self:GetSelectedItem()
@@ -74,21 +76,41 @@ return function(Cmdr)
 		end
 	end
 
-	local function UpdateContainerSize()
+	const function updateContainerPosition()
+		if not Gui.Visible then
+			return
+		end
+
+		const desiredX = Entry.TextBox.AbsolutePosition.X + autocompleteHorizontalOffset
+		const maxX = math.max(
+			AUTOCOMPLETE_EDGE_PADDING,
+			Gui.Parent.AbsoluteSize.X - Gui.AbsoluteSize.X - AUTOCOMPLETE_EDGE_PADDING
+		)
+		const xOffset = math.clamp(desiredX, AUTOCOMPLETE_EDGE_PADDING, maxX)
+		const entryBottom = math.max(
+			Entry.AbsolutePosition.Y + Entry.AbsoluteSize.Y,
+			Entry.TextBox.AbsolutePosition.Y + Entry.TextBox.AbsoluteSize.Y
+		)
+		const yOffset = entryBottom + AUTOCOMPLETE_VERTICAL_GAP
+
+		Gui.Position = UDim2.fromOffset(xOffset, yOffset)
+	end
+
+	const function updateContainerSize()
+		updateContainerPosition()
+
 		const maxAvailableWidth = math.max(1, Gui.Parent.AbsoluteSize.X - 2 * AUTOCOMPLETE_EDGE_PADDING)
 		const width = math.min(
-			math.max(Title.Field.TextBounds.X + Title.Field.Type.TextBounds.X + 28, Gui.Size.X.Offset),
+			math.max(Title.Field.TextBounds.X + Title.Field.Type.TextBounds.X + 28, autocompleteContentWidth),
 			AUTOCOMPLETE_MAX_WIDTH,
 			maxAvailableWidth
 		)
 		const availableHeight =
 			math.max(0, Gui.Parent.AbsoluteSize.Y - Gui.AbsolutePosition.Y - AUTOCOMPLETE_EDGE_PADDING)
 		const height = math.min(Gui.UIListLayout.AbsoluteContentSize.Y, AUTOCOMPLETE_MAX_HEIGHT, availableHeight)
-		const maxX = math.max(AUTOCOMPLETE_EDGE_PADDING, Gui.Parent.AbsoluteSize.X - width - AUTOCOMPLETE_EDGE_PADDING)
-		const xOffset = math.clamp(Gui.Position.X.Offset, AUTOCOMPLETE_EDGE_PADDING, maxX)
 
-		Gui.Position = UDim2.fromOffset(xOffset, Gui.Position.Y.Offset)
 		Gui.Size = UDim2.fromOffset(width, height)
+		updateContainerPosition()
 	end
 
 	-- Update the info display (Name, type, and description) based on given options.
@@ -117,7 +139,7 @@ return function(Cmdr)
 		-- Update container
 		task.wait()
 		Gui.UIListLayout:ApplyLayout()
-		UpdateContainerSize()
+		updateContainerSize()
 		Gui.ScrollBarThickness = defaultBarThickness
 	end
 
@@ -187,6 +209,7 @@ return function(Cmdr)
 			AUTOCOMPLETE_MAX_WIDTH,
 			math.max(1, Gui.Parent.AbsoluteSize.X - 2 * AUTOCOMPLETE_EDGE_PADDING)
 		)
+		autocompleteContentWidth = autocompleteWidth
 		Gui.UIListLayout:ApplyLayout()
 
 		-- Todo: Use TextService to find accurate position for auto complete box
@@ -198,20 +221,10 @@ return function(Cmdr)
 		table.remove(words, #words)
 		local extra = (options.at and options.at or (#table.concat(words, " ") + 1)) * 7
 
-		-- Keep the compact menu below the entry and within the viewport.
-		const desiredX = Entry.TextBox.AbsolutePosition.X + extra
-		const maxX = math.max(
-			AUTOCOMPLETE_EDGE_PADDING,
-			Gui.Parent.AbsoluteSize.X - autocompleteWidth - AUTOCOMPLETE_EDGE_PADDING
-		)
-		const xOffset = math.clamp(desiredX, AUTOCOMPLETE_EDGE_PADDING, maxX)
-		const yOffset = Entry.TextBox.AbsolutePosition.Y + Entry.TextBox.AbsoluteSize.Y + AUTOCOMPLETE_VERTICAL_GAP
-		const availableHeight = math.max(0, Gui.Parent.AbsoluteSize.Y - yOffset - AUTOCOMPLETE_EDGE_PADDING)
-		const height = math.min(Gui.UIListLayout.AbsoluteContentSize.Y, AUTOCOMPLETE_MAX_HEIGHT, availableHeight)
-
-		Gui.Position = UDim2.fromOffset(xOffset, yOffset)
-		Gui.Size = UDim2.fromOffset(autocompleteWidth, height)
+		autocompleteHorizontalOffset = extra
+		Gui.Size = UDim2.fromOffset(autocompleteWidth, AUTOCOMPLETE_MAX_HEIGHT)
 		Gui.Visible = true
+		updateContainerSize()
 		self:UpdateGhostText()
 
 		-- Finally, update thge info display
@@ -274,7 +287,10 @@ return function(Cmdr)
 		self:UpdateGhostText()
 	end
 
-	Gui.Parent:GetPropertyChangedSignal("AbsoluteSize"):Connect(UpdateContainerSize)
+	Gui.Parent:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateContainerSize)
+	Gui.UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(updateContainerSize)
+	Entry.TextBox:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateContainerPosition)
+	Entry.TextBox:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateContainerPosition)
 
 	return AutoComplete
 end

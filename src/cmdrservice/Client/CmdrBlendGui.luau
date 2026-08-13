@@ -12,8 +12,8 @@ const Maid = require("Maid")
 const Observable = require("Observable")
 const t = require("t")
 
-const HIDDEN_Y_OFFSET = 68
-const VISIBLE_Y_OFFSET = 56
+const HIDDEN_Y_OFFSET = 84
+const VISIBLE_Y_OFFSET = 72
 
 const CmdrBlendGui = {}
 
