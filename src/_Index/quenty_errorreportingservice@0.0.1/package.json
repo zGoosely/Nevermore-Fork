@@ -12,10 +12,8 @@
     "quenty/promise@0.0.1",
     "quenty/secretservice@0.0.1",
     "quenty/servicebag@0.0.1",
-    "quenty/t@0.0.1"
+    "quenty/t@0.0.1",
+    "quenty/webhook@0.0.1"
   ],
-  "externals": [
-    "WebhookTypes",
-    "WebhookUtils"
-  ]
+  "externals": []
 }
