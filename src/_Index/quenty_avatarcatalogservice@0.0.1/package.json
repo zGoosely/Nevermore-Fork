@@ -1,0 +1,29 @@
+{
+  "name": "quenty/avatarcatalogservice",
+  "version": "0.0.1",
+  "exports": {
+    "AvatarCatalogService": "AvatarCatalogService",
+    "AvatarCatalogServiceInterface": "AvatarCatalogServiceInterface",
+    "WellKnownUnfairPackagesAndParts": "Catalog/WellKnownUnfairPackagesAndParts"
+  },
+  "dependencies": [
+    "quenty/accessorytypeutils@0.0.1",
+    "quenty/assetserviceutils@0.0.1",
+    "quenty/avatareditorutils@0.0.1",
+    "quenty/baseobject@0.0.1",
+    "quenty/binder@0.0.1",
+    "quenty/humanoiddescriptionutils@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/marketplaceutils@0.0.1",
+    "quenty/promise@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/t@0.0.1",
+    "quenty/tableutils@0.0.1",
+    "quenty/tie@0.0.1",
+    "quenty/valueobject@0.0.1"
+  ],
+  "externals": [
+    "Jest"
+  ]
+}

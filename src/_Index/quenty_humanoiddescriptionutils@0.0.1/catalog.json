@@ -8,8 +8,8 @@
   "modules": {
     "HumanoidDescriptionUtils.luau": {
       "realm": "shared",
-      "kind": "Class/model",
-      "description": "Handles actions involving HumanoidDescription objects, including loading character appearance. Public entry points include `promiseUserIdFromName`, `HumanoidDescriptionUtils.promiseApplyDescription`, `HumanoidDescriptionUtils.promiseApplyDescriptionReset`, `HumanoidDescriptionUtils.promiseApplyFromUserName`, `HumanoidDescriptionUtils.promiseFromUserName`, `HumanoidDescriptionUtils.promiseFromUserId`,…"
+      "kind": "Utility",
+      "description": "Loads, parses, and asynchronously applies HumanoidDescription objects."
     }
   }
 }

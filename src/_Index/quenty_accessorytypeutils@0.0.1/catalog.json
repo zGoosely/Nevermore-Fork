@@ -1,0 +1,16 @@
+{
+  "purpose": "Converts Roblox avatar asset types, catalog asset type identifiers, and accessory type names into their corresponding enum values.",
+  "description": "Converts Roblox avatar asset types, catalog asset type identifiers, and accessory type names into their corresponding enum values.",
+  "tags": [
+    "enums",
+    "player_service",
+    "utility"
+  ],
+  "modules": {
+    "AccessoryTypeUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Stateless conversions between Roblox avatar asset types, asset type identifiers, accessory type names, and accessory types."
+    }
+  }
+}

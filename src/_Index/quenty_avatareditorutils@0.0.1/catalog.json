@@ -1,0 +1,17 @@
+{
+  "purpose": "Provides Promise-based utilities for Roblox AvatarEditorService catalog, inventory, outfit, avatar-rule, and prompt APIs.",
+  "description": "Provides Promise-based utilities for Roblox AvatarEditorService catalog, inventory, outfit, avatar-rule, and prompt APIs.",
+  "tags": [
+    "avatar",
+    "catalog",
+    "promise",
+    "utility"
+  ],
+  "modules": {
+    "AvatarEditorUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Wraps AvatarEditorService catalog queries, inventory and outfit access, avatar rules, recommendations, favorites, and interactive prompts in Promise-based APIs."
+    }
+  }
+}

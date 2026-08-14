@@ -1,0 +1,13 @@
+{
+  "name": "quenty/avatareditorutils",
+  "version": "0.0.1",
+  "exports": {
+    "AvatarEditorUtils": "AvatarEditorUtils"
+  },
+  "dependencies": [
+    "quenty/maid@0.0.1",
+    "quenty/promise@0.0.1",
+    "quenty/t@0.0.1"
+  ],
+  "externals": []
+}

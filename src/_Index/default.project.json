@@ -12,6 +12,9 @@
     "quenty/access@0.0.1": {
       "$path": "quenty_access@0.0.1"
     },
+    "quenty/accessorytypeutils@0.0.1": {
+      "$path": "quenty_accessorytypeutils@0.0.1"
+    },
     "quenty/actionexecutionservice@0.0.1": {
       "$path": "quenty_actionexecutionservice@0.0.1"
     },
@@ -53,6 +56,12 @@
     },
     "quenty/attributeutils@0.0.1": {
       "$path": "quenty_attributeutils@0.0.1"
+    },
+    "quenty/avatarcatalogservice@0.0.1": {
+      "$path": "quenty_avatarcatalogservice@0.0.1"
+    },
+    "quenty/avatareditorutils@0.0.1": {
+      "$path": "quenty_avatareditorutils@0.0.1"
     },
     "quenty/badgeutils@0.0.1": {
       "$path": "quenty_badgeutils@0.0.1"

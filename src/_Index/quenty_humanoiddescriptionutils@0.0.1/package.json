@@ -6,7 +6,8 @@
   },
   "dependencies": [
     "quenty/insertserviceutils@0.0.1",
-    "quenty/promise@0.0.1"
+    "quenty/promise@0.0.1",
+    "quenty/t@0.0.1"
   ],
   "externals": []
 }

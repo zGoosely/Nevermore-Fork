@@ -1,22 +1,28 @@
 --!strict
 --[=[
 	Handles actions involving HumanoidDescription objects, including loading character appearance.
-	@class HumanoidDescriptionUtils
+
+	@util HumanoidDescriptionUtils
 ]=]
-local Players = game:GetService("Players")
 
-local InsertServiceUtils = require("@game/ReplicatedStorage/Packages/InsertServiceUtils")
+const Players = game:GetService("Players")
 
-local Promise = require("@game/ReplicatedStorage/Packages/Promise")
+const InsertServiceUtils = require("@game/ReplicatedStorage/Packages/InsertServiceUtils")
+const Promise = require("@game/ReplicatedStorage/Packages/Promise")
+const t = require("@game/ReplicatedStorage/Packages/t")
 
-local HumanoidDescriptionUtils = {}
+const isAssetTypeVerification = t.enum(Enum.AssetTypeVerification)
+const isHumanoid = t.instanceIsA("Humanoid")
+const isHumanoidDescription = t.instanceIsA("HumanoidDescription")
 
-const function promiseUserIdFromName(name: string): Promise.Promise<number>
-	assert(type(name) == "string", "Bad name")
+const HumanoidDescriptionUtils = {}
+
+const promiseUserIdFromName = function(name: string): Promise.Promise<number>
+	assert(t.string(name) and name ~= "", "Bad name")
 
 	return Promise.spawn(function(resolve, reject)
 		local userId
-		local ok, err = pcall(function()
+		const ok, err = pcall(function()
 			userId = Players:GetUserIdFromNameAsync(name)
 		end)
 
@@ -24,8 +30,8 @@ const function promiseUserIdFromName(name: string): Promise.Promise<number>
 			return reject(err)
 		end
 
-		if type(userId) ~= "number" then
-			return reject("UserId returned was not a number")
+		if not t.numberPositive(userId) then
+			return reject("UserId returned was not a positive number")
 		end
 
 		return resolve(userId)
@@ -33,20 +39,22 @@ const function promiseUserIdFromName(name: string): Promise.Promise<number>
 end
 
 --[=[
-	Promises to apply a humaoid description
+	Applies a humanoid description asynchronously.
+
+	@within HumanoidDescriptionUtils
 	@param humanoid Humanoid
 	@param description HumanoidDescription
-	@return Promise
+	@return Promise.Promise<()>
 ]=]
 function HumanoidDescriptionUtils.promiseApplyDescription(
 	humanoid: Humanoid,
 	description: HumanoidDescription
 ): Promise.Promise<()>
-	assert(typeof(humanoid) == "Instance" and humanoid:IsA("Humanoid"), "Bad humanoid")
-	assert(typeof(description) == "Instance" and description:IsA("HumanoidDescription"), "Bad description")
+	assert(isHumanoid(humanoid), "Bad humanoid")
+	assert(isHumanoidDescription(description), "Bad description")
 
 	return Promise.spawn(function(resolve, reject)
-		local ok, err = pcall(function()
+		const ok, err = pcall(function()
 			humanoid:ApplyDescriptionAsync(description)
 		end)
 		if not ok then
@@ -58,23 +66,25 @@ function HumanoidDescriptionUtils.promiseApplyDescription(
 end
 
 --[=[
-	Promises to apply a humaoid description reset call
+	Applies a humanoid description through the reset API asynchronously.
 
+	@within HumanoidDescriptionUtils
 	@param humanoid Humanoid
 	@param description HumanoidDescription
 	@param assetTypeVerification AssetTypeVerification
-	@return Promise
+	@return Promise.Promise<()>
 ]=]
 function HumanoidDescriptionUtils.promiseApplyDescriptionReset(
 	humanoid: Humanoid,
 	description: HumanoidDescription,
 	assetTypeVerification: Enum.AssetTypeVerification
 ): Promise.Promise<()>
-	assert(typeof(humanoid) == "Instance" and humanoid:IsA("Humanoid"), "Bad humanoid")
-	assert(typeof(description) == "Instance" and description:IsA("HumanoidDescription"), "Bad description")
+	assert(isHumanoid(humanoid), "Bad humanoid")
+	assert(isHumanoidDescription(description), "Bad description")
+	assert(isAssetTypeVerification(assetTypeVerification), "Bad assetTypeVerification")
 
 	return Promise.spawn(function(resolve, reject)
-		local ok, err = pcall(function()
+		const ok, err = pcall(function()
 			humanoid:ApplyDescriptionResetAsync(description, assetTypeVerification)
 		end)
 		if not ok then
@@ -84,40 +94,52 @@ function HumanoidDescriptionUtils.promiseApplyDescriptionReset(
 		resolve()
 	end)
 end
+
 --[=[
-	Applies humanoid description from userName.
+	Applies the humanoid description belonging to a username asynchronously.
+
+	@within HumanoidDescriptionUtils
 	@param humanoid Humanoid
 	@param userName string
-	@return Promise
+	@return Promise.Promise<()>
 ]=]
 function HumanoidDescriptionUtils.promiseApplyFromUserName(humanoid: Humanoid, userName: string): Promise.Promise<()>
+	assert(isHumanoid(humanoid), "Bad humanoid")
+	assert(t.string(userName) and userName ~= "", "Bad userName")
+
 	return HumanoidDescriptionUtils.promiseFromUserName(userName):Then(function(description)
 		return HumanoidDescriptionUtils.promiseApplyDescription(humanoid, description)
 	end)
 end
 
 --[=[
-	Retrieves a humanoid description from username
+	Retrieves a humanoid description from a username asynchronously.
+
+	@within HumanoidDescriptionUtils
 	@param userName string
-	@return Promise<HumanoidDescription>
+	@return Promise.Promise<HumanoidDescription>
 ]=]
 function HumanoidDescriptionUtils.promiseFromUserName(userName: string): Promise.Promise<HumanoidDescription>
+	assert(t.string(userName) and userName ~= "", "Bad userName")
+
 	return promiseUserIdFromName(userName):Then(function(userId)
 		return HumanoidDescriptionUtils.promiseFromUserId(userId)
 	end)
 end
 
 --[=[
-	Retrieves a humanoid description from userId
+	Retrieves a humanoid description from a user ID asynchronously.
+
+	@within HumanoidDescriptionUtils
 	@param userId number
-	@return Promise<HumanoidDescription>
+	@return Promise.Promise<HumanoidDescription>
 ]=]
 function HumanoidDescriptionUtils.promiseFromUserId(userId: number): Promise.Promise<HumanoidDescription>
-	assert(type(userId) == "number", "Bad userId")
+	assert(t.numberPositive(userId), "Bad userId")
 
 	return Promise.spawn(function(resolve, reject)
 		local description = nil
-		local ok, err = pcall(function()
+		const ok, err = pcall(function()
 			description = Players:GetHumanoidDescriptionFromUserId(userId)
 		end)
 		if not ok then
@@ -128,24 +150,28 @@ function HumanoidDescriptionUtils.promiseFromUserId(userId: number): Promise.Pro
 			reject("API failed to return a description")
 			return
 		end
-		assert(typeof(description) == "Instance", "Bad description")
+		assert(isHumanoidDescription(description), "Bad description")
 		resolve(description)
 	end)
 end
 
 --[=[
-	Retrieves the assetIds from an assetId, in the format that is known to us.
-	@param assetString string -- A comma seperated value of asset ids which should be numbers
+	Parses a comma-separated HumanoidDescription asset property into asset IDs.
+
+	@within HumanoidDescriptionUtils
+	@param assetString string
 	@return { number }
 ]=]
 function HumanoidDescriptionUtils.getAssetIdsFromString(assetString: string): { number }
+	assert(t.string(assetString), "Bad assetString")
+
 	if assetString == "" then
 		return {}
 	end
 
-	local assetIds = {}
+	const assetIds = {}
 	for _, assetIdStr in string.split(assetString, ",") do
-		local num = tonumber(assetIdStr)
+		const num = tonumber(assetIdStr)
 		if num then
 			table.insert(assetIds, num)
 		elseif assetIdStr ~= "" then
@@ -162,12 +188,16 @@ function HumanoidDescriptionUtils.getAssetIdsFromString(assetString: string): { 
 end
 
 --[=[
-	From stuff like [HumanoidDescription.HatAccessory].
-	@param assetString string -- A comma seperated value of asset ids which should be numbers
-	@return { Promise<Instance> }
+	Creates asset-loading promises for a comma-separated HumanoidDescription asset property.
+
+	@within HumanoidDescriptionUtils
+	@param assetString string
+	@return { Promise.Promise<Instance> }
 ]=]
 function HumanoidDescriptionUtils.getAssetPromisesFromString(assetString: string): { Promise.Promise<Instance> }
-	local promises = {}
+	assert(t.string(assetString), "Bad assetString")
+
+	const promises = {}
 	for _, assetId in HumanoidDescriptionUtils.getAssetIdsFromString(assetString) do
 		table.insert(promises, InsertServiceUtils.promiseAsset(assetId))
 	end

@@ -3,7 +3,7 @@
 This file is generated from each package's `catalog.json` and `package.json`. Edit catalog metadata with
 `nevermore-packages` or by changing the sidecar, then run `python3 scripts/sync_packages.py`.
 
-**Coverage:** 215 packages · 876 production modules
+**Coverage:** 218 packages · 886 production modules
 
 ## Package directory
 
@@ -11,6 +11,7 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 | --- | --- | --- | ---: |
 | [acceltween](#acceltween) | `0.0.1` | `animation`, `math` | 1 |
 | [access](#access) | `0.0.1` | `animation`, `commerce`, `data`, `developer_tools`, `enums`, `game_service`, `gui`, `lifecycle`, `localization`, `math`, `player_service`, `reactive`, `security`, `serialization`, `utility` | 34 |
+| [accessorytypeutils](#accessorytypeutils) | `0.0.1` | `enums`, `player_service`, `utility` | 1 |
 | [actionexecutionservice](#actionexecutionservice) | `0.0.1` | `animation`, `data`, `enums`, `game_service`, `gui`, `input`, `lifecycle`, `math`, `player_service`, `reactive`, `security`, `utility` | 5 |
 | [actionmanager](#actionmanager) | `0.0.1` | `reactive` | 2 |
 | [adorneeboundingbox](#adorneeboundingbox) | `0.0.1` | `physics`, `reactive`, `utility` | 4 |
@@ -25,6 +26,8 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 | [attribute](#attribute) | `0.0.1` | `data`, `reactive`, `security` | 1 |
 | [attributeindex](#attributeindex) | `0.0.1` | `data`, `game_service`, `reactive` | 1 |
 | [attributeutils](#attributeutils) | `0.0.1` | `data`, `reactive`, `utility` | 2 |
+| [avatarcatalogservice](#avatarcatalogservice) | `0.0.1` | `avatar`, `cache`, `game_service`, `player_service` | 8 |
+| [avatareditorutils](#avatareditorutils) | `0.0.1` | `avatar`, `catalog`, `promise`, `utility` | 1 |
 | [badgeutils](#badgeutils) | `0.0.1` | `commerce`, `game_service`, `utility` | 1 |
 | [banservice](#banservice) | `0.0.1` | `game_service`, `security`, `utility` | 2 |
 | [baseobject](#baseobject) | `0.0.1` | `lifecycle` | 1 |
@@ -284,6 +287,19 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 | [`Shared/RxAccessStateUtils.luau`](src/_Index/quenty_access@0.0.1/Shared/RxAccessStateUtils.luau) | shared | Class/model | Observable plumbing for access. The tri-state -- `true                                                                                                                                                                                                                                                                                                                                                                         \| false \| nil`-- has to travel through observables like any other value, and none of the obvious [Rx] operators carry`nil`: * `Rx.startWith({nil})`iterates its list, and a Lua list cannot hold nil, so it fires nothing. *`Rx.defaultsTo(nil)`only fires on fail or complete, so a lookup still in flight emits nothing at all. *`Rx.of(nil)`relies on varargs packing surviving a lone nil, and completes besides. That matters because [Rx.combineLatest] waits for every source to emit once. A fact that stays silent until its lookup lands would keep the whole feature from emitting -- so a live consumer renders nothing instead of rendering "not yet known". Public entry points include`RxAccessStateUtils.ofStatic`, `RxAccessStateUtils.startUnresolved`, `RxAccessStateUtils.unresolvedOnError`, `RxAccessStateUtils.distinctState`, `RxAccessStateUtils.completeOn`, `finish`. |
 | [`Shared/WellKnownAccessFeatureNames.luau`](src/_Index/quenty_access@0.0.1/Shared/WellKnownAccessFeatureNames.luau) | shared | Class/model | The feature names the package itself registers. Shipping a name means every game gates the same capability by the same string, and a package that wants to widen it has something to widen. See [AccessFeature.PushFactAllowsFeature]. |
 
+# accessorytypeutils
+
+- **Purpose:** Converts Roblox avatar asset types, catalog asset type identifiers, and accessory type names into their corresponding enum values.
+- **Path:** [`src/_Index/quenty_accessorytypeutils@0.0.1/`](src/_Index/quenty_accessorytypeutils@0.0.1/)
+- **Short Description:** Converts Roblox avatar asset types, catalog asset type identifiers, and accessory type names into their corresponding enum values.
+- **Tags:** `enums`, `player_service`, `utility`
+
+### Submodules
+
+| Module | Realm | Kind | Responsibility and public surface |
+| --- | --- | --- | --- |
+| [`AccessoryTypeUtils.luau`](src/_Index/quenty_accessorytypeutils@0.0.1/AccessoryTypeUtils.luau) | shared | Utility | Stateless conversions between Roblox avatar asset types, asset type identifiers, accessory type names, and accessory types. |
+
 # actionexecutionservice
 
 - **Purpose:** `ActionExecutionService` runs cancellable server work with optional keyed locks. It is independent from `PlayerInputService`: input reports intent, while the gameplay system decides whether work succeeded, failed, or should be cancelled.
@@ -480,6 +496,39 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 | --- | --- | --- | --- |
 | [`AttributeUtils.luau`](src/_Index/quenty_attributeutils@0.0.1/AttributeUtils.luau) | shared | Class/model | Provides utility functions to work with attributes in Roblox Public entry points include `AttributeUtils.isValidAttributeType`, `AttributeUtils.isValidAttributeName`, `AttributeUtils.setAttribute`, `AttributeUtils.promiseAttribute`, `AttributeUtils.bindToBinder`, `syncAttribute`, `syncBoundClass`, `AttributeUtils.initAttribute`. |
 | [`RxAttributeUtils.luau`](src/_Index/quenty_attributeutils@0.0.1/RxAttributeUtils.luau) | shared | Class/model | Utility functions involving attributes. Public entry points include `handleAttributeChanged`, `RxAttributeUtils.observeAttributeKeysBrio`, `RxAttributeUtils.observeAttributeKeys`. |
+
+# avatarcatalogservice
+
+- **Purpose:** Caches and applies reusable R6 and R15 avatar body parts and packages, with server-authoritative replacement rules.
+- **Path:** [`src/_Index/quenty_avatarcatalogservice@0.0.1/`](src/_Index/quenty_avatarcatalogservice@0.0.1/)
+- **Short Description:** AvatarCatalogService lets each game register explicit body assets, load Roblox bundles or legacy packages once, apply catalog entries on demand, dynamically replace disallowed parts or complete packages for every player, and optionally enforce a conservative built-in unfair-avatar list.
+- **Tags:** `avatar`, `cache`, `game_service`, `player_service`
+
+### Submodules
+
+| Module | Realm | Kind | Responsibility and public surface |
+| --- | --- | --- | --- |
+| [`AvatarCatalogService.luau`](src/_Index/quenty_avatarcatalogservice@0.0.1/AvatarCatalogService.luau) | server | Service | Registers and applies cached R6/R15 body catalogs and enforces dynamic replacement rules after player appearances load. |
+| [`AvatarCatalogServiceInterface.luau`](src/_Index/quenty_avatarcatalogservice@0.0.1/AvatarCatalogServiceInterface.luau) | server | Interface | Tie contract used by bound humanoids to observe policy updates and request enforcement. |
+| [`AvatarCatalogServiceTypes.luau`](src/_Index/quenty_avatarcatalogservice@0.0.1/AvatarCatalogServiceTypes.luau) | server | Types | Type contracts for avatar body parts, packages, scales, catalogs, and replacement rules. |
+| [`AvatarCatalogServiceUtils.luau`](src/_Index/quenty_avatarcatalogservice@0.0.1/AvatarCatalogServiceUtils.luau) | server | Utility | Stateless validation, copying, matching, and HumanoidDescription transformation helpers. |
+| [`Binders/AvatarCatalogHumanoid.luau`](src/_Index/quenty_avatarcatalogservice@0.0.1/Binders/AvatarCatalogHumanoid.luau) | server | Class/model | Owns catalog update observation and avatar enforcement for one PlayerHumanoidBinder-bound humanoid. |
+| [`Binders/AvatarCatalogHumanoidBinder.luau`](src/_Index/quenty_avatarcatalogservice@0.0.1/Binders/AvatarCatalogHumanoidBinder.luau) | server | Binder provider | Provides the PlayerHumanoidBinder that owns AvatarCatalogHumanoid lifetimes. |
+| [`Catalog/AvatarCatalogCache.luau`](src/_Index/quenty_avatarcatalogservice@0.0.1/Catalog/AvatarCatalogCache.luau) | server | Class/model | Caches bundle, outfit, legacy package, and product metadata lookups for the lifetime of the server. |
+| [`Catalog/WellKnownUnfairPackagesAndParts.luau`](src/_Index/quenty_avatarcatalogservice@0.0.1/Catalog/WellKnownUnfairPackagesAndParts.luau) | shared | Constants | Read-only identities for the conservative built-in list of Roblox-authored packages and body parts with substantially reduced visible geometry. |
+
+# avatareditorutils
+
+- **Purpose:** Provides Promise-based utilities for Roblox AvatarEditorService catalog, inventory, outfit, avatar-rule, and prompt APIs.
+- **Path:** [`src/_Index/quenty_avatareditorutils@0.0.1/`](src/_Index/quenty_avatareditorutils@0.0.1/)
+- **Short Description:** Provides Promise-based utilities for Roblox AvatarEditorService catalog, inventory, outfit, avatar-rule, and prompt APIs.
+- **Tags:** `avatar`, `catalog`, `promise`, `utility`
+
+### Submodules
+
+| Module | Realm | Kind | Responsibility and public surface |
+| --- | --- | --- | --- |
+| [`AvatarEditorUtils.luau`](src/_Index/quenty_avatareditorutils@0.0.1/AvatarEditorUtils.luau) | shared | Utility | Wraps AvatarEditorService catalog queries, inventory and outfit access, avatar rules, recommendations, favorites, and interactive prompts in Promise-based APIs. |
 
 # badgeutils
 
@@ -1717,7 +1766,7 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 
 | Module | Realm | Kind | Responsibility and public surface |
 | --- | --- | --- | --- |
-| [`HumanoidDescriptionUtils.luau`](src/_Index/quenty_humanoiddescriptionutils@0.0.1/HumanoidDescriptionUtils.luau) | shared | Class/model | Handles actions involving HumanoidDescription objects, including loading character appearance. Public entry points include `promiseUserIdFromName`, `HumanoidDescriptionUtils.promiseApplyDescription`, `HumanoidDescriptionUtils.promiseApplyDescriptionReset`, `HumanoidDescriptionUtils.promiseApplyFromUserName`, `HumanoidDescriptionUtils.promiseFromUserName`, `HumanoidDescriptionUtils.promiseFromUserId`,… |
+| [`HumanoidDescriptionUtils.luau`](src/_Index/quenty_humanoiddescriptionutils@0.0.1/HumanoidDescriptionUtils.luau) | shared | Utility | Loads, parses, and asynchronously applies HumanoidDescription objects. |
 
 # humanoidkillerutils
 

@@ -1,0 +1,12 @@
+{
+  "name": "quenty/accessorytypeutils",
+  "version": "0.0.1",
+  "exports": {
+    "AccessoryTypeUtils": "AccessoryTypeUtils"
+  },
+  "dependencies": [
+    "quenty/enumutils@0.0.1",
+    "quenty/t@0.0.1"
+  ],
+  "externals": []
+}
