@@ -297,20 +297,19 @@ def main() -> int:
             continue
         server_root = manifest_path.parent
         shared_root = shared_pair[0].parent
-        server_owns_root = any((server_root / name).is_file() for name in ("init.lua", "init.luau"))
-        base_root = server_root if server_owns_root else shared_root
-        overlay_root = shared_root if server_owns_root else server_root
-        base_path = base_root.name if server_owns_root else f"../../shared/_Index/{base_root.name}"
-        overlay_prefix = (
-            f"../../shared/_Index/{overlay_root.name}" if server_owns_root else overlay_root.name
-        )
-        node: dict[str, object] = {"$path": base_path}
-        for source_path in sorted(overlay_root.rglob("*")):
-            if not source_path.is_file() or source_path.suffix not in {".lua", ".luau"}:
-                continue
-            relative = source_path.relative_to(overlay_root).as_posix()
-            mapped_path = mapped_source_path(overlay_root, source_path, overlay_prefix)
-            add_source_mapping(node, relative, mapped_path)
+        node: dict[str, object] = {"$className": "Folder"}
+        for source_root, source_prefix in (
+            (shared_root, f"../../shared/_Index/{shared_root.name}"),
+            (server_root, server_root.name),
+        ):
+            for source_path in sorted(source_root.rglob("*")):
+                if not source_path.is_file() or source_path.suffix not in {".lua", ".luau"}:
+                    continue
+                relative = source_path.relative_to(source_root).as_posix()
+                if relative in {"init.lua", "init.luau"}:
+                    raise ValueError(f"A paired package cannot override its root init module: {name}")
+                mapped_path = mapped_source_path(source_root, source_path, source_prefix)
+                add_source_mapping(node, relative, mapped_path)
         server_tree[scoped_version] = node
 
     write_or_check(SHARED_INDEX / "default.project.json", project_json("_Index", shared_tree), args.check, differences)

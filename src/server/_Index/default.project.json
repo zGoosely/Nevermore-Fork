@@ -7,7 +7,130 @@
   "tree": {
     "$className": "Folder",
     "quenty/access@0.0.1": {
-      "$path": "../../shared/_Index/quenty_access@0.0.1",
+      "$className": "Folder",
+      "Client": {
+        "$className": "Folder",
+        "AccessServiceClient": {
+          "$path": "../../shared/_Index/quenty_access@0.0.1/Client/AccessServiceClient.luau"
+        },
+        "Binders": {
+          "$className": "Folder",
+          "AccessPlayerClient": {
+            "$path": "../../shared/_Index/quenty_access@0.0.1/Client/Binders/AccessPlayerClient.luau"
+          }
+        },
+        "Commands": {
+          "$className": "Folder",
+          "AccessCommandServiceClient": {
+            "$path": "../../shared/_Index/quenty_access@0.0.1/Client/Commands/AccessCommandServiceClient.luau"
+          }
+        }
+      },
+      "Shared": {
+        "$className": "Folder",
+        "AccessDataService": {
+          "$path": "../../shared/_Index/quenty_access@0.0.1/Shared/AccessDataService.luau"
+        },
+        "AccessDataServiceInterface": {
+          "$path": "../../shared/_Index/quenty_access@0.0.1/Shared/AccessDataServiceInterface.luau"
+        },
+        "AccessFact": {
+          "$path": "../../shared/_Index/quenty_access@0.0.1/Shared/AccessFact.luau"
+        },
+        "AccessFactContributionState": {
+          "$path": "../../shared/_Index/quenty_access@0.0.1/Shared/AccessFactContributionState.luau"
+        },
+        "AccessFactContributionStateUtils": {
+          "$path": "../../shared/_Index/quenty_access@0.0.1/Shared/AccessFactContributionStateUtils.luau"
+        },
+        "AccessFactNames": {
+          "$path": "../../shared/_Index/quenty_access@0.0.1/Shared/AccessFactNames.luau"
+        },
+        "AccessFactPriority": {
+          "$path": "../../shared/_Index/quenty_access@0.0.1/Shared/AccessFactPriority.luau"
+        },
+        "AccessFactServerOverrideBehavior": {
+          "$path": "../../shared/_Index/quenty_access@0.0.1/Shared/AccessFactServerOverrideBehavior.luau"
+        },
+        "AccessFeature": {
+          "$path": "../../shared/_Index/quenty_access@0.0.1/Shared/AccessFeature.luau"
+        },
+        "AccessPlayerInterface": {
+          "$path": "../../shared/_Index/quenty_access@0.0.1/Shared/AccessPlayerInterface.luau"
+        },
+        "AccessPolicy": {
+          "$path": "../../shared/_Index/quenty_access@0.0.1/Shared/AccessPolicy.luau"
+        },
+        "AccessPolicyContextUtils": {
+          "$path": "../../shared/_Index/quenty_access@0.0.1/Shared/AccessPolicyContextUtils.luau"
+        },
+        "AccessPolicyNames": {
+          "$path": "../../shared/_Index/quenty_access@0.0.1/Shared/AccessPolicyNames.luau"
+        },
+        "AccessPolicyRealm": {
+          "$path": "../../shared/_Index/quenty_access@0.0.1/Shared/AccessPolicyRealm.luau"
+        },
+        "AccessPolicyService": {
+          "$path": "../../shared/_Index/quenty_access@0.0.1/Shared/AccessPolicyService.luau"
+        },
+        "AccessPolicyServiceInterface": {
+          "$path": "../../shared/_Index/quenty_access@0.0.1/Shared/AccessPolicyServiceInterface.luau"
+        },
+        "AccessStateUtils": {
+          "$path": "../../shared/_Index/quenty_access@0.0.1/Shared/AccessStateUtils.luau"
+        },
+        "Binders": {
+          "$className": "Folder",
+          "AccessPlayerBase": {
+            "$path": "../../shared/_Index/quenty_access@0.0.1/Shared/Binders/AccessPlayerBase.luau"
+          }
+        },
+        "Commands": {
+          "$className": "Folder",
+          "AccessCommandUtils": {
+            "$path": "../../shared/_Index/quenty_access@0.0.1/Shared/Commands/AccessCommandUtils.luau"
+          }
+        },
+        "Implementations": {
+          "$className": "Folder",
+          "Facts": {
+            "$className": "Folder",
+            "FeatureAccessFact": {
+              "$path": "../../shared/_Index/quenty_access@0.0.1/Shared/Implementations/Facts/FeatureAccessFact.luau"
+            },
+            "OwnsGameAccessFact": {
+              "$path": "../../shared/_Index/quenty_access@0.0.1/Shared/Implementations/Facts/OwnsGameAccessFact.luau"
+            },
+            "PlayerIsAdminAccessFact": {
+              "$path": "../../shared/_Index/quenty_access@0.0.1/Shared/Implementations/Facts/PlayerIsAdminAccessFact.luau"
+            }
+          },
+          "Policy": {
+            "$className": "Folder",
+            "AccessKickPolicy": {
+              "$path": "../../shared/_Index/quenty_access@0.0.1/Shared/Implementations/Policy/AccessKickPolicy.luau"
+            }
+          }
+        },
+        "JSONAttributeValue": {
+          "$path": "../../shared/_Index/quenty_access@0.0.1/Shared/JSONAttributeValue.luau"
+        },
+        "Replication": {
+          "$className": "Folder",
+          "AccessReplicationState": {
+            "$path": "../../shared/_Index/quenty_access@0.0.1/Shared/Replication/AccessReplicationState.luau"
+          },
+          "AccessReplicationStateUtils": {
+            "$path": "../../shared/_Index/quenty_access@0.0.1/Shared/Replication/AccessReplicationStateUtils.luau"
+          }
+        },
+        "RxAccessStateUtils": {
+          "$path": "../../shared/_Index/quenty_access@0.0.1/Shared/RxAccessStateUtils.luau"
+        },
+        "WellKnownAccessFeatureNames": {
+          "$path": "../../shared/_Index/quenty_access@0.0.1/Shared/WellKnownAccessFeatureNames.luau"
+        }
+      },
       "Server": {
         "$className": "Folder",
         "AccessService": {
@@ -28,7 +151,19 @@
       }
     },
     "quenty/actionexecutionservice@0.0.1": {
-      "$path": "../../shared/_Index/quenty_actionexecutionservice@0.0.1",
+      "$className": "Folder",
+      "ActionExecutionStatuses": {
+        "$path": "../../shared/_Index/quenty_actionexecutionservice@0.0.1/ActionExecutionStatuses.luau"
+      },
+      "ActionExecutionTypes": {
+        "$path": "../../shared/_Index/quenty_actionexecutionservice@0.0.1/ActionExecutionTypes.luau"
+      },
+      "ActionExecutionUtils": {
+        "$path": "../../shared/_Index/quenty_actionexecutionservice@0.0.1/ActionExecutionUtils.luau"
+      },
+      "ActionExecutionUtils.spec": {
+        "$path": "../../shared/_Index/quenty_actionexecutionservice@0.0.1/ActionExecutionUtils.spec.luau"
+      },
       "ActionExecution": {
         "$path": "quenty_actionexecutionservice@0.0.1/ActionExecution.luau"
       },
@@ -40,7 +175,16 @@
       }
     },
     "quenty/avatarcatalogservice@0.0.1": {
-      "$path": "../../shared/_Index/quenty_avatarcatalogservice@0.0.1",
+      "$className": "Folder",
+      "Catalog": {
+        "$className": "Folder",
+        "WellKnownUnfairPackagesAndParts": {
+          "$path": "../../shared/_Index/quenty_avatarcatalogservice@0.0.1/Catalog/WellKnownUnfairPackagesAndParts.luau"
+        },
+        "AvatarCatalogCache": {
+          "$path": "quenty_avatarcatalogservice@0.0.1/Catalog/AvatarCatalogCache.luau"
+        }
+      },
       "AvatarCatalogService": {
         "$path": "quenty_avatarcatalogservice@0.0.1/AvatarCatalogService.luau"
       },
@@ -64,22 +208,34 @@
         "AvatarCatalogHumanoidBinder": {
           "$path": "quenty_avatarcatalogservice@0.0.1/Binders/AvatarCatalogHumanoidBinder.luau"
         }
-      },
-      "Catalog": {
-        "$className": "Folder",
-        "AvatarCatalogCache": {
-          "$path": "quenty_avatarcatalogservice@0.0.1/Catalog/AvatarCatalogCache.luau"
-        }
       }
     },
     "quenty/banservice@0.0.1": {
-      "$path": "../../shared/_Index/quenty_banservice@0.0.1",
+      "$className": "Folder",
+      "BanServiceUtils": {
+        "$path": "../../shared/_Index/quenty_banservice@0.0.1/BanServiceUtils.luau"
+      },
       "BanService": {
         "$path": "quenty_banservice@0.0.1/BanService.luau"
       }
     },
     "quenty/clipcharacters@0.0.1": {
-      "$path": "../../shared/_Index/quenty_clipcharacters@0.0.1",
+      "$className": "Folder",
+      "Client": {
+        "$className": "Folder",
+        "ClipCharacters": {
+          "$path": "../../shared/_Index/quenty_clipcharacters@0.0.1/Client/ClipCharacters.luau"
+        },
+        "ClipCharactersServiceClient": {
+          "$path": "../../shared/_Index/quenty_clipcharacters@0.0.1/Client/ClipCharactersServiceClient.luau"
+        }
+      },
+      "Shared": {
+        "$className": "Folder",
+        "ClipCharactersServiceConstants": {
+          "$path": "../../shared/_Index/quenty_clipcharacters@0.0.1/Shared/ClipCharactersServiceConstants.luau"
+        }
+      },
       "Server": {
         "$className": "Folder",
         "ClipCharactersService": {
@@ -88,16 +244,79 @@
       }
     },
     "quenty/cmdrservice@0.0.1": {
-      "$path": "../../shared/_Index/quenty_cmdrservice@0.0.1",
-      "CmdrService": {
-        "$path": "quenty_cmdrservice@0.0.1/CmdrService.luau"
+      "$className": "Folder",
+      "CmdrServiceClient": {
+        "$path": "../../shared/_Index/quenty_cmdrservice@0.0.1/CmdrServiceClient.luau"
       },
       "CmdrTemplateProviderServer": {
+        "CmdrCommandDefinitionTemplate": {
+          "$path": "../../shared/_Index/quenty_cmdrservice@0.0.1/CmdrTemplateProviderServer/CmdrCommandDefinitionTemplate.luau"
+        },
+        "CmdrExecutionTemplate": {
+          "$path": "../../shared/_Index/quenty_cmdrservice@0.0.1/CmdrTemplateProviderServer/CmdrExecutionTemplate.luau"
+        },
         "$path": "quenty_cmdrservice@0.0.1/CmdrTemplateProviderServer"
+      },
+      "Shared": {
+        "$className": "Folder",
+        "CmdrServiceUtils": {
+          "$path": "../../shared/_Index/quenty_cmdrservice@0.0.1/Shared/CmdrServiceUtils.luau"
+        }
+      },
+      "CmdrService": {
+        "$path": "quenty_cmdrservice@0.0.1/CmdrService.luau"
       }
     },
     "quenty/cooldownservice@0.0.1": {
-      "$path": "../../shared/_Index/quenty_cooldownservice@0.0.1",
+      "$className": "Folder",
+      "Client": {
+        "$className": "Folder",
+        "CooldownBindersClient": {
+          "$path": "../../shared/_Index/quenty_cooldownservice@0.0.1/Client/CooldownBindersClient.luau"
+        },
+        "CooldownClient": {
+          "$path": "../../shared/_Index/quenty_cooldownservice@0.0.1/Client/CooldownClient.luau"
+        }
+      },
+      "CooldownServiceClient": {
+        "$path": "../../shared/_Index/quenty_cooldownservice@0.0.1/CooldownServiceClient.luau"
+      },
+      "Shared": {
+        "$className": "Folder",
+        "CooldownBase": {
+          "$path": "../../shared/_Index/quenty_cooldownservice@0.0.1/Shared/CooldownBase.luau"
+        },
+        "CooldownClockService": {
+          "$path": "../../shared/_Index/quenty_cooldownservice@0.0.1/Shared/CooldownClockService.luau"
+        },
+        "CooldownExpiryScheduler": {
+          "$path": "../../shared/_Index/quenty_cooldownservice@0.0.1/Shared/CooldownExpiryScheduler.luau"
+        },
+        "CooldownExpiryScheduler.spec": {
+          "$path": "../../shared/_Index/quenty_cooldownservice@0.0.1/Shared/CooldownExpiryScheduler.spec.luau"
+        },
+        "CooldownRegistry": {
+          "$path": "../../shared/_Index/quenty_cooldownservice@0.0.1/Shared/CooldownRegistry.luau"
+        },
+        "CooldownRegistry.spec": {
+          "$path": "../../shared/_Index/quenty_cooldownservice@0.0.1/Shared/CooldownRegistry.spec.luau"
+        },
+        "CooldownServiceConstants": {
+          "$path": "../../shared/_Index/quenty_cooldownservice@0.0.1/Shared/CooldownServiceConstants.luau"
+        },
+        "CooldownServiceTypes": {
+          "$path": "../../shared/_Index/quenty_cooldownservice@0.0.1/Shared/CooldownServiceTypes.luau"
+        },
+        "CooldownServiceUtils": {
+          "$path": "../../shared/_Index/quenty_cooldownservice@0.0.1/Shared/CooldownServiceUtils.luau"
+        },
+        "CooldownServiceUtils.spec": {
+          "$path": "../../shared/_Index/quenty_cooldownservice@0.0.1/Shared/CooldownServiceUtils.spec.luau"
+        },
+        "CooldownTypes": {
+          "$path": "../../shared/_Index/quenty_cooldownservice@0.0.1/Shared/CooldownTypes.luau"
+        }
+      },
       "CooldownService": {
         "$path": "quenty_cooldownservice@0.0.1/CooldownService.luau"
       },
@@ -124,7 +343,55 @@
       "$path": "quenty_datastore@0.0.1"
     },
     "quenty/deathreport@0.0.1": {
-      "$path": "../../shared/_Index/quenty_deathreport@0.0.1",
+      "$className": "Folder",
+      "Client": {
+        "$className": "Folder",
+        "DeathReportBindersClient": {
+          "$path": "../../shared/_Index/quenty_deathreport@0.0.1/Client/DeathReportBindersClient.luau"
+        },
+        "Stats": {
+          "$className": "Folder",
+          "PlayerDeathTrackerClient": {
+            "$path": "../../shared/_Index/quenty_deathreport@0.0.1/Client/Stats/PlayerDeathTrackerClient.luau"
+          },
+          "PlayerKillTrackerClient": {
+            "$path": "../../shared/_Index/quenty_deathreport@0.0.1/Client/Stats/PlayerKillTrackerClient.luau"
+          },
+          "TeamKillTrackerClient": {
+            "$path": "../../shared/_Index/quenty_deathreport@0.0.1/Client/Stats/TeamKillTrackerClient.luau"
+          }
+        }
+      },
+      "DeathReportServiceClient": {
+        "$path": "../../shared/_Index/quenty_deathreport@0.0.1/DeathReportServiceClient.luau"
+      },
+      "Shared": {
+        "$className": "Folder",
+        "DeathReportNetwork": {
+          "$path": "../../shared/_Index/quenty_deathreport@0.0.1/Shared/DeathReportNetwork.luau"
+        },
+        "DeathReportProcessor": {
+          "$path": "../../shared/_Index/quenty_deathreport@0.0.1/Shared/DeathReportProcessor.luau"
+        },
+        "DeathReportServiceConstants": {
+          "$path": "../../shared/_Index/quenty_deathreport@0.0.1/Shared/DeathReportServiceConstants.luau"
+        },
+        "DeathReportUtils": {
+          "$path": "../../shared/_Index/quenty_deathreport@0.0.1/Shared/DeathReportUtils.luau"
+        },
+        "DeathReportUtils.spec": {
+          "$path": "../../shared/_Index/quenty_deathreport@0.0.1/Shared/DeathReportUtils.spec.luau"
+        },
+        "Stats": {
+          "$className": "Folder",
+          "PlayerKillTrackerUtils": {
+            "$path": "../../shared/_Index/quenty_deathreport@0.0.1/Shared/Stats/PlayerKillTrackerUtils.luau"
+          },
+          "TeamKillTrackerUtils": {
+            "$path": "../../shared/_Index/quenty_deathreport@0.0.1/Shared/Stats/TeamKillTrackerUtils.luau"
+          }
+        }
+      },
       "DeathReportService": {
         "$path": "quenty_deathreport@0.0.1/DeathReportService.luau"
       },
@@ -157,7 +424,10 @@
       "$path": "quenty_errorreportingservice@0.0.1"
     },
     "quenty/funnels@0.0.1": {
-      "$path": "../../shared/_Index/quenty_funnels@0.0.1",
+      "$className": "Folder",
+      "FunnelStepTracker": {
+        "$path": "../../shared/_Index/quenty_funnels@0.0.1/FunnelStepTracker.luau"
+      },
       "Server": {
         "$className": "Folder",
         "FunnelStepLogger": {
@@ -166,7 +436,94 @@
       }
     },
     "quenty/gameconfig@0.0.1": {
-      "$path": "../../shared/_Index/quenty_gameconfig@0.0.1",
+      "$className": "Folder",
+      "Client": {
+        "$className": "Folder",
+        "Cmdr": {
+          "$className": "Folder",
+          "GameConfigCommandServiceClient": {
+            "$path": "../../shared/_Index/quenty_gameconfig@0.0.1/Client/Cmdr/GameConfigCommandServiceClient.luau"
+          }
+        },
+        "Config": {
+          "$className": "Folder",
+          "Asset": {
+            "$className": "Folder",
+            "GameConfigAssetClient": {
+              "$path": "../../shared/_Index/quenty_gameconfig@0.0.1/Client/Config/Asset/GameConfigAssetClient.luau"
+            }
+          },
+          "Config": {
+            "$className": "Folder",
+            "GameConfigClient": {
+              "$path": "../../shared/_Index/quenty_gameconfig@0.0.1/Client/Config/Config/GameConfigClient.luau"
+            }
+          }
+        },
+        "GameConfigBindersClient": {
+          "$path": "../../shared/_Index/quenty_gameconfig@0.0.1/Client/GameConfigBindersClient.luau"
+        },
+        "GameConfigServiceClient": {
+          "$path": "../../shared/_Index/quenty_gameconfig@0.0.1/Client/GameConfigServiceClient.luau"
+        }
+      },
+      "Shared": {
+        "$className": "Folder",
+        "Cmdr": {
+          "$className": "Folder",
+          "GameConfigCmdrUtils": {
+            "$path": "../../shared/_Index/quenty_gameconfig@0.0.1/Shared/Cmdr/GameConfigCmdrUtils.luau"
+          }
+        },
+        "Config": {
+          "$className": "Folder",
+          "Asset": {
+            "$className": "Folder",
+            "GameConfigAssetBase": {
+              "$path": "../../shared/_Index/quenty_gameconfig@0.0.1/Shared/Config/Asset/GameConfigAssetBase.luau"
+            },
+            "GameConfigAssetConstants": {
+              "$path": "../../shared/_Index/quenty_gameconfig@0.0.1/Shared/Config/Asset/GameConfigAssetConstants.luau"
+            },
+            "GameConfigAssetUtils": {
+              "$path": "../../shared/_Index/quenty_gameconfig@0.0.1/Shared/Config/Asset/GameConfigAssetUtils.luau"
+            }
+          },
+          "AssetTypes": {
+            "$className": "Folder",
+            "GameConfigAssetTypeUtils": {
+              "$path": "../../shared/_Index/quenty_gameconfig@0.0.1/Shared/Config/AssetTypes/GameConfigAssetTypeUtils.luau"
+            },
+            "GameConfigAssetTypes": {
+              "$path": "../../shared/_Index/quenty_gameconfig@0.0.1/Shared/Config/AssetTypes/GameConfigAssetTypes.luau"
+            }
+          },
+          "Config": {
+            "$className": "Folder",
+            "GameConfigBase": {
+              "$path": "../../shared/_Index/quenty_gameconfig@0.0.1/Shared/Config/Config/GameConfigBase.luau"
+            },
+            "GameConfigConstants": {
+              "$path": "../../shared/_Index/quenty_gameconfig@0.0.1/Shared/Config/Config/GameConfigConstants.luau"
+            },
+            "GameConfigUtils": {
+              "$path": "../../shared/_Index/quenty_gameconfig@0.0.1/Shared/Config/Config/GameConfigUtils.luau"
+            }
+          },
+          "Picker": {
+            "$className": "Folder",
+            "GameConfigPicker": {
+              "$path": "../../shared/_Index/quenty_gameconfig@0.0.1/Shared/Config/Picker/GameConfigPicker.luau"
+            }
+          }
+        },
+        "GameConfigDataService": {
+          "$path": "../../shared/_Index/quenty_gameconfig@0.0.1/Shared/GameConfigDataService.luau"
+        },
+        "GameConfigTranslator": {
+          "$path": "../../shared/_Index/quenty_gameconfig@0.0.1/Shared/GameConfigTranslator.luau"
+        }
+      },
       "Server": {
         "$className": "Folder",
         "Cmdr": {
@@ -208,19 +565,91 @@
       }
     },
     "quenty/gameproductservice@0.0.1": {
-      "$path": "../../shared/_Index/quenty_gameproductservice@0.0.1",
+      "$className": "Folder",
+      "GameProductServiceClient": {
+        "$path": "../../shared/_Index/quenty_gameproductservice@0.0.1/GameProductServiceClient.luau"
+      },
+      "Shared": {
+        "$className": "Folder",
+        "GameProductDataService": {
+          "$path": "../../shared/_Index/quenty_gameproductservice@0.0.1/Shared/GameProductDataService.luau"
+        },
+        "GameProductHandlerResult": {
+          "$path": "../../shared/_Index/quenty_gameproductservice@0.0.1/Shared/GameProductHandlerResult.luau"
+        },
+        "GameProductNetwork": {
+          "$path": "../../shared/_Index/quenty_gameproductservice@0.0.1/Shared/GameProductNetwork.luau"
+        },
+        "GameProductTypes": {
+          "$path": "../../shared/_Index/quenty_gameproductservice@0.0.1/Shared/GameProductTypes.luau"
+        },
+        "GameProductUtils": {
+          "$path": "../../shared/_Index/quenty_gameproductservice@0.0.1/Shared/GameProductUtils.luau"
+        }
+      },
       "GameProductService": {
         "$path": "quenty_gameproductservice@0.0.1/GameProductService.luau"
       }
     },
     "quenty/gifting@0.0.1": {
-      "$path": "../../shared/_Index/quenty_gifting@0.0.1",
+      "$className": "Folder",
+      "GiftingServiceClient": {
+        "$path": "../../shared/_Index/quenty_gifting@0.0.1/GiftingServiceClient.luau"
+      },
+      "Shared": {
+        "$className": "Folder",
+        "GiftingAssetTypes": {
+          "$path": "../../shared/_Index/quenty_gifting@0.0.1/Shared/GiftingAssetTypes.luau"
+        },
+        "GiftingConstants": {
+          "$path": "../../shared/_Index/quenty_gifting@0.0.1/Shared/GiftingConstants.luau"
+        },
+        "GiftingDuplicateBehavior": {
+          "$path": "../../shared/_Index/quenty_gifting@0.0.1/Shared/GiftingDuplicateBehavior.luau"
+        },
+        "GiftingNetwork": {
+          "$path": "../../shared/_Index/quenty_gifting@0.0.1/Shared/GiftingNetwork.luau"
+        },
+        "GiftingRestrictions": {
+          "$path": "../../shared/_Index/quenty_gifting@0.0.1/Shared/GiftingRestrictions.luau"
+        },
+        "GiftingSerializationUtils": {
+          "$path": "../../shared/_Index/quenty_gifting@0.0.1/Shared/GiftingSerializationUtils.luau"
+        },
+        "GiftingTypes": {
+          "$path": "../../shared/_Index/quenty_gifting@0.0.1/Shared/GiftingTypes.luau"
+        }
+      },
       "GiftingService": {
         "$path": "quenty_gifting@0.0.1/GiftingService.luau"
       }
     },
     "quenty/hide@0.0.1": {
-      "$path": "../../shared/_Index/quenty_hide@0.0.1",
+      "$className": "Folder",
+      "Client": {
+        "$className": "Folder",
+        "Binders": {
+          "$className": "Folder",
+          "DynamicHideClient": {
+            "$path": "../../shared/_Index/quenty_hide@0.0.1/Client/Binders/DynamicHideClient.luau"
+          },
+          "HideClient": {
+            "$path": "../../shared/_Index/quenty_hide@0.0.1/Client/Binders/HideClient.luau"
+          }
+        },
+        "HideServiceClient": {
+          "$path": "../../shared/_Index/quenty_hide@0.0.1/Client/HideServiceClient.luau"
+        }
+      },
+      "Shared": {
+        "$className": "Folder",
+        "DynamicHideBase": {
+          "$path": "../../shared/_Index/quenty_hide@0.0.1/Shared/DynamicHideBase.luau"
+        },
+        "HideUtils": {
+          "$path": "../../shared/_Index/quenty_hide@0.0.1/Shared/HideUtils.luau"
+        }
+      },
       "Server": {
         "$className": "Folder",
         "Binders": {
@@ -241,13 +670,46 @@
       "$path": "quenty_httppromise@0.0.1"
     },
     "quenty/inputkeymapdatastoreservice@0.0.1": {
-      "$path": "../../shared/_Index/quenty_inputkeymapdatastoreservice@0.0.1",
+      "$className": "Folder",
+      "Client": {
+        "$className": "Folder",
+        "InputKeyMapDataStoreClientModel": {
+          "$path": "../../shared/_Index/quenty_inputkeymapdatastoreservice@0.0.1/Client/InputKeyMapDataStoreClientModel.luau"
+        }
+      },
+      "InputKeyMapDataStoreServiceClient": {
+        "$path": "../../shared/_Index/quenty_inputkeymapdatastoreservice@0.0.1/InputKeyMapDataStoreServiceClient.luau"
+      },
+      "Shared": {
+        "$className": "Folder",
+        "InputKeyMapDataStoreServiceConstants": {
+          "$path": "../../shared/_Index/quenty_inputkeymapdatastoreservice@0.0.1/Shared/InputKeyMapDataStoreServiceConstants.luau"
+        },
+        "InputKeyMapDataStoreServiceNetwork": {
+          "$path": "../../shared/_Index/quenty_inputkeymapdatastoreservice@0.0.1/Shared/InputKeyMapDataStoreServiceNetwork.luau"
+        },
+        "InputKeyMapDataStoreServiceTypes": {
+          "$path": "../../shared/_Index/quenty_inputkeymapdatastoreservice@0.0.1/Shared/InputKeyMapDataStoreServiceTypes.luau"
+        },
+        "InputKeyMapDataStoreServiceUtils": {
+          "$path": "../../shared/_Index/quenty_inputkeymapdatastoreservice@0.0.1/Shared/InputKeyMapDataStoreServiceUtils.luau"
+        },
+        "InputKeyMapDataStoreServiceUtils.spec": {
+          "$path": "../../shared/_Index/quenty_inputkeymapdatastoreservice@0.0.1/Shared/InputKeyMapDataStoreServiceUtils.spec.luau"
+        }
+      },
       "InputKeyMapDataStoreService": {
         "$path": "quenty_inputkeymapdatastoreservice@0.0.1/InputKeyMapDataStoreService.luau"
       }
     },
     "quenty/lockservice@0.0.1": {
-      "$path": "../../shared/_Index/quenty_lockservice@0.0.1",
+      "$className": "Folder",
+      "LockServiceTypes": {
+        "$path": "../../shared/_Index/quenty_lockservice@0.0.1/LockServiceTypes.luau"
+      },
+      "LockServiceUtils": {
+        "$path": "../../shared/_Index/quenty_lockservice@0.0.1/LockServiceUtils.luau"
+      },
       "LockPermit": {
         "$path": "quenty_lockservice@0.0.1/LockPermit.luau"
       },
@@ -259,7 +721,61 @@
       }
     },
     "quenty/motor6d@0.0.1": {
-      "$path": "../../shared/_Index/quenty_motor6d@0.0.1",
+      "$className": "Folder",
+      "Client": {
+        "$className": "Folder",
+        "Humanoid": {
+          "$className": "Folder",
+          "Motor6DStackHumanoidClient": {
+            "$path": "../../shared/_Index/quenty_motor6d@0.0.1/Client/Humanoid/Motor6DStackHumanoidClient.luau"
+          }
+        },
+        "Motor6DServiceClient": {
+          "$path": "../../shared/_Index/quenty_motor6d@0.0.1/Client/Motor6DServiceClient.luau"
+        },
+        "Stack": {
+          "$className": "Folder",
+          "Motor6DStackClient": {
+            "$path": "../../shared/_Index/quenty_motor6d@0.0.1/Client/Stack/Motor6DStackClient.luau"
+          }
+        }
+      },
+      "Shared": {
+        "$className": "Folder",
+        "Animation": {
+          "$className": "Folder",
+          "Motor6DAnimator": {
+            "$path": "../../shared/_Index/quenty_motor6d@0.0.1/Shared/Animation/Motor6DAnimator.luau"
+          },
+          "Motor6DPhysicsTransformer": {
+            "$path": "../../shared/_Index/quenty_motor6d@0.0.1/Shared/Animation/Motor6DPhysicsTransformer.luau"
+          },
+          "Motor6DSmoothTransformer": {
+            "$path": "../../shared/_Index/quenty_motor6d@0.0.1/Shared/Animation/Motor6DSmoothTransformer.luau"
+          },
+          "Motor6DTransformer": {
+            "$path": "../../shared/_Index/quenty_motor6d@0.0.1/Shared/Animation/Motor6DTransformer.luau"
+          }
+        },
+        "Humanoid": {
+          "$className": "Folder",
+          "Motor6DStackHumanoidBase": {
+            "$path": "../../shared/_Index/quenty_motor6d@0.0.1/Shared/Humanoid/Motor6DStackHumanoidBase.luau"
+          },
+          "Motor6DStackHumanoidInterface": {
+            "$path": "../../shared/_Index/quenty_motor6d@0.0.1/Shared/Humanoid/Motor6DStackHumanoidInterface.luau"
+          }
+        },
+        "Stack": {
+          "$className": "Folder",
+          "Motor6DStackBase": {
+            "$path": "../../shared/_Index/quenty_motor6d@0.0.1/Shared/Stack/Motor6DStackBase.luau"
+          },
+          "Motor6DStackInterface": {
+            "$path": "../../shared/_Index/quenty_motor6d@0.0.1/Shared/Stack/Motor6DStackInterface.luau"
+          }
+        }
+      },
       "Server": {
         "$className": "Folder",
         "Humanoid": {
@@ -280,7 +796,31 @@
       }
     },
     "quenty/permissionservice@0.0.1": {
-      "$path": "../../shared/_Index/quenty_permissionservice@0.0.1",
+      "$className": "Folder",
+      "Constants": {
+        "$className": "Folder",
+        "PermissionLevel": {
+          "$path": "../../shared/_Index/quenty_permissionservice@0.0.1/Constants/PermissionLevel.luau"
+        },
+        "PermissionProviderConstants": {
+          "$path": "../../shared/_Index/quenty_permissionservice@0.0.1/Constants/PermissionProviderConstants.luau"
+        }
+      },
+      "PermissionServiceClient": {
+        "Providers": {
+          "$className": "Folder",
+          "PermissionProviderClient": {
+            "$path": "../../shared/_Index/quenty_permissionservice@0.0.1/PermissionServiceClient/Providers/PermissionProviderClient.luau"
+          }
+        },
+        "$path": "../../shared/_Index/quenty_permissionservice@0.0.1/PermissionServiceClient"
+      },
+      "Shared": {
+        "$className": "Folder",
+        "PermissionServiceNetwork": {
+          "$path": "../../shared/_Index/quenty_permissionservice@0.0.1/Shared/PermissionServiceNetwork.luau"
+        }
+      },
       "PermissionService": {
         "PermissionProviderUtils": {
           "$path": "quenty_permissionservice@0.0.1/PermissionService/PermissionProviderUtils.luau"
@@ -301,25 +841,145 @@
       }
     },
     "quenty/playerdatastoreservice@0.0.1": {
-      "$path": "../../shared/_Index/quenty_playerdatastoreservice@0.0.1",
+      "$className": "Folder",
+      "PlayerDataStoreServiceClient": {
+        "$path": "../../shared/_Index/quenty_playerdatastoreservice@0.0.1/PlayerDataStoreServiceClient.luau"
+      },
+      "Shared": {
+        "$className": "Folder",
+        "PlayerDataStoreServiceNetwork": {
+          "$path": "../../shared/_Index/quenty_playerdatastoreservice@0.0.1/Shared/PlayerDataStoreServiceNetwork.luau"
+        },
+        "PlayerDataStoreServiceProfile": {
+          "$path": "../../shared/_Index/quenty_playerdatastoreservice@0.0.1/Shared/PlayerDataStoreServiceProfile.luau"
+        },
+        "PlayerDataStoreServiceUtils": {
+          "$path": "../../shared/_Index/quenty_playerdatastoreservice@0.0.1/Shared/PlayerDataStoreServiceUtils.luau"
+        }
+      },
       "PlayerDataStoreService": {
         "$path": "quenty_playerdatastoreservice@0.0.1/PlayerDataStoreService.luau"
       }
     },
     "quenty/playeridservice@0.0.1": {
-      "$path": "../../shared/_Index/quenty_playeridservice@0.0.1",
+      "$className": "Folder",
+      "PlayerIdServiceClient": {
+        "$path": "../../shared/_Index/quenty_playeridservice@0.0.1/PlayerIdServiceClient.luau"
+      },
+      "Shared": {
+        "$className": "Folder",
+        "PlayerIdServiceConstants": {
+          "$path": "../../shared/_Index/quenty_playeridservice@0.0.1/Shared/PlayerIdServiceConstants.luau"
+        },
+        "PlayerIdServiceInterface": {
+          "$path": "../../shared/_Index/quenty_playeridservice@0.0.1/Shared/PlayerIdServiceInterface.luau"
+        },
+        "PlayerIdServiceUtils": {
+          "$path": "../../shared/_Index/quenty_playeridservice@0.0.1/Shared/PlayerIdServiceUtils.luau"
+        }
+      },
       "PlayerIdService": {
         "$path": "quenty_playeridservice@0.0.1/PlayerIdService.luau"
       }
     },
     "quenty/playerinputmode@0.0.1": {
-      "$path": "../../shared/_Index/quenty_playerinputmode@0.0.1",
+      "$className": "Folder",
+      "PlayerInputModeServiceClient": {
+        "$path": "../../shared/_Index/quenty_playerinputmode@0.0.1/PlayerInputModeServiceClient.luau"
+      },
+      "Shared": {
+        "$className": "Folder",
+        "PlayerInputModeNetwork": {
+          "$path": "../../shared/_Index/quenty_playerinputmode@0.0.1/Shared/PlayerInputModeNetwork.luau"
+        },
+        "PlayerInputModeServiceConstants": {
+          "$path": "../../shared/_Index/quenty_playerinputmode@0.0.1/Shared/PlayerInputModeServiceConstants.luau"
+        },
+        "PlayerInputModeTypes": {
+          "$path": "../../shared/_Index/quenty_playerinputmode@0.0.1/Shared/PlayerInputModeTypes.luau"
+        },
+        "PlayerInputModeUtils": {
+          "$path": "../../shared/_Index/quenty_playerinputmode@0.0.1/Shared/PlayerInputModeUtils.luau"
+        }
+      },
       "PlayerInputModeService": {
         "$path": "quenty_playerinputmode@0.0.1/PlayerInputModeService.luau"
       }
     },
     "quenty/playerinputservice@0.0.1": {
-      "$path": "../../shared/_Index/quenty_playerinputservice@0.0.1",
+      "$className": "Folder",
+      "Client": {
+        "$className": "Folder",
+        "PlayerInputActionModel": {
+          "$path": "../../shared/_Index/quenty_playerinputservice@0.0.1/Client/PlayerInputActionModel.luau"
+        }
+      },
+      "PlayerInputCooldownServiceClient": {
+        "$path": "../../shared/_Index/quenty_playerinputservice@0.0.1/PlayerInputCooldownServiceClient.luau"
+      },
+      "PlayerInputServiceClient": {
+        "$path": "../../shared/_Index/quenty_playerinputservice@0.0.1/PlayerInputServiceClient.luau"
+      },
+      "Shared": {
+        "$className": "Folder",
+        "PlayerInputActionConditionModel": {
+          "$path": "../../shared/_Index/quenty_playerinputservice@0.0.1/Shared/PlayerInputActionConditionModel.luau"
+        },
+        "PlayerInputActionConditionModel.spec": {
+          "$path": "../../shared/_Index/quenty_playerinputservice@0.0.1/Shared/PlayerInputActionConditionModel.spec.luau"
+        },
+        "PlayerInputActionProvider": {
+          "$path": "../../shared/_Index/quenty_playerinputservice@0.0.1/Shared/PlayerInputActionProvider.luau"
+        },
+        "PlayerInputActionRegistryServiceShared": {
+          "$path": "../../shared/_Index/quenty_playerinputservice@0.0.1/Shared/PlayerInputActionRegistryServiceShared.luau"
+        },
+        "PlayerInputActorUtils": {
+          "$path": "../../shared/_Index/quenty_playerinputservice@0.0.1/Shared/PlayerInputActorUtils.luau"
+        },
+        "PlayerInputActorUtils.spec": {
+          "$path": "../../shared/_Index/quenty_playerinputservice@0.0.1/Shared/PlayerInputActorUtils.spec.luau"
+        },
+        "PlayerInputCooldownServiceConstants": {
+          "$path": "../../shared/_Index/quenty_playerinputservice@0.0.1/Shared/PlayerInputCooldownServiceConstants.luau"
+        },
+        "PlayerInputCooldownServiceTypes": {
+          "$path": "../../shared/_Index/quenty_playerinputservice@0.0.1/Shared/PlayerInputCooldownServiceTypes.luau"
+        },
+        "PlayerInputCooldownServiceUtils": {
+          "$path": "../../shared/_Index/quenty_playerinputservice@0.0.1/Shared/PlayerInputCooldownServiceUtils.luau"
+        },
+        "PlayerInputCooldownServiceUtils.spec": {
+          "$path": "../../shared/_Index/quenty_playerinputservice@0.0.1/Shared/PlayerInputCooldownServiceUtils.spec.luau"
+        },
+        "PlayerInputPolicyModel": {
+          "$path": "../../shared/_Index/quenty_playerinputservice@0.0.1/Shared/PlayerInputPolicyModel.luau"
+        },
+        "PlayerInputPolicyModel.spec": {
+          "$path": "../../shared/_Index/quenty_playerinputservice@0.0.1/Shared/PlayerInputPolicyModel.spec.luau"
+        },
+        "PlayerInputResults": {
+          "$path": "../../shared/_Index/quenty_playerinputservice@0.0.1/Shared/PlayerInputResults.luau"
+        },
+        "PlayerInputServiceConstants": {
+          "$path": "../../shared/_Index/quenty_playerinputservice@0.0.1/Shared/PlayerInputServiceConstants.luau"
+        },
+        "PlayerInputServiceNetwork": {
+          "$path": "../../shared/_Index/quenty_playerinputservice@0.0.1/Shared/PlayerInputServiceNetwork.luau"
+        },
+        "PlayerInputServiceTypes": {
+          "$path": "../../shared/_Index/quenty_playerinputservice@0.0.1/Shared/PlayerInputServiceTypes.luau"
+        },
+        "PlayerInputServiceUtils": {
+          "$path": "../../shared/_Index/quenty_playerinputservice@0.0.1/Shared/PlayerInputServiceUtils.luau"
+        },
+        "PlayerInputServiceUtils.spec": {
+          "$path": "../../shared/_Index/quenty_playerinputservice@0.0.1/Shared/PlayerInputServiceUtils.spec.luau"
+        },
+        "PlayerInputStates": {
+          "$path": "../../shared/_Index/quenty_playerinputservice@0.0.1/Shared/PlayerInputStates.luau"
+        }
+      },
       "PlayerInputCooldownService": {
         "$path": "quenty_playerinputservice@0.0.1/PlayerInputCooldownService.luau"
       },
@@ -349,7 +1009,55 @@
       }
     },
     "quenty/ragdoll@0.0.1": {
-      "$path": "../../shared/_Index/quenty_ragdoll@0.0.1",
+      "$className": "Folder",
+      "Shared": {
+        "$className": "Folder",
+        "Classes": {
+          "$className": "Folder",
+          "BindableRagdollHumanoidOnFall": {
+            "$path": "../../shared/_Index/quenty_ragdoll@0.0.1/Shared/Classes/BindableRagdollHumanoidOnFall.luau"
+          },
+          "RagdollHumanoidOnFallConstants": {
+            "$path": "../../shared/_Index/quenty_ragdoll@0.0.1/Shared/Classes/RagdollHumanoidOnFallConstants.luau"
+          },
+          "RagdollableBase": {
+            "$path": "../../shared/_Index/quenty_ragdoll@0.0.1/Shared/Classes/RagdollableBase.luau"
+          }
+        },
+        "Interfaces": {
+          "$className": "Folder",
+          "RagdollableInterface": {
+            "$path": "../../shared/_Index/quenty_ragdoll@0.0.1/Shared/Interfaces/RagdollableInterface.luau"
+          }
+        },
+        "RagdollServiceConstants": {
+          "$path": "../../shared/_Index/quenty_ragdoll@0.0.1/Shared/RagdollServiceConstants.luau"
+        },
+        "Rigging": {
+          "$className": "Folder",
+          "RagdollAdditionalAttachmentUtils": {
+            "$path": "../../shared/_Index/quenty_ragdoll@0.0.1/Shared/Rigging/RagdollAdditionalAttachmentUtils.luau"
+          },
+          "RagdollBallSocketUtils": {
+            "$path": "../../shared/_Index/quenty_ragdoll@0.0.1/Shared/Rigging/RagdollBallSocketUtils.luau"
+          },
+          "RagdollCollisionUtils": {
+            "$path": "../../shared/_Index/quenty_ragdoll@0.0.1/Shared/Rigging/RagdollCollisionUtils.luau"
+          },
+          "RagdollMotorData": {
+            "$path": "../../shared/_Index/quenty_ragdoll@0.0.1/Shared/Rigging/RagdollMotorData.luau"
+          },
+          "RagdollMotorLimitData": {
+            "$path": "../../shared/_Index/quenty_ragdoll@0.0.1/Shared/Rigging/RagdollMotorLimitData.luau"
+          },
+          "RagdollMotorUtils": {
+            "$path": "../../shared/_Index/quenty_ragdoll@0.0.1/Shared/Rigging/RagdollMotorUtils.luau"
+          },
+          "RxRagdollUtils": {
+            "$path": "../../shared/_Index/quenty_ragdoll@0.0.1/Shared/Rigging/RxRagdollUtils.luau"
+          }
+        }
+      },
       "Server": {
         "$className": "Folder",
         "Classes": {
@@ -391,7 +1099,28 @@
       "$path": "quenty_receiptprocessing@0.0.1"
     },
     "quenty/roguehumanoid@0.0.1": {
-      "$path": "../../shared/_Index/quenty_roguehumanoid@0.0.1",
+      "$className": "Folder",
+      "Client": {
+        "$className": "Folder",
+        "RogueHumanoidClient": {
+          "$path": "../../shared/_Index/quenty_roguehumanoid@0.0.1/Client/RogueHumanoidClient.luau"
+        },
+        "RogueHumanoidServiceClient": {
+          "$path": "../../shared/_Index/quenty_roguehumanoid@0.0.1/Client/RogueHumanoidServiceClient.luau"
+        }
+      },
+      "Shared": {
+        "$className": "Folder",
+        "RogueHumanoidBase": {
+          "$path": "../../shared/_Index/quenty_roguehumanoid@0.0.1/Shared/RogueHumanoidBase.luau"
+        },
+        "RogueHumanoidInterface": {
+          "$path": "../../shared/_Index/quenty_roguehumanoid@0.0.1/Shared/RogueHumanoidInterface.luau"
+        },
+        "RogueHumanoidProperties": {
+          "$path": "../../shared/_Index/quenty_roguehumanoid@0.0.1/Shared/RogueHumanoidProperties.luau"
+        }
+      },
       "Server": {
         "$className": "Folder",
         "RogueHumanoid": {
@@ -403,13 +1132,88 @@
       }
     },
     "quenty/saveslot@0.0.1": {
-      "$path": "../../shared/_Index/quenty_saveslot@0.0.1",
+      "$className": "Folder",
+      "SaveSlotServiceClient": {
+        "$path": "../../shared/_Index/quenty_saveslot@0.0.1/SaveSlotServiceClient.luau"
+      },
+      "Shared": {
+        "$className": "Folder",
+        "SaveSlotConstants": {
+          "$path": "../../shared/_Index/quenty_saveslot@0.0.1/Shared/SaveSlotConstants.luau"
+        },
+        "SaveSlotNetwork": {
+          "$path": "../../shared/_Index/quenty_saveslot@0.0.1/Shared/SaveSlotNetwork.luau"
+        },
+        "SaveSlotSerializationUtils": {
+          "$path": "../../shared/_Index/quenty_saveslot@0.0.1/Shared/SaveSlotSerializationUtils.luau"
+        },
+        "SaveSlotTypes": {
+          "$path": "../../shared/_Index/quenty_saveslot@0.0.1/Shared/SaveSlotTypes.luau"
+        },
+        "SaveSlotUtils": {
+          "$path": "../../shared/_Index/quenty_saveslot@0.0.1/Shared/SaveSlotUtils.luau"
+        }
+      },
       "SaveSlotService": {
         "$path": "quenty_saveslot@0.0.1/SaveSlotService.luau"
       }
     },
     "quenty/scoredactionservice@0.0.1": {
-      "$path": "../../shared/_Index/quenty_scoredactionservice@0.0.1",
+      "$className": "Folder",
+      "Client": {
+        "$className": "Folder",
+        "InputList": {
+          "$className": "Folder",
+          "InputListScoreHelper": {
+            "$path": "../../shared/_Index/quenty_scoredactionservice@0.0.1/Client/InputList/InputListScoreHelper.luau"
+          },
+          "InputListScoreHelper.spec": {
+            "$path": "../../shared/_Index/quenty_scoredactionservice@0.0.1/Client/InputList/InputListScoreHelper.spec.luau"
+          }
+        },
+        "Picker": {
+          "$className": "Folder",
+          "ScoredActionPicker": {
+            "$path": "../../shared/_Index/quenty_scoredactionservice@0.0.1/Client/Picker/ScoredActionPicker.luau"
+          },
+          "ScoredActionPicker.spec": {
+            "$path": "../../shared/_Index/quenty_scoredactionservice@0.0.1/Client/Picker/ScoredActionPicker.spec.luau"
+          },
+          "ScoredActionPickerProvider": {
+            "$path": "../../shared/_Index/quenty_scoredactionservice@0.0.1/Client/Picker/ScoredActionPickerProvider.luau"
+          },
+          "ScoredActionPickerProvider.spec": {
+            "$path": "../../shared/_Index/quenty_scoredactionservice@0.0.1/Client/Picker/ScoredActionPickerProvider.spec.luau"
+          },
+          "TouchButtonScoredActionPicker": {
+            "$path": "../../shared/_Index/quenty_scoredactionservice@0.0.1/Client/Picker/TouchButtonScoredActionPicker.luau"
+          },
+          "TouchButtonScoredActionPicker.spec": {
+            "$path": "../../shared/_Index/quenty_scoredactionservice@0.0.1/Client/Picker/TouchButtonScoredActionPicker.spec.luau"
+          }
+        },
+        "ScoredAction": {
+          "$path": "../../shared/_Index/quenty_scoredactionservice@0.0.1/Client/ScoredAction.luau"
+        },
+        "ScoredAction.spec": {
+          "$path": "../../shared/_Index/quenty_scoredactionservice@0.0.1/Client/ScoredAction.spec.luau"
+        },
+        "ScoredActionServiceClient": {
+          "$path": "../../shared/_Index/quenty_scoredactionservice@0.0.1/Client/ScoredActionServiceClient.luau"
+        },
+        "ScoredActionServiceClient.spec": {
+          "$path": "../../shared/_Index/quenty_scoredactionservice@0.0.1/Client/ScoredActionServiceClient.spec.luau"
+        },
+        "ScoredActionUtils": {
+          "$path": "../../shared/_Index/quenty_scoredactionservice@0.0.1/Client/ScoredActionUtils.luau"
+        },
+        "ScoredActionUtils.spec": {
+          "$path": "../../shared/_Index/quenty_scoredactionservice@0.0.1/Client/ScoredActionUtils.spec.luau"
+        }
+      },
+      "jest.config": {
+        "$path": "../../shared/_Index/quenty_scoredactionservice@0.0.1/jest.config.lua"
+      },
       "Server": {
         "$className": "Folder",
         "ScoredActionService": {
@@ -421,13 +1225,58 @@
       }
     },
     "quenty/secretservice@0.0.1": {
-      "$path": "../../shared/_Index/quenty_secretservice@0.0.1",
+      "$className": "Folder",
+      "Constants": {
+        "$className": "Folder",
+        "SecretServiceConstants": {
+          "$path": "../../shared/_Index/quenty_secretservice@0.0.1/Constants/SecretServiceConstants.luau"
+        },
+        "SecretServiceNetwork": {
+          "$path": "../../shared/_Index/quenty_secretservice@0.0.1/Constants/SecretServiceNetwork.luau"
+        }
+      },
+      "SecretServiceClient": {
+        "$path": "../../shared/_Index/quenty_secretservice@0.0.1/SecretServiceClient.luau"
+      },
       "SecretService": {
         "$path": "quenty_secretservice@0.0.1/SecretService.luau"
       }
     },
     "quenty/serverlist@0.0.1": {
-      "$path": "../../shared/_Index/quenty_serverlist@0.0.1",
+      "$className": "Folder",
+      "ServerListServiceClient": {
+        "$path": "../../shared/_Index/quenty_serverlist@0.0.1/ServerListServiceClient.luau"
+      },
+      "Shared": {
+        "$className": "Folder",
+        "ServerListConstants": {
+          "$path": "../../shared/_Index/quenty_serverlist@0.0.1/Shared/ServerListConstants.luau"
+        },
+        "ServerListFilters": {
+          "$path": "../../shared/_Index/quenty_serverlist@0.0.1/Shared/ServerListFilters.luau"
+        },
+        "ServerListFilters.spec": {
+          "$path": "../../shared/_Index/quenty_serverlist@0.0.1/Shared/ServerListFilters.spec.luau"
+        },
+        "ServerListNameUtils": {
+          "$path": "../../shared/_Index/quenty_serverlist@0.0.1/Shared/ServerListNameUtils.luau"
+        },
+        "ServerListNameUtils.spec": {
+          "$path": "../../shared/_Index/quenty_serverlist@0.0.1/Shared/ServerListNameUtils.spec.luau"
+        },
+        "ServerListNetwork": {
+          "$path": "../../shared/_Index/quenty_serverlist@0.0.1/Shared/ServerListNetwork.luau"
+        },
+        "ServerListTypes": {
+          "$path": "../../shared/_Index/quenty_serverlist@0.0.1/Shared/ServerListTypes.luau"
+        },
+        "ServerListUtils": {
+          "$path": "../../shared/_Index/quenty_serverlist@0.0.1/Shared/ServerListUtils.luau"
+        },
+        "ServerListUtils.spec": {
+          "$path": "../../shared/_Index/quenty_serverlist@0.0.1/Shared/ServerListUtils.spec.luau"
+        }
+      },
       "Server": {
         "$className": "Folder",
         "ServerListRegistry": {
@@ -439,7 +1288,22 @@
       }
     },
     "quenty/serverregionservice@0.0.1": {
-      "$path": "../../shared/_Index/quenty_serverregionservice@0.0.1",
+      "$className": "Folder",
+      "ServerRegionServiceClient": {
+        "$path": "../../shared/_Index/quenty_serverregionservice@0.0.1/ServerRegionServiceClient.luau"
+      },
+      "Shared": {
+        "$className": "Folder",
+        "ServerRegionServiceConstants": {
+          "$path": "../../shared/_Index/quenty_serverregionservice@0.0.1/Shared/ServerRegionServiceConstants.luau"
+        },
+        "ServerRegionServiceUtils": {
+          "$path": "../../shared/_Index/quenty_serverregionservice@0.0.1/Shared/ServerRegionServiceUtils.luau"
+        },
+        "ServerRegionServiceUtils.spec": {
+          "$path": "../../shared/_Index/quenty_serverregionservice@0.0.1/Shared/ServerRegionServiceUtils.spec.luau"
+        }
+      },
       "Server": {
         "$className": "Folder",
         "ServerRegionGeolocationUtils": {
@@ -451,7 +1315,88 @@
       }
     },
     "quenty/softshutdown@0.0.1": {
-      "$path": "../../shared/_Index/quenty_softshutdown@0.0.1",
+      "$className": "Folder",
+      "Client": {
+        "$className": "Folder",
+        "SoftShutdownUI": {
+          "$path": "../../shared/_Index/quenty_softshutdown@0.0.1/Client/SoftShutdownUI.luau"
+        }
+      },
+      "Shared": {
+        "$className": "Folder",
+        "SoftShutdownConstants": {
+          "$path": "../../shared/_Index/quenty_softshutdown@0.0.1/Shared/SoftShutdownConstants.luau"
+        },
+        "SoftShutdownTranslator": {
+          "ar-001": {
+            "$path": "../../shared/_Index/quenty_softshutdown@0.0.1/Shared/SoftShutdownTranslator/ar-001.luau"
+          },
+          "de-de": {
+            "$path": "../../shared/_Index/quenty_softshutdown@0.0.1/Shared/SoftShutdownTranslator/de-de.luau"
+          },
+          "en-gb": {
+            "$path": "../../shared/_Index/quenty_softshutdown@0.0.1/Shared/SoftShutdownTranslator/en-gb.luau"
+          },
+          "en-us": {
+            "$path": "../../shared/_Index/quenty_softshutdown@0.0.1/Shared/SoftShutdownTranslator/en-us.luau"
+          },
+          "es-es": {
+            "$path": "../../shared/_Index/quenty_softshutdown@0.0.1/Shared/SoftShutdownTranslator/es-es.luau"
+          },
+          "es-mx": {
+            "$path": "../../shared/_Index/quenty_softshutdown@0.0.1/Shared/SoftShutdownTranslator/es-mx.luau"
+          },
+          "fr-ca": {
+            "$path": "../../shared/_Index/quenty_softshutdown@0.0.1/Shared/SoftShutdownTranslator/fr-ca.luau"
+          },
+          "fr-fr": {
+            "$path": "../../shared/_Index/quenty_softshutdown@0.0.1/Shared/SoftShutdownTranslator/fr-fr.luau"
+          },
+          "id-id": {
+            "$path": "../../shared/_Index/quenty_softshutdown@0.0.1/Shared/SoftShutdownTranslator/id-id.luau"
+          },
+          "$path": "../../shared/_Index/quenty_softshutdown@0.0.1/Shared/SoftShutdownTranslator",
+          "it-it": {
+            "$path": "../../shared/_Index/quenty_softshutdown@0.0.1/Shared/SoftShutdownTranslator/it-it.luau"
+          },
+          "ja-jp": {
+            "$path": "../../shared/_Index/quenty_softshutdown@0.0.1/Shared/SoftShutdownTranslator/ja-jp.luau"
+          },
+          "ko-kr": {
+            "$path": "../../shared/_Index/quenty_softshutdown@0.0.1/Shared/SoftShutdownTranslator/ko-kr.luau"
+          },
+          "pl-pl": {
+            "$path": "../../shared/_Index/quenty_softshutdown@0.0.1/Shared/SoftShutdownTranslator/pl-pl.luau"
+          },
+          "pt-br": {
+            "$path": "../../shared/_Index/quenty_softshutdown@0.0.1/Shared/SoftShutdownTranslator/pt-br.luau"
+          },
+          "pt-pt": {
+            "$path": "../../shared/_Index/quenty_softshutdown@0.0.1/Shared/SoftShutdownTranslator/pt-pt.luau"
+          },
+          "ru-ru": {
+            "$path": "../../shared/_Index/quenty_softshutdown@0.0.1/Shared/SoftShutdownTranslator/ru-ru.luau"
+          },
+          "th-th": {
+            "$path": "../../shared/_Index/quenty_softshutdown@0.0.1/Shared/SoftShutdownTranslator/th-th.luau"
+          },
+          "tr-tr": {
+            "$path": "../../shared/_Index/quenty_softshutdown@0.0.1/Shared/SoftShutdownTranslator/tr-tr.luau"
+          },
+          "vi-vn": {
+            "$path": "../../shared/_Index/quenty_softshutdown@0.0.1/Shared/SoftShutdownTranslator/vi-vn.luau"
+          },
+          "zh-cn": {
+            "$path": "../../shared/_Index/quenty_softshutdown@0.0.1/Shared/SoftShutdownTranslator/zh-cn.luau"
+          },
+          "zh-tw": {
+            "$path": "../../shared/_Index/quenty_softshutdown@0.0.1/Shared/SoftShutdownTranslator/zh-tw.luau"
+          }
+        }
+      },
+      "SoftShutdownServiceClient": {
+        "$path": "../../shared/_Index/quenty_softshutdown@0.0.1/SoftShutdownServiceClient.luau"
+      },
       "Server": {
         "$className": "Folder",
         "SoftShutdownServiceUtils": {
@@ -463,7 +1408,55 @@
       }
     },
     "quenty/soundgroup@0.0.1": {
-      "$path": "../../shared/_Index/quenty_soundgroup@0.0.1",
+      "$className": "Folder",
+      "Client": {
+        "$className": "Folder",
+        "SoundGroupServiceClient": {
+          "$path": "../../shared/_Index/quenty_soundgroup@0.0.1/Client/SoundGroupServiceClient.luau"
+        }
+      },
+      "Shared": {
+        "$className": "Folder",
+        "Effects": {
+          "$className": "Folder",
+          "SoundEffectsList": {
+            "$path": "../../shared/_Index/quenty_soundgroup@0.0.1/Shared/Effects/SoundEffectsList.luau"
+          },
+          "SoundEffectsRegistry": {
+            "$path": "../../shared/_Index/quenty_soundgroup@0.0.1/Shared/Effects/SoundEffectsRegistry.luau"
+          }
+        },
+        "Groups": {
+          "$className": "Folder",
+          "WellKnownSoundGroups": {
+            "$path": "../../shared/_Index/quenty_soundgroup@0.0.1/Shared/Groups/WellKnownSoundGroups.luau"
+          }
+        },
+        "SoundEffectService": {
+          "$path": "../../shared/_Index/quenty_soundgroup@0.0.1/Shared/SoundEffectService.luau"
+        },
+        "SoundGroupTracker": {
+          "$path": "../../shared/_Index/quenty_soundgroup@0.0.1/Shared/SoundGroupTracker.luau"
+        },
+        "Utils": {
+          "$className": "Folder",
+          "SoundGroupPathUtils": {
+            "$path": "../../shared/_Index/quenty_soundgroup@0.0.1/Shared/Utils/SoundGroupPathUtils.luau"
+          }
+        },
+        "Volume": {
+          "$className": "Folder",
+          "SoundGroupVolume": {
+            "$path": "../../shared/_Index/quenty_soundgroup@0.0.1/Shared/Volume/SoundGroupVolume.luau"
+          },
+          "SoundGroupVolumeInterface": {
+            "$path": "../../shared/_Index/quenty_soundgroup@0.0.1/Shared/Volume/SoundGroupVolumeInterface.luau"
+          },
+          "SoundGroupVolumeProperties": {
+            "$path": "../../shared/_Index/quenty_soundgroup@0.0.1/Shared/Volume/SoundGroupVolumeProperties.luau"
+          }
+        }
+      },
       "Server": {
         "$className": "Folder",
         "SoundGroupService": {
@@ -472,7 +1465,46 @@
       }
     },
     "quenty/soundplayer@0.0.1": {
-      "$path": "../../shared/_Index/quenty_soundplayer@0.0.1",
+      "$className": "Folder",
+      "Client": {
+        "$className": "Folder",
+        "Loops": {
+          "$className": "Folder",
+          "Layered": {
+            "$className": "Folder",
+            "LayeredLoopedSoundPlayer": {
+              "$path": "../../shared/_Index/quenty_soundplayer@0.0.1/Client/Loops/Layered/LayeredLoopedSoundPlayer.luau"
+            },
+            "LayeredSoundHelper": {
+              "$path": "../../shared/_Index/quenty_soundplayer@0.0.1/Client/Loops/Layered/LayeredSoundHelper.luau"
+            }
+          },
+          "LoopedSoundPlayer": {
+            "$path": "../../shared/_Index/quenty_soundplayer@0.0.1/Client/Loops/LoopedSoundPlayer.luau"
+          },
+          "SimpleLoopedSoundPlayer": {
+            "$path": "../../shared/_Index/quenty_soundplayer@0.0.1/Client/Loops/SimpleLoopedSoundPlayer.luau"
+          }
+        },
+        "Schedule": {
+          "$className": "Folder",
+          "SoundLoopScheduleUtils": {
+            "$path": "../../shared/_Index/quenty_soundplayer@0.0.1/Client/Schedule/SoundLoopScheduleUtils.luau"
+          }
+        },
+        "Service": {
+          "$className": "Folder",
+          "SoundPlayerServiceClient": {
+            "$path": "../../shared/_Index/quenty_soundplayer@0.0.1/Client/Service/SoundPlayerServiceClient.luau"
+          }
+        },
+        "Stack": {
+          "$className": "Folder",
+          "SoundPlayerStack": {
+            "$path": "../../shared/_Index/quenty_soundplayer@0.0.1/Client/Stack/SoundPlayerStack.luau"
+          }
+        }
+      },
       "Server": {
         "$className": "Folder",
         "SoundPlayerService": {
