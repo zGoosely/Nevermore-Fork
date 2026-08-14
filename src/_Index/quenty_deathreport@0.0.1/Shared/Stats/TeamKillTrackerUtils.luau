@@ -39,7 +39,7 @@ end
 ]=]
 function TeamKillTrackerUtils.observeBrio(binder: any, instance: Instance): any
 	assert(t.table(binder), "Bad binder")
-	assert(t.instance(instance), "Bad instance")
+	assert(t.Instance(instance), "Bad instance")
 
 	return RxBinderUtils.observeBoundChildClassBrio(binder, instance)
 end
@@ -54,7 +54,7 @@ end
 ]=]
 function TeamKillTrackerUtils.getTeamKillTracker(binder: any, team: Instance): any
 	assert(t.table(binder), "Bad binder")
-	assert(t.instance(team), "Bad team")
+	assert(t.Instance(team), "Bad team")
 
 	return BinderUtils.findFirstChild(binder, team)
 end

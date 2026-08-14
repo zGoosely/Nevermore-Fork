@@ -57,7 +57,7 @@ end
 ]=]
 function PlayerKillTrackerUtils.getPlayerKillTracker(binder: any, parent: Instance): any
 	assert(t.table(binder), "Bad binder")
-	assert(t.instance(parent), "Bad parent")
+	assert(t.Instance(parent), "Bad parent")
 
 	return BinderUtils.findFirstChild(binder, parent)
 end

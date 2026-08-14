@@ -26,15 +26,15 @@ export type DeathReport = {
 }
 
 const isWeaponDataValidator = t.strictInterface({
-	weaponInstance = t.optional(t.instance),
+	weaponInstance = t.optional(t.Instance),
 })
 
 const isDeathReportValidator = t.strictInterface({
 	type = t.literal("deathReport"),
-	adornee = t.instance,
+	adornee = t.Instance,
 	humanoid = t.optional(t.instanceIsA("Humanoid")),
 	player = t.optional(t.instanceIsA("Player")),
-	killerAdornee = t.optional(t.instance),
+	killerAdornee = t.optional(t.Instance),
 	killerHumanoid = t.optional(t.instanceIsA("Humanoid")),
 	killerPlayer = t.optional(t.instanceIsA("Player")),
 	weaponData = isWeaponDataValidator,
@@ -69,8 +69,8 @@ end
 	@return DeathReport
 ]=]
 function DeathReportUtils.create(adornee: Instance, killerAdornee: Instance?, weaponData: WeaponData?): DeathReport
-	assert(t.instance(adornee), "Bad adornee")
-	assert(t.optional(t.instance)(killerAdornee), "Bad killerAdornee")
+	assert(t.Instance(adornee), "Bad adornee")
+	assert(t.optional(t.Instance)(killerAdornee), "Bad killerAdornee")
 	assert(t.optional(isWeaponDataValidator)(weaponData), "Bad weaponData")
 
 	local humanoid: Humanoid?
@@ -122,7 +122,7 @@ end
 	@return WeaponData
 ]=]
 function DeathReportUtils.createWeaponData(weaponInstance: Instance?): WeaponData
-	assert(t.optional(t.instance)(weaponInstance), "Bad weaponInstance")
+	assert(t.optional(t.Instance)(weaponInstance), "Bad weaponInstance")
 
 	return {
 		weaponInstance = weaponInstance,

@@ -205,15 +205,20 @@ promise is running, the service applies the latest revision before completing.
 
 ## Built-in unfair package list
 
-`WellKnownUnfairPackagesAndParts` is enabled by default. It replaces known parts from these Roblox-authored packages
+`WellKnownUnfairPackagesAndParts` is enabled by default. It replaces known parts from these catalog packages
 with the rig's default body geometry:
 
+- Billy and Billy 1.0 (the current stick-figure bundles)
 - Headless Horseman heads
 - Korblox Deathspeaker right leg
 - The Gnomsky Brothers
 - Skelly
 - Magma Fiend
+- Mini 2.0
+- Mini Short
+- Mini Plushie (tiny)
 - Piggy
+- known legacy tiny dynamic heads
 
 Disable or re-enable the list at runtime without affecting game-defined rules:
 
@@ -236,18 +241,28 @@ for packageName, packageDefinition in WellKnownUnfairPackagesAndParts.PACKAGES d
 end
 ```
 
-The default entries are intentionally limited to stable Roblox-authored identities. Roblox's bundle API identifies
+The default entries are intentionally limited to exact catalog identities. Roblox's bundle API identifies
 [Headless Horseman](https://catalog.roblox.com/v1/bundles/201/details),
 [Korblox Deathspeaker](https://catalog.roblox.com/v1/bundles/192/details),
 [The Gnomsky Brothers](https://catalog.roblox.com/v1/bundles/652/details),
 [Skelly](https://catalog.roblox.com/v1/bundles/353/details),
 [Magma Fiend](https://catalog.roblox.com/v1/bundles/429/details), and
 [Piggy](https://catalog.roblox.com/v1/bundles/998/details).
+[Billy](https://catalog.roblox.com/v1/bundles/2043/details) describes itself as the replacement for a bundle removed for
+being too skinny and links to the separately identified
+[Billy 1.0](https://catalog.roblox.com/v1/bundles/104350/details). The
+[Mini 2.0](https://catalog.roblox.com/v1/bundles/140395/details) and
+[Mini Short](https://catalog.roblox.com/v1/bundles/1459995/details) listings instruct users to select the lowest body
+scales, while [Mini Plushie (tiny)](https://catalog.roblox.com/v1/bundles/161986395866906/details) is explicitly sold
+as a tiny body.
 [Roblox's avatar-body specification](https://create.roblox.com/docs/avatar/character-bodies/specifications) requires
 opaque, substantially visible body geometry, while competitive developers have
 [documented the gameplay problems](https://devforum.roblox.com/t/small-invisible-avatars-wreaking-havoc-on-games/3172363)
-caused by small or invisible avatar parts. Static lists cannot keep pace with every UGC combination, so games should add
-their own entries with `SetBodyPart()`, `RegisterPackage()`, and the corresponding replacement methods.
+caused by small or invisible avatar parts. Roblox now removes
+[partially or fully invisible heads](https://devforum.roblox.com/t/removing-partially-or-fully-invisible-heads-from-marketplace-inventories/4144715)
+from both the Marketplace and user inventories, but the legacy tiny-head IDs remain listed as a defensive fallback.
+Static lists cannot keep pace with every UGC combination, so games should add their own entries with `SetBodyPart()`,
+`RegisterPackage()`, and the corresponding replacement methods.
 
 ## Update observation and Tie integration
 

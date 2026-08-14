@@ -19,6 +19,19 @@ describe("DeathReportUtils.isDeathReport(deathReport)", function()
 	it("should return false for a table with wrong type", function()
 		expect(DeathReportUtils.isDeathReport({ type = "other" })).toEqual(false)
 	end)
+
+	it("should accept generic Instance values in a constructed report", function()
+		const adornee = Instance.new("Model")
+		const weapon = Instance.new("Tool")
+		const report = DeathReportUtils.create(adornee, nil, DeathReportUtils.createWeaponData(weapon))
+
+		expect(DeathReportUtils.isDeathReport(report)).toEqual(true)
+		expect(report.adornee).toEqual(adornee)
+		expect(report.weaponData.weaponInstance).toEqual(weapon)
+
+		weapon:Destroy()
+		adornee:Destroy()
+	end)
 end)
 
 describe("DeathReportUtils.getDefaultColor()", function()

@@ -1,6 +1,6 @@
 --!strict
 --[=[
-	A conservative list of Roblox-authored packages and body parts that substantially reduce
+	A conservative list of catalog packages and body parts that substantially reduce
 	a character's visible silhouette. Games can extend their own replacement rules separately.
 
 	@class WellKnownUnfairPackagesAndParts
@@ -10,6 +10,60 @@ const TableUtils = require("@game/ReplicatedStorage/Packages/TableUtils")
 
 return TableUtils.deepReadonly({
 	BODY_PARTS = {
+		BillyHead = {
+			RigType = Enum.HumanoidRigType.R15,
+			BodyPart = Enum.BodyPart.Head,
+			AssetIds = {
+				14498289391, -- Billy
+				15177652816, -- Billy 1.0
+			},
+			ReplacementAssetId = 0,
+		},
+		BillyLeftArm = {
+			RigType = Enum.HumanoidRigType.R15,
+			BodyPart = Enum.BodyPart.LeftArm,
+			AssetIds = {
+				14498289877, -- Billy
+				15177652080, -- Billy 1.0
+			},
+			ReplacementAssetId = 0,
+		},
+		BillyLeftLeg = {
+			RigType = Enum.HumanoidRigType.R15,
+			BodyPart = Enum.BodyPart.LeftLeg,
+			AssetIds = {
+				14498289824, -- Billy
+				15177663260, -- Billy 1.0
+			},
+			ReplacementAssetId = 0,
+		},
+		BillyRightArm = {
+			RigType = Enum.HumanoidRigType.R15,
+			BodyPart = Enum.BodyPart.RightArm,
+			AssetIds = {
+				14498289785, -- Billy
+				15177649506, -- Billy 1.0
+			},
+			ReplacementAssetId = 0,
+		},
+		BillyRightLeg = {
+			RigType = Enum.HumanoidRigType.R15,
+			BodyPart = Enum.BodyPart.RightLeg,
+			AssetIds = {
+				14498289771, -- Billy
+				15177665462, -- Billy 1.0
+			},
+			ReplacementAssetId = 0,
+		},
+		BillyTorso = {
+			RigType = Enum.HumanoidRigType.R15,
+			BodyPart = Enum.BodyPart.Torso,
+			AssetIds = {
+				14498289777, -- Billy
+				15177665463, -- Billy 1.0
+			},
+			ReplacementAssetId = 0,
+		},
 		GnomskyBrothersHead = {
 			RigType = Enum.HumanoidRigType.R15,
 			BodyPart = Enum.BodyPart.Head,
@@ -105,6 +159,114 @@ return TableUtils.deepReadonly({
 			AssetIds = { 2608539495 },
 			ReplacementAssetId = 0,
 		},
+		MiniPlushieTinyHead = {
+			RigType = Enum.HumanoidRigType.R15,
+			BodyPart = Enum.BodyPart.Head,
+			AssetIds = { 125378629370015 },
+			ReplacementAssetId = 0,
+		},
+		MiniPlushieTinyLeftArm = {
+			RigType = Enum.HumanoidRigType.R15,
+			BodyPart = Enum.BodyPart.LeftArm,
+			AssetIds = { 100505795772170 },
+			ReplacementAssetId = 0,
+		},
+		MiniPlushieTinyLeftLeg = {
+			RigType = Enum.HumanoidRigType.R15,
+			BodyPart = Enum.BodyPart.LeftLeg,
+			AssetIds = { 80051239734739 },
+			ReplacementAssetId = 0,
+		},
+		MiniPlushieTinyRightArm = {
+			RigType = Enum.HumanoidRigType.R15,
+			BodyPart = Enum.BodyPart.RightArm,
+			AssetIds = { 110353866109560 },
+			ReplacementAssetId = 0,
+		},
+		MiniPlushieTinyRightLeg = {
+			RigType = Enum.HumanoidRigType.R15,
+			BodyPart = Enum.BodyPart.RightLeg,
+			AssetIds = { 88323716288538 },
+			ReplacementAssetId = 0,
+		},
+		MiniPlushieTinyTorso = {
+			RigType = Enum.HumanoidRigType.R15,
+			BodyPart = Enum.BodyPart.Torso,
+			AssetIds = { 76164635122422 },
+			ReplacementAssetId = 0,
+		},
+		MiniShortHead = {
+			RigType = Enum.HumanoidRigType.R15,
+			BodyPart = Enum.BodyPart.Head,
+			AssetIds = { 93301331583224 },
+			ReplacementAssetId = 0,
+		},
+		MiniShortLeftArm = {
+			RigType = Enum.HumanoidRigType.R15,
+			BodyPart = Enum.BodyPart.LeftArm,
+			AssetIds = { 117663748665031 },
+			ReplacementAssetId = 0,
+		},
+		MiniShortLeftLeg = {
+			RigType = Enum.HumanoidRigType.R15,
+			BodyPart = Enum.BodyPart.LeftLeg,
+			AssetIds = { 84573805197915 },
+			ReplacementAssetId = 0,
+		},
+		MiniShortRightArm = {
+			RigType = Enum.HumanoidRigType.R15,
+			BodyPart = Enum.BodyPart.RightArm,
+			AssetIds = { 76560469465850 },
+			ReplacementAssetId = 0,
+		},
+		MiniShortRightLeg = {
+			RigType = Enum.HumanoidRigType.R15,
+			BodyPart = Enum.BodyPart.RightLeg,
+			AssetIds = { 107566307931894 },
+			ReplacementAssetId = 0,
+		},
+		MiniShortTorso = {
+			RigType = Enum.HumanoidRigType.R15,
+			BodyPart = Enum.BodyPart.Torso,
+			AssetIds = { 87376904839655 },
+			ReplacementAssetId = 0,
+		},
+		MiniTwoHead = {
+			RigType = Enum.HumanoidRigType.R15,
+			BodyPart = Enum.BodyPart.Head,
+			AssetIds = { 15273378858 },
+			ReplacementAssetId = 0,
+		},
+		MiniTwoLeftArm = {
+			RigType = Enum.HumanoidRigType.R15,
+			BodyPart = Enum.BodyPart.LeftArm,
+			AssetIds = { 15273379146 },
+			ReplacementAssetId = 0,
+		},
+		MiniTwoLeftLeg = {
+			RigType = Enum.HumanoidRigType.R15,
+			BodyPart = Enum.BodyPart.LeftLeg,
+			AssetIds = { 15273379144 },
+			ReplacementAssetId = 0,
+		},
+		MiniTwoRightArm = {
+			RigType = Enum.HumanoidRigType.R15,
+			BodyPart = Enum.BodyPart.RightArm,
+			AssetIds = { 15273379145 },
+			ReplacementAssetId = 0,
+		},
+		MiniTwoRightLeg = {
+			RigType = Enum.HumanoidRigType.R15,
+			BodyPart = Enum.BodyPart.RightLeg,
+			AssetIds = { 15273379160 },
+			ReplacementAssetId = 0,
+		},
+		MiniTwoTorso = {
+			RigType = Enum.HumanoidRigType.R15,
+			BodyPart = Enum.BodyPart.Torso,
+			AssetIds = { 15273378599 },
+			ReplacementAssetId = 0,
+		},
 		PiggyHead = {
 			RigType = Enum.HumanoidRigType.R15,
 			BodyPart = Enum.BodyPart.Head,
@@ -180,8 +342,39 @@ return TableUtils.deepReadonly({
 			AssetIds = { 2510272577 },
 			ReplacementAssetId = 0,
 		},
+		TinyDynamicHeads = {
+			RigType = Enum.HumanoidRigType.R15,
+			BodyPart = Enum.BodyPart.Head,
+			AssetIds = {
+				14525302443, -- Tiny Head! - Dynamic Head
+				131807154518854, -- Tiny Head - Dynamic Head
+			},
+			ReplacementAssetId = 0,
+		},
 	},
 	PACKAGES = {
+		Billy = {
+			BundleId = 2043,
+			BodyParts = {
+				"BillyHead",
+				"BillyLeftArm",
+				"BillyLeftLeg",
+				"BillyRightArm",
+				"BillyRightLeg",
+				"BillyTorso",
+			},
+		},
+		BillyOne = {
+			BundleId = 104350,
+			BodyParts = {
+				"BillyHead",
+				"BillyLeftArm",
+				"BillyLeftLeg",
+				"BillyRightArm",
+				"BillyRightLeg",
+				"BillyTorso",
+			},
+		},
 		GnomskyBrothers = {
 			BundleId = 652,
 			BodyParts = {
@@ -215,6 +408,39 @@ return TableUtils.deepReadonly({
 				"MagmaFiendRightArm",
 				"MagmaFiendRightLeg",
 				"MagmaFiendTorso",
+			},
+		},
+		MiniPlushieTiny = {
+			BundleId = 161986395866906,
+			BodyParts = {
+				"MiniPlushieTinyHead",
+				"MiniPlushieTinyLeftArm",
+				"MiniPlushieTinyLeftLeg",
+				"MiniPlushieTinyRightArm",
+				"MiniPlushieTinyRightLeg",
+				"MiniPlushieTinyTorso",
+			},
+		},
+		MiniShort = {
+			BundleId = 1459995,
+			BodyParts = {
+				"MiniShortHead",
+				"MiniShortLeftArm",
+				"MiniShortLeftLeg",
+				"MiniShortRightArm",
+				"MiniShortRightLeg",
+				"MiniShortTorso",
+			},
+		},
+		MiniTwo = {
+			BundleId = 140395,
+			BodyParts = {
+				"MiniTwoHead",
+				"MiniTwoLeftArm",
+				"MiniTwoLeftLeg",
+				"MiniTwoRightArm",
+				"MiniTwoRightLeg",
+				"MiniTwoTorso",
 			},
 		},
 		Piggy = {
