@@ -1,0 +1,16 @@
+{
+  "purpose": "Serializes Color3 values into compact DataStore-safe RGB arrays.",
+  "description": "Nevermore's Color3SerializationUtils adapted to strict package conventions.",
+  "tags": [
+    "color",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "Color3SerializationUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Validates, serializes, and deserializes Color3 RGB arrays."
+    }
+  }
+}

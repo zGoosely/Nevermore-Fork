@@ -96,6 +96,9 @@
     "quenty/blend@0.0.1": {
       "$path": "quenty_blend@0.0.1"
     },
+    "quenty/bodycolorsutils@0.0.1": {
+      "$path": "quenty_bodycolorsutils@0.0.1"
+    },
     "quenty/boundingboxutils@0.0.1": {
       "$path": "quenty_boundingboxutils@0.0.1"
     },
@@ -140,6 +143,9 @@
     },
     "quenty/cmdrservice@0.0.1": {
       "$path": "quenty_cmdrservice@0.0.1"
+    },
+    "quenty/color3serializationutils@0.0.1": {
+      "$path": "quenty_color3serializationutils@0.0.1"
     },
     "quenty/color3utils@0.0.1": {
       "$path": "quenty_color3utils@0.0.1"

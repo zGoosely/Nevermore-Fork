@@ -1,0 +1,27 @@
+{
+  "purpose": "Represents, serializes, applies, and observes Roblox body colors.",
+  "description": "Nevermore's BodyColorsUtils adapted to strict package conventions and modern BodyPartDescription colors.",
+  "tags": [
+    "avatar",
+    "color",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "BodyColorsDataConstants.luau": {
+      "realm": "shared",
+      "kind": "Constants",
+      "description": "Read-only mappings between body-color data, attributes, and body-part slots."
+    },
+    "BodyColorsDataUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Validates, converts, serializes, and applies body-color data."
+    },
+    "RxBodyColorsDataUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Observes body-color data represented by instance attributes."
+    }
+  }
+}

@@ -71,6 +71,10 @@ const DISALLOWED_R15_HEAD_ASSET_ID = 987654321
 self._avatarCatalogService:SetBodyPartReplacement(DISALLOWED_R15_HEAD_ASSET_ID, "ApprovedR15Head")
 ```
 
+Single body-part application preserves that part's current color. This includes colors stored on modern
+`BodyPartDescription` children, so replacing a dynamic head does not reset the player's skin tone. Complete package
+application intentionally keeps its existing color behavior.
+
 Entries and rules can be inspected or removed at runtime:
 
 ```luau

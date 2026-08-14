@@ -3,7 +3,7 @@
 This file is generated from each package's `catalog.json` and `package.json`. Edit catalog metadata with
 `nevermore-packages` or by changing the sidecar, then run `python3 scripts/sync_packages.py`.
 
-**Coverage:** 218 packages · 886 production modules
+**Coverage:** 220 packages · 890 production modules
 
 ## Package directory
 
@@ -39,6 +39,7 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 | [binderutils](#binderutils) | `0.0.1` | `utility` | 1 |
 | [bindtocloseservice](#bindtocloseservice) | `0.0.1` | `game_service` | 1 |
 | [blend](#blend) | `0.0.1` | `shared` | 2 |
+| [bodycolorsutils](#bodycolorsutils) | `0.0.1` | `avatar`, `color`, `serialization`, `utility` | 3 |
 | [boundingboxutils](#boundingboxutils) | `0.0.1` | `physics`, `utility` | 2 |
 | [brine](#brine) | `0.0.1` | `data`, `enums`, `serialization`, `utility` | 6 |
 | [brio](#brio) | `0.0.1` | `data`, `lifecycle`, `reactive` | 1 |
@@ -54,6 +55,7 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 | [clipcharacters](#clipcharacters) | `0.0.1` | `enums`, `game_service`, `physics`, `player_service` | 4 |
 | [cmdr](#cmdr) | `0.0.1` | `data`, `developer_tools`, `enums`, `game_service`, `gui`, `input`, `math`, `player_service`, `serialization` | 77 |
 | [cmdrservice](#cmdrservice) | `0.0.1` | `developer_tools`, `enums`, `game_service`, `utility` | 6 |
+| [color3serializationutils](#color3serializationutils) | `0.0.1` | `color`, `serialization`, `utility` | 1 |
 | [color3utils](#color3utils) | `0.0.1` | `data`, `utility` | 3 |
 | [colorpicker](#colorpicker) | `0.0.1` | `data`, `gui`, `input`, `lifecycle`, `math`, `player_service`, `reactive`, `security`, `serialization`, `utility` | 7 |
 | [colorsequenceutils](#colorsequenceutils) | `0.0.1` | `math`, `utility` | 1 |
@@ -686,6 +688,21 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 | [`Blend.luau`](src/_Index/quenty_blend@0.0.1/Blend.luau) | shared | Class/model | Declarative UI system inspired by Fusion. Public entry points include `Blend.New`, `Blend.Dynamic`, `Blend.Computed`, `Blend.OnChange`, `Blend.OnEvent`, `Blend.Attached`, `Blend.ComputedPairs`, `Blend.AccelTween`. |
 | [`BlendDefaultProps.luau`](src/_Index/quenty_blend@0.0.1/BlendDefaultProps.luau) | shared | Module | Blend Default Props provides the module implementation used by the Blend package. |
 
+# bodycolorsutils
+
+- **Purpose:** Represents, serializes, applies, and observes Roblox body colors.
+- **Path:** [`src/_Index/quenty_bodycolorsutils@0.0.1/`](src/_Index/quenty_bodycolorsutils@0.0.1/)
+- **Short Description:** Nevermore's BodyColorsUtils adapted to strict package conventions and modern BodyPartDescription colors.
+- **Tags:** `avatar`, `color`, `serialization`, `utility`
+
+### Submodules
+
+| Module | Realm | Kind | Responsibility and public surface |
+| --- | --- | --- | --- |
+| [`BodyColorsDataConstants.luau`](src/_Index/quenty_bodycolorsutils@0.0.1/BodyColorsDataConstants.luau) | shared | Constants | Read-only mappings between body-color data, attributes, and body-part slots. |
+| [`BodyColorsDataUtils.luau`](src/_Index/quenty_bodycolorsutils@0.0.1/BodyColorsDataUtils.luau) | shared | Utility | Validates, converts, serializes, and applies body-color data. |
+| [`RxBodyColorsDataUtils.luau`](src/_Index/quenty_bodycolorsutils@0.0.1/RxBodyColorsDataUtils.luau) | shared | Utility | Observes body-color data represented by instance attributes. |
+
 # boundingboxutils
 
 - **Purpose:** Bounding box utilties. Prefer model:GetBoundingBox() in most cases. However, sometimes grouping isn't possible.
@@ -1061,6 +1078,19 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 | [`CmdrTemplateProviderServer/CmdrExecutionTemplate.luau`](src/_Index/quenty_cmdrservice@0.0.1/CmdrTemplateProviderServer/CmdrExecutionTemplate.luau) | shared | Class/model | Forwards a generated Cmdr command to the function retained by its server-side. |
 | [`CmdrTemplateProviderServer/init.luau`](src/_Index/quenty_cmdrservice@0.0.1/CmdrTemplateProviderServer/init.luau) | server | Class/model | Provides the ModuleScript templates used to register table-defined Cmdr commands. |
 | [`Shared/CmdrServiceUtils.luau`](src/_Index/quenty_cmdrservice@0.0.1/Shared/CmdrServiceUtils.luau) | shared | Utility | Shared types and context helpers for [CmdrService]. Public entry points include `CmdrServiceUtils.getServiceBag`, `CmdrServiceUtils.writeServiceBagInContext`. |
+
+# color3serializationutils
+
+- **Purpose:** Serializes Color3 values into compact DataStore-safe RGB arrays.
+- **Path:** [`src/_Index/quenty_color3serializationutils@0.0.1/`](src/_Index/quenty_color3serializationutils@0.0.1/)
+- **Short Description:** Nevermore's Color3SerializationUtils adapted to strict package conventions.
+- **Tags:** `color`, `serialization`, `utility`
+
+### Submodules
+
+| Module | Realm | Kind | Responsibility and public surface |
+| --- | --- | --- | --- |
+| [`Color3SerializationUtils.luau`](src/_Index/quenty_color3serializationutils@0.0.1/Color3SerializationUtils.luau) | shared | Utility | Validates, serializes, and deserializes Color3 RGB arrays. |
 
 # color3utils
 

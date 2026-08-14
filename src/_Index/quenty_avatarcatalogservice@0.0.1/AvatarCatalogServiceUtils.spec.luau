@@ -17,9 +17,11 @@ const it = Jest.Globals.it
 describe("AvatarCatalogServiceUtils", function()
 	it("replaces a dynamic head description with a catalog head", function()
 		const description = Instance.new("HumanoidDescription")
+		description.HeadColor = Color3.fromRGB(20, 20, 20)
 		const dynamicHead = Instance.new("BodyPartDescription")
 		dynamicHead.BodyPart = Enum.BodyPart.Head
 		dynamicHead.AssetId = 100
+		dynamicHead.Color = Color3.fromRGB(255, 224, 189)
 		dynamicHead.Parent = description
 
 		const replacement = {
@@ -39,7 +41,48 @@ describe("AvatarCatalogServiceUtils", function()
 
 		expect(changed).toEqual(true)
 		expect(description.Head).toEqual(200)
+		expect(description.HeadColor).toEqual(Color3.fromRGB(255, 224, 189))
 		expect(description:FindFirstChildOfClass("BodyPartDescription")).toEqual(nil)
+		description:Destroy()
+	end)
+
+	it("keeps package replacement color behavior unchanged", function()
+		const description = Instance.new("HumanoidDescription")
+		description.HeadColor = Color3.fromRGB(20, 20, 20)
+		const dynamicHead = Instance.new("BodyPartDescription")
+		dynamicHead.BodyPart = Enum.BodyPart.Head
+		dynamicHead.AssetId = 100
+		dynamicHead.Color = Color3.fromRGB(255, 224, 189)
+		dynamicHead.Parent = description
+
+		const packages = {
+			Disallowed = {
+				RigType = Enum.HumanoidRigType.R15,
+				BodyParts = {
+					[Enum.BodyPart.Head] = 100,
+				},
+				Scales = nil,
+			},
+			Default = {
+				RigType = Enum.HumanoidRigType.R15,
+				BodyParts = {
+					[Enum.BodyPart.Head] = 200,
+				},
+				Scales = nil,
+			},
+		}
+		const changed = AvatarCatalogServiceUtils.applyReplacements(
+			description,
+			Enum.HumanoidRigType.R15,
+			packages,
+			{ Disallowed = "Default" },
+			{},
+			{}
+		)
+
+		expect(changed).toEqual(true)
+		expect(description.Head).toEqual(200)
+		expect(description.HeadColor).toEqual(Color3.fromRGB(20, 20, 20))
 		description:Destroy()
 	end)
 

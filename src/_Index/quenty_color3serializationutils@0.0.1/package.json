@@ -1,0 +1,11 @@
+{
+  "name": "quenty/color3serializationutils",
+  "version": "0.0.1",
+  "exports": {
+    "Color3SerializationUtils": "Color3SerializationUtils"
+  },
+  "dependencies": [
+    "quenty/t@0.0.1"
+  ],
+  "externals": []
+}

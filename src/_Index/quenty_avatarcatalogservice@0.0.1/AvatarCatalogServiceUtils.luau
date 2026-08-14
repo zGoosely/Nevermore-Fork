@@ -5,6 +5,7 @@
 	@util AvatarCatalogServiceUtils
 ]=]
 
+const BodyColorsDataUtils = require("@game/ReplicatedStorage/Packages/BodyColorsDataUtils")
 const HumanoidDescriptionUtils = require("@game/ReplicatedStorage/Packages/HumanoidDescriptionUtils")
 const Promise = require("@game/ReplicatedStorage/Packages/Promise")
 const t = require("@game/ReplicatedStorage/Packages/t")
@@ -120,7 +121,12 @@ const removeBodyPartDescriptions = function(description: HumanoidDescription, bo
 	end
 end
 
-const setBodyPartAssetId = function(description: HumanoidDescription, bodyPart: Enum.BodyPart, assetId: number): boolean
+const setBodyPartAssetId = function(
+	description: HumanoidDescription,
+	bodyPart: Enum.BodyPart,
+	assetId: number,
+	shouldPreserveColor: boolean
+): boolean
 	const propertyName = BODY_PART_PROPERTIES[bodyPart]
 	if propertyName == nil then
 		return false
@@ -129,9 +135,15 @@ const setBodyPartAssetId = function(description: HumanoidDescription, bodyPart: 
 	if bodyPartDescription == nil and (description :: any)[propertyName] == assetId then
 		return false
 	end
+	const previousBodyColors = if shouldPreserveColor
+		then BodyColorsDataUtils.fromHumanoidDescription(description)
+		else nil
 	removeBodyPartDescriptions(description, bodyPart)
 	const anyDescription = description :: any
 	anyDescription[propertyName] = assetId
+	if previousBodyColors then
+		BodyColorsDataUtils.applyToHumanoidDescription(previousBodyColors, description)
+	end
 	return true
 end
 
@@ -294,7 +306,7 @@ function AvatarCatalogServiceUtils.applyBodyPart(
 	assert(t.instanceIsA("HumanoidDescription")(description), "Bad description")
 	assert(isBodyPartDefinition(definition), "Bad definition")
 
-	return setBodyPartAssetId(description, definition.BodyPart, definition.AssetId)
+	return setBodyPartAssetId(description, definition.BodyPart, definition.AssetId, true)
 end
 
 --[=[
@@ -318,7 +330,7 @@ function AvatarCatalogServiceUtils.applyWellKnownUnfairParts(
 		const key = getReplacementKeyUnchecked(rigType, bodyPart, currentAssetId)
 		const replacementAssetId = WELL_KNOWN_UNFAIR_REPLACEMENTS[key]
 		if replacementAssetId ~= nil then
-			changed = setBodyPartAssetId(description, bodyPart, replacementAssetId) or changed
+			changed = setBodyPartAssetId(description, bodyPart, replacementAssetId, true) or changed
 		end
 	end
 	return changed
@@ -341,11 +353,7 @@ function AvatarCatalogServiceUtils.applyPackage(
 
 	local changed = false
 	for bodyPart, assetId in definition.BodyParts do
-		changed = AvatarCatalogServiceUtils.applyBodyPart(description, {
-			RigType = definition.RigType,
-			BodyPart = bodyPart,
-			AssetId = assetId,
-		}) or changed
+		changed = setBodyPartAssetId(description, bodyPart, assetId, false) or changed
 	end
 	if definition.Scales then
 		for _, propertyName in SCALE_PROPERTIES do
