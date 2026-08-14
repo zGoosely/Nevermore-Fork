@@ -1,0 +1,27 @@
+{
+  "purpose": "Provides the Cmdr command framework, including command registration, argument types, dispatch, built-in commands, and the client command console.",
+  "description": "Provides the Cmdr command framework, including command registration, argument types, dispatch, built-in commands, and the client command console.",
+  "tags": [
+    "data",
+    "developer_tools",
+    "enums",
+    "game_service",
+    "gui",
+    "input",
+    "math",
+    "player_service",
+    "serialization"
+  ],
+  "modules": {
+    "Cmdr/BuiltInCommands/Utility/varServer.luau": {
+      "realm": "server",
+      "kind": "Module",
+      "description": "Var Server provides the module implementation used by the Cmdr package."
+    },
+    "Cmdr/BuiltInCommands/Utility/varSetServer.luau": {
+      "realm": "server",
+      "kind": "Module",
+      "description": "Var Set Server provides the module implementation used by the Cmdr package."
+    }
+  }
+}

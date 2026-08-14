@@ -6,7 +6,7 @@
   ],
   "modules": {
     "ProfileStore.luau": {
-      "realm": "shared",
+      "realm": "server",
       "kind": "Module",
       "description": "Profile Store provides the module implementation used by the Profilestore package. Public entry points include `AcquireRunnerThreadAndCallEventHandler`, `RunEventHandlerInFreeThread`, `Connection.Disconnect`, `SignalClass.New`, `SignalClass.Connect`, `SignalClass.GetListenerCount`, `SignalClass.Fire`, `SignalClass.Wait`."
     }

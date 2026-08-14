@@ -228,20 +228,10 @@
       "kind": "Module",
       "description": "Var provides the module implementation used by the Cmdr package."
     },
-    "Cmdr/BuiltInCommands/Utility/varServer.luau": {
-      "realm": "shared",
-      "kind": "Module",
-      "description": "Var Server provides the module implementation used by the Cmdr package."
-    },
     "Cmdr/BuiltInCommands/Utility/varSet.luau": {
       "realm": "shared",
       "kind": "Module",
       "description": "Var Set provides the module implementation used by the Cmdr package."
-    },
-    "Cmdr/BuiltInCommands/Utility/varSetServer.luau": {
-      "realm": "shared",
-      "kind": "Module",
-      "description": "Var Set Server provides the module implementation used by the Cmdr package."
     },
     "Cmdr/BuiltInCommands/help.luau": {
       "realm": "shared",

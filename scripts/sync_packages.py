@@ -297,11 +297,17 @@ def main() -> int:
             continue
         server_root = manifest_path.parent
         shared_root = shared_pair[0].parent
-        node: dict[str, object] = {"$className": "Folder"}
-        for source_root, source_prefix in (
-            (shared_root, f"../../shared/_Index/{shared_root.name}"),
-            (server_root, server_root.name),
-        ):
+        server_owns_root = any((server_root / name).is_file() for name in ("init.lua", "init.luau"))
+        if server_owns_root:
+            node: dict[str, object] = {"$path": server_root.name}
+            source_roots = ((shared_root, f"../../shared/_Index/{shared_root.name}"),)
+        else:
+            node = {"$className": "Folder"}
+            source_roots = (
+                (shared_root, f"../../shared/_Index/{shared_root.name}"),
+                (server_root, server_root.name),
+            )
+        for source_root, source_prefix in source_roots:
             for source_path in sorted(source_root.rglob("*")):
                 if not source_path.is_file() or source_path.suffix not in {".lua", ".luau"}:
                     continue

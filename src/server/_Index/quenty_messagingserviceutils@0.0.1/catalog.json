@@ -7,7 +7,7 @@
   ],
   "modules": {
     "MessagingServiceUtils.luau": {
-      "realm": "shared",
+      "realm": "server",
       "kind": "Class/model",
       "description": "Messaging Service Utils provides the class/model implementation used by the Messagingserviceutils package. Public entry points include `MessagingServiceUtils.promisePublish`, `MessagingServiceUtils.promiseSubscribe`."
     }

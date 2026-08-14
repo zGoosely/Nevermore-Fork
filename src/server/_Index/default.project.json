@@ -243,6 +243,258 @@
         }
       }
     },
+    "quenty/cmdr@0.0.1": {
+      "$className": "Folder",
+      "Cmdr": {
+        "BuiltInCommands": {
+          "$className": "Folder",
+          "Admin": {
+            "$className": "Folder",
+            "announce": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Admin/announce.luau"
+            },
+            "announceServer": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Admin/announceServer.luau"
+            },
+            "gotoPlace": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Admin/gotoPlace.luau"
+            },
+            "gotoPlaceServer": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Admin/gotoPlaceServer.luau"
+            },
+            "kick": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Admin/kick.luau"
+            },
+            "kickServer": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Admin/kickServer.luau"
+            },
+            "kill": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Admin/kill.luau"
+            },
+            "killServer": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Admin/killServer.luau"
+            },
+            "respawn": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Admin/respawn.luau"
+            },
+            "respawnServer": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Admin/respawnServer.luau"
+            },
+            "teleport": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Admin/teleport.luau"
+            },
+            "teleportServer": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Admin/teleportServer.luau"
+            }
+          },
+          "Debug": {
+            "$className": "Folder",
+            "blink": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Debug/blink.luau"
+            },
+            "fetch": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Debug/fetch.luau"
+            },
+            "fetchServer": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Debug/fetchServer.luau"
+            },
+            "getPlayerPlaceInstance": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Debug/getPlayerPlaceInstance.luau"
+            },
+            "getPlayerPlaceInstanceServer": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Debug/getPlayerPlaceInstanceServer.luau"
+            },
+            "position": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Debug/position.luau"
+            },
+            "thru": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Debug/thru.luau"
+            },
+            "uptime": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Debug/uptime.luau"
+            },
+            "uptimeServer": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Debug/uptimeServer.luau"
+            },
+            "version": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Debug/version.luau"
+            }
+          },
+          "Utility": {
+            "$className": "Folder",
+            "alias": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/alias.luau"
+            },
+            "bind": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/bind.luau"
+            },
+            "clear": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/clear.luau"
+            },
+            "convertTimestamp": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/convertTimestamp.luau"
+            },
+            "echo": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/echo.luau"
+            },
+            "edit": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/edit.luau"
+            },
+            "history": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/history.luau"
+            },
+            "hover": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/hover.luau"
+            },
+            "jsonArrayDecode": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/jsonArrayDecode.luau"
+            },
+            "jsonArrayEncode": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/jsonArrayEncode.luau"
+            },
+            "len": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/len.luau"
+            },
+            "math": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/math.luau"
+            },
+            "pick": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/pick.luau"
+            },
+            "rand": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/rand.luau"
+            },
+            "replace": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/replace.luau"
+            },
+            "resolve": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/resolve.luau"
+            },
+            "run": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/run.luau"
+            },
+            "runLines": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/runLines.luau"
+            },
+            "runif": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/runif.luau"
+            },
+            "unbind": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/unbind.luau"
+            },
+            "var": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/var.luau"
+            },
+            "varSet": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/varSet.luau"
+            },
+            "varServer": {
+              "$path": "quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/varServer.luau"
+            },
+            "varSetServer": {
+              "$path": "quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/varSetServer.luau"
+            }
+          },
+          "help": {
+            "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/help.luau"
+          }
+        },
+        "BuiltInTypes": {
+          "$className": "Folder",
+          "BindableResource": {
+            "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInTypes/BindableResource.luau"
+          },
+          "BrickColor": {
+            "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInTypes/BrickColor.luau"
+          },
+          "Color3": {
+            "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInTypes/Color3.luau"
+          },
+          "Command": {
+            "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInTypes/Command.luau"
+          },
+          "ConditionFunction": {
+            "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInTypes/ConditionFunction.luau"
+          },
+          "Duration": {
+            "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInTypes/Duration.luau"
+          },
+          "JSON": {
+            "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInTypes/JSON.luau"
+          },
+          "MathOperator": {
+            "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInTypes/MathOperator.luau"
+          },
+          "Player": {
+            "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInTypes/Player.luau"
+          },
+          "PlayerId": {
+            "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInTypes/PlayerId.luau"
+          },
+          "Primitives": {
+            "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInTypes/Primitives.luau"
+          },
+          "StoredKey": {
+            "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInTypes/StoredKey.luau"
+          },
+          "Team": {
+            "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInTypes/Team.luau"
+          },
+          "Type": {
+            "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInTypes/Type.luau"
+          },
+          "URL": {
+            "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInTypes/URL.luau"
+          },
+          "UserInput": {
+            "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInTypes/UserInput.luau"
+          },
+          "Vector": {
+            "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInTypes/Vector.luau"
+          }
+        },
+        "CmdrClient": {
+          "CmdrInterface": {
+            "AutoComplete": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/CmdrClient/CmdrInterface/AutoComplete.luau"
+            },
+            "Window": {
+              "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/CmdrClient/CmdrInterface/Window.luau"
+            },
+            "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/CmdrClient/CmdrInterface"
+          },
+          "DefaultEventHandlers": {
+            "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/CmdrClient/DefaultEventHandlers.luau"
+          },
+          "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/CmdrClient"
+        },
+        "CreateGui": {
+          "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/CreateGui.luau"
+        },
+        "Initialize": {
+          "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/Initialize.luau"
+        },
+        "Shared": {
+          "$className": "Folder",
+          "Argument": {
+            "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/Shared/Argument.luau"
+          },
+          "Command": {
+            "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/Shared/Command.luau"
+          },
+          "Dispatcher": {
+            "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/Shared/Dispatcher.luau"
+          },
+          "Registry": {
+            "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/Shared/Registry.luau"
+          },
+          "Util": {
+            "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr/Shared/Util.luau"
+          }
+        },
+        "$path": "../../shared/_Index/quenty_cmdr@0.0.1/Cmdr"
+      }
+    },
     "quenty/cmdrservice@0.0.1": {
       "$className": "Folder",
       "CmdrServiceClient": {
@@ -720,6 +972,9 @@
         "$path": "quenty_lockservice@0.0.1/LockService.spec.luau"
       }
     },
+    "quenty/messagingserviceutils@0.0.1": {
+      "$path": "quenty_messagingserviceutils@0.0.1"
+    },
     "quenty/motor6d@0.0.1": {
       "$className": "Folder",
       "Client": {
@@ -1007,6 +1262,9 @@
           "$path": "quenty_playerinputservice@0.0.1/Server/PlayerInputServerModel.spec.luau"
         }
       }
+    },
+    "quenty/profilestore@0.0.1": {
+      "$path": "quenty_profilestore@0.0.1"
     },
     "quenty/ragdoll@0.0.1": {
       "$className": "Folder",

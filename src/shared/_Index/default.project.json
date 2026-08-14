@@ -342,9 +342,6 @@
     "quenty/memorystoreutils@0.0.1": {
       "$path": "quenty_memorystoreutils@0.0.1"
     },
-    "quenty/messagingserviceutils@0.0.1": {
-      "$path": "quenty_messagingserviceutils@0.0.1"
-    },
     "quenty/modelappearance@0.0.1": {
       "$path": "quenty_modelappearance@0.0.1"
     },
@@ -413,9 +410,6 @@
     },
     "quenty/probability@0.0.1": {
       "$path": "quenty_probability@0.0.1"
-    },
-    "quenty/profilestore@0.0.1": {
-      "$path": "quenty_profilestore@0.0.1"
     },
     "quenty/promise@0.0.1": {
       "$path": "quenty_promise@0.0.1"

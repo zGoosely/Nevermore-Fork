@@ -975,7 +975,7 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 # cmdr
 
 - **Purpose:** Provides the Cmdr command framework, including command registration, argument types, dispatch, built-in commands, and the client command console.
-- **Path:** [`src/shared/_Index/quenty_cmdr@0.0.1/`](src/shared/_Index/quenty_cmdr@0.0.1/)
+- **Path:** [`src/shared/_Index/quenty_cmdr@0.0.1/`](src/shared/_Index/quenty_cmdr@0.0.1/), [`src/server/_Index/quenty_cmdr@0.0.1/`](src/server/_Index/quenty_cmdr@0.0.1/)
 - **Short Description:** Provides the Cmdr command framework, including command registration, argument types, dispatch, built-in commands, and the client command console.
 - **Tags:** `data`, `developer_tools`, `enums`, `game_service`, `gui`, `input`, `math`, `player_service`, `serialization`
 
@@ -1026,9 +1026,9 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 | [`Cmdr/BuiltInCommands/Utility/runif.luau`](src/shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/runif.luau) | shared | Module | Runif provides the module implementation used by the Cmdr package. |
 | [`Cmdr/BuiltInCommands/Utility/unbind.luau`](src/shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/unbind.luau) | shared | Module | Unbind provides the module implementation used by the Cmdr package. |
 | [`Cmdr/BuiltInCommands/Utility/var.luau`](src/shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/var.luau) | shared | Module | Var provides the module implementation used by the Cmdr package. |
-| [`Cmdr/BuiltInCommands/Utility/varServer.luau`](src/shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/varServer.luau) | shared | Module | Var Server provides the module implementation used by the Cmdr package. |
+| [`Cmdr/BuiltInCommands/Utility/varServer.luau`](src/server/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/varServer.luau) | server | Module | Var Server provides the module implementation used by the Cmdr package. |
 | [`Cmdr/BuiltInCommands/Utility/varSet.luau`](src/shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/varSet.luau) | shared | Module | Var Set provides the module implementation used by the Cmdr package. |
-| [`Cmdr/BuiltInCommands/Utility/varSetServer.luau`](src/shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/varSetServer.luau) | shared | Module | Var Set Server provides the module implementation used by the Cmdr package. |
+| [`Cmdr/BuiltInCommands/Utility/varSetServer.luau`](src/server/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/Utility/varSetServer.luau) | server | Module | Var Set Server provides the module implementation used by the Cmdr package. |
 | [`Cmdr/BuiltInCommands/help.luau`](src/shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInCommands/help.luau) | shared | Module | Help provides the module implementation used by the Cmdr package. |
 | [`Cmdr/BuiltInTypes/BindableResource.luau`](src/shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInTypes/BindableResource.luau) | shared | Module | Bindable Resource provides the module implementation used by the Cmdr package. |
 | [`Cmdr/BuiltInTypes/BrickColor.luau`](src/shared/_Index/quenty_cmdr@0.0.1/Cmdr/BuiltInTypes/BrickColor.luau) | shared | Module | Brick Color provides the module implementation used by the Cmdr package. |
@@ -2132,7 +2132,7 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 # messagingserviceutils
 
 - **Purpose:** Collects the messagingserviceutils runtime building blocks—Messaging Service Utils—and composes them for reuse in Roblox experiences.
-- **Path:** [`src/shared/_Index/quenty_messagingserviceutils@0.0.1/`](src/shared/_Index/quenty_messagingserviceutils@0.0.1/)
+- **Path:** [`src/server/_Index/quenty_messagingserviceutils@0.0.1/`](src/server/_Index/quenty_messagingserviceutils@0.0.1/)
 - **Short Description:** Collects the messagingserviceutils runtime building blocks—Messaging Service Utils—and composes them for reuse in Roblox experiences.
 - **Tags:** `game_service`, `utility`
 
@@ -2140,7 +2140,7 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 
 | Module | Realm | Kind | Responsibility and public surface |
 | --- | --- | --- | --- |
-| [`MessagingServiceUtils.luau`](src/shared/_Index/quenty_messagingserviceutils@0.0.1/MessagingServiceUtils.luau) | shared | Class/model | Messaging Service Utils provides the class/model implementation used by the Messagingserviceutils package. Public entry points include `MessagingServiceUtils.promisePublish`, `MessagingServiceUtils.promiseSubscribe`. |
+| [`MessagingServiceUtils.luau`](src/server/_Index/quenty_messagingserviceutils@0.0.1/MessagingServiceUtils.luau) | server | Class/model | Messaging Service Utils provides the class/model implementation used by the Messagingserviceutils package. Public entry points include `MessagingServiceUtils.promisePublish`, `MessagingServiceUtils.promiseSubscribe`. |
 
 # modelappearance
 
@@ -2513,7 +2513,7 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 # profilestore
 
 - **Purpose:** Collects the profilestore runtime building blocks—Profile Store—and composes them for reuse in Roblox experiences.
-- **Path:** [`src/shared/_Index/quenty_profilestore@0.0.1/`](src/shared/_Index/quenty_profilestore@0.0.1/)
+- **Path:** [`src/server/_Index/quenty_profilestore@0.0.1/`](src/server/_Index/quenty_profilestore@0.0.1/)
 - **Short Description:** Collects the profilestore runtime building blocks—Profile Store—and composes them for reuse in Roblox experiences.
 - **Tags:** `data`
 
@@ -2521,7 +2521,7 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 
 | Module | Realm | Kind | Responsibility and public surface |
 | --- | --- | --- | --- |
-| [`ProfileStore.luau`](src/shared/_Index/quenty_profilestore@0.0.1/ProfileStore.luau) | shared | Module | Profile Store provides the module implementation used by the Profilestore package. Public entry points include `AcquireRunnerThreadAndCallEventHandler`, `RunEventHandlerInFreeThread`, `Connection.Disconnect`, `SignalClass.New`, `SignalClass.Connect`, `SignalClass.GetListenerCount`, `SignalClass.Fire`, `SignalClass.Wait`. |
+| [`ProfileStore.luau`](src/server/_Index/quenty_profilestore@0.0.1/ProfileStore.luau) | server | Module | Profile Store provides the module implementation used by the Profilestore package. Public entry points include `AcquireRunnerThreadAndCallEventHandler`, `RunEventHandlerInFreeThread`, `Connection.Disconnect`, `SignalClass.New`, `SignalClass.Connect`, `SignalClass.GetListenerCount`, `SignalClass.Fire`, `SignalClass.Wait`. |
 
 # promise
 
