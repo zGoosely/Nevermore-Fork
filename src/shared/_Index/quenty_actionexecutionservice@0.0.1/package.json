@@ -1,0 +1,19 @@
+{
+  "name": "quenty/actionexecutionservice",
+  "version": "0.0.1",
+  "exports": {
+    "ActionExecutionStatuses": "ActionExecutionStatuses",
+    "ActionExecutionTypes": "ActionExecutionTypes",
+    "ActionExecutionUtils": "ActionExecutionUtils"
+  },
+  "dependencies": [
+    "quenty/canceltoken@0.0.1",
+    "quenty/promise@0.0.1",
+    "quenty/t@0.0.1",
+    "quenty/tableutils@0.0.1"
+  ],
+  "externals": [
+    "Jest",
+    "LockServiceUtils"
+  ]
+}

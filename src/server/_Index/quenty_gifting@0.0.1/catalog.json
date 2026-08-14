@@ -1,0 +1,26 @@
+{
+  "purpose": "`GiftingService` stores virtual pass and developer-product entitlements under a player's `Gifted` PlayerDataStoreService root. It uses GameConfig keys, enforces configurable social restrictions, keeps server and client caches, serializes the client projection with Squash, and can fulfill paid gifts through `GameProductService`.",
+  "description": "`GiftingService` stores virtual pass and developer-product entitlements under a player's `Gifted` PlayerDataStoreService root. It uses GameConfig keys, enforces configurable social restrictions, keeps server and client caches, serializes the client projection with Squash, and can fulfill paid gifts through `GameProductService`.",
+  "tags": [
+    "commerce",
+    "data",
+    "developer_tools",
+    "enums",
+    "game_service",
+    "lifecycle",
+    "localization",
+    "math",
+    "player_service",
+    "reactive",
+    "security",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "GiftingService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Persists GameConfig-backed pass and developer-product gifts, applies social restrictions, and integrates paid gift fulfillment with GameProductService. Public entry points include `GiftingService.Init`, `GiftingService.Start`, `GiftingService.SetPlayerGiftRestriction`, `GiftingService.GetPlayerGiftRestriction`, `GiftingService.RegisterGiftProduct`, `GiftingService.CanGiftAsync`, `GiftingService.GiftAsync`,…"
+    }
+  }
+}

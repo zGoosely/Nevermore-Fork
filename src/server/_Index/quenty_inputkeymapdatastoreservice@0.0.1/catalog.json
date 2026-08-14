@@ -1,0 +1,22 @@
+{
+  "purpose": "Persists rebindable input-keymap overrides in each player's existing PlayerDataStoreService profile and synchronizes authoritative bindings across the client/server boundary with ByteNet.",
+  "description": "Validates, stores, restores, and reactively applies per-player input bindings without opening another profile session.",
+  "tags": [
+    "data",
+    "game_service",
+    "input",
+    "lifecycle",
+    "player_service",
+    "reactive",
+    "security",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "InputKeyMapDataStoreService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Validates registered rebindable keymaps, applies per-player request rate limits, persists accepted binding overrides through PlayerDataStoreService, and republishes authoritative state when a request is rejected. Public entry points include `InputKeyMapDataStoreService.Init`, `InputKeyMapDataStoreService.Start`, `InputKeyMapDataStoreService.Destroy`."
+    }
+  }
+}

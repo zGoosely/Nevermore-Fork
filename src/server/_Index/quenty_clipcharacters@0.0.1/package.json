@@ -1,0 +1,12 @@
+{
+  "name": "quenty/clipcharacters",
+  "version": "0.0.1",
+  "exports": {
+    "ClipCharactersService": "Server/ClipCharactersService"
+  },
+  "dependencies": [
+    "quenty/maid@0.0.1",
+    "quenty/servicebag@0.0.1"
+  ],
+  "externals": []
+}

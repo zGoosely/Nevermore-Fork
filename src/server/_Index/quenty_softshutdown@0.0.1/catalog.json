@@ -1,0 +1,28 @@
+{
+  "purpose": "Recreation of Nevermore Engine's soft shutdown service for restarting Roblox servers on update without losing players.",
+  "description": "Recreation of Nevermore Engine's soft shutdown service for restarting Roblox servers on update without losing players.",
+  "tags": [
+    "animation",
+    "data",
+    "enums",
+    "game_service",
+    "gui",
+    "localization",
+    "player_service",
+    "reactive",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "Server/SoftShutdownServiceUtils.luau": {
+      "realm": "server",
+      "kind": "Utility",
+      "description": "Shared server-side rules for identifying soft-shutdown waiting servers. Public entry points include `SoftShutdownServiceUtils.isReservedServer`, `SoftShutdownServiceUtils.isLobbyTeleportPlayer`, `SoftShutdownServiceUtils.promiseIsLobby`, `SoftShutdownServiceUtils.containsPending`."
+    },
+    "SoftShutdownService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "This service lets you shut down servers without losing players. When game.OnClose is called, players in the server are teleported into a reserved lobby server. When the reserved server starts up, it teleports everyone back into updated servers. Public entry points include `SoftShutdownService.Init`, `SoftShutdownService.Start`, `handleLobbyStatus`, `SoftShutdownService.Destroy`."
+    }
+  }
+}

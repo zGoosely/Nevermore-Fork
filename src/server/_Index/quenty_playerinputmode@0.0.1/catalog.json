@@ -1,0 +1,25 @@
+{
+  "purpose": "`PlayerInputModeServiceClient` converts local InputMode activity into one of three public control families:",
+  "description": "`PlayerInputModeServiceClient` converts local InputMode activity into one of three public control families:",
+  "tags": [
+    "commerce",
+    "data",
+    "enums",
+    "game_service",
+    "gui",
+    "input",
+    "lifecycle",
+    "player_service",
+    "reactive",
+    "security",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "PlayerInputModeService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Validates input-mode reports from each client and exposes the result through a replicated Player attribute. Public entry points include `PlayerInputModeService.Init`, `PlayerInputModeService.Start`, `PlayerInputModeService.GetPlayerInputModeType`, `PlayerInputModeService.GetPlayerInputModeAsync`, `PlayerInputModeService.ObservePlayerInputType`, `PlayerInputModeService.Destroy`."
+    }
+  }
+}

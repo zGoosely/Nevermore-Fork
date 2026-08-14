@@ -1,0 +1,13 @@
+{
+  "name": "quenty/hide",
+  "version": "0.0.1",
+  "exports": {
+    "HideService": "Server/HideService"
+  },
+  "dependencies": [
+    "quenty/binder@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/servicebag@0.0.1"
+  ],
+  "externals": []
+}

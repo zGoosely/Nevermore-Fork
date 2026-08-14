@@ -14,7 +14,7 @@ from textual.widgets import DataTable, Input, Select
 @pytest.mark.asyncio
 async def test_tui_search_filters_packages(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     root = tmp_path / "repo"
-    package = root / "src" / "_Index" / "quenty_example@0.0.1"
+    package = root / "src" / "shared" / "_Index" / "quenty_example@0.0.1"
     package.mkdir(parents=True)
     (package / "package.json").write_text(
         '{"name":"quenty/example","version":"0.0.1","exports":{"Maid":"Maid"},'
@@ -29,7 +29,7 @@ async def test_tui_search_filters_packages(tmp_path: Path, monkeypatch: pytest.M
     )
     (package / "Maid.luau").write_text("--!strict\n\nreturn {}\n", encoding="utf-8")
     (package / "Internal.luau").write_text("--!strict\n\nreturn {}\n", encoding="utf-8")
-    second_package = root / "src" / "_Index" / "quenty_second@0.0.1"
+    second_package = root / "src" / "shared" / "_Index" / "quenty_second@0.0.1"
     second_package.mkdir(parents=True)
     (second_package / "package.json").write_text(
         '{"name":"quenty/second","version":"0.0.1","exports":{"Second":"Second"},'

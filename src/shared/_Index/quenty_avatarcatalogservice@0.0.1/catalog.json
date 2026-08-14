@@ -1,0 +1,17 @@
+{
+  "purpose": "Caches and applies reusable R6 and R15 avatar body parts and packages, with server-authoritative replacement rules.",
+  "description": "AvatarCatalogService lets each game register explicit body assets, load Roblox bundles or legacy packages once, apply catalog entries on demand, dynamically replace disallowed parts or complete packages for every player, and optionally enforce a conservative built-in unfair-avatar list.",
+  "tags": [
+    "avatar",
+    "cache",
+    "game_service",
+    "player_service"
+  ],
+  "modules": {
+    "Catalog/WellKnownUnfairPackagesAndParts.luau": {
+      "realm": "shared",
+      "kind": "Constants",
+      "description": "Read-only identities for the conservative built-in list of Roblox-authored packages and body parts with substantially reduced visible geometry."
+    }
+  }
+}

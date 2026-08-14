@@ -1,0 +1,55 @@
+{
+  "purpose": "Loads, validates, translates, replicates, and exposes game configuration across server and client realms.",
+  "description": "Loads, validates, translates, replicates, and exposes game configuration across server and client realms.",
+  "tags": [
+    "commerce",
+    "data",
+    "developer_tools",
+    "enums",
+    "game_service",
+    "lifecycle",
+    "localization",
+    "math",
+    "reactive",
+    "security",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "Server/Cmdr/GameConfigCommandService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Registers server Cmdr commands and game-config-backed argument types. Public entry points include `GameConfigCommandService.Init`, `GameConfigCommandService.Start`, `GameConfigCommandService.Destroy`."
+    },
+    "Server/Config/Asset/GameConfigAsset.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Server model for a configured asset. It derives stable localization keys from Roblox cloud metadata and stores those keys on the replicated asset Folder. Public entry points include `GameConfigAsset.new`."
+    },
+    "Server/Config/Config/GameConfig.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Server model for a replicated game configuration. Public entry points include `GameConfig.new`, `GameConfig.GetGameConfigAssetBinder`."
+    },
+    "Server/GameConfigBindersServer.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Provides the server GameConfig and GameConfigAsset binders."
+    },
+    "Server/GameConfigService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Registers Roblox assets into replicated, queryable game configurations. Configuration is represented by tagged Folders and attributes under ReplicatedStorage.GameConfigs, so additions and removals naturally replicate to GameConfigServiceClient without a custom network packet."
+    },
+    "Server/GameConfigServiceConstants.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Constants used by GameConfigService."
+    },
+    "Server/Mantle/MantleConfigProvider.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Loads Roblox asset IDs from Mantle-generated configuration ModuleScripts and turns them into replicated GameConfig folders. Public entry points include `MantleConfigProvider.new`, `MantleConfigProvider.Init`, `MantleConfigProvider.LoadConfigData`, `MantleConfigProvider.Destroy`."
+    }
+  }
+}

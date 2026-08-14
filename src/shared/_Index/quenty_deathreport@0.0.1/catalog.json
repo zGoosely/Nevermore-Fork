@@ -1,0 +1,72 @@
+{
+  "purpose": "`DeathReport` is a comprehensive, production-ready death and kill tracking package for Nevermore. It provides centralized event orchestration, reactive stream observers (`Observable`), automatic stats tracking, and ultra-compact network replication via **ByteNet** and **PlayerIdService**.",
+  "description": "`DeathReport` is a comprehensive, production-ready death and kill tracking package for Nevermore. It provides centralized event orchestration, reactive stream observers (`Observable`), automatic stats tracking, and ultra-compact network replication via **ByteNet** and **PlayerIdService**.",
+  "tags": [
+    "data",
+    "enums",
+    "game_service",
+    "lifecycle",
+    "localization",
+    "player_service",
+    "reactive",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "Client/DeathReportBindersClient.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Registers client-side death report binders with BinderProvider."
+    },
+    "Client/Stats/PlayerDeathTrackerClient.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Client-side tracker for player deaths. Public entry points include `PlayerDeathTrackerClient.new`, `PlayerDeathTrackerClient.GetDeathValue`, `PlayerDeathTrackerClient.GetPlayer`, `PlayerDeathTrackerClient.GetKills`, `PlayerDeathTrackerClient.Destroy`."
+    },
+    "Client/Stats/PlayerKillTrackerClient.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Client-side tracker for player kills. Public entry points include `PlayerKillTrackerClient.new`, `PlayerKillTrackerClient.GetKillValue`, `PlayerKillTrackerClient.GetPlayer`, `PlayerKillTrackerClient.GetKills`, `PlayerKillTrackerClient.Destroy`."
+    },
+    "Client/Stats/TeamKillTrackerClient.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Client-side tracker for team kills. Public entry points include `TeamKillTrackerClient.new`, `TeamKillTrackerClient.GetKillValue`, `TeamKillTrackerClient.GetTeam`, `TeamKillTrackerClient.GetKills`, `TeamKillTrackerClient.Destroy`."
+    },
+    "DeathReportServiceClient.luau": {
+      "realm": "client",
+      "kind": "Service",
+      "description": "Centralized death reporting service which can be used to track deaths on the client. Public entry points include `DeathReportServiceClient.Init`, `DeathReportServiceClient.Start`, `DeathReportServiceClient.ObservePlayerKillerReports`, `DeathReportServiceClient.ObservePlayerDeathReports`, `DeathReportServiceClient.ObserveHumanoidKillerReports`, `DeathReportServiceClient.ObserveHumanoidDeathReports`,…"
+    },
+    "Shared/DeathReportNetwork.luau": {
+      "realm": "shared",
+      "kind": "Network",
+      "description": "ByteNet protocol schema for DeathReport with compact uint8 Player IDs."
+    },
+    "Shared/DeathReportProcessor.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Handles shared observable subscription tables for the client and server. Public entry points include `DeathReportProcessor.new`, `DeathReportProcessor.ObservePlayerKillerReports`, `DeathReportProcessor.ObservePlayerDeathReports`, `DeathReportProcessor.ObserveHumanoidDeathReports`, `DeathReportProcessor.ObserveHumanoidKillerReports`, `DeathReportProcessor.ObserveCharacterKillerReports`,…"
+    },
+    "Shared/DeathReportServiceConstants.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Read-only package configuration constants for DeathReport."
+    },
+    "Shared/DeathReportUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Stateless utility functions for death report construction and inspection. Public entry points include `DeathReportUtils.fromDeceasedHumanoid`, `DeathReportUtils.create`, `DeathReportUtils.isDeathReport`, `DeathReportUtils.isWeaponData`, `DeathReportUtils.createWeaponData`, `DeathReportUtils.getDeadDisplayName`, `DeathReportUtils.involvesPlayer`, `DeathReportUtils.getKillerDisplayName`."
+    },
+    "Shared/Stats/PlayerKillTrackerUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Stateless utility functions for player kill trackers. Public entry points include `PlayerKillTrackerUtils.create`, `PlayerKillTrackerUtils.observeBrio`, `PlayerKillTrackerUtils.getPlayerKillTracker`."
+    },
+    "Shared/Stats/TeamKillTrackerUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Stateless utility functions for team kill trackers. Public entry points include `TeamKillTrackerUtils.create`, `TeamKillTrackerUtils.observeBrio`, `TeamKillTrackerUtils.getTeamKillTracker`."
+    }
+  }
+}

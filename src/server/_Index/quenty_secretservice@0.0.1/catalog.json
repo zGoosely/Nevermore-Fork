@@ -1,0 +1,17 @@
+{
+  "purpose": "Collects the secretservice runtime building blocks—Secret Service Constants, Secret Service Network, Secret Service, Secret Service Client—and composes them for reuse in Roblox experiences.",
+  "description": "Collects the secretservice runtime building blocks—Secret Service Constants, Secret Service Network, Secret Service, Secret Service Client—and composes them for reuse in Roblox experiences.",
+  "tags": [
+    "enums",
+    "game_service",
+    "security",
+    "serialization"
+  ],
+  "modules": {
+    "SecretService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Secret Service provides the service implementation used by the Secretservice package. Public entry points include `sortKeys`, `SecretService.Init`, `SecretService.Start`, `SecretService.SetEncryptionSeed`, `SecretService.SetPublicKeySeed`, `SecretService.SetPublicSeed`, `SecretService.PromiseSecret`, `SecretService.GetSecret`."
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "purpose": "`ActionExecutionService` runs cancellable server work with optional keyed locks. It is independent from `PlayerInputService`: input reports intent, while the gameplay system decides whether work succeeded, failed, or should be cancelled.",
+  "description": "`ActionExecutionService` runs cancellable server work with optional keyed locks. It is independent from `PlayerInputService`: input reports intent, while the gameplay system decides whether work succeeded, failed, or should be cancelled.",
+  "tags": [
+    "animation",
+    "data",
+    "enums",
+    "game_service",
+    "gui",
+    "input",
+    "lifecycle",
+    "math",
+    "player_service",
+    "reactive",
+    "security",
+    "utility"
+  ],
+  "modules": {
+    "ActionExecution.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Owns one cancellable server operation and its optional lock permit. Public entry points include `ActionExecution.new`, `ActionExecution.GetActor`, `ActionExecution.HasTag`, `ActionExecution.GetStatus`, `ActionExecution.ObserveStatus`, `ActionExecution.IsActive`, `ActionExecution.GetCancelReason`, `ActionExecution.GetPromise`."
+    },
+    "ActionExecutionService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Starts cancellable server operations, coordinates optional keyed locks, and indexes active executions for dynamic interruption. Public entry points include `ActionExecutionService.Init`, `ActionExecutionService.TryStart`, `ActionExecutionService.GetActorExecutions`, `ActionExecutionService.CancelActorExecutions`, `ActionExecutionService.CancelActorExecutionsByTag`,…"
+    }
+  }
+}

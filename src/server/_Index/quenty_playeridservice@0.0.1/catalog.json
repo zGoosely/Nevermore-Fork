@@ -1,0 +1,23 @@
+{
+  "purpose": "Assigns every current player a unique replicated `uint8` ID. Automatic IDs use the compact `1..Players.MaxPlayers` range, remain stable for the player's session, and are recycled after departure. Zero is intentionally left available as an unassigned network sentinel.",
+  "description": "Assigns every current player a unique replicated `uint8` ID. Automatic IDs use the compact `1..Players.MaxPlayers` range, remain stable for the player's session, and are recycled after departure. Zero is intentionally left available as an unassigned network sentinel.",
+  "tags": [
+    "data",
+    "enums",
+    "game_service",
+    "lifecycle",
+    "math",
+    "player_service",
+    "reactive",
+    "security",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "PlayerIdService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Assigns stable, recycled uint8 IDs to current players. IDs replicate through a Player attribute and can be sent directly through compact network schemas. Public entry points include `PlayerIdService.Init`, `PlayerIdService.Start`, `PlayerIdService.GetId`, `PlayerIdService.Observe`, `PlayerIdService.GetPlayer`, `PlayerIdService.RefreshIds`, `PlayerIdService.SetIds`, `PlayerIdService.Destroy`."
+    }
+  }
+}

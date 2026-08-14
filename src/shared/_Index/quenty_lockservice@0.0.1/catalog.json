@@ -1,0 +1,28 @@
+{
+  "purpose": "`LockService` provides server-local, non-queued locks identified by an owner `Instance` and string key. `ActionExecutionService` always uses the action's actor as this owner, so action locks never contend across different players.",
+  "description": "`LockService` provides server-local, non-queued locks identified by an owner `Instance` and string key. `ActionExecutionService` always uses the action's actor as this owner, so action locks never contend across different players.",
+  "tags": [
+    "data",
+    "enums",
+    "game_service",
+    "gui",
+    "lifecycle",
+    "localization",
+    "player_service",
+    "reactive",
+    "security",
+    "utility"
+  ],
+  "modules": {
+    "LockServiceTypes.luau": {
+      "realm": "shared",
+      "kind": "Types",
+      "description": "Shared contracts for keyed server lock acquisition."
+    },
+    "LockServiceUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Validates keyed lock configuration and identifiers. Public entry points include `LockServiceUtils.isTimeout`, `LockServiceUtils.isLockKey`, `LockServiceUtils.isReason`, `LockServiceUtils.isAcquireConfig`."
+    }
+  }
+}

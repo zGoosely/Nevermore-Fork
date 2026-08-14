@@ -1,0 +1,28 @@
+{
+  "name": "quenty/motor6d",
+  "version": "0.0.1",
+  "exports": {
+    "Motor6DStackHumanoidClient": "Client/Humanoid/Motor6DStackHumanoidClient",
+    "Motor6DStackInterface": "Shared/Stack/Motor6DStackInterface"
+  },
+  "dependencies": [
+    "quenty/baseobject@0.0.1",
+    "quenty/binder@0.0.1",
+    "quenty/brio@0.0.1",
+    "quenty/cframeutils@0.0.1",
+    "quenty/characterutils@0.0.1",
+    "quenty/draw@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/rxbrioutils@0.0.1",
+    "quenty/rxinstanceutils@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/signal@0.0.1",
+    "quenty/spring@0.0.1",
+    "quenty/springutils@0.0.1",
+    "quenty/steputils@0.0.1",
+    "quenty/symbol@0.0.1",
+    "quenty/tie@0.0.1"
+  ],
+  "externals": []
+}

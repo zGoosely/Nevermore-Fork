@@ -1,0 +1,14 @@
+{
+  "purpose": "Server-side funnel logger",
+  "description": "Server-side funnel logger",
+  "tags": [
+    "shared"
+  ],
+  "modules": {
+    "Server/FunnelStepLogger.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Server-side funnel logger Public entry points include `FunnelStepLogger.new`, `FunnelStepLogger.SetPrintDebugEnabled`, `FunnelStepLogger.LogStep`, `FunnelStepLogger.IsStepComplete`."
+    }
+  }
+}

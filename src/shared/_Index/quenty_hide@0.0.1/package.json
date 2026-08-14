@@ -1,0 +1,19 @@
+{
+  "name": "quenty/hide",
+  "version": "0.0.1",
+  "exports": {
+    "HideServiceClient": "Client/HideServiceClient"
+  },
+  "dependencies": [
+    "quenty/baseobject@0.0.1",
+    "quenty/binder@0.0.1",
+    "quenty/brio@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/rxbrioutils@0.0.1",
+    "quenty/rxinstanceutils@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/transparency@0.0.1"
+  ],
+  "externals": []
+}

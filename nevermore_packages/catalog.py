@@ -13,7 +13,7 @@ from .models import CatalogEntry, ModuleEntry, PackageRecord
 CARD_START = re.compile(r"^# (?P<name>[a-z0-9][a-z0-9-]*)$", re.MULTILINE)
 FIELD = re.compile(r"^- \*\*(?P<field>Purpose|Short Description|Tags):\*\* (?P<value>.*)$", re.MULTILINE)
 MODULE_ROW = re.compile(
-    r"^\| \[`(?P<label>[^`]+)`\]\((?P<path>src/_Index/[^)]+)\)\s*"
+    r"^\| \[`(?P<label>[^`]+)`\]\((?P<path>src/(?:shared|server)/_Index/[^)]+)\)\s*"
     r"\|\s*(?P<realm>[^|]+?)\s*\|\s*(?P<kind>[^|]+?)\s*\|\s*(?P<description>.*?)\s*\|$",
     re.MULTILINE,
 )
@@ -72,18 +72,16 @@ def parse_legacy_catalog(markdown: str) -> dict[str, CatalogEntry]:
 
 
 def module_count(record: PackageRecord) -> int:
-    return sum(
-        1
-        for path in record.root.rglob("*")
-        if path.is_file()
-        and path.suffix in {".lua", ".luau"}
-        and not path.name.endswith((".spec.lua", ".spec.luau"))
-        and path.name not in {"jest.config.lua", "jest.config.luau"}
-    )
+    return len(record.catalog.modules)
 
 
 def _escape_cell(value: str) -> str:
     return value.replace("|", "\\|").replace("\n", " ")
+
+
+def _relative_root(root: Path) -> str:
+    source_root = next(parent for parent in root.parents if parent.name == "src")
+    return root.relative_to(source_root.parent).as_posix()
 
 
 def render_catalog(records: Iterable[PackageRecord]) -> str:
@@ -110,14 +108,15 @@ def render_catalog(records: Iterable[PackageRecord]) -> str:
 
     for record in packages:
         entry = record.catalog
-        relative_root = record.root.relative_to(record.root.parents[2]).as_posix()
+        roots = tuple(root for root in (record.shared_root, record.server_root) if root is not None)
+        root_labels = [_relative_root(root) for root in roots]
         lines.extend(
             [
                 "",
                 f"# {record.short_name}",
                 "",
                 f"- **Purpose:** {entry.purpose}",
-                f"- **Path:** [`{relative_root}/`]({relative_root}/)",
+                f"- **Path:** {', '.join(f'[`{root}/`]({root}/)' for root in root_labels)}",
                 f"- **Short Description:** {entry.description}",
                 f"- **Tags:** {', '.join(f'`{tag}`' for tag in entry.tags)}",
             ]
@@ -133,6 +132,8 @@ def render_catalog(records: Iterable[PackageRecord]) -> str:
                 ]
             )
             for module in entry.modules:
+                module_root = record.root_for_realm(module.realm)
+                relative_root = _relative_root(module_root)
                 path = f"{relative_root}/{module.path}"
                 lines.append(
                     f"| [`{module.path}`]({path}) | {_escape_cell(module.realm)} | "
@@ -161,10 +162,17 @@ def validate_catalog(record: PackageRecord) -> list[str]:
     if len(record.catalog.tags) != len(set(record.catalog.tags)):
         diagnostics.append(f"{record.name}: tags must be unique")
 
-    actual = discover_production_modules(record.root)
-    described = {module.path for module in record.catalog.modules}
-    for missing in sorted(actual - described):
+    roots = tuple(root for root in (record.shared_root, record.server_root) if root is not None)
+    actual_by_realm = {
+        (path, "server" if root == record.server_root else "shared")
+        for root in roots
+        for path in discover_production_modules(root)
+    }
+    described_by_realm = {
+        (module.path, "server" if module.realm == "server" else "shared") for module in record.catalog.modules
+    }
+    for missing, _realm in sorted(actual_by_realm - described_by_realm):
         diagnostics.append(f"{record.name}: missing module metadata for {missing}")
-    for stale in sorted(described - actual):
+    for stale, _realm in sorted(described_by_realm - actual_by_realm):
         diagnostics.append(f"{record.name}: stale module metadata for {stale}")
     return diagnostics

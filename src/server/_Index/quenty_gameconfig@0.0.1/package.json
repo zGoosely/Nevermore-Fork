@@ -1,0 +1,23 @@
+{
+  "name": "quenty/gameconfig",
+  "version": "0.0.1",
+  "exports": {
+    "GameConfigService": "Server/GameConfigService"
+  },
+  "dependencies": [
+    "quenty/badgeutils@0.0.1",
+    "quenty/binder@0.0.1",
+    "quenty/clientranslator@0.0.1",
+    "quenty/cmdrservice@0.0.1",
+    "quenty/errorreportingservice@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/marketplaceutils@0.0.1",
+    "quenty/playerutils@0.0.1",
+    "quenty/preferredparentutils@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/stringutils@0.0.1",
+    "quenty/tableutils@0.0.1"
+  ],
+  "externals": []
+}

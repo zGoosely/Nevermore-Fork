@@ -1,0 +1,16 @@
+{
+  "purpose": "Collects the banservice runtime building blocks—Ban Service, Ban Service Utils—and composes them for reuse in Roblox experiences.",
+  "description": "Collects the banservice runtime building blocks—Ban Service, Ban Service Utils—and composes them for reuse in Roblox experiences.",
+  "tags": [
+    "game_service",
+    "security",
+    "utility"
+  ],
+  "modules": {
+    "BanServiceUtils.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Ban Service Utils provides the module implementation used by the Banservice package. Public entry points include `BanServiceUtils.isActiveBan`."
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "quenty/scoredactionservice",
+  "version": "0.0.1",
+  "exports": {
+    "ScoredActionService": "Server/ScoredActionService"
+  },
+  "dependencies": [
+    "quenty/inputkeymaputils@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/servicebag@0.0.1"
+  ],
+  "externals": [
+    "Jest"
+  ]
+}

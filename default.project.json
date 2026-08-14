@@ -15,7 +15,13 @@
     "ReplicatedStorage": {
       "$className": "ReplicatedStorage",
       "Packages": {
-        "$path": "src"
+        "$path": "src/shared"
+      }
+    },
+    "ServerStorage": {
+      "$className": "ServerStorage",
+      "ServerPackages": {
+        "$path": "src/server"
       }
     }
   }

@@ -1,0 +1,12 @@
+{
+  "name": "quenty/soundplayer",
+  "version": "0.0.1",
+  "exports": {
+    "SoundPlayerService": "Server/SoundPlayerService"
+  },
+  "dependencies": [
+    "quenty/servicebag@0.0.1",
+    "quenty/soundgroup@0.0.1"
+  ],
+  "externals": []
+}

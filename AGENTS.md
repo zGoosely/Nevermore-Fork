@@ -1,6 +1,6 @@
 # Nevermore Fork conventions
 
-This is the target style for all new and changed code in `src/_Index/`. Some packages are older ports and do not yet follow every rule below. Treat this document, not nearby legacy code, as the source of truth. Preserve an established public API unless a change explicitly includes a migration.
+This is the target style for all new and changed code in `src/shared/_Index/` and `src/server/_Index/`. Some packages are older ports and do not yet follow every rule below. Treat this document, not nearby legacy code, as the source of truth. Preserve an established public API unless a change explicitly includes a migration.
 
 ## Non-negotiable rules
 
@@ -9,7 +9,7 @@ This is the target style for all new and changed code in `src/_Index/`. Some pac
 - Define methods with dot notation and an explicit typed `self`: `function Class.Method(self: Class, ...)`. Calls may use normal colon syntax.
 - Put stateless logic in a `*Utils` module. A private helper that does not read or mutate `self`, and does not need another instance method, does not belong on a service or class.
 - Resolve every service dependency in `Init`, store it on the service, and declare that field in the exported service type.
-- Check `PKGINFO.md`, the flat exports in `src/`, and indexed packages in `src/_Index/` before creating a module or implementing functionality from scratch.
+- Check `PKGINFO.md`, the flat exports in `src/shared/` and `src/server/`, and both indexed package roots before creating a module or implementing functionality from scratch.
 - Format every changed Luau file with StyLua. Tabs, indentation, spacing, double quotes, and blank lines are part of correctness.
 - Keep service public APIs small. Services orchestrate lifecycle and dependencies; they are not miscellaneous function containers.
 - Do not add redundant `_isStarted` or `_isDestroyed` service fields. `ServiceBag` owns service lifecycle ordering, and the service's `Maid` owns cleanup; use those lifecycle mechanisms instead of tracking duplicate state.
@@ -32,7 +32,7 @@ If a module starts accumulating responsibilities from two rows, split it before 
 
 ### Before creating a module
 
-Search `PKGINFO.md` and `src/_Index/` by concept and likely module name before writing anything. Reuse the established package that already owns the behavior, or compose existing packages, instead of adding a near-duplicate abstraction. Inspect its API and lifecycle rather than guessing from its filename.
+Search `PKGINFO.md`, `src/shared/_Index/`, and `src/server/_Index/` by concept and likely module name before writing anything. Reuse the established package that already owns the behavior, or compose existing packages, instead of adding a near-duplicate abstraction. Inspect its API and lifecycle rather than guessing from its filename.
 
 Use the packages that match the job: `Maid` for owned cleanup, `Promise` for asynchronous completion, `Observable`/`Rx` for streams, `ValueObject` for reactive state, `Binder` for genuine tagged-instance ownership, `t` for runtime validation, and the existing utility packages for common transformations. Do not recreate these locally.
 
@@ -50,7 +50,7 @@ After implementation, perform a separate revision pass. Ask:
 Keep a small indexed package flat:
 
 ```text
-src/_Index/quenty_example@0.0.1/
+src/shared/_Index/quenty_example@0.0.1/
 	package.json
 	Example.luau
 	ExampleUtils.luau
@@ -59,9 +59,8 @@ src/_Index/quenty_example@0.0.1/
 Use realm folders and `Shared` once a package has both server and client behavior:
 
 ```text
-src/_Index/quenty_exampleservice@0.0.1/
+src/shared/_Index/quenty_exampleservice@0.0.1/
 	package.json
-	ExampleService.luau
 	ExampleServiceClient.luau
 	README.md
 	Server/
@@ -74,6 +73,11 @@ src/_Index/quenty_exampleservice@0.0.1/
 		ExampleServiceNetwork.luau
 		ExampleServiceTypes.luau
 		ExampleServiceUtils.luau
+src/server/_Index/quenty_exampleservice@0.0.1/
+	package.json
+	ExampleService.luau
+	Server/
+		ExampleServerModel.luau
 ```
 
 Only create folders that have content. A two-file service does not need empty `Server`, `Client`, or `Shared` directories. Put code in `Shared` only when both realms can safely require it; shared modules must not access server-only APIs.
@@ -87,7 +91,7 @@ Split a service or class when it owns several independently describable workflow
 For a crowded service:
 
 ```text
-src/_Index/quenty_coinservice@0.0.1/
+src/server/_Index/quenty_coinservice@0.0.1/
 	CoinService.luau          # Public facade; resolves and coordinates support services
 	CoinPickupService.luau    # Picks up coins
 	CoinObserveService.luau   # Watches coins
@@ -102,7 +106,7 @@ src/_Index/quenty_coinservice@0.0.1/
 For a crowded class:
 
 ```text
-src/_Index/quenty_quest@0.0.1/
+src/shared/_Index/quenty_quest@0.0.1/
 	Quest.luau               # Main public class and coordinator
 	QuestTrackerModel.luau   # Tracks quest state
 	QuestCreatorModel.luau   # Creates quest state
@@ -127,7 +131,7 @@ Use this order consistently:
 1. `--!strict`, then `--!optimize 2` only for a measured hot path.
 2. One Moonwave module header.
 3. Roblox services from `game:GetService()`.
-4. Cross-package requires through `@game/ReplicatedStorage/Packages/<Export>`. Package-local `init.luau` modules use
+4. Shared/client cross-package requires through `@game/ReplicatedStorage/Packages/<Export>` and server-only requires through `@game/ServerStorage/ServerPackages/<Export>`. Package-local `init.luau` modules use
    `@self/<Child>` for children; ordinary modules use `./Sibling` and `../ParentSibling` paths.
 5. Exported/local types.
 6. Module constants and reusable validators.
@@ -172,11 +176,11 @@ const ExampleUtils = require("@self/ExampleUtils")
 An ordinary module imports a sibling with `./ExampleUtils`. The distinction follows the Roblox hierarchy: an
 `init.luau` file becomes the parent ModuleScript, while an ordinary file remains a sibling of nearby modules.
 
-Each package lives at `src/_Index/quenty_<package>@0.0.1/` on disk and is mapped by Rojo to the direct `_Index` child `quenty/<package>@0.0.1`. Its `package.json` lists logical identity, public exports, package dependencies, and external game dependencies. Add a strict flat wrapper in `src/` only for a consumer-facing entrypoint or a module imported by another package. Do not expose tests or private helpers.
+Each package lives in `src/shared/_Index/quenty_<package>@0.0.1/`, `src/server/_Index/quenty_<package>@0.0.1/`, or both. Paired partitions share a logical identity and version but keep realm-local catalogs, exports, and dependencies. Rojo maps shared/client exports to `ReplicatedStorage.Packages` and server exports to `ServerStorage.ServerPackages`. Add a strict flat wrapper in the owning surface only for a consumer-facing entrypoint or a module imported by another package. Do not expose tests or private helpers.
 
 Module loading and service resolution are different operations:
 
-- `require("@game/ReplicatedStorage/Packages/SomeService")` loads the service module and normally belongs with the top-level imports.
+- `require("@game/ReplicatedStorage/Packages/SomeClientOrSharedModule")` and `require("@game/ServerStorage/ServerPackages/SomeService")` load modules from their realm-owned surfaces and normally belong with the top-level imports.
 - `self._serviceBag:GetService(SomeService)` resolves the service instance and always belongs in `Init`.
 - A class constructs its owned dependencies in `.new()`.
 - Do not look up services lazily from `Start`, public methods, private methods, or callbacks.
@@ -253,7 +257,7 @@ A service is constructed by `ServiceBag`; it does not expose `.new()`. It owns d
 	@server
 ]=]
 
-const CmdrService = require("@game/ReplicatedStorage/Packages/CmdrService")
+const CmdrService = require("@game/ServerStorage/ServerPackages/CmdrService")
 const Maid = require("@game/ReplicatedStorage/Packages/Maid")
 const ServiceBag = require("@game/ReplicatedStorage/Packages/ServiceBag")
 const t = require("@game/ReplicatedStorage/Packages/t")
@@ -445,7 +449,7 @@ For a focused change, format and check the changed files first; run the full com
 
 ## Review checklist
 
-- Did you search `PKGINFO.md` and `src/_Index/` and reuse the right existing package before creating new code?
+- Did you search `PKGINFO.md` and both indexed package roots and reuse the right existing package before creating new code?
 - Is this a service, stateful class, or stateless utility for the right reason?
 - Is the main service/class still focused, or should cohesive workflows become support services/models?
 - Did every new runtime type/shape assertion use `t`?

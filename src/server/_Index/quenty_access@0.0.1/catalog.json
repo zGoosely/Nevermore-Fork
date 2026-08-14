@@ -1,0 +1,38 @@
+{
+  "purpose": "A shared fact, feature, and policy system for gating game access.",
+  "description": "Centralizes game-access decisions. Facts contribute evidence, policies evaluate that evidence, and replicated state lets client UI and server authority agree on the same feature gates.",
+  "tags": [
+    "animation",
+    "commerce",
+    "data",
+    "developer_tools",
+    "enums",
+    "game_service",
+    "gui",
+    "lifecycle",
+    "localization",
+    "math",
+    "player_service",
+    "reactive",
+    "security",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "Server/AccessService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Server entry point for the access package. Brings up the shared [AccessDataService] and the server-only pieces built on it, so a game starts access with one `GetService` instead of knowing which half of it lives where. Facts and features are still registered in shared code -- both realms have to agree on what exists, and a registration only the server ran is a fact the client can never resolve."
+    },
+    "Server/Binders/AccessPlayer.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "The server half of [AccessPlayerBase]. Adds the things only a server may do: forcing a fact, and saying whether a policy is actually running against this player. Bound to every player automatically -- reach it with `AccessPlayerInterface:Find(player)` rather than by requiring this module, so consumers do not depend on the package."
+    },
+    "Server/Commands/AccessCommandService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Cmdr commands for inspecting and overriding access. The point of the package is that when somebody says \"I can't get in\", one command tells you why: Every command here is admin-gated, because [CmdrService] gates every command it registers on the whole reason overrides are safe to ship enabled."
+    }
+  }
+}

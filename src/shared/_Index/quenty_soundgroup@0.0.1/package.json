@@ -1,0 +1,26 @@
+{
+  "name": "quenty/soundgroup",
+  "version": "0.0.1",
+  "exports": {
+    "SoundGroupServiceClient": "Client/SoundGroupServiceClient",
+    "WellKnownSoundGroups": "Shared/Groups/WellKnownSoundGroups"
+  },
+  "dependencies": [
+    "quenty/baseobject@0.0.1",
+    "quenty/binder@0.0.1",
+    "quenty/brio@0.0.1",
+    "quenty/counter@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/observablecollection@0.0.1",
+    "quenty/promise@0.0.1",
+    "quenty/rogueproperty@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/rxinstanceutils@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/signal@0.0.1",
+    "quenty/tableutils@0.0.1",
+    "quenty/tie@0.0.1",
+    "quenty/valueobject@0.0.1"
+  ],
+  "externals": []
+}

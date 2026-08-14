@@ -1,0 +1,9 @@
+{
+  "name": "quenty/funnels",
+  "version": "0.0.1",
+  "exports": {},
+  "dependencies": [
+    "quenty/baseobject@0.0.1"
+  ],
+  "externals": []
+}

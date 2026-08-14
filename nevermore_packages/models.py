@@ -82,6 +82,8 @@ class PackageRecord:
     dependencies: tuple[str, ...]
     externals: tuple[str, ...]
     catalog: CatalogEntry
+    shared_root: Path | None = None
+    server_root: Path | None = None
 
     @property
     def short_name(self) -> str:
@@ -90,6 +92,14 @@ class PackageRecord:
     @property
     def identifier(self) -> str:
         return f"{self.name}@{self.version}"
+
+    def root_for_realm(self, realm: str) -> Path:
+        """Return the authoring partition that owns a module realm."""
+
+        root = self.server_root if realm == "server" else self.shared_root
+        if root is None:
+            raise ValueError(f"{self.name} has no {realm} partition")
+        return root
 
 
 @dataclass(frozen=True, slots=True)

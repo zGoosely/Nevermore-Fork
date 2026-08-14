@@ -1,0 +1,21 @@
+{
+  "name": "quenty/serverlist",
+  "version": "0.0.1",
+  "exports": {
+    "ServerListService": "ServerListService"
+  },
+  "dependencies": [
+    "quenty/bindtocloseservice@0.0.1",
+    "quenty/gameversionutils@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/promise@0.0.1",
+    "quenty/ratelimiter@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/serverregionservice@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/t@0.0.1",
+    "quenty/tableutils@0.0.1",
+    "quenty/teleportserviceutils@0.0.1"
+  ],
+  "externals": []
+}

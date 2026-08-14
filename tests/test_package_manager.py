@@ -14,7 +14,8 @@ from nevermore_packages.models import ModuleEntry
 @pytest.fixture()
 def repository(tmp_path: Path) -> Path:
     root = tmp_path / "repo"
-    (root / "src" / "_Index").mkdir(parents=True)
+    (root / "src" / "shared" / "_Index").mkdir(parents=True)
+    (root / "src" / "server" / "_Index").mkdir(parents=True)
     (root / "scripts").mkdir()
     (root / "PKGINFO.md").write_text("# Nevermore Package Information\n", encoding="utf-8")
     shutil.copy(Path("scripts/normalize_package_requires.py"), root / "scripts")
@@ -129,9 +130,11 @@ def test_create_dual_realm_service_with_dependencies(repository: Path) -> None:
         ("ExampleService.luau", "server"),
         ("ExampleServiceClient.luau", "client"),
     }
-    for module_name in record.exports:
-        source = (record.root / f"{module_name}.luau").read_text(encoding="utf-8")
-        assert "const Maid = require(Packages.Maid)" in source
+    for module in manager.list_package_modules(record.short_name):
+        root = record.root_for_realm(module.realm)
+        source = (root / module.path).read_text(encoding="utf-8")
+        assert 'const Maid = require("@game/ReplicatedStorage/Packages/Maid")' in source
+        module_name = Path(module.path).stem
         assert f'{module_name}.ServiceName = "{module_name}"' in source
 
 
@@ -155,7 +158,7 @@ def test_discover_and_change_module_exposure(repository: Path) -> None:
         ModuleEntry("Internal/Hidden.lua", "shared", "Utility", "Hidden helper."),
         ModuleEntry("Internal/Hidden.luau", "shared", "Utility", "Hidden helper."),
         ModuleEntry("Internal/Feature/init.luau", "shared", "Class/model", "Hidden feature."),
-        ModuleEntry("Server/Hidden.luau", "server", "Utility", "Server helper."),
+        ModuleEntry("Server/Hidden.luau", "shared", "Utility", "Server helper."),
     )
     updated = manager.update_package(
         record.short_name,
@@ -166,6 +169,8 @@ def test_discover_and_change_module_exposure(repository: Path) -> None:
         modules=modules,
     )
     assert updated.ok, updated.diagnostics
+    moved = manager.set_module_realm(record.short_name, "Server/Hidden", "server")
+    assert moved.ok, moved.diagnostics
 
     discovered = manager.list_package_modules(record.short_name)
     assert [(module.target, module.is_exposed) for module in discovered] == [
@@ -178,12 +183,12 @@ def test_discover_and_change_module_exposure(repository: Path) -> None:
     exposed = manager.set_module_exposed(record.short_name, "Internal/Hidden", True)
     assert exposed.ok, exposed.diagnostics
     assert manager.get_package(record.short_name).exports["Hidden"] == "Internal/Hidden"
-    assert (repository / "src" / "Hidden.luau").is_file()
+    assert (repository / "src" / "shared" / "Hidden.luau").is_file()
 
     hidden = manager.set_module_exposed(record.short_name, "Internal/Hidden", False)
     assert hidden.ok, hidden.diagnostics
     assert "Hidden" not in manager.get_package(record.short_name).exports
-    assert not (repository / "src" / "Hidden.luau").exists()
+    assert not (repository / "src" / "shared" / "Hidden.luau").exists()
 
     assert manager.set_all_modules_exposed(record.short_name, False).ok
     assert manager.get_package(record.short_name).exports == {}
@@ -194,6 +199,9 @@ def test_discover_and_change_module_exposure(repository: Path) -> None:
         "Hidden": "Internal/Hidden",
         "ServerHidden": "Server/Hidden",
     }
+    assert (repository / "src" / "shared" / "Hidden.luau").is_file()
+    assert (repository / "src" / "server" / "ServerHidden.luau").is_file()
+    assert not (repository / "src" / "shared" / "ServerHidden.luau").exists()
 
 
 def test_remove_reports_reverse_dependencies(repository: Path) -> None:
@@ -211,13 +219,46 @@ def test_remove_reports_reverse_dependencies(repository: Path) -> None:
     assert "quenty/consumer" in result.diagnostics[0]
 
 
+def test_move_root_module_to_server_preserves_shared_children(repository: Path) -> None:
+    manager = PackageManager(repository)
+    assert manager.create_package("mixed", kind="utility", export_name="Mixed").ok
+    record = manager.get_package("mixed")
+    assert record.shared_root is not None
+    (record.shared_root / "Mixed.luau").rename(record.shared_root / "init.luau")
+    (record.shared_root / "Child.luau").write_text("--!strict\n\nreturn {}\n", encoding="utf-8")
+
+    updated = manager.update_package(
+        record.short_name,
+        purpose=record.catalog.purpose,
+        description=record.catalog.description,
+        tags=record.catalog.tags,
+        exports={"Mixed": "."},
+        modules=(
+            ModuleEntry("init.luau", "shared", "Utility", "Mixed root."),
+            ModuleEntry("Child.luau", "shared", "Utility", "Shared child."),
+        ),
+    )
+    assert updated.ok, updated.diagnostics
+
+    moved = manager.set_module_realm("mixed", ".", "server")
+    assert moved.ok, moved.diagnostics
+    moved_record = manager.get_package("mixed")
+    assert moved_record.shared_root is not None
+    assert moved_record.server_root is not None
+    assert (moved_record.shared_root / "Child.luau").is_file()
+    assert (moved_record.server_root / "init.luau").is_file()
+    assert not (repository / "src" / "shared" / "Mixed.luau").exists()
+    assert (repository / "src" / "server" / "Mixed.luau").is_file()
+
+
 def test_failed_sync_rolls_back_creation(repository: Path) -> None:
     manager = PackageManager(repository)
     (repository / "scripts" / "sync_packages.py").write_text("raise SystemExit(1)\n", encoding="utf-8")
 
     result = manager.create_package("rollback", purpose="Rollback.", description="Rollback.")
     assert not result.ok
-    assert not list((repository / "src" / "_Index").glob("quenty_rollback@*"))
+    assert not list((repository / "src" / "shared" / "_Index").glob("quenty_rollback@*"))
+    assert not list((repository / "src" / "server" / "_Index").glob("quenty_rollback@*"))
 
 
 def test_catalog_rendering_is_deterministic(repository: Path) -> None:
@@ -235,7 +276,7 @@ def test_legacy_catalog_parser() -> None:
 # example
 
 - **Purpose:** Example purpose
-- **Path:** [`src/_Index/quenty_example@0.0.1/`](src/_Index/quenty_example@0.0.1/)
+- **Path:** [`src/shared/_Index/quenty_example@0.0.1/`](src/shared/_Index/quenty_example@0.0.1/)
 - **Short Description:** Example description
 - **Tags:** `utility`, `data`
 
@@ -243,7 +284,7 @@ def test_legacy_catalog_parser() -> None:
 
 | Module | Realm | Kind | Responsibility and public surface |
 | --- | --- | --- | --- |
-| [`Example.luau`](src/_Index/quenty_example@0.0.1/Example.luau) | shared | Utility | Example helper. |
+| [`Example.luau`](src/shared/_Index/quenty_example@0.0.1/Example.luau) | shared | Utility | Example helper. |
 """
     entry = parse_legacy_catalog(markdown)["example"]
     assert entry.purpose == "Example purpose"
@@ -255,9 +296,11 @@ def test_project_mounts_surfaces_at_replicated_storage_packages() -> None:
     project = json.loads(Path("default.project.json").read_text(encoding="utf-8"))
     tree = project["tree"]
     assert tree["$className"] == "DataModel"
-    assert tree["ReplicatedStorage"]["Packages"]["$path"] == "src"
+    assert tree["ReplicatedStorage"]["Packages"]["$path"] == "src/shared"
+    assert tree["ServerStorage"]["ServerPackages"]["$path"] == "src/server"
 
 
 def test_index_project_excludes_package_metadata_from_rojo() -> None:
-    project = json.loads(Path("src/_Index/default.project.json").read_text(encoding="utf-8"))
-    assert project["globIgnorePaths"] == ["**/catalog.json", "**/package.json"]
+    for path in (Path("src/shared/_Index/default.project.json"), Path("src/server/_Index/default.project.json")):
+        project = json.loads(path.read_text(encoding="utf-8"))
+        assert project["globIgnorePaths"] == ["**/catalog.json", "**/package.json"]

@@ -1,0 +1,19 @@
+{
+  "name": "quenty/softshutdown",
+  "version": "0.0.1",
+  "exports": {
+    "SoftShutdownService": "SoftShutdownService",
+    "SoftShutdownServiceUtils": "Server/SoftShutdownServiceUtils"
+  },
+  "dependencies": [
+    "quenty/bindtocloseservice@0.0.1",
+    "quenty/datastore@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/playerdatastoreservice@0.0.1",
+    "quenty/promise@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/t@0.0.1",
+    "quenty/teleportserviceutils@0.0.1"
+  ],
+  "externals": []
+}

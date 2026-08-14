@@ -1,0 +1,26 @@
+{
+  "purpose": "See [Binder] for usage.",
+  "description": "See [Binder] for usage.",
+  "tags": [
+    "game_service",
+    "physics",
+    "utility"
+  ],
+  "modules": {
+    "Server/Binders/DynamicHide.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Dynamic Hide provides the class/model implementation used by the Hide package. Public entry points include `DynamicHide.new`."
+    },
+    "Server/Binders/Hide.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Primarily used for authoring, this hides the tagged instance from render. Great for making bounding boxes in studio that are then hidden upon runtime. See [Binder] for usage. Public entry points include `Hide.new`, `Hide.Destroy`."
+    },
+    "Server/HideService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Hide Service provides the service implementation used by the Hide package. Public entry points include `HideService.Init`."
+    }
+  }
+}

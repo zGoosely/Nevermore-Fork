@@ -1,0 +1,24 @@
+{
+  "purpose": "Resolves competing actions by priority when they share an input.",
+  "description": "Lets multiple actions share an input and compete by score; every frame the enabled highest-scoring action becomes preferred for that input type.",
+  "tags": [
+    "animation",
+    "data",
+    "enums",
+    "game_service",
+    "gui",
+    "input",
+    "lifecycle",
+    "math",
+    "player_service",
+    "reactive",
+    "utility"
+  ],
+  "modules": {
+    "Server/ScoredActionService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Scored Action Service provides the service implementation used by the Scoredactionservice package. Public entry points include `ScoredActionService.Init`."
+    }
+  }
+}

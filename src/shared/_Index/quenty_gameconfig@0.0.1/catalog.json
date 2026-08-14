@@ -1,0 +1,105 @@
+{
+  "purpose": "Loads, validates, translates, replicates, and exposes game configuration across server and client realms.",
+  "description": "Loads, validates, translates, replicates, and exposes game configuration across server and client realms.",
+  "tags": [
+    "commerce",
+    "data",
+    "developer_tools",
+    "enums",
+    "game_service",
+    "lifecycle",
+    "localization",
+    "math",
+    "reactive",
+    "security",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "Client/Cmdr/GameConfigCommandServiceClient.luau": {
+      "realm": "client",
+      "kind": "Service",
+      "description": "Registers client Cmdr game-config argument types and displays the active config name in Cmdr. Public entry points include `GameConfigCommandServiceClient.Init`, `GameConfigCommandServiceClient.Start`, `GameConfigCommandServiceClient.Destroy`."
+    },
+    "Client/Config/Asset/GameConfigAssetClient.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Client model for a replicated configured asset. Public entry points include `GameConfigAssetClient.new`, `GameConfigAssetClient.ObserveTranslatedName`, `GameConfigAssetClient.ObserveTranslatedDescription`."
+    },
+    "Client/Config/Config/GameConfigClient.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Client model for a replicated game configuration. Public entry points include `GameConfigClient.new`, `GameConfigClient.GetGameConfigAssetBinder`."
+    },
+    "Client/GameConfigBindersClient.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Provides the client GameConfig and GameConfigAsset binders."
+    },
+    "Client/GameConfigServiceClient.luau": {
+      "realm": "client",
+      "kind": "Service",
+      "description": "Provides client-side reactive access to replicated game configurations. Public entry points include `GameConfigServiceClient.Init`, `GameConfigServiceClient.Start`, `GameConfigServiceClient.GetConfigPicker`, `GameConfigServiceClient.Destroy`."
+    },
+    "Shared/Cmdr/GameConfigCmdrUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Registers Cmdr argument types backed by the active GameConfigPicker. Public entry points include `GameConfigCmdrUtils.registerAssetTypes`, `GameConfigCmdrUtils.registerGiftAssetKeyType`, `GameConfigCmdrUtils.registerAssetType`."
+    },
+    "Shared/Config/Asset/GameConfigAssetBase.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Shared reactive model for a configured Roblox asset. Instances of this class are constructed by the server and client binders. Public entry points include `GameConfigAssetBase.new`, `GameConfigAssetBase.GetFolder`, `GameConfigAssetBase.GetAssetId`, `GameConfigAssetBase.ObserveAssetId`, `GameConfigAssetBase.GetAssetType`, `GameConfigAssetBase.ObserveAssetType`, `GameConfigAssetBase.GetAssetKey`,…"
+    },
+    "Shared/Config/Asset/GameConfigAssetConstants.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Attribute names used by game-config assets."
+    },
+    "Shared/Config/Asset/GameConfigAssetUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Creates game-config assets and resolves their Roblox cloud metadata. Public entry points include `GameConfigAssetUtils.isValidAssetId`, `GameConfigAssetUtils.create`, `GameConfigAssetUtils.promiseCloudDataForAssetType`."
+    },
+    "Shared/Config/AssetTypes/GameConfigAssetTypeUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Utilities for validating and naming game-config asset types. Public entry points include `GameConfigAssetTypeUtils.isAssetType`, `GameConfigAssetTypeUtils.getPlural`."
+    },
+    "Shared/Config/AssetTypes/GameConfigAssetTypes.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Enumerates every asset category understood by GameConfigService."
+    },
+    "Shared/Config/Config/GameConfigBase.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Shared reactive model for one replicated game configuration. Public entry points include `GameConfigBase.new`, `GameConfigBase.GetFolder`, `GameConfigBase.GetGameId`, `GameConfigBase.ObserveGameId`, `GameConfigBase.GetConfigName`, `GameConfigBase.ObserveConfigName`, `GameConfigBase.GetAssetsOfType`, `GameConfigBase.GetAssetsOfTypeAndKey`."
+    },
+    "Shared/Config/Config/GameConfigConstants.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Attribute names used by game configurations."
+    },
+    "Shared/Config/Config/GameConfigUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Creates and observes the replicated Folder layout used by GameConfigService. Public entry points include `GameConfigUtils.create`, `GameConfigUtils.getOrCreateAssetFolder`, `GameConfigUtils.observeAssetFolderBrio`."
+    },
+    "Shared/Config/Picker/GameConfigPicker.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Provides synchronous, promise-based, and reactive queries over all replicated game configurations that target the current universe. Public entry points include `GameConfigPicker.new`, `GameConfigPicker.GetActiveConfigs`, `GameConfigPicker.GetConfigsForGameId`, `GameConfigPicker.ObserveActiveConfigsBrio`, `GameConfigPicker.ObserveConfigsForGameIdBrio`, `GameConfigPicker.GetAllActiveAssetsOfType`,…"
+    },
+    "Shared/GameConfigDataService.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "Small shared dependency that exposes the realm's active GameConfigPicker to packages which should not depend directly on the server or client service. Public entry points include `GameConfigDataService.Init`, `GameConfigDataService.SetConfigPicker`, `GameConfigDataService.GetConfigPicker`."
+    },
+    "Shared/GameConfigTranslator.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Provides localized strings for game configurations."
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "purpose": "`SoundPlayer` is the client playback layer for long-running music, ambience, and other sounds that need smooth transitions. It can cross-fade between tracks, schedule changes at loop boundaries, choose sounds from a collection, synchronize loops to a clock or BPM, combine multiple synchronized layers, and arbitrate between competing players by priority.",
+  "description": "`SoundPlayer` is the client playback layer for long-running music, ambience, and other sounds that need smooth transitions. It can cross-fade between tracks, schedule changes at loop boundaries, choose sounds from a collection, synchronize loops to a clock or BPM, combine multiple synchronized layers, and arbitrate between competing players by priority.",
+  "tags": [
+    "animation",
+    "audio",
+    "data",
+    "enums",
+    "game_service",
+    "lifecycle",
+    "localization",
+    "math",
+    "player_service",
+    "reactive",
+    "security",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "Server/SoundPlayerService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Sound Player Service provides the service implementation used by the Soundplayer package. Public entry points include `SoundPlayerService.Init`."
+    }
+  }
+}

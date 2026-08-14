@@ -1,0 +1,41 @@
+{
+  "purpose": "Converts physical input into rebinding-aware, semantic player actions.",
+  "description": "Processes semantic player actions from input maps, applies player-mode policy and rebinding, and coordinates client/server action state.",
+  "tags": [
+    "data",
+    "enums",
+    "game_service",
+    "gui",
+    "input",
+    "lifecycle",
+    "localization",
+    "math",
+    "player_service",
+    "reactive",
+    "security",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "PlayerInputCooldownService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Automatically maps authoritative action cooldowns onto PlayerInputService restrictions and starts them from completed action executions. Public entry points include `PlayerInputCooldownService.Init`, `PlayerInputCooldownService.Start`, `PlayerInputCooldownService.Bind`, `PlayerInputCooldownService.BindAction`, `PlayerInputCooldownService.TryStartActionExecution`, `PlayerInputCooldownService.IsActionOnCooldown`,…"
+    },
+    "PlayerInputService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Validates compact semantic input reports and provides authoritative contexts, restrictions, server binding overrides, and input observations. Public entry points include `PlayerInputService.Init`, `PlayerInputService.Start`, `PlayerInputService.RegisterActor`, `PlayerInputService.ObserveActorsBrio`, `PlayerInputService.SetGlobalServerInputRateLimit`, `PlayerInputService.SetGlobalNetworkRateLimit`,…"
+    },
+    "Server/PlayerInputActorModel.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Owns one Player or NPC Model's authoritative input policy, rate limiters, held action state, and optional player binding overrides. Public entry points include `PlayerInputActorModel.new`, `PlayerInputActorModel.ProcessInput`, `PlayerInputActorModel.TryInput`, `PlayerInputActorModel.PushContext`, `PlayerInputActorModel.PushRestriction`, `PlayerInputActorModel.IsInputHeld`, `PlayerInputActorModel.ForceRelease`,…"
+    },
+    "Server/PlayerInputServerModel.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Compatibility alias for [PlayerInputActorModel]."
+    }
+  }
+}

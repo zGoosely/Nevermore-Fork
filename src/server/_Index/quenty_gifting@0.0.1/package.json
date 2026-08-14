@@ -1,0 +1,24 @@
+{
+  "name": "quenty/gifting",
+  "version": "0.0.1",
+  "exports": {
+    "GiftingService": "GiftingService"
+  },
+  "dependencies": [
+    "quenty/cmdrservice@0.0.1",
+    "quenty/gameconfig@0.0.1",
+    "quenty/gameproductservice@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/observablecollection@0.0.1",
+    "quenty/playerdatastoreservice@0.0.1",
+    "quenty/playerutils@0.0.1",
+    "quenty/promise@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/rxbrioutils@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/tableutils@0.0.1"
+  ],
+  "externals": [
+    "GameProductHandlerResult"
+  ]
+}

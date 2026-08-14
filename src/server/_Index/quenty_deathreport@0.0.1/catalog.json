@@ -1,0 +1,52 @@
+{
+  "purpose": "`DeathReport` is a comprehensive, production-ready death and kill tracking package for Nevermore. It provides centralized event orchestration, reactive stream observers (`Observable`), automatic stats tracking, and ultra-compact network replication via **ByteNet** and **PlayerIdService**.",
+  "description": "`DeathReport` is a comprehensive, production-ready death and kill tracking package for Nevermore. It provides centralized event orchestration, reactive stream observers (`Observable`), automatic stats tracking, and ultra-compact network replication via **ByteNet** and **PlayerIdService**.",
+  "tags": [
+    "data",
+    "enums",
+    "game_service",
+    "lifecycle",
+    "localization",
+    "player_service",
+    "reactive",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "DeathReportService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Centralized death reporting service which can be used to track deaths on the server. Public entry points include `DeathReportService.Init`, `DeathReportService.Start`, `DeathReportService.AddWeaponDataRetriever`, `DeathReportService.FindWeaponData`, `DeathReportService.ObservePlayerKillerReports`, `DeathReportService.ObservePlayerDeathReports`, `DeathReportService.ObserveHumanoidKillerReports`,…"
+    },
+    "Server/DeathReportBindersServer.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Registers server-side death report binders with BinderProvider."
+    },
+    "Server/DeathTrackedHumanoid.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Tracks deaths on humanoids and reports them to DeathReportService. Public entry points include `DeathTrackedHumanoid.new`, `DeathTrackedHumanoid.Destroy`."
+    },
+    "Server/Stats/PlayerDeathTracker.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Server-side tracker for player deaths. Public entry points include `PlayerDeathTracker.new`, `PlayerDeathTracker.Destroy`."
+    },
+    "Server/Stats/PlayerKillTracker.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Server-side tracker for player kills. Public entry points include `PlayerKillTracker.new`, `PlayerKillTracker.GetKillValue`, `PlayerKillTracker.GetPlayer`, `PlayerKillTracker.GetKills`, `PlayerKillTracker.Destroy`."
+    },
+    "Server/Stats/PlayerKillTrackerAssigner.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Assigns player kill and death trackers to connecting players. Public entry points include `PlayerKillTrackerAssigner.new`, `PlayerKillTrackerAssigner.GetPlayerKills`, `PlayerKillTrackerAssigner.GetPlayerKillTracker`, `PlayerKillTrackerAssigner.Destroy`."
+    },
+    "Server/Stats/TeamKillTracker.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Server-side tracker for team kills. Public entry points include `TeamKillTracker.new`, `TeamKillTracker.GetTeam`, `TeamKillTracker.GetKills`, `TeamKillTracker.Destroy`."
+    }
+  }
+}

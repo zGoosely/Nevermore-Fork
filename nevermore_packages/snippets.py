@@ -12,7 +12,13 @@ from .models import SnippetTemplate
 
 PLACEHOLDER = re.compile(r"\$\{(?P<braced_index>\d+)(?::(?P<default>[^}]*))?\}|\$(?P<plain_index>\d+)")
 PACKAGE_REQUIRE = re.compile(
-    r"^const (?P<binding>[A-Za-z_][A-Za-z0-9_]*) = require\(Packages\.(?P<alias>[A-Za-z_][A-Za-z0-9_]*)\)$"
+    r'^const (?P<binding>[A-Za-z_][A-Za-z0-9_]*) = require\((?:Packages\.(?P<property_alias>[A-Za-z_][A-Za-z0-9_]*)'
+    r'|"@game/(?:ReplicatedStorage/Packages|ServerStorage/ServerPackages)/'
+    r'(?P<path_alias>[A-Za-z_][A-Za-z0-9_]*)")\)$'
+)
+PACKAGE_ROOT = re.compile(
+    r"^const (?:Packages|ServerPackages) = "
+    r"(?:ReplicatedStorage\.Packages|ServerStorage\.ServerPackages)$"
 )
 
 
@@ -61,12 +67,16 @@ def render_snippet_template(path: Path, template_name: str, public_name: str) ->
     return rendered.rstrip() + "\n"
 
 
-def inject_package_requires(source: str, aliases: tuple[str, ...]) -> str:
+def inject_package_requires(
+    source: str,
+    aliases: tuple[str, ...],
+    alias_realms: dict[str, str] | None = None,
+    source_realm: str = "shared",
+) -> str:
     """Add sorted public package requires to a rendered module without duplicates."""
 
     requested = set(aliases)
-    if not requested:
-        return source
+    realms = alias_realms or {}
 
     lines = source.rstrip().splitlines()
     existing = {}
@@ -74,34 +84,41 @@ def inject_package_requires(source: str, aliases: tuple[str, ...]) -> str:
     for line in lines:
         match = PACKAGE_REQUIRE.fullmatch(line)
         if match:
-            existing[match.group("alias")] = match.group("binding")
+            alias = match.group("property_alias") or match.group("path_alias")
+            existing[alias] = match.group("binding")
+        elif PACKAGE_ROOT.fullmatch(line):
+            continue
         else:
             retained.append(line)
 
-    all_aliases = sorted(existing.keys() | requested, key=str.casefold)
-    require_lines = [f"const {existing.get(alias, alias)} = require(Packages.{alias})" for alias in all_aliases]
+    for service_name in ("ReplicatedStorage", "ServerStorage"):
+        declaration = f'const {service_name} = game:GetService("{service_name}")'
+        if sum(line.count(service_name) for line in retained) == 1:
+            retained = [line for line in retained if line != declaration]
 
-    packages_index = next(
-        (index for index, line in enumerate(retained) if line == "const Packages = ReplicatedStorage.Packages"),
-        None,
-    )
-    if packages_index is None:
+    all_aliases = sorted(existing.keys() | requested, key=str.casefold)
+    require_lines = []
+    for alias in all_aliases:
+        target_realm = realms.get(alias, "shared")
+        allowed = (
+            target_realm == "shared"
+            or source_realm == "server" and target_realm == "server"
+            or source_realm == "client" and target_realm == "client"
+        )
+        if not allowed:
+            raise ValueError(f"{source_realm} module cannot require {target_realm} export {alias}")
+        runtime_root = (
+            "@game/ServerStorage/ServerPackages"
+            if target_realm == "server"
+            else "@game/ReplicatedStorage/Packages"
+        )
+        require_lines.append(f'const {existing.get(alias, alias)} = require("{runtime_root}/{alias}")')
+
+    if require_lines:
         header_index = next((index + 1 for index, line in enumerate(retained) if line == "]=]"), 1)
         while header_index < len(retained) and not retained[header_index].strip():
             header_index += 1
-        package_block = [
-            'const ReplicatedStorage = game:GetService("ReplicatedStorage")',
-            "const Packages = ReplicatedStorage.Packages",
-            "",
-            *require_lines,
-            "",
-        ]
-        retained[header_index:header_index] = package_block
-    else:
-        insert_index = packages_index + 1
-        while insert_index < len(retained) and not retained[insert_index].strip():
-            retained.pop(insert_index)
-        retained[insert_index:insert_index] = ["", *require_lines, ""]
+        retained[header_index:header_index] = [*require_lines, ""]
 
     normalized_lines = []
     for line in retained:

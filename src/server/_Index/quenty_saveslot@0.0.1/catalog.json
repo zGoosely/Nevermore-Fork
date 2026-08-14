@@ -1,0 +1,27 @@
+{
+  "purpose": "`SaveSlotService` adapts Nevermore's SaveSlot lifecycle to this fork's `PlayerDataStoreService`. It does not open another DataStore or ProfileStore session. Instead, each player's existing profile contains account-wide data plus a `SaveSlots` branch:",
+  "description": "`SaveSlotService` adapts Nevermore's SaveSlot lifecycle to this fork's `PlayerDataStoreService`. It does not open another DataStore or ProfileStore session. Instead, each player's existing profile contains account-wide data plus a `SaveSlots` branch:",
+  "tags": [
+    "commerce",
+    "data",
+    "developer_tools",
+    "enums",
+    "game_service",
+    "gui",
+    "lifecycle",
+    "localization",
+    "math",
+    "player_service",
+    "reactive",
+    "security",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "SaveSlotService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Provides player save slots on top of PlayerDataStoreService's single ProfileStore session. Account-wide data remains at the profile root; slot-scoped data is routed through `SaveSlots.Slots[slotId]` and never replicates to clients."
+    }
+  }
+}

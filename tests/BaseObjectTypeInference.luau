@@ -1,6 +1,6 @@
 --!strict
 
-const BaseObject = require("../src/_Index/quenty_baseobject@0.0.1/BaseObject")
+const BaseObject = require("../src/shared/_Index/quenty_baseobject@0.0.1/BaseObject")
 
 const Example = setmetatable({}, BaseObject)
 Example.ClassName = "Example"

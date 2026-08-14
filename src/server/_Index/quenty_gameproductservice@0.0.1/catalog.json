@@ -1,0 +1,26 @@
+{
+  "purpose": "Server-authoritative product ownership, receipts, purchases, and gifting.",
+  "description": "Coordinates Roblox product ownership, purchase receipts, gifting, and server-authoritative product handlers across the network boundary.",
+  "tags": [
+    "animation",
+    "commerce",
+    "data",
+    "developer_tools",
+    "enums",
+    "game_service",
+    "lifecycle",
+    "math",
+    "player_service",
+    "reactive",
+    "security",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "GameProductService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "GameConfig-backed purchase prompting, ownership queries, and receipt-safe developer-product fulfillment. Developer products are granted only from ProcessReceipt through ReceiptProcessingService. PromptProductPurchaseFinished is used only to detect a cancelled prompt."
+    }
+  }
+}

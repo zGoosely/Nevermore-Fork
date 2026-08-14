@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Synchronize checked-in package surfaces, manifests, and the Rojo index map."""
+"""Synchronize paired package surfaces, manifests, catalogs, and Rojo index maps."""
 
 from __future__ import annotations
 
@@ -8,7 +8,7 @@ import json
 import re
 import sys
 from collections import defaultdict
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -16,34 +16,50 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from nevermore_packages.catalog import read_catalog, render_catalog, validate_catalog
-from nevermore_packages.models import PackageRecord
+from nevermore_packages.models import CatalogEntry, PackageRecord
 
 
 SRC = ROOT / "src"
-INDEX = SRC / "_Index"
+SHARED = SRC / "shared"
+SERVER = SRC / "server"
+SHARED_INDEX = SHARED / "_Index"
+SERVER_INDEX = SERVER / "_Index"
 CATALOG = ROOT / "PKGINFO.md"
 DOCUMENTATION_NAMES = {"MyClass"}
 PACKAGE_REQUIRE = re.compile(
     r"(?:\brequire|\(require\s*::\s*any\))\s*\(\s*(?:"
-    r"[\"']@game/ReplicatedStorage/Packages/(?P<path_alias>[A-Za-z_][A-Za-z0-9_]*)[\"']"
-    r"|Packages\.(?P<property_alias>[A-Za-z_][A-Za-z0-9_]*))\s*\)"
+    r"[\"']@game/(?:ReplicatedStorage/Packages|ServerStorage/ServerPackages)/"
+    r"(?P<path_alias>[A-Za-z_][A-Za-z0-9_]*)[\"']"
+    r"|(?:Packages|ServerPackages)\.(?P<property_alias>[A-Za-z_][A-Za-z0-9_]*))\s*\)"
 )
 TYPE_DECLARATION = re.compile(
     r"^export type\s+(?P<name>[A-Za-z_][A-Za-z0-9_]*)\s*(?P<generics><[^=\n]+>)?\s*=",
     re.MULTILINE,
 )
-def resolve_module(package_root: Path, target: str) -> Path:
-    base = package_root if target == "." else package_root / target
-    if base.is_dir():
-        for init_name in ("init.luau", "init.lua"):
-            candidate = base / init_name
+VALID_REALMS = {"shared", "client", "server"}
+
+
+def resolve_module(roots: tuple[Path, ...], target: str) -> Path:
+    for package_root in roots:
+        base = package_root if target == "." else package_root / target
+        if base.is_dir():
+            for init_name in ("init.luau", "init.lua"):
+                candidate = base / init_name
+                if candidate.exists():
+                    return candidate
+        for extension in (".luau", ".lua"):
+            candidate = Path(f"{base}{extension}")
             if candidate.exists():
                 return candidate
-    for extension in (".luau", ".lua"):
-        candidate = Path(f"{base}{extension}")
-        if candidate.exists():
-            return candidate
-    raise ValueError(f"Cannot resolve export target {target!r} in {package_root}")
+    raise ValueError(f"Cannot resolve export target {target!r} in {', '.join(str(root) for root in roots)}")
+
+
+def module_target(relative_path: str) -> str:
+    path = PurePosixPath(relative_path)
+    if path.name in {"init.lua", "init.luau"}:
+        parent = path.parent.as_posix()
+        return "." if parent == "." else parent
+    return path.with_suffix("").as_posix()
 
 
 def runtime_expression(scoped_version: str, target: str) -> str:
@@ -86,9 +102,7 @@ def render_wrapper(scoped_version: str, implementation: Path, target: str) -> st
     require_binding = f"const Implementation = require({expression})"
     if len(require_binding) > 120:
         require_binding = f"const Implementation =\n\trequire({expression})"
-    return "\n".join(
-        ["--!strict", "", require_binding, "", *declarations, "", "return Implementation", ""]
-    )
+    return "\n".join(["--!strict", "", require_binding, "", *declarations, "", "return Implementation", ""])
 
 
 def write_or_check(path: Path, expected: str, check: bool, differences: list[Path]) -> None:
@@ -101,31 +115,140 @@ def write_or_check(path: Path, expected: str, check: bool, differences: list[Pat
         path.write_text(expected, encoding="utf-8")
 
 
+def partition_manifests(index: Path) -> dict[str, tuple[Path, dict[str, object]]]:
+    result = {}
+    for manifest_path in sorted(index.glob("quenty_*@*/package.json")):
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        name = str(manifest["name"])
+        if name in result:
+            raise ValueError(f"Duplicate indexed package partition: {name}")
+        result[name] = (manifest_path, manifest)
+    return result
+
+
+def merge_catalogs(shared_root: Path | None, server_root: Path | None, name: str) -> CatalogEntry:
+    entries = [read_catalog(root / "catalog.json") for root in (shared_root, server_root) if root is not None]
+    first = entries[0]
+    for entry in entries[1:]:
+        if (entry.purpose, entry.description, entry.tags) != (first.purpose, first.description, first.tags):
+            raise ValueError(f"Paired catalog metadata differs for {name}")
+    modules = tuple(sorted((module for entry in entries for module in entry.modules), key=lambda module: module.path))
+    if len({module.path for module in modules}) != len(modules):
+        raise ValueError(f"Module appears in both package partitions: {name}")
+    return CatalogEntry(first.purpose, first.description, first.tags, modules)
+
+
+def add_source_mapping(node: dict[str, object], relative_path: str, source_path: str) -> None:
+    path = PurePosixPath(relative_path)
+    parts = list(path.parts)
+    filename = parts.pop()
+    if filename in {"init.lua", "init.luau"}:
+        if not parts:
+            raise ValueError("A paired server partition cannot override a shared package root init module")
+        instance_parts = parts
+    else:
+        instance_parts = [*parts, PurePosixPath(filename).stem]
+
+    cursor = node
+    for index, part in enumerate(instance_parts):
+        is_last = index == len(instance_parts) - 1
+        child = cursor.setdefault(part, {} if is_last else {"$className": "Folder"})
+        if not isinstance(child, dict):
+            raise ValueError(f"Conflicting Rojo mapping at {relative_path}")
+        cursor = child
+    cursor.pop("$className", None)
+    cursor["$path"] = source_path
+
+
+def project_json(name: str, tree: dict[str, object]) -> str:
+    return json.dumps(
+        {
+            "name": name,
+            "globIgnorePaths": ["**/catalog.json", "**/package.json"],
+            "tree": tree,
+        },
+        indent=2,
+    ) + "\n"
+
+
+def mapped_source_path(package_root: Path, source_path: Path, prefix: str) -> str:
+    relative = PurePosixPath(source_path.relative_to(package_root).as_posix())
+    mapped_relative = relative.parent if relative.name in {"init.lua", "init.luau"} else relative
+    return f"{prefix}/{mapped_relative.as_posix()}"
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--check", action="store_true", help="Report drift without writing files")
     args = parser.parse_args()
 
-    manifests: dict[str, tuple[Path, dict[str, object]]] = {}
-    alias_owners: dict[str, str] = {}
-    alias_targets: dict[str, tuple[Path, str]] = {}
+    shared_manifests = partition_manifests(SHARED_INDEX)
+    server_manifests = partition_manifests(SERVER_INDEX)
+    package_names = sorted(set(shared_manifests) | set(server_manifests))
 
-    for manifest_path in sorted(INDEX.glob("quenty_*@*/package.json")):
-        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-        package_name = str(manifest["name"])
-        if package_name in manifests:
-            raise ValueError(f"Duplicate indexed package: {package_name}")
-        manifests[package_name] = (manifest_path, manifest)
-        for alias, target in dict(manifest["exports"]).items():
-            if alias in alias_owners:
-                raise ValueError(f"Duplicate surface export: {alias}")
-            alias_owners[alias] = package_name
-            alias_targets[alias] = (manifest_path.parent, str(target))
+    partitions: dict[tuple[str, str], tuple[Path, dict[str, object]]] = {}
+    package_versions = {}
+    records = []
+    alias_owners = {}
+    alias_targets: dict[str, tuple[str, Path, str]] = {}
+    module_realms: dict[tuple[str, str], str] = {}
 
-    package_versions = {name: str(manifest["version"]) for name, (_, manifest) in manifests.items()}
-    dependencies: dict[str, set[str]] = defaultdict(set)
-    externals: dict[str, set[str]] = defaultdict(set)
-    for package_name, (manifest_path, _) in manifests.items():
+    for name in package_names:
+        shared_pair = shared_manifests.get(name)
+        server_pair = server_manifests.get(name)
+        pairs = [("shared", shared_pair), ("server", server_pair)]
+        versions = {str(pair[1]["version"]) for _, pair in pairs if pair is not None}
+        if len(versions) != 1:
+            raise ValueError(f"Paired package versions differ for {name}")
+        version = versions.pop()
+        package_versions[name] = version
+        shared_root = shared_pair[0].parent if shared_pair else None
+        server_root = server_pair[0].parent if server_pair else None
+        catalog = merge_catalogs(shared_root, server_root, name)
+        metadata = {module_target(module.path): module for module in catalog.modules}
+        exports = {}
+        dependencies = set()
+        externals = set()
+        for partition_name, pair in pairs:
+            if pair is None:
+                continue
+            manifest_path, manifest = pair
+            partitions[(name, partition_name)] = pair
+            for alias, target_value in dict(manifest.get("exports", {})).items():
+                target = str(target_value)
+                module = metadata.get(target)
+                if module is None:
+                    raise ValueError(f"Export {alias} has no catalog module in {name}")
+                expected_partition = "server" if module.realm == "server" else "shared"
+                if expected_partition != partition_name:
+                    raise ValueError(f"Export {alias} is in the wrong package partition")
+                if alias in alias_owners:
+                    raise ValueError(f"Duplicate surface export: {alias}")
+                alias_owners[str(alias)] = name
+                implementation = resolve_module(tuple(root for root in (shared_root, server_root) if root), target)
+                alias_targets[str(alias)] = (partition_name, implementation, target)
+                exports[str(alias)] = target
+                module_realms[(name, str(alias))] = module.realm
+            dependencies.update(str(item) for item in manifest.get("dependencies", []))
+            externals.update(str(item) for item in manifest.get("externals", []))
+        records.append(
+            PackageRecord(
+                root=shared_root or server_root,  # type: ignore[arg-type]
+                name=name,
+                version=version,
+                exports=exports,
+                dependencies=tuple(sorted(dependencies)),
+                externals=tuple(sorted(externals)),
+                catalog=catalog,
+                shared_root=shared_root,
+                server_root=server_root,
+            )
+        )
+
+    dependencies_by_partition: dict[tuple[str, str], set[str]] = defaultdict(set)
+    externals_by_partition: dict[tuple[str, str], set[str]] = defaultdict(set)
+    for key, (manifest_path, _) in partitions.items():
+        package_name, partition_name = key
         for source_path in manifest_path.parent.rglob("*"):
             if not source_path.is_file() or source_path.suffix not in {".lua", ".luau"}:
                 continue
@@ -134,76 +257,81 @@ def main() -> int:
                 alias = match.group("path_alias") or match.group("property_alias")
                 dependency = alias_owners.get(alias)
                 if dependency and dependency != package_name:
-                    dependencies[package_name].add(dependency)
+                    dependencies_by_partition[key].add(dependency)
                 elif not dependency and alias not in DOCUMENTATION_NAMES:
-                    externals[package_name].add(alias)
+                    externals_by_partition[key].add(alias)
 
     differences: list[Path] = []
-    index_tree: dict[str, object] = {"$className": "Folder"}
-    records: list[PackageRecord] = []
-
-    for package_name, (manifest_path, manifest) in sorted(manifests.items()):
-        version = str(manifest["version"])
-        scoped_version = f"{package_name}@{version}"
-        index_tree[scoped_version] = {"$path": manifest_path.parent.name}
-        normalized_manifest = {
+    for key, (manifest_path, manifest) in sorted(partitions.items()):
+        package_name, partition_name = key
+        version = package_versions[package_name]
+        normalized = {
             "name": package_name,
             "version": version,
-            "exports": dict(sorted(dict(manifest["exports"]).items())),
+            "exports": dict(sorted(dict(manifest.get("exports", {})).items())),
             "dependencies": [
-                f"{dependency}@{package_versions[dependency]}" for dependency in sorted(dependencies[package_name])
+                f"{dependency}@{package_versions[dependency]}"
+                for dependency in sorted(dependencies_by_partition[key])
             ],
-            "externals": sorted(externals[package_name]),
+            "externals": sorted(externals_by_partition[key]),
         }
-        write_or_check(
-            manifest_path,
-            json.dumps(normalized_manifest, indent=2) + "\n",
-            args.check,
-            differences,
+        write_or_check(manifest_path, json.dumps(normalized, indent=2) + "\n", args.check, differences)
+
+    for alias, (partition_name, implementation, target) in sorted(alias_targets.items()):
+        owner = alias_owners[alias]
+        scoped_version = f"{owner}@{package_versions[owner]}"
+        wrapper = render_wrapper(scoped_version, implementation, target)
+        surface = SERVER if partition_name == "server" else SHARED
+        write_or_check(surface / f"{alias}.luau", wrapper, args.check, differences)
+
+    shared_tree: dict[str, object] = {"$className": "Folder"}
+    for name, (manifest_path, manifest) in sorted(shared_manifests.items()):
+        shared_tree[f'{name}@{manifest["version"]}'] = {"$path": manifest_path.parent.name}
+
+    server_tree: dict[str, object] = {"$className": "Folder"}
+    for name, (manifest_path, manifest) in sorted(server_manifests.items()):
+        scoped_version = f'{name}@{manifest["version"]}'
+        shared_pair = shared_manifests.get(name)
+        if shared_pair is None:
+            server_tree[scoped_version] = {"$path": manifest_path.parent.name}
+            continue
+        server_root = manifest_path.parent
+        shared_root = shared_pair[0].parent
+        server_owns_root = any((server_root / name).is_file() for name in ("init.lua", "init.luau"))
+        base_root = server_root if server_owns_root else shared_root
+        overlay_root = shared_root if server_owns_root else server_root
+        base_path = base_root.name if server_owns_root else f"../../shared/_Index/{base_root.name}"
+        overlay_prefix = (
+            f"../../shared/_Index/{overlay_root.name}" if server_owns_root else overlay_root.name
         )
+        node: dict[str, object] = {"$path": base_path}
+        for source_path in sorted(overlay_root.rglob("*")):
+            if not source_path.is_file() or source_path.suffix not in {".lua", ".luau"}:
+                continue
+            relative = source_path.relative_to(overlay_root).as_posix()
+            mapped_path = mapped_source_path(overlay_root, source_path, overlay_prefix)
+            add_source_mapping(node, relative, mapped_path)
+        server_tree[scoped_version] = node
 
-        catalog_path = manifest_path.parent / "catalog.json"
-        catalog = read_catalog(catalog_path)
-        record = PackageRecord(
-            root=manifest_path.parent,
-            name=package_name,
-            version=version,
-            exports={str(alias): str(target) for alias, target in normalized_manifest["exports"].items()},
-            dependencies=tuple(str(item) for item in normalized_manifest["dependencies"]),
-            externals=tuple(str(item) for item in normalized_manifest["externals"]),
-            catalog=catalog,
-        )
-        records.append(record)
+    write_or_check(SHARED_INDEX / "default.project.json", project_json("_Index", shared_tree), args.check, differences)
+    write_or_check(SERVER_INDEX / "default.project.json", project_json("_Index", server_tree), args.check, differences)
+    write_or_check(CATALOG, render_catalog(records), args.check, differences)
 
-        for alias, target in normalized_manifest["exports"].items():
-            implementation = resolve_module(manifest_path.parent, target)
-            wrapper = render_wrapper(scoped_version, implementation, target)
-            write_or_check(SRC / f"{alias}.luau", wrapper, args.check, differences)
-
-    index_project = json.dumps(
-        {
-            "name": "_Index",
-            "globIgnorePaths": ["**/catalog.json", "**/package.json"],
-            "tree": index_tree,
-        },
-        indent=2,
-    ) + "\n"
-    write_or_check(INDEX / "default.project.json", index_project, args.check, differences)
-
-    rendered_catalog = render_catalog(records)
-    write_or_check(CATALOG, rendered_catalog, args.check, differences)
-
-    expected_wrappers = {f"{alias}.luau" for alias in alias_owners}
-    unexpected_wrappers = [path for path in SRC.glob("*.luau") if path.name not in expected_wrappers]
-    differences.extend(unexpected_wrappers)
-    if not args.check:
-        for wrapper in unexpected_wrappers:
-            wrapper.unlink()
+    expected_shared = {f"{alias}.luau" for alias, value in alias_targets.items() if value[0] == "shared"}
+    expected_server = {f"{alias}.luau" for alias, value in alias_targets.items() if value[0] == "server"}
+    for surface, expected in ((SHARED, expected_shared), (SERVER, expected_server)):
+        unexpected = [path for path in surface.glob("*.luau") if path.name not in expected]
+        differences.extend(unexpected)
+        if not args.check:
+            for path in unexpected:
+                path.unlink()
 
     if args.check:
         for record in records:
-            if validate_catalog(record) and record.root / "catalog.json" not in differences:
-                differences.append(record.root / "catalog.json")
+            if validate_catalog(record):
+                for root in (record.shared_root, record.server_root):
+                    if root is not None and root / "catalog.json" not in differences:
+                        differences.append(root / "catalog.json")
 
     if differences:
         action = "would update" if args.check else "updated"
@@ -214,7 +342,7 @@ def main() -> int:
             print(f"... and {len(differences) - 25} more")
         return 1 if args.check else 0
 
-    print(f"Package surfaces are synchronized ({len(manifests)} packages, {len(alias_owners)} exports)")
+    print(f"Package surfaces are synchronized ({len(records)} packages, {len(alias_owners)} exports)")
     return 0
 
 

@@ -1,0 +1,22 @@
+{
+  "purpose": "`SoundGroup` manages the Roblox `SoundService` hierarchy as named dot-separated paths. It creates standard audio categories, routes sounds into those categories, applies reversible effects, tracks hierarchy changes reactively, and provides stackable volume modifiers.",
+  "description": "`SoundGroup` manages the Roblox `SoundService` hierarchy as named dot-separated paths. It creates standard audio categories, routes sounds into those categories, applies reversible effects, tracks hierarchy changes reactively, and provides stackable volume modifiers.",
+  "tags": [
+    "audio",
+    "data",
+    "game_service",
+    "lifecycle",
+    "localization",
+    "math",
+    "player_service",
+    "reactive",
+    "utility"
+  ],
+  "modules": {
+    "Server/SoundGroupService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Sound Group Service provides the service implementation used by the Soundgroup package. Public entry points include `SoundGroupService.Init`, `SoundGroupService.Start`, `SoundGroupService.Destroy`."
+    }
+  }
+}

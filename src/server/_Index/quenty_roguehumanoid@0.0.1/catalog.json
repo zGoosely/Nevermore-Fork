@@ -1,0 +1,21 @@
+{
+  "purpose": "Imported from Nevermore's `@quenty/rogue-humanoid` package. It exposes composable Rogue properties for humanoid WalkSpeed, jump settings, scale, and maximum health through `RogueHumanoidService` and `RogueHumanoidServiceClient`.",
+  "description": "Imported from Nevermore's `@quenty/rogue-humanoid` package. It exposes composable Rogue properties for humanoid WalkSpeed, jump settings, scale, and maximum health through `RogueHumanoidService` and `RogueHumanoidServiceClient`.",
+  "tags": [
+    "data",
+    "game_service",
+    "player_service"
+  ],
+  "modules": {
+    "Server/RogueHumanoid.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Rogue Humanoid provides the class/model implementation used by the Roguehumanoid package. Public entry points include `RogueHumanoid.new`."
+    },
+    "Server/RogueHumanoidService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Rogue Humanoid Service provides the service implementation used by the Roguehumanoid package. Public entry points include `RogueHumanoidService.Init`."
+    }
+  }
+}

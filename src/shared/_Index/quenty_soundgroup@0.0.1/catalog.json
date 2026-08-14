@@ -1,0 +1,67 @@
+{
+  "purpose": "`SoundGroup` manages the Roblox `SoundService` hierarchy as named dot-separated paths. It creates standard audio categories, routes sounds into those categories, applies reversible effects, tracks hierarchy changes reactively, and provides stackable volume modifiers.",
+  "description": "`SoundGroup` manages the Roblox `SoundService` hierarchy as named dot-separated paths. It creates standard audio categories, routes sounds into those categories, applies reversible effects, tracks hierarchy changes reactively, and provides stackable volume modifiers.",
+  "tags": [
+    "audio",
+    "data",
+    "game_service",
+    "lifecycle",
+    "localization",
+    "math",
+    "player_service",
+    "reactive",
+    "utility"
+  ],
+  "modules": {
+    "Client/SoundGroupServiceClient.luau": {
+      "realm": "client",
+      "kind": "Service",
+      "description": "Sound Group Service Client provides the service implementation used by the Soundgroup package. Public entry points include `SoundGroupServiceClient.Init`, `SoundGroupServiceClient.Destroy`."
+    },
+    "Shared/Effects/SoundEffectsList.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Holds sound effects to be applied Public entry points include `SoundEffectsList.new`, `SoundEffectsList.HasEffects`, `SoundEffectsList.ObserveHasEffects`, `SoundEffectsList.IsActive`, `SoundEffectsList.PushEffect`, `SoundEffectsList.ApplyEffects`."
+    },
+    "Shared/Effects/SoundEffectsRegistry.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Allows us to independently apply sound effects to both sound groups and to individual sounds. Public entry points include `SoundEffectsRegistry.new`, `SoundEffectsRegistry.PushEffect`, `SoundEffectsRegistry.ApplyEffects`, `SoundEffectsRegistry.ObserveActiveEffectsPathBrios`."
+    },
+    "Shared/Groups/WellKnownSoundGroups.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Well Known Sound Groups provides the class/model implementation used by the Soundgroup package."
+    },
+    "Shared/SoundEffectService.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "Handles applying global volume and effects to specific sounds in a group based upon a path. Public entry points include `SoundEffectService.Init`, `SoundEffectService.Start`, `SoundEffectService.RegisterSFX`, `SoundEffectService.PromiseCreateVolumeMultiplier`, `SoundEffectService.GetOrCreateSoundGroup`, `SoundEffectService.GetSoundGroup`, `SoundEffectService.PushEffect`, `SoundEffectService.ApplyEffects`."
+    },
+    "Shared/SoundGroupTracker.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Sound Group Tracker provides the class/model implementation used by the Soundgroup package. Public entry points include `SoundGroupTracker.new`, `SoundGroupTracker.GetFirstSoundGroup`, `SoundGroupTracker.ObserveSoundGroup`, `SoundGroupTracker.ObserveSoundGroupBrio`, `SoundGroupTracker.ObserveSoundGroupsBrio`, `SoundGroupTracker.Track`, `SoundGroupTracker.ObserveSoundGroupPath`."
+    },
+    "Shared/Utils/SoundGroupPathUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Sound Group Path Utils provides the class/model implementation used by the Soundgroup package. Public entry points include `SoundGroupPathUtils.isSoundGroupPath`, `SoundGroupPathUtils.toPathTable`, `SoundGroupPathUtils.findSoundGroup`, `SoundGroupPathUtils.findOrCreateSoundGroup`."
+    },
+    "Shared/Volume/SoundGroupVolume.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Sound Group Volume provides the class/model implementation used by the Soundgroup package. Public entry points include `SoundGroupVolume.new`, `SoundGroupVolume.CreateMultiplier`."
+    },
+    "Shared/Volume/SoundGroupVolumeInterface.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Sound Group Volume Interface provides the class/model implementation used by the Soundgroup package."
+    },
+    "Shared/Volume/SoundGroupVolumeProperties.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Sound Group Volume Properties provides the class/model implementation used by the Soundgroup package."
+    }
+  }
+}

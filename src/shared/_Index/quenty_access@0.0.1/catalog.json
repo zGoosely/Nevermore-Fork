@@ -1,0 +1,178 @@
+{
+  "purpose": "A shared fact, feature, and policy system for gating game access.",
+  "description": "Centralizes game-access decisions. Facts contribute evidence, policies evaluate that evidence, and replicated state lets client UI and server authority agree on the same feature gates.",
+  "tags": [
+    "animation",
+    "commerce",
+    "data",
+    "developer_tools",
+    "enums",
+    "game_service",
+    "gui",
+    "lifecycle",
+    "localization",
+    "math",
+    "player_service",
+    "reactive",
+    "security",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "Client/AccessServiceClient.luau": {
+      "realm": "client",
+      "kind": "Service",
+      "description": "Client entry point for the access package. The mirror of [AccessService]: brings up the shared The client resolves its own facts rather than being told the verdict, which is what keeps a menu from rendering nothing while it waits on the server. Facts the client genuinely cannot resolve are the exception, and those replicate."
+    },
+    "Client/Binders/AccessPlayerClient.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "The client half of [AccessPlayerBase]. It reads what the server replicated onto the player instance and feeds it into this realm's [AccessDataService], so a fact this realm can resolve and one only the server can are answered through the same path. Bound to every player, so this realm can answer questions about anybody -- a party UI can show which teammate is missing a chapter without asking them."
+    },
+    "Client/Commands/AccessCommandServiceClient.luau": {
+      "realm": "client",
+      "kind": "Service",
+      "description": "Registers the access argument types on the client, so the console autocompletes fact and feature names as you type them. The commands themselves are server-side in [AccessCommandService]; this only teaches the client what the arguments look like. Public entry points include `AccessCommandServiceClient.Init`, `AccessCommandServiceClient.Start`, `AccessCommandServiceClient.Destroy`."
+    },
+    "Shared/AccessDataService.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "Aggregates every [AccessFact] a game registers and answers every [AccessFeature] it gates against them. One place resolves the facts, one place applies the policy, and both realms read the same registry -- so the menu, the storefront and the server's arrival gate reach one verdict instead of three that drift. Registration belongs in shared code, during `Init`: Several layers may answer one fact."
+    },
+    "Shared/AccessDataServiceInterface.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "The tie for [AccessDataService], so other packages can ask about access without depending on this one. A package like an area-gating library should not have to `require` the access package -- and should not break in a game that has no access package at all. It reaches the implementation through this definition instead, and simply finds nothing when access is not installed."
+    },
+    "Shared/AccessFact.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "One layer of one fact about a player: `true`, `false`, or `nil` for not-yet-answered. Facts are never gated by a release flag and never consult each other -- \"does this player own the pass\" is the same question whether or not the game has launched. What a fact _means_ is [AccessFeature]'s business."
+    },
+    "Shared/AccessFactContributionState.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "What a fact layer said, named rather than encoded in a boolean and a nil. `nil` used to carry two of these at once, which is the root of a whole family of bugs: a Lua table cannot hold nil, so an unresolved fact simply vanished from any map it was put in, and _ **ALLOW** -- yes. _ **DENY** -- no. _ **UNRESOLVED** -- I tried and cannot say yet. An answer, not a silence. _ **ABSTAIN** -- not my question."
+    },
+    "Shared/AccessFactContributionStateUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Moving between an [AccessFactContributionState] and the plain values authors write. Authoring stays cheap -- a resolver may still return `true`, `false`, or an observable of `boolean?` and the boundary names what arrived. What is no longer possible is an unlabelled nil reaching the merge, where it used to mean two different things depending on where you looked."
+    },
+    "Shared/AccessFactNames.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "The fact names the package itself registers. A fact name is API: it is what a spec overrides, what someone types into the console, and what a feature declares. Naming the ones this package ships means a game, a downstream package, and a console command all spell them the same way without having to coordinate."
+    },
+    "Shared/AccessFactPriority.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Where a fact layer sits when several answer the same fact. Several mechanisms can legitimately answer one question -- a group rank and an allowlist both say whether someone is staff, a console override says so louder than either. Rather than let registration order decide, every layer declares a priority and the highest one that has something to say wins."
+    },
+    "Shared/AccessFactServerOverrideBehavior.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "How a fact's server answer combines with the one the client worked out for itself. The server's answer **always replicates** -- that part is not configurable, because a client that silently never hears is the failure nobody can debug. What a fact chooses is what the client should _do_ with it, and there are only four sensible answers, so they are named rather than left to a predicate somebody has to read."
+    },
+    "Shared/AccessFeature.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "One capability a game gates: entering a chapter, buying an egg, opening a demo area. A feature is policy -- it reads facts and **decides**. Every judgement lives here: which combination of facts opens a thing, what a release flag means for it, inversions, per-thing context. Facts state what is true; features decide what that is worth. That is why the same fact can grant one feature and deny another."
+    },
+    "Shared/AccessPlayerInterface.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "The tie for [AccessPlayerBase], so anything holding a player can ask about their access without requiring the access package or plumbing a [ServiceBag] to the call site. Members are name-based for the same reason [AccessDataServiceInterface]'s are: a consumer that already holds an [AccessFeature] object also holds this package. The setters sit behind."
+    },
+    "Shared/AccessPolicy.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Something that _happens_ because of a verdict. Facts say what is true, features say what that means, and a policy is the consequence -- kicking, teleporting, closing a door. A policy has a lifetime, so give it to a maid where you make it. Registering it does not take ownership. A policy declares what it reads, the same way a feature does, and its context only hands back what it declared."
+    },
+    "Shared/AccessPolicyContextUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "The thing an [AccessPolicy] is handed when it runs. A named concept with a checked shape rather than an anonymous table, because a policy author reads this before they write anything, and \"what do I get and what may I do with it\" should be answerable in one place."
+    },
+    "Shared/AccessPolicyNames.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "The policy names the package itself registers. Named for the same reason fact names are: a policy name is what a console user types and what a test addresses, so it is API rather than an internal label."
+    },
+    "Shared/AccessPolicyRealm.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Which realm a policy's consequence runs in. Policies are registered in **both** realms regardless, so a console on either side knows every policy name and can autocomplete it. The realm decides only where `apply` actually runs -- kicking is server-side, showing a piece of UI is client-side, and neither should half-happen on the wrong one. Public entry points include `AccessPolicyRealm.runsHere`."
+    },
+    "Shared/AccessPolicyService.luau": {
+      "realm": "shared",
+      "kind": "Service",
+      "description": "Registers [AccessPolicy] objects and runs the enabled ones against each player. Policies register **disabled** unless they asked not to. A policy that is off is still listed, still autocompletes, and still names what it reads -- it simply is not running."
+    },
+    "Shared/AccessPolicyServiceInterface.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "The tie for [AccessPolicyService], so a console pane or a debug UI can list policies and see what is running without depending on this package. Query only. Enabling a policy is not here on purpose: a policy is a consequence, and turning one on from anything that merely found an interface would make \"something can see the registry\" and \"something can start kicking people\" the same permission."
+    },
+    "Shared/AccessStateUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "The verdict an [AccessFeature] produces, and the fold most features want. Three outcomes, not two. `disallowed(UNRESOLVED)` means no answer came back yet -- a lookup still in flight, a service that failed, a realm that cannot resolve a fact at all -- and it is deliberately not the same as being denied."
+    },
+    "Shared/Binders/AccessPlayerBase.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "The scripter-facing view of one player's access. Bound to every player in both realms, so anything holding a `Player` can ask about them without reaching for a service or knowing a registry exists. Three shapes of the same question because callers genuinely differ: a guard wants a boolean now, a UI wants a stream, and a gate wants to wait for a real answer."
+    },
+    "Shared/Commands/AccessCommandUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Cmdr types and readout formatting for [AccessDataService]. The formatting lives here, apart from the command that prints it, because the readout is the thing this package exists to make good -- somebody is complaining, and this is what tells you why. Pure functions over an [AccessFactReport], so the exact text is unit-tested rather than eyeballed once."
+    },
+    "Shared/Implementations/Facts/FeatureAccessFact.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "A fact whose answer is another feature's verdict. This is how features compose. Features do not read other features directly, on purpose. Facts are already the one currency everything else is built on -- the layer merge, the reports, the console readout, with all of that already working, instead of needing a second resolution path and a second way of explaining itself."
+    },
+    "Shared/Implementations/Facts/OwnsGameAccessFact.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Whether the player has bought this game, from [GameProductDataService]. Pre-registered by Registered at [AccessFactPriority].BUILT_IN, so a game that has its own idea of ownership layers over it rather than fighting it for the name. GOTCHA: ownership that cannot be resolved abstains rather than answering false."
+    },
+    "Shared/Implementations/Facts/PlayerIsAdminAccessFact.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Whether the player has admin permission, from [PermissionService]. Pre-registered by Registered at [AccessFactPriority].BUILT_IN -- the bottom -- so anything a game registers under the same name outranks it. A game with its own idea of who counts as staff layers over this rather than fighting it."
+    },
+    "Shared/Implementations/Policy/AccessKickPolicy.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "A policy whose consequence is kicking. What _triggers_ it is the binding. Behaviour and application are separated on purpose: kicking is one thing, and \"when someone is not staff\" is another. Bind them at the registration site, where both halves read in a line: GOTCHA, and the reason this is a class rather than a pattern to copy: **a kick never fires on an unanswered input.** \"We could not find out whether you…"
+    },
+    "Shared/JSONAttributeValue.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Stores a JSON-serializable value in one Roblox attribute and exposes it as an observable value."
+    },
+    "Shared/Replication/AccessReplicationState.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "What this realm has been told about a fact, as four distinct states rather than a boolean and a guess. Helpers live in [AccessReplicationStateUtils]. Three of these look like \"false\" if you flatten them, and each needs a different response: _ **NOT_YET_ARRIVED** -- the server has not spoken. Never overrides; the local answer stands. _ **ABSTAINED** -- the server has no layer for this fact either."
+    },
+    "Shared/Replication/AccessReplicationStateUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Reading an [AccessReplicationState] out of what actually arrived, and asking the one question the combine rules turn on. Public entry points include `AccessReplicationStateUtils.fromEntry`, `AccessReplicationStateUtils.hasAnswer`, `AccessReplicationStateUtils.isReplicationState`."
+    },
+    "Shared/RxAccessStateUtils.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Observable plumbing for access. The tri-state -- `true                                                                                                                                                                                                                                                                                                                                                                         | false | nil`-- has to travel through observables like any other value, and none of the obvious [Rx] operators carry`nil`: * `Rx.startWith({nil})`iterates its list, and a Lua list cannot hold nil, so it fires nothing. *`Rx.defaultsTo(nil)`only fires on fail or complete, so a lookup still in flight emits nothing at all. *`Rx.of(nil)`relies on varargs packing surviving a lone nil, and completes besides. That matters because [Rx.combineLatest] waits for every source to emit once. A fact that stays silent until its lookup lands would keep the whole feature from emitting -- so a live consumer renders nothing instead of rendering \"not yet known\". Public entry points include`RxAccessStateUtils.ofStatic`, `RxAccessStateUtils.startUnresolved`, `RxAccessStateUtils.unresolvedOnError`, `RxAccessStateUtils.distinctState`, `RxAccessStateUtils.completeOn`, `finish`."
+    },
+    "Shared/WellKnownAccessFeatureNames.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "The feature names the package itself registers. Shipping a name means every game gates the same capability by the same string, and a package that wants to widen it has something to widen. See [AccessFeature.PushFactAllowsFeature]."
+    }
+  }
+}

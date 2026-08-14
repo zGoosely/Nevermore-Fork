@@ -1,0 +1,28 @@
+{
+  "purpose": "Helps transform or modify a Motor6D's CFrame over time, on top of Roblox's animation stack.",
+  "description": "Helps transform or modify a Motor6D's CFrame over time, on top of Roblox's animation stack.",
+  "tags": [
+    "animation",
+    "game_service",
+    "math",
+    "physics",
+    "player_service"
+  ],
+  "modules": {
+    "Server/Humanoid/Motor6DStackHumanoid.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Motor6DStack Humanoid provides the class/model implementation used by the Motor6d package. Public entry points include `Motor6DStackHumanoid.new`."
+    },
+    "Server/Motor6DService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Motor6DService provides the service implementation used by the Motor6d package. Public entry points include `Motor6DService.Init`."
+    },
+    "Server/Stack/Motor6DStack.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Motor6DStack provides the class/model implementation used by the Motor6d package. Public entry points include `Motor6DStack.new`."
+    }
+  }
+}

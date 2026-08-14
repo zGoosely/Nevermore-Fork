@@ -1,0 +1,22 @@
+{
+  "purpose": "Registers and secures Cmdr commands. Table-defined commands are converted into the same paired ModuleScripts Cmdr normally expects. A shared definition module is replicated by Cmdr for parsing and autocomplete, while a server execution module forwards back into the function retained by this service.",
+  "description": "Registers and secures Cmdr commands. Table-defined commands are converted into the same paired ModuleScripts Cmdr normally expects. A shared definition module is replicated by Cmdr for parsing and autocomplete, while a server execution module forwards back into the function retained by this service.",
+  "tags": [
+    "developer_tools",
+    "enums",
+    "game_service",
+    "utility"
+  ],
+  "modules": {
+    "CmdrService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Registers and secures Cmdr commands. Table-defined commands are converted into the same paired ModuleScripts Cmdr normally expects. A shared definition module is replicated by Cmdr for parsing and autocomplete, while a server execution module forwards back into the function retained by this service."
+    },
+    "CmdrTemplateProviderServer/init.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Provides the ModuleScript templates used to register table-defined Cmdr commands."
+    }
+  }
+}

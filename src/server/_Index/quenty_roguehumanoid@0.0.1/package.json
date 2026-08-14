@@ -1,0 +1,14 @@
+{
+  "name": "quenty/roguehumanoid",
+  "version": "0.0.1",
+  "exports": {
+    "RogueHumanoid": "Server/RogueHumanoid",
+    "RogueHumanoidService": "Server/RogueHumanoidService"
+  },
+  "dependencies": [
+    "quenty/binder@0.0.1",
+    "quenty/rogueproperty@0.0.1",
+    "quenty/servicebag@0.0.1"
+  ],
+  "externals": []
+}

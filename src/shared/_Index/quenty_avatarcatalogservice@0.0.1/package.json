@@ -1,0 +1,11 @@
+{
+  "name": "quenty/avatarcatalogservice",
+  "version": "0.0.1",
+  "exports": {
+    "WellKnownUnfairPackagesAndParts": "Catalog/WellKnownUnfairPackagesAndParts"
+  },
+  "dependencies": [
+    "quenty/tableutils@0.0.1"
+  ],
+  "externals": []
+}

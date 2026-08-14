@@ -1,0 +1,9 @@
+{
+  "name": "quenty/banservice",
+  "version": "0.0.1",
+  "exports": {
+    "BanServiceUtils": "BanServiceUtils"
+  },
+  "dependencies": [],
+  "externals": []
+}

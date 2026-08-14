@@ -1,0 +1,23 @@
+{
+  "name": "quenty/inputkeymapdatastoreservice",
+  "version": "0.0.1",
+  "exports": {
+    "InputKeyMapDataStoreServiceClient": "InputKeyMapDataStoreServiceClient"
+  },
+  "dependencies": [
+    "quenty/bytenet@0.0.1",
+    "quenty/enumutils@0.0.1",
+    "quenty/inputkeymaputils@0.0.1",
+    "quenty/inputmode@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/playerdatastoreservice@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/squash@0.0.1",
+    "quenty/t@0.0.1",
+    "quenty/tableutils@0.0.1"
+  ],
+  "externals": [
+    "Jest",
+    "PlayerDataStoreServiceProfile"
+  ]
+}

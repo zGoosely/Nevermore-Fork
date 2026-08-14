@@ -1,0 +1,14 @@
+{
+  "name": "quenty/access",
+  "version": "0.0.1",
+  "exports": {},
+  "dependencies": [
+    "quenty/binder@0.0.1",
+    "quenty/cmdrservice@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/permissionservice@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/t@0.0.1"
+  ],
+  "externals": []
+}

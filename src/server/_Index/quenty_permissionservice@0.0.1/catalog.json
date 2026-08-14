@@ -1,0 +1,40 @@
+{
+  "purpose": "Constants for the permission system",
+  "description": "Constants for the permission system",
+  "tags": [
+    "data",
+    "enums",
+    "game_service",
+    "player_service",
+    "security",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "PermissionService/PermissionProviderUtils.luau": {
+      "realm": "server",
+      "kind": "Utility",
+      "description": "Utility functions to provide/configure a permission. See [BasePermissionProvider] and [PermissionService]. Public entry points include `PermissionProviderUtils.createGroupRankConfig`, `PermissionProviderUtils.createSingleUserConfig`, `PermissionProviderUtils.createConfigFromGame`."
+    },
+    "PermissionService/Providers/BasePermissionProvider.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Basic interface for providing permissions. Providers only answer questions -- [PermissionService] owns the networking and decides what reaches the client. Public entry points include `BasePermissionProvider.new`, `BasePermissionProvider.Start`, `BasePermissionProvider.PromiseIsPermissionLevel`, `BasePermissionProvider.PromiseIsAdmin`, `BasePermissionProvider.PromiseIsCreator`,…"
+    },
+    "PermissionService/Providers/CreatorPermissionProvider.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Provides permissions from a single user creator Public entry points include `CreatorPermissionProvider.new`, `CreatorPermissionProvider.PromiseIsPermissionLevel`."
+    },
+    "PermissionService/Providers/GroupPermissionProvider.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Provides permissions from a group Public entry points include `GroupPermissionProvider.new`, `GroupPermissionProvider.Start`, `GroupPermissionProvider.PromiseIsPermissionLevel`."
+    },
+    "PermissionService/init.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Provides permissions for the game. See [BasePermissionProvider]. Permissions are static: they come from the configured provider (game group rank, or the creator's user id) and are resolved once per player as they join, then pushed to that player over [PermissionServiceNetwork]. Be sure to initialize the [PermissionServiceClient] on the client."
+    }
+  }
+}

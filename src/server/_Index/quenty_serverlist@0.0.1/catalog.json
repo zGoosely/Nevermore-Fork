@@ -1,0 +1,27 @@
+{
+  "purpose": "`ServerListService` publishes a bounded place-scoped directory through `MemoryStoreHashMap`. Each game server publishes one expiring entry, while directory reads happen only when at least one local client observes the list. All interested clients in the same server share one cache and refresh operation.",
+  "description": "`ServerListService` publishes a bounded place-scoped directory through `MemoryStoreHashMap`. Each game server publishes one expiring entry, while directory reads happen only when at least one local client observes the list. All interested clients in the same server share one cache and refresh operation.",
+  "tags": [
+    "data",
+    "enums",
+    "game_service",
+    "lifecycle",
+    "localization",
+    "player_service",
+    "reactive",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "Server/ServerListRegistry.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Owns the place-scoped MemoryStoreHashMap used by the server directory. Public entry points include `ServerListRegistry.new`, `ServerListRegistry.PublishAsync`, `ServerListRegistry.ListAsync`, `ServerListRegistry.RemoveAsync`, `ServerListRegistry.Destroy`."
+    },
+    "ServerListService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Publishes this server and maintains one lazy, shared place-server directory cache. Public entry points include `ServerListService.Init`, `ServerListService.Start`, `ServerListService.SetRegion`, `handleSubscriptionChanged`, `handleSnapshotRequested`, `handleJoinRequested`, `ServerListService.Destroy`."
+    }
+  }
+}

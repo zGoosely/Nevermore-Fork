@@ -1,0 +1,17 @@
+{
+  "purpose": "Clip characters locally on the client of other clients so they don't interfere with physics.",
+  "description": "Clip characters locally on the client of other clients so they don't interfere with physics.",
+  "tags": [
+    "enums",
+    "game_service",
+    "physics",
+    "player_service"
+  ],
+  "modules": {
+    "Server/ClipCharactersService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Clip Characters Service provides the service implementation used by the Clipcharacters package. Public entry points include `ClipCharactersService.Init`, `ClipCharactersService.Destroy`."
+    }
+  }
+}

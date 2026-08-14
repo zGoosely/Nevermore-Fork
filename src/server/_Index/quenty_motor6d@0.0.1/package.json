@@ -1,0 +1,14 @@
+{
+  "name": "quenty/motor6d",
+  "version": "0.0.1",
+  "exports": {
+    "Motor6DService": "Server/Motor6DService",
+    "Motor6DStackHumanoid": "Server/Humanoid/Motor6DStackHumanoid"
+  },
+  "dependencies": [
+    "quenty/binder@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/tie@0.0.1"
+  ],
+  "externals": []
+}

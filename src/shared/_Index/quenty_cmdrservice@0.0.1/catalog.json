@@ -1,0 +1,32 @@
+{
+  "purpose": "Registers and secures Cmdr commands. Table-defined commands are converted into the same paired ModuleScripts Cmdr normally expects. A shared definition module is replicated by Cmdr for parsing and autocomplete, while a server execution module forwards back into the function retained by this service.",
+  "description": "Registers and secures Cmdr commands. Table-defined commands are converted into the same paired ModuleScripts Cmdr normally expects. A shared definition module is replicated by Cmdr for parsing and autocomplete, while a server execution module forwards back into the function retained by this service.",
+  "tags": [
+    "developer_tools",
+    "enums",
+    "game_service",
+    "utility"
+  ],
+  "modules": {
+    "CmdrServiceClient.luau": {
+      "realm": "client",
+      "kind": "Service",
+      "description": "Cmdr Service Client provides the service implementation used by the Cmdrservice package. Public entry points include `CmdrServiceClient.Init`, `CmdrServiceClient.Start`, `CmdrServiceClient.PromiseCmdr`, `registerCommand`, `CmdrServiceClient.Destroy`."
+    },
+    "CmdrTemplateProviderServer/CmdrCommandDefinitionTemplate.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Decodes a generated Cmdr command definition."
+    },
+    "CmdrTemplateProviderServer/CmdrExecutionTemplate.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Forwards a generated Cmdr command to the function retained by its server-side."
+    },
+    "Shared/CmdrServiceUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Shared types and context helpers for [CmdrService]. Public entry points include `CmdrServiceUtils.getServiceBag`, `CmdrServiceUtils.writeServiceBagInContext`."
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "purpose": "`PlayerDataStoreService` owns server-side ProfileStore sessions. `PlayerDataStoreServiceClient` is its read-only client mirror.",
+  "description": "`PlayerDataStoreService` owns server-side ProfileStore sessions. `PlayerDataStoreServiceClient` is its read-only client mirror.",
+  "tags": [
+    "data",
+    "game_service",
+    "lifecycle",
+    "math",
+    "player_service",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "PlayerDataStoreService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Owns ProfileStore sessions for players in live gameplay servers and replicates approved profile data to [PlayerDataStoreServiceClient]. Public entry points include `PlayerDataStoreService.Init`, `PlayerDataStoreService.Start`, `getCommandProfile`, `encodeCommandValue`, `decodeCommandValue`, `PlayerDataStoreService.GetStoreNameAndVersion`, `PlayerDataStoreService.AddReplicator`, `PlayerDataStoreService.SetHiddenKey`."
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "purpose": "Providers screenGuis with a given display order for easy use. In a script that needs a new screen gui, do this:",
+  "description": "Providers screenGuis with a given display order for easy use. In a script that needs a new screen gui, do this:",
+  "tags": [
+    "game_service",
+    "gui",
+    "player_service",
+    "security"
+  ],
+  "modules": {
+    "GenericScreenGuiProvider.luau": {
+      "realm": "client",
+      "kind": "Service",
+      "description": "Providers screenGuis with a given display order for easy use. In a script that needs a new screen gui, do this: Public entry points include `GenericScreenGuiProvider.new`, `GenericScreenGuiProvider.Init`, `GenericScreenGuiProvider.Start`, `GenericScreenGuiProvider.ObserveScreenGui`, `GenericScreenGuiProvider.SetDisplayOrder`, `GenericScreenGuiProvider.Get`, `GenericScreenGuiProvider.GetDisplayOrder`,…"
+    },
+    "ScreenGuiService.luau": {
+      "realm": "client",
+      "kind": "Service",
+      "description": "Centralized provider so Hoarcekat stories can bootstrap in a fake PlayerGui Public entry points include `ScreenGuiService.Init`, `ScreenGuiService.GetGuiParent`, `ScreenGuiService.SetGuiParent`, `ScreenGuiService.ObservePlayerGui`, `ScreenGuiService.Destroy`."
+    }
+  }
+}

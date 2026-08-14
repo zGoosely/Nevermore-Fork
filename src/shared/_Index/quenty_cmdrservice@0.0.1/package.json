@@ -1,0 +1,15 @@
+{
+  "name": "quenty/cmdrservice",
+  "version": "0.0.1",
+  "exports": {
+    "CmdrServiceClient": "CmdrServiceClient"
+  },
+  "dependencies": [
+    "quenty/maid@0.0.1",
+    "quenty/permissionservice@0.0.1",
+    "quenty/promise@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/stringutils@0.0.1"
+  ],
+  "externals": []
+}

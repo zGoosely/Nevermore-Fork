@@ -101,10 +101,10 @@ class FormScreen(ModalScreen[dict[str, Any] | None]):
 class CreatePackageScreen(FormScreen):
     """Collect package scaffolding and initial catalog metadata."""
 
-    def __init__(self, templates: tuple[SnippetTemplate, ...], dependency_aliases: tuple[str, ...]) -> None:
+    def __init__(self, templates: tuple[SnippetTemplate, ...], dependency_realms: dict[str, str]) -> None:
         super().__init__()
         self.templates = {template.name: template for template in templates}
-        self.dependency_aliases = dependency_aliases
+        self.dependency_realms = dependency_realms
 
     def compose(self) -> ComposeResult:
         with Vertical(id="dialog"):
@@ -160,7 +160,18 @@ class CreatePackageScreen(FormScreen):
                 yield Label("Dependencies · Tab to complete", classes="field-label")
                 yield DependencyInput(
                     placeholder="Maid, Promise, ServiceBag",
-                    suggester=DependencySuggester(self.dependency_aliases),
+                    suggester=DependencySuggester(
+                        tuple(
+                            sorted(
+                                (
+                                    alias
+                                    for alias, realm in self.dependency_realms.items()
+                                    if realm == "shared"
+                                ),
+                                key=str.casefold,
+                            )
+                        )
+                    ),
                     id="dependencies",
                 )
             with Horizontal(classes="dialog-actions"):
@@ -176,6 +187,9 @@ class CreatePackageScreen(FormScreen):
 
     @on(Select.Changed, "#service-realm")
     def service_realm_changed(self) -> None:
+        self.query_one("#dependencies", DependencyInput).suggester = DependencySuggester(
+            self._allowed_dependency_aliases()
+        )
         self._update_service_preview()
 
     @on(Input.Changed, "#name")
@@ -188,7 +202,7 @@ class CreatePackageScreen(FormScreen):
         selected_template = self.query_one("#template", Select).value
         template_name = selected_template if isinstance(selected_template, str) and selected_template else None
         template = self.templates.get(template_name) if template_name else None
-        dependency_lookup = {alias.casefold(): alias for alias in self.dependency_aliases}
+        dependency_lookup = {alias.casefold(): alias for alias in self._allowed_dependency_aliases()}
         dependencies = tuple(
             dict.fromkeys(
                 dependency_lookup.get(item.strip().casefold(), item.strip())
@@ -219,6 +233,9 @@ class CreatePackageScreen(FormScreen):
         self.query_one("#service-options", Vertical).styles.display = (
             "block" if template and template.kind == "service" else "none"
         )
+        self.query_one("#dependencies", DependencyInput).suggester = DependencySuggester(
+            self._allowed_dependency_aliases()
+        )
         self._update_service_preview()
 
     def _update_service_preview(self) -> None:
@@ -248,6 +265,21 @@ class CreatePackageScreen(FormScreen):
         if realm == "both":
             names = [base_name, f"{base_name}Client"]
         preview.update("Creates " + " + ".join(f"{name}.luau" for name in names))
+
+    def _allowed_dependency_aliases(self) -> tuple[str, ...]:
+        selected = self.query_one("#template", Select).value
+        template = self.templates.get(selected) if isinstance(selected, str) else None
+        if not template or template.kind != "service":
+            allowed_realms = {"shared"}
+        else:
+            realm = self.query_one("#service-realm", Select).value
+            allowed_realms = {"shared", realm} if realm in {"server", "client"} else {"shared"}
+        return tuple(
+            sorted(
+                (alias for alias, realm in self.dependency_realms.items() if realm in allowed_realms),
+                key=str.casefold,
+            )
+        )
 
     @staticmethod
     def _template_label(name: str) -> str:
@@ -334,6 +366,38 @@ class VersionScreen(FormScreen):
     @on(Button.Pressed, "#save")
     def save(self) -> None:
         self.dismiss({"name": self.record.short_name, "version": self.query_one("#version", Input).value})
+
+    @on(Button.Pressed, "#cancel")
+    def cancel(self) -> None:
+        self.dismiss(None)
+
+
+class RealmScreen(FormScreen):
+    """Choose the runtime realm for one package module."""
+
+    def __init__(self, record: PackageRecord, module: PackageModule) -> None:
+        super().__init__()
+        self.record = record
+        self.module = module
+
+    def compose(self) -> ComposeResult:
+        with Vertical(id="dialog"):
+            yield Label(f"Move {self.module.path}", classes="dialog-title")
+            yield Label("Realm", classes="field-label")
+            yield Select(
+                (("Shared", "shared"), ("Client", "client"), ("Server", "server")),
+                value=self.module.realm,
+                id="realm",
+            )
+            with Horizontal(classes="dialog-actions"):
+                yield Button("Apply", variant="primary", id="save")
+                yield Button("Cancel", id="cancel")
+
+    @on(Button.Pressed, "#save")
+    def save(self) -> None:
+        realm = self.query_one("#realm", Select).value
+        if isinstance(realm, str):
+            self.dismiss({"name": self.record.short_name, "target": self.module.target, "realm": realm})
 
     @on(Button.Pressed, "#cancel")
     def cancel(self) -> None:
@@ -684,6 +748,7 @@ class PackageManagerApp(App[None]):
                     with TabPane("Modules", id="modules-tab"):
                         with Horizontal(id="module-actions"):
                             yield Static("No modules", id="module-summary")
+                            yield Button("Set realm", id="set-module-realm")
                             yield Button("Expose", id="toggle-module")
                             yield Button("Expose all", id="expose-all")
                             yield Button("Hide all", id="hide-all")
@@ -695,7 +760,7 @@ class PackageManagerApp(App[None]):
     def on_mount(self) -> None:
         packages = self.query_one("#packages", DataTable)
         packages.add_columns("Package", "Version")
-        self.query_one("#modules-table", DataTable).add_columns("Module", "Public alias", "Exposed")
+        self.query_one("#modules-table", DataTable).add_columns("Module", "Realm", "Public alias", "Exposed")
         self.refresh_packages()
 
     def refresh_packages(self, query: str = "") -> None:
@@ -758,7 +823,11 @@ class PackageManagerApp(App[None]):
             f"[#928374]• {escape(external)}  (external)[/#928374]" for external in record.externals
         )
         dependency_text = "\n".join(filter(None, (dependencies, externals))) or "[#928374]None[/#928374]"
-        relative_path = escape(str(record.root.relative_to(self.manager.root)))
+        relative_paths = "  ·  ".join(
+            escape(str(root.relative_to(self.manager.root)))
+            for root in (record.shared_root, record.server_root)
+            if root is not None
+        )
 
         self.query_one("#overview", Static).update(
             f"[#fabd2f bold]PURPOSE[/#fabd2f bold]\n{escape(record.catalog.purpose)}\n\n"
@@ -770,7 +839,7 @@ class PackageManagerApp(App[None]):
             f"{tags or '[#928374]No tags[/#928374]'}\n\n"
             f"[#fabd2f bold]EXPORTS[/#fabd2f bold]\n{exports}\n\n"
             f"[#fabd2f bold]DEPENDENCIES[/#fabd2f bold]\n{dependency_text}\n\n"
-            f"[#928374]{relative_path}[/#928374]"
+            f"[#928374]{relative_paths}[/#928374]"
         )
         exposed_count = sum(module.is_exposed for module in self.modules)
         module_word = "module" if len(self.modules) == 1 else "modules"
@@ -783,6 +852,7 @@ class PackageManagerApp(App[None]):
             status = Text("Yes", style="bold #b8bb26") if module.is_exposed else Text("No", style="#928374")
             module_table.add_row(
                 module.path,
+                module.realm.title(),
                 ", ".join(module.aliases) or "—",
                 status,
                 key=module.target,
@@ -802,6 +872,17 @@ class PackageManagerApp(App[None]):
             return
         self.selected_module_target = str(event.row_key.value)
         self._update_module_toggle_label()
+
+    @on(Button.Pressed, "#set-module-realm")
+    def set_module_realm_pressed(self) -> None:
+        record = self._selected_record()
+        module = self._selected_module()
+        if record and module and not self.busy:
+            self.push_screen(RealmScreen(record, module), self._realm_result)
+
+    def _realm_result(self, values: dict[str, Any] | None) -> None:
+        if values:
+            self._execute("Changing module realm", lambda: self.manager.set_module_realm(**values))
 
     @on(Button.Pressed, "#toggle-module")
     def toggle_module_pressed(self) -> None:
@@ -839,6 +920,7 @@ class PackageManagerApp(App[None]):
         button = self.query_one("#toggle-module", Button)
         button.label = "Hide" if module and module.is_exposed else "Expose"
         button.disabled = module is None or self.busy
+        self.query_one("#set-module-realm", Button).disabled = module is None or self.busy
         self.query_one("#expose-all", Button).disabled = not self.modules or self.busy
         self.query_one("#hide-all", Button).disabled = not self.modules or self.busy
 
@@ -854,7 +936,7 @@ class PackageManagerApp(App[None]):
                 self._show_error(str(error))
                 return
             self.push_screen(
-                CreatePackageScreen(templates, self.manager.list_dependency_aliases()),
+                CreatePackageScreen(templates, self.manager.dependency_alias_realms()),
                 self._create_result,
             )
 

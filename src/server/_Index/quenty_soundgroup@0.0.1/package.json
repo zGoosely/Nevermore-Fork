@@ -1,0 +1,14 @@
+{
+  "name": "quenty/soundgroup",
+  "version": "0.0.1",
+  "exports": {
+    "SoundGroupService": "Server/SoundGroupService"
+  },
+  "dependencies": [
+    "quenty/maid@0.0.1",
+    "quenty/rogueproperty@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/tie@0.0.1"
+  ],
+  "externals": []
+}

@@ -1,0 +1,35 @@
+{
+  "purpose": "`PlayerDataStoreService` owns server-side ProfileStore sessions. `PlayerDataStoreServiceClient` is its read-only client mirror.",
+  "description": "`PlayerDataStoreService` owns server-side ProfileStore sessions. `PlayerDataStoreServiceClient` is its read-only client mirror.",
+  "tags": [
+    "data",
+    "game_service",
+    "lifecycle",
+    "math",
+    "player_service",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "PlayerDataStoreServiceClient.luau": {
+      "realm": "client",
+      "kind": "Service",
+      "description": "Client-side mirror of [PlayerDataStoreService]. Receives the full profile as one Squash buffer (`profileLoaded`) and then applies `valueChanged` deltas on top of it. The store is read-only with one exception: [PlayerDataStoreServiceClient.SetSetting] may ask the server to change a setting. Everything else is server-authoritative and has no setter."
+    },
+    "Shared/PlayerDataStoreServiceNetwork.luau": {
+      "realm": "shared",
+      "kind": "Network",
+      "description": "Replicates player data from [PlayerDataStoreService] to [PlayerDataStoreServiceClient]. On join the server sends that player their whole profile as one buffer (`profileLoaded`, hidden keys blanked) and then streams `valueChanged` deltas. The server never listens to either, so a client firing them does nothing."
+    },
+    "Shared/PlayerDataStoreServiceProfile.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Selects the consuming game's profile contract before PlayerDataStoreService initializes. PlayerDataStoreService defaults to `ProfileData`; feature services such as SaveSlotService may select a more specialized contract in their own `Init` method."
+    },
+    "Shared/PlayerDataStoreServiceUtils.luau": {
+      "realm": "shared",
+      "kind": "Module",
+      "description": "Player Data Store Service Utils provides the module implementation used by the Playerdatastoreservice package. Public entry points include `getSettingsTemplate`, `PlayerDataStoreServiceUtils.splitValuePath`, `PlayerDataStoreServiceUtils.valuePathsOverlap`, `PlayerDataStoreServiceUtils.readObservableValuePath`, `PlayerDataStoreServiceUtils.writeObservableValuePath`, `PlayerDataStoreServiceUtils.readValuePath`,…"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "quenty/lockservice",
+  "version": "0.0.1",
+  "exports": {},
+  "dependencies": [
+    "quenty/promise@0.0.1",
+    "quenty/t@0.0.1"
+  ],
+  "externals": []
+}

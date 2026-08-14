@@ -1,0 +1,32 @@
+{
+  "name": "quenty/playerinputservice",
+  "version": "0.0.1",
+  "exports": {
+    "PlayerInputCooldownServiceClient": "PlayerInputCooldownServiceClient",
+    "PlayerInputServiceClient": "PlayerInputServiceClient"
+  },
+  "dependencies": [
+    "quenty/actionexecutionservice@0.0.1",
+    "quenty/brio@0.0.1",
+    "quenty/bytenet@0.0.1",
+    "quenty/characterutils@0.0.1",
+    "quenty/conditions@0.0.1",
+    "quenty/cooldownservice@0.0.1",
+    "quenty/enums@0.0.1",
+    "quenty/enumutils@0.0.1",
+    "quenty/inputkeymaputils@0.0.1",
+    "quenty/inputmode@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/observablecollection@0.0.1",
+    "quenty/playerinputmode@0.0.1",
+    "quenty/ratelimiter@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/signal@0.0.1",
+    "quenty/t@0.0.1",
+    "quenty/tableutils@0.0.1"
+  ],
+  "externals": [
+    "Jest"
+  ]
+}

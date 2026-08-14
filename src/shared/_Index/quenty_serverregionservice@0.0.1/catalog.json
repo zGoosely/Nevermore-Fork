@@ -1,0 +1,28 @@
+{
+  "purpose": "Resolves one approximate server region through IP geolocation and replicates it as an attribute on `ReplicatedStorage`.",
+  "description": "Provides server and client access to a shared server-region attribute, including a promise that waits for replication.",
+  "tags": [
+    "data",
+    "game_service",
+    "lifecycle",
+    "localization",
+    "utility"
+  ],
+  "modules": {
+    "ServerRegionServiceClient.luau": {
+      "realm": "client",
+      "kind": "Service",
+      "description": "Reads the replicated server region. Public entry points include `ServerRegionServiceClient.GetRegion` and `ServerRegionServiceClient.PromiseRegion`."
+    },
+    "Shared/ServerRegionServiceConstants.luau": {
+      "realm": "shared",
+      "kind": "Constants",
+      "description": "Defines the geolocation endpoint, replicated attribute name, and validation bounds."
+    },
+    "Shared/ServerRegionServiceUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Validates, formats, reads, and promises replicated region values. Public entry points include `isRegion`, `formatGeolocationResponse`, `getRegion`, and `promiseRegion`."
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "purpose": "Server-side funnel logger",
+  "description": "Server-side funnel logger",
+  "tags": [
+    "shared"
+  ],
+  "modules": {
+    "FunnelStepTracker.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Funnel Step Tracker provides the class/model implementation used by the Funnels package. Public entry points include `FunnelStepTracker.new`, `FunnelStepTracker.LogStep`, `FunnelStepTracker.IsStepComplete`, `FunnelStepTracker.GetLoggedSteps`, `FunnelStepTracker.ClearLoggedSteps`."
+    }
+  }
+}

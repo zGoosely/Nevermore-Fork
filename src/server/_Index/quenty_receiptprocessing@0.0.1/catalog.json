@@ -1,0 +1,15 @@
+{
+  "purpose": "Centralize receipt processing within games since this is a constrained resource.",
+  "description": "Centralize receipt processing within games since this is a constrained resource.",
+  "tags": [
+    "commerce",
+    "game_service"
+  ],
+  "modules": {
+    "ReceiptProcessingService.luau": {
+      "realm": "server",
+      "kind": "Service",
+      "description": "Centralize receipt processing within games since this is a constrained resource. Public entry points include `ReceiptProcessingService.Init`, `ReceiptProcessingService.Start`, `ReceiptProcessingService.SetDefaultPurchaseDecision`, `ReceiptProcessingService.ObserveReceiptProcessedForPlayer`, `ReceiptProcessingService.ObserveReceiptProcessedForUserId`, `ReceiptProcessingService.RegisterReceiptProcessor`,…"
+    }
+  }
+}
