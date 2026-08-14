@@ -7,6 +7,7 @@ from collections.abc import Callable
 from typing import Any
 
 from rich.markup import escape
+from rich.text import Text
 from textual import on, work
 from textual.app import App, ComposeResult
 from textual.binding import Binding
@@ -30,7 +31,7 @@ from textual.widgets import (
 )
 
 from .manager import PackageManager
-from .models import ModuleEntry, OperationResult, PackageRecord, SnippetTemplate
+from .models import ModuleEntry, OperationResult, PackageModule, PackageRecord, SnippetTemplate
 
 
 GRUVBOX_THEME = Theme(
@@ -523,6 +524,22 @@ class PackageManagerApp(App[None]):
         height: 1fr;
     }
 
+    #module-actions {
+        height: 3;
+        margin-bottom: 1;
+    }
+
+    #module-summary {
+        width: 1fr;
+        color: #928374;
+        content-align: left middle;
+    }
+
+    #module-actions Button {
+        min-width: 11;
+        margin-left: 1;
+    }
+
     #overview {
         height: auto;
         color: #ebdbb2;
@@ -639,7 +656,9 @@ class PackageManagerApp(App[None]):
         self.theme = GRUVBOX_THEME.name
         self.manager = manager
         self.records: list[PackageRecord] = []
+        self.modules: tuple[PackageModule, ...] = ()
         self.selected_name: str | None = None
+        self.selected_module_target: str | None = None
         self.busy = False
 
     def compose(self) -> ComposeResult:
@@ -663,7 +682,12 @@ class PackageManagerApp(App[None]):
                         with VerticalScroll(id="overview-scroll"):
                             yield Static("Select a package", id="overview")
                     with TabPane("Modules", id="modules-tab"):
-                        yield DataTable(id="modules-table", zebra_stripes=True)
+                        with Horizontal(id="module-actions"):
+                            yield Static("No modules", id="module-summary")
+                            yield Button("Expose", id="toggle-module")
+                            yield Button("Expose all", id="expose-all")
+                            yield Button("Hide all", id="hide-all")
+                        yield DataTable(id="modules-table", cursor_type="row", zebra_stripes=True)
                     with TabPane("Activity", id="activity-tab"):
                         yield RichLog(id="logs", wrap=True, markup=True)
         yield Footer()
@@ -671,7 +695,7 @@ class PackageManagerApp(App[None]):
     def on_mount(self) -> None:
         packages = self.query_one("#packages", DataTable)
         packages.add_columns("Package", "Version")
-        self.query_one("#modules-table", DataTable).add_columns("Module", "Realm", "Kind", "Description")
+        self.query_one("#modules-table", DataTable).add_columns("Module", "Public alias", "Exposed")
         self.refresh_packages()
 
     def refresh_packages(self, query: str = "") -> None:
@@ -690,11 +714,18 @@ class PackageManagerApp(App[None]):
         self.query_one("#browser-heading", Static).update(f"{len(filtered)} {package_word}")
         if filtered:
             selected = next((record for record in filtered if record.name == self.selected_name), filtered[0])
+            selected_index = filtered.index(selected)
+            table.move_cursor(row=selected_index, column=0, animate=False)
             self.show_record(selected)
         else:
             self.selected_name = None
+            self.selected_module_target = None
+            self.modules = ()
             self.query_one("#selection-title", Static).update("No matching packages")
             self.query_one("#overview", Static).update("No packages match the current search.")
+            self.query_one("#module-summary", Static).update("No modules")
+            self.query_one("#modules-table", DataTable).clear()
+            self._update_module_toggle_label()
 
     @on(Input.Changed, "#search")
     def search_changed(self, event: Input.Changed) -> None:
@@ -709,7 +740,10 @@ class PackageManagerApp(App[None]):
             self.show_record(record)
 
     def show_record(self, record: PackageRecord) -> None:
+        if self.selected_name != record.name:
+            self.selected_module_target = None
         self.selected_name = record.name
+        self.modules = self.manager.list_package_modules(record.short_name)
         self.query_one("#selection-title", Static).update(record.name)
 
         tags = "  ".join(f"[black on #d79921] {escape(tag)} [/black on #d79921]" for tag in record.catalog.tags)
@@ -732,16 +766,81 @@ class PackageManagerApp(App[None]):
             f"[#fabd2f bold]PACKAGE[/#fabd2f bold]\n"
             f"Version   [#83a598]{escape(record.version)}[/#83a598]\n"
             f"Exports   [#83a598]{len(record.exports)}[/#83a598]\n"
-            f"Modules   [#83a598]{len(record.catalog.modules)}[/#83a598]\n"
+            f"Modules   [#83a598]{len(self.modules)}[/#83a598]\n"
             f"{tags or '[#928374]No tags[/#928374]'}\n\n"
             f"[#fabd2f bold]EXPORTS[/#fabd2f bold]\n{exports}\n\n"
             f"[#fabd2f bold]DEPENDENCIES[/#fabd2f bold]\n{dependency_text}\n\n"
             f"[#928374]{relative_path}[/#928374]"
         )
-        modules = self.query_one("#modules-table", DataTable)
-        modules.clear()
-        for module in record.catalog.modules:
-            modules.add_row(module.path, module.realm, module.kind, module.description)
+        exposed_count = sum(module.is_exposed for module in self.modules)
+        module_word = "module" if len(self.modules) == 1 else "modules"
+        self.query_one("#module-summary", Static).update(
+            f"{len(self.modules)} {module_word} · {exposed_count} exposed"
+        )
+        module_table = self.query_one("#modules-table", DataTable)
+        module_table.clear()
+        for module in self.modules:
+            status = Text("Yes", style="bold #b8bb26") if module.is_exposed else Text("No", style="#928374")
+            module_table.add_row(
+                module.path,
+                ", ".join(module.aliases) or "—",
+                status,
+                key=module.target,
+            )
+        if not any(module.target == self.selected_module_target for module in self.modules):
+            self.selected_module_target = self.modules[0].target if self.modules else None
+        if self.selected_module_target is not None:
+            selected_index = next(
+                index for index, module in enumerate(self.modules) if module.target == self.selected_module_target
+            )
+            module_table.move_cursor(row=selected_index, column=0, animate=False)
+        self._update_module_toggle_label()
+
+    @on(DataTable.RowHighlighted, "#modules-table")
+    def module_row_highlighted(self, event: DataTable.RowHighlighted) -> None:
+        if event.row_key.value is None:
+            return
+        self.selected_module_target = str(event.row_key.value)
+        self._update_module_toggle_label()
+
+    @on(Button.Pressed, "#toggle-module")
+    def toggle_module_pressed(self) -> None:
+        self.action_toggle_module()
+
+    def action_toggle_module(self) -> None:
+        record = self._selected_record()
+        module = self._selected_module()
+        if record and module and not self.busy:
+            verb = "Hiding" if module.is_exposed else "Exposing"
+            self._execute(
+                f"{verb} module",
+                lambda: self.manager.set_module_exposed(record.short_name, module.target, not module.is_exposed),
+            )
+
+    @on(Button.Pressed, "#expose-all")
+    def expose_all_pressed(self) -> None:
+        self._set_all_modules_exposed(True)
+
+    @on(Button.Pressed, "#hide-all")
+    def hide_all_pressed(self) -> None:
+        self._set_all_modules_exposed(False)
+
+    def _set_all_modules_exposed(self, exposed: bool) -> None:
+        record = self._selected_record()
+        if record and not self.busy:
+            verb = "Exposing" if exposed else "Hiding"
+            self._execute(
+                f"{verb} all modules",
+                lambda: self.manager.set_all_modules_exposed(record.short_name, exposed),
+            )
+
+    def _update_module_toggle_label(self) -> None:
+        module = self._selected_module()
+        button = self.query_one("#toggle-module", Button)
+        button.label = "Hide" if module and module.is_exposed else "Expose"
+        button.disabled = module is None or self.busy
+        self.query_one("#expose-all", Button).disabled = not self.modules or self.busy
+        self.query_one("#hide-all", Button).disabled = not self.modules or self.busy
 
     @on(Button.Pressed, "#create")
     def create_pressed(self) -> None:
@@ -847,6 +946,12 @@ class PackageManagerApp(App[None]):
 
     def _selected_record(self) -> PackageRecord | None:
         return self._find_record(self.selected_name) if self.selected_name else None
+
+    def _selected_module(self) -> PackageModule | None:
+        return next(
+            (module for module in self.modules if module.target == self.selected_module_target),
+            None,
+        )
 
     def _find_record(self, name: str) -> PackageRecord | None:
         return next((record for record in self.records if record.name == name), None)

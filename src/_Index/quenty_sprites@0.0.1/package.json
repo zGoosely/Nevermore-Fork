@@ -1,7 +1,11 @@
 {
   "name": "quenty/sprites",
   "version": "0.0.1",
-  "exports": {},
+  "exports": {
+    "InputImageLibrary": "Sprite/InputImageLibrary",
+    "Sprite": "Sprite/Sprite",
+    "Spritesheet": "Sprite/Spritesheet"
+  },
   "dependencies": [],
   "externals": []
 }

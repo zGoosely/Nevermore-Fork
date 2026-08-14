@@ -20,6 +20,8 @@
     "quenty/tableutils@0.0.1"
   ],
   "externals": [
+    "PlayerDataStoreServiceProfile",
+    "PlayerDataStoreServiceUtils",
     "SlotsProfileData"
   ]
 }

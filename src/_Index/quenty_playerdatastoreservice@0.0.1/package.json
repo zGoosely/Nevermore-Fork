@@ -3,9 +3,7 @@
   "version": "0.0.1",
   "exports": {
     "PlayerDataStoreService": "PlayerDataStoreService",
-    "PlayerDataStoreServiceClient": "PlayerDataStoreServiceClient",
-    "PlayerDataStoreServiceProfile": "Shared/PlayerDataStoreServiceProfile",
-    "PlayerDataStoreServiceUtils": "Shared/PlayerDataStoreServiceUtils"
+    "PlayerDataStoreServiceClient": "PlayerDataStoreServiceClient"
   },
   "dependencies": [
     "quenty/asyncsemaphore@0.0.1",

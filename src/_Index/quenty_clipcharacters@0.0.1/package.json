@@ -1,7 +1,11 @@
 {
   "name": "quenty/clipcharacters",
   "version": "0.0.1",
-  "exports": {},
+  "exports": {
+    "ClipCharacters": "Client/ClipCharacters",
+    "ClipCharactersService": "Server/ClipCharactersService",
+    "ClipCharactersServiceClient": "Client/ClipCharactersServiceClient"
+  },
   "dependencies": [
     "quenty/baseobject@0.0.1",
     "quenty/characterutils@0.0.1",

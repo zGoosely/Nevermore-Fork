@@ -8,6 +8,7 @@ import pytest
 
 from nevermore_packages.catalog import parse_legacy_catalog, render_catalog, validate_catalog
 from nevermore_packages.manager import PackageManager
+from nevermore_packages.models import ModuleEntry
 
 
 @pytest.fixture()
@@ -132,6 +133,67 @@ def test_create_dual_realm_service_with_dependencies(repository: Path) -> None:
         source = (record.root / f"{module_name}.luau").read_text(encoding="utf-8")
         assert "const Maid = require(Packages.Maid)" in source
         assert f'{module_name}.ServiceName = "{module_name}"' in source
+
+
+def test_discover_and_change_module_exposure(repository: Path) -> None:
+    manager = PackageManager(repository)
+    assert manager.create_package("example-utils", kind="utility", export_name="ExampleUtils").ok
+    record = manager.get_package("example-utils")
+    internal = record.root / "Internal"
+    internal.mkdir()
+    (internal / "Hidden.luau").write_text("--!strict\n\nreturn {}\n", encoding="utf-8")
+    (internal / "Hidden.lua").write_text("--!strict\n\nreturn {}\n", encoding="utf-8")
+    server = record.root / "Server"
+    server.mkdir()
+    (server / "Hidden.luau").write_text("--!strict\n\nreturn {}\n", encoding="utf-8")
+    feature = internal / "Feature"
+    feature.mkdir()
+    (feature / "init.luau").write_text("--!strict\n\nreturn {}\n", encoding="utf-8")
+
+    modules = (
+        *record.catalog.modules,
+        ModuleEntry("Internal/Hidden.lua", "shared", "Utility", "Hidden helper."),
+        ModuleEntry("Internal/Hidden.luau", "shared", "Utility", "Hidden helper."),
+        ModuleEntry("Internal/Feature/init.luau", "shared", "Class/model", "Hidden feature."),
+        ModuleEntry("Server/Hidden.luau", "server", "Utility", "Server helper."),
+    )
+    updated = manager.update_package(
+        record.short_name,
+        purpose=record.catalog.purpose,
+        description=record.catalog.description,
+        tags=record.catalog.tags,
+        exports=record.exports,
+        modules=modules,
+    )
+    assert updated.ok, updated.diagnostics
+
+    discovered = manager.list_package_modules(record.short_name)
+    assert [(module.target, module.is_exposed) for module in discovered] == [
+        ("ExampleUtils", True),
+        ("Internal/Feature", False),
+        ("Internal/Hidden", False),
+        ("Server/Hidden", False),
+    ]
+
+    exposed = manager.set_module_exposed(record.short_name, "Internal/Hidden", True)
+    assert exposed.ok, exposed.diagnostics
+    assert manager.get_package(record.short_name).exports["Hidden"] == "Internal/Hidden"
+    assert (repository / "src" / "Hidden.luau").is_file()
+
+    hidden = manager.set_module_exposed(record.short_name, "Internal/Hidden", False)
+    assert hidden.ok, hidden.diagnostics
+    assert "Hidden" not in manager.get_package(record.short_name).exports
+    assert not (repository / "src" / "Hidden.luau").exists()
+
+    assert manager.set_all_modules_exposed(record.short_name, False).ok
+    assert manager.get_package(record.short_name).exports == {}
+    assert manager.set_all_modules_exposed(record.short_name, True).ok
+    assert manager.get_package(record.short_name).exports == {
+        "ExampleUtils": "ExampleUtils",
+        "Feature": "Internal/Feature",
+        "Hidden": "Internal/Hidden",
+        "ServerHidden": "Server/Hidden",
+    }
 
 
 def test_remove_reports_reverse_dependencies(repository: Path) -> None:

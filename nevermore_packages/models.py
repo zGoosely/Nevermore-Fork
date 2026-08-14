@@ -93,6 +93,22 @@ class PackageRecord:
 
 
 @dataclass(frozen=True, slots=True)
+class PackageModule:
+    """One requireable runtime module discovered inside an indexed package."""
+
+    path: str
+    target: str
+    realm: str
+    kind: str
+    description: str
+    aliases: tuple[str, ...] = ()
+
+    @property
+    def is_exposed(self) -> bool:
+        return bool(self.aliases)
+
+
+@dataclass(frozen=True, slots=True)
 class SnippetTemplate:
     """A complete package module available from an external VS Code snippet file."""
 

@@ -3,9 +3,7 @@
   "version": "0.0.1",
   "exports": {
     "LockPermit": "LockPermit",
-    "LockService": "LockService",
-    "LockServiceTypes": "LockServiceTypes",
-    "LockServiceUtils": "LockServiceUtils"
+    "LockService": "LockService"
   },
   "dependencies": [
     "quenty/asyncsemaphore@0.0.1",

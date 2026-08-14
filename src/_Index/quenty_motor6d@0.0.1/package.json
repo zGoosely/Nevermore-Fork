@@ -4,6 +4,7 @@
   "exports": {
     "Motor6DService": "Server/Motor6DService",
     "Motor6DStackHumanoid": "Server/Humanoid/Motor6DStackHumanoid",
+    "Motor6DStackHumanoidClient": "Client/Humanoid/Motor6DStackHumanoidClient",
     "Motor6DStackInterface": "Shared/Stack/Motor6DStackInterface"
   },
   "dependencies": [

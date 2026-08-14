@@ -1,7 +1,10 @@
 {
   "name": "quenty/idleservice",
   "version": "0.0.1",
-  "exports": {},
+  "exports": {
+    "IdleServiceClient": "Client/IdleServiceClient",
+    "IdleTargetCalculator": "Client/IdleTargetCalculator"
+  },
   "dependencies": [
     "quenty/baseobject@0.0.1",
     "quenty/humanoidtracker@0.0.1",

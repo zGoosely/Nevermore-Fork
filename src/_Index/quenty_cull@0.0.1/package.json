@@ -2,14 +2,8 @@
   "name": "quenty/cull",
   "version": "0.0.1",
   "exports": {
-    "ClientCullingConstants": "ClientCullingConstants",
-    "ClientCullingModel": "ClientCullingModel",
-    "ClientCullingRegistry": "ClientCullingRegistry",
     "ClientCullingService": "ClientCullingService",
-    "ClientCullingSpatialIndex": "ClientCullingSpatialIndex",
-    "ClientCullingTypes": "ClientCullingTypes",
-    "ClientCullingUtils": "ClientCullingUtils",
-    "ClientCullingVisibilityState": "ClientCullingVisibilityState"
+    "ClientCullingUtils": "ClientCullingUtils"
   },
   "dependencies": [
     "quenty/binder@0.0.1",

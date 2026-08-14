@@ -2,10 +2,7 @@
   "name": "quenty/webhook",
   "version": "0.0.1",
   "exports": {
-    "WebhookClient": "WebhookClient",
-    "WebhookTypes": "WebhookTypes",
-    "WebhookUtils": "WebhookUtils",
-    "webhook": "."
+    "WebhookClient": "WebhookClient"
   },
   "dependencies": [
     "quenty/httppromise@0.0.1",

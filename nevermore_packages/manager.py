@@ -12,7 +12,15 @@ from pathlib import Path
 from typing import Sequence
 
 from .catalog import parse_legacy_catalog, read_catalog, validate_catalog, write_catalog
-from .models import CatalogEntry, CommandResult, ModuleEntry, OperationResult, PackageRecord, SnippetTemplate
+from .models import (
+    CatalogEntry,
+    CommandResult,
+    ModuleEntry,
+    OperationResult,
+    PackageModule,
+    PackageRecord,
+    SnippetTemplate,
+)
 from .snippets import inject_package_requires, load_snippet_templates, render_snippet_template
 
 
@@ -69,6 +77,69 @@ class PackageManager:
         if len(matches) != 1:
             raise ValueError(f"Multiple installed versions found for quenty/{short_name}")
         return self._record(matches[0].parent, self._read_json(matches[0]))
+
+    def list_package_modules(self, name: str) -> tuple[PackageModule, ...]:
+        """Discover every production Luau module and its public exposure state."""
+
+        record = self.get_package(name)
+        metadata = {module.path: module for module in record.catalog.modules}
+        target_paths: dict[str, list[str]] = {}
+        for path in self._source_module_paths(record):
+            relative = path.relative_to(record.root).as_posix()
+            target_paths.setdefault(self._module_target(relative), []).append(relative)
+
+        modules = []
+        for target, paths in sorted(target_paths.items()):
+            path = sorted(paths, key=lambda item: (not item.endswith(".luau"), item))[0]
+            entry = metadata.get(path)
+            aliases = tuple(sorted(alias for alias, export_target in record.exports.items() if export_target == target))
+            modules.append(
+                PackageModule(
+                    path=path,
+                    target=target,
+                    realm=entry.realm if entry else self._infer_module_realm(path),
+                    kind=entry.kind if entry else "Uncatalogued",
+                    description=entry.description if entry else "",
+                    aliases=aliases,
+                )
+            )
+        return tuple(modules)
+
+    def set_module_exposed(self, name: str, target: str, exposed: bool) -> OperationResult:
+        """Expose or hide one package module through the flat public package surface."""
+
+        try:
+            record = self.get_package(name)
+            module = next((module for module in self.list_package_modules(name) if module.target == target), None)
+            if module is None:
+                raise ValueError(f"Unknown package module target: {target}")
+            exports = dict(record.exports)
+            if exposed:
+                self._add_module_export(record, module, exports, self._public_alias_owners(record.name))
+            else:
+                exports = {alias: value for alias, value in exports.items() if value != target}
+        except (OSError, ValueError) as error:
+            return OperationResult(False, "Module exposure could not be changed", diagnostics=(str(error),))
+
+        state = "Exposed" if exposed else "Hidden"
+        return self._write_exports(record, exports, f"{state} {module.path}")
+
+    def set_all_modules_exposed(self, name: str, exposed: bool) -> OperationResult:
+        """Expose or hide every production module in one package."""
+
+        try:
+            record = self.get_package(name)
+            modules = self.list_package_modules(name)
+            exports = dict(record.exports) if exposed else {}
+            if exposed:
+                alias_owners = self._public_alias_owners(record.name)
+                for module in modules:
+                    self._add_module_export(record, module, exports, alias_owners)
+        except (OSError, ValueError) as error:
+            return OperationResult(False, "Module exposure could not be changed", diagnostics=(str(error),))
+
+        state = "Exposed" if exposed else "Hidden"
+        return self._write_exports(record, exports, f"{state} all modules in {record.name}")
 
     def reverse_dependencies(self, name: str) -> tuple[str, ...]:
         target = self.get_package(name).name
@@ -371,6 +442,81 @@ class PackageManager:
             externals=tuple(str(item) for item in manifest.get("externals", [])),
             catalog=read_catalog(root / "catalog.json"),
         )
+
+    def _source_module_paths(self, record: PackageRecord) -> tuple[Path, ...]:
+        return tuple(
+            sorted(
+                path
+                for path in record.root.rglob("*")
+                if path.is_file()
+                and path.suffix in {".lua", ".luau"}
+                and not path.name.endswith((".spec.lua", ".spec.luau"))
+                and path.name not in {"jest.config.lua", "jest.config.luau"}
+            )
+        )
+
+    def _module_target(self, relative_path: str) -> str:
+        path = Path(relative_path)
+        if path.name in {"init.lua", "init.luau"}:
+            parent = path.parent.as_posix()
+            return "." if parent == "." else parent
+        return path.with_suffix("").as_posix()
+
+    def _infer_module_realm(self, relative_path: str) -> str:
+        parts = {part.casefold() for part in Path(relative_path).parts[:-1]}
+        if "server" in parts:
+            return "server"
+        if "client" in parts:
+            return "client"
+        return "shared"
+
+    def _add_module_export(
+        self,
+        record: PackageRecord,
+        module: PackageModule,
+        exports: dict[str, str],
+        alias_owners: dict[str, str],
+    ) -> None:
+        if module.target in exports.values():
+            return
+
+        target_parts = [record.short_name] if module.target == "." else module.target.split("/")
+        candidates = [
+            _pascal_case("-".join(target_parts[index:]))
+            for index in range(len(target_parts) - 1, -1, -1)
+        ]
+        candidates.append(_pascal_case("-".join((record.short_name, *target_parts))))
+        for alias in dict.fromkeys(candidates):
+            if EXPORT_NAME.fullmatch(alias) and alias not in exports and alias not in alias_owners:
+                exports[alias] = module.target
+                return
+
+        raise ValueError(f"Cannot derive an unused public alias for {module.path}")
+
+    def _public_alias_owners(self, excluded_package: str) -> dict[str, str]:
+        return {
+            alias: package.name
+            for package in self.list_packages()
+            if package.name != excluded_package
+            for alias in package.exports
+        }
+
+    def _write_exports(self, record: PackageRecord, exports: dict[str, str], summary: str) -> OperationResult:
+        if exports == record.exports:
+            return OperationResult(True, f"No exposure changes needed for {record.name}")
+
+        before = self._snapshot()
+        try:
+            manifest = self._read_json(record.root / "package.json")
+            manifest["exports"] = dict(sorted(exports.items()))
+            self._write_json(record.root / "package.json", manifest)
+            sync_result = self._fast_sync()
+            if not sync_result.ok:
+                raise RuntimeError(sync_result.output)
+            return self._success(summary, before, (sync_result,))
+        except Exception as error:
+            self._restore(before)
+            return OperationResult(False, "Module exposure failed and was rolled back", diagnostics=(str(error),))
 
     def _fast_sync(self) -> CommandResult:
         normalization = self._run([sys.executable, str(self.scripts / "normalize_package_requires.py")])

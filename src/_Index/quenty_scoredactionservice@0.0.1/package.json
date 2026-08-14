@@ -2,6 +2,10 @@
   "name": "quenty/scoredactionservice",
   "version": "0.0.1",
   "exports": {
+    "ScoredAction": "Client/ScoredAction",
+    "ScoredActionService": "Server/ScoredActionService",
+    "ScoredActionServiceClient": "Client/ScoredActionServiceClient",
+    "ScoredActionUtils": "Client/ScoredActionUtils",
     "jest.config": "jest.config"
   },
   "dependencies": [

@@ -1,7 +1,11 @@
 {
   "name": "quenty/colorpicker",
   "version": "0.0.1",
-  "exports": {},
+  "exports": {
+    "HSColorPicker": "Client/HSV/HSColorPicker",
+    "HSVColorPicker": "Client/HSV/HSVColorPicker",
+    "ValueColorPicker": "Client/HSV/ValueColorPicker"
+  },
   "dependencies": [
     "quenty/baseobject@0.0.1",
     "quenty/basicpane@0.0.1",

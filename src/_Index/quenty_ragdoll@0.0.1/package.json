@@ -1,7 +1,11 @@
 {
   "name": "quenty/ragdoll",
   "version": "0.0.1",
-  "exports": {},
+  "exports": {
+    "Ragdoll": "Server/Classes/Ragdoll",
+    "RagdollService": "Server/RagdollService",
+    "Ragdollable": "Server/Classes/Ragdollable"
+  },
   "dependencies": [
     "quenty/adorneedata@0.0.1",
     "quenty/attribute@0.0.1",

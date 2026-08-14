@@ -2,6 +2,7 @@
   "name": "quenty/rogueproperty",
   "version": "0.0.1",
   "exports": {
+    "RogueProperty": "Shared/Implementation/RogueProperty",
     "RoguePropertyService": "Shared/RoguePropertyService",
     "RoguePropertyTableDefinition": "Shared/Definition/RoguePropertyTableDefinition"
   },

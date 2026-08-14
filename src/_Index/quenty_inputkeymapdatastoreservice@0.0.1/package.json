@@ -19,6 +19,7 @@
     "quenty/tableutils@0.0.1"
   ],
   "externals": [
-    "Jest"
+    "Jest",
+    "PlayerDataStoreServiceProfile"
   ]
 }

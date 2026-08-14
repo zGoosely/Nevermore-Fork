@@ -3,9 +3,7 @@
   "version": "0.0.2",
   "exports": {
     "TaggedTemplateProvider": "TaggedTemplateProvider",
-    "TemplateProvider": "TemplateProvider",
-    "TemplateReplicationModes": "TemplateReplicationModes",
-    "TemplateReplicationModesUtils": "TemplateReplicationModesUtils"
+    "TemplateProvider": "TemplateProvider"
   },
   "dependencies": [
     "quenty/brio@0.0.1",

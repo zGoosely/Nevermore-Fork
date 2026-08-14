@@ -1,7 +1,16 @@
 {
   "name": "quenty/soundplayer",
   "version": "0.0.1",
-  "exports": {},
+  "exports": {
+    "LayeredLoopedSoundPlayer": "Client/Loops/Layered/LayeredLoopedSoundPlayer",
+    "LayeredSoundHelper": "Client/Loops/Layered/LayeredSoundHelper",
+    "LoopedSoundPlayer": "Client/Loops/LoopedSoundPlayer",
+    "SimpleLoopedSoundPlayer": "Client/Loops/SimpleLoopedSoundPlayer",
+    "SoundLoopScheduleUtils": "Client/Schedule/SoundLoopScheduleUtils",
+    "SoundPlayerService": "Server/SoundPlayerService",
+    "SoundPlayerServiceClient": "Client/Service/SoundPlayerServiceClient",
+    "SoundPlayerStack": "Client/Stack/SoundPlayerStack"
+  },
   "dependencies": [
     "quenty/baseobject@0.0.1",
     "quenty/maid@0.0.1",

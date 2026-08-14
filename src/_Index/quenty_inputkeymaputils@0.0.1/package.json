@@ -11,6 +11,7 @@
     "InputKeyMapService": "InputKeyMapService",
     "InputKeyMapServiceClient": "InputKeyMapServiceClient",
     "InputTypeUtils": "Shared/Types/InputTypeUtils",
+    "ProximityPromptInputUtils": "Shared/ProximityPromptInputUtils",
     "SlottedTouchButtonUtils": "Shared/Types/SlottedTouchButtonUtils"
   },
   "dependencies": [

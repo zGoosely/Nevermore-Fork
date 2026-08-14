@@ -1,7 +1,10 @@
 {
   "name": "quenty/hide",
   "version": "0.0.1",
-  "exports": {},
+  "exports": {
+    "HideService": "Server/HideService",
+    "HideServiceClient": "Client/HideServiceClient"
+  },
   "dependencies": [
     "quenty/baseobject@0.0.1",
     "quenty/binder@0.0.1",

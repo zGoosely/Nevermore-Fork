@@ -3,7 +3,7 @@
 This file is generated from each package's `catalog.json` and `package.json`. Edit catalog metadata with
 `nevermore-packages` or by changing the sidecar, then run `python3 scripts/sync_packages.py`.
 
-**Coverage:** 217 packages · 880 production modules
+**Coverage:** 215 packages · 876 production modules
 
 ## Package directory
 
@@ -101,7 +101,6 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 | [humanoidteleportutils](#humanoidteleportutils) | `0.0.1` | `game_service`, `player_service`, `utility` | 1 |
 | [humanoidtracker](#humanoidtracker) | `0.0.1` | `game_service`, `player_service` | 2 |
 | [idleservice](#idleservice) | `0.0.1` | `animation`, `game_service`, `player_service` | 2 |
-| [inputcategorizer](#inputcategorizer) | `0.0.1` | `enums`, `input` | 2 |
 | [inputkeymapdatastoreservice](#inputkeymapdatastoreservice) | `0.0.1` | `data`, `game_service`, `input`, `lifecycle`, `player_service`, `reactive`, `security`, `serialization`, `utility` | 7 |
 | [inputkeymaputils](#inputkeymaputils) | `0.0.1` | `animation`, `data`, `enums`, `game_service`, `gui`, `input`, `lifecycle`, `localization`, `math`, `player_service`, `reactive`, `security`, `serialization`, `utility` | 13 |
 | [inputmode](#inputmode) | `0.0.1` | `animation`, `data`, `enums`, `game_service`, `gui`, `input`, `lifecycle`, `localization`, `player_service`, `reactive`, `serialization` | 6 |
@@ -109,7 +108,6 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 | [insertserviceutils](#insertserviceutils) | `0.0.1` | `game_service`, `utility`, `world` | 1 |
 | [instancetreeutils](#instancetreeutils) | `0.0.1` | `utility` | 1 |
 | [jsonutils](#jsonutils) | `0.0.1` | `serialization`, `utility` | 1 |
-| [lightingservice](#lightingservice) | `0.0.1` | `data`, `game_service`, `reactive`, `world` | 2 |
 | [linear](#linear) | `0.0.1` | `data` | 1 |
 | [linearsystemssolverutils](#linearsystemssolverutils) | `0.0.1` | `utility` | 1 |
 | [linkutils](#linkutils) | `0.0.1` | `data`, `reactive`, `utility` | 2 |
@@ -1788,20 +1786,6 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 | [`Client/IdleServiceClient.luau`](src/_Index/quenty_idleservice@0.0.1/Client/IdleServiceClient.luau) | client | Service | Helps track whether or not a player is idle and, if so, can show UI or other idle-related effects. Public entry points include `IdleServiceClient.Init`, `IdleServiceClient.Start`, `IdleServiceClient.ObserveHumanoidMoveFromCurrentPosition`, `IdleServiceClient.IsHumanoidIdle`, `IdleServiceClient.IsMoving`, `IdleServiceClient.ObserveHumanoidIdle`, `IdleServiceClient.DoShowIdleUI`, `IdleServiceClient.ObserveShowIdleUI`. |
 | [`Client/IdleTargetCalculator.luau`](src/_Index/quenty_idleservice@0.0.1/Client/IdleTargetCalculator.luau) | client | Class/model | Assists in calculating whether the player is idle while moving the camera around or aiming a gun. Public entry points include `IdleTargetCalculator.new`, `IdleTargetCalculator.GetShouldDisableContextUI`, `IdleTargetCalculator.ObserveShouldDisableContextUI`, `IdleTargetCalculator.SetTarget`. |
 
-# inputcategorizer
-
-- **Purpose:** Canonical InputCategoryTypes
-- **Path:** [`src/_Index/quenty_inputcategorizer@0.0.1/`](src/_Index/quenty_inputcategorizer@0.0.1/)
-- **Short Description:** Canonical InputCategoryTypes
-- **Tags:** `enums`, `input`
-
-### Submodules
-
-| Module | Realm | Kind | Responsibility and public surface |
-| --- | --- | --- | --- |
-| [`InputCategorizer.luau`](src/_Index/quenty_inputcategorizer@0.0.1/InputCategorizer.luau) | shared | Module | Input Categorizer provides the module implementation used by the Inputcategorizer package. Public entry points include `InputCategorizer.getLastInputCategory`. |
-| [`InputCategoryTypes.luau`](src/_Index/quenty_inputcategorizer@0.0.1/InputCategoryTypes.luau) | shared | Class/model | Canonical InputCategoryTypes. |
-
 # inputkeymapdatastoreservice
 
 - **Purpose:** Persists rebindable input-keymap overrides in each player's existing PlayerDataStoreService profile and synchronizes authoritative bindings across the client/server boundary with ByteNet.
@@ -1916,20 +1900,6 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 | Module | Realm | Kind | Responsibility and public surface |
 | --- | --- | --- | --- |
 | [`JSONUtils.luau`](src/_Index/quenty_jsonutils@0.0.1/JSONUtils.luau) | shared | Class/model | Utility methods for JSON Public entry points include `JSONUtils.jsonDecode`, `JSONUtils.jsonEncode`, `JSONUtils.promiseJSONDecode`. |
-
-# lightingservice
-
-- **Purpose:** `PostProcessingStackService` owns shared, named post-processing effects on the client. Each effect exposes property stacks backed by `StateStack`, so temporary overrides restore the previous value when their cleanup function is called.
-- **Path:** [`src/_Index/quenty_lightingservice@0.0.1/`](src/_Index/quenty_lightingservice@0.0.1/)
-- **Short Description:** `PostProcessingStackService` owns shared, named post-processing effects on the client. Each effect exposes property stacks backed by `StateStack`, so temporary overrides restore the previous value when their cleanup function is called.
-- **Tags:** `data`, `game_service`, `reactive`, `world`
-
-### Submodules
-
-| Module | Realm | Kind | Responsibility and public surface |
-| --- | --- | --- | --- |
-| [`Client/LightingEffect.luau`](src/_Index/quenty_lightingservice@0.0.1/Client/LightingEffect.luau) | client | Class/model | Owns a named post-processing effect and the stacks that control its properties. Public entry points include `LightingEffect.new`, `LightingEffect.GetName`, `LightingEffect.GetClassName`, `LightingEffect.GetInstance`. |
-| [`Client/PostProcessingStackService.luau`](src/_Index/quenty_lightingservice@0.0.1/Client/PostProcessingStackService.luau) | client | Service | Provides shared, named post-processing effects for the local client. Public entry points include `PostProcessingStackService.Init`, `PostProcessingStackService.GetOrCreateEffect`, `PostProcessingStackService.Destroy`. |
 
 # linear
 

@@ -22,5 +22,7 @@
     "quenty/squash@0.0.1",
     "quenty/tableutils@0.0.1"
   ],
-  "externals": []
+  "externals": [
+    "GameProductHandlerResult"
+  ]
 }

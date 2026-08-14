@@ -282,9 +282,6 @@
     "quenty/idleservice@0.0.1": {
       "$path": "quenty_idleservice@0.0.1"
     },
-    "quenty/inputcategorizer@0.0.1": {
-      "$path": "quenty_inputcategorizer@0.0.1"
-    },
     "quenty/inputkeymapdatastoreservice@0.0.1": {
       "$path": "quenty_inputkeymapdatastoreservice@0.0.1"
     },
@@ -305,9 +302,6 @@
     },
     "quenty/jsonutils@0.0.1": {
       "$path": "quenty_jsonutils@0.0.1"
-    },
-    "quenty/lightingservice@0.0.1": {
-      "$path": "quenty_lightingservice@0.0.1"
     },
     "quenty/linear@0.0.1": {
       "$path": "quenty_linear@0.0.1"
