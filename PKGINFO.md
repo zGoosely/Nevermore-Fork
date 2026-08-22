@@ -3,7 +3,7 @@
 This file is generated from each package's `catalog.json` and `package.json`. Edit catalog metadata with
 `nevermore-packages` or by changing the sidecar, then run `python3 scripts/sync_packages.py`.
 
-**Coverage:** 221 packages · 892 production modules
+**Coverage:** 222 packages · 898 production modules
 
 ## Package directory
 
@@ -51,6 +51,7 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 | [canceltoken](#canceltoken) | `0.0.1` | `lifecycle`, `math`, `reactive` | 2 |
 | [cframeutils](#cframeutils) | `0.0.1` | `data`, `math`, `serialization`, `utility` | 3 |
 | [characterutils](#characterutils) | `0.0.1` | `audio`, `data`, `player_service`, `reactive`, `utility` | 8 |
+| [chatproviderservice](#chatproviderservice) | `0.0.1` | `data`, `game_service`, `player_service`, `reactive`, `security`, `serialization`, `utility` | 6 |
 | [clientcamera](#clientcamera) | `0.0.1` | `animation`, `data`, `game_service`, `gui`, `input`, `math`, `physics`, `player_service`, `reactive`, `security`, `utility` | 37 |
 | [clientranslator](#clientranslator) | `0.0.1` | `data`, `enums`, `game_service`, `input`, `localization`, `math`, `player_service`, `serialization`, `utility` | 8 |
 | [clipcharacters](#clipcharacters) | `0.0.1` | `enums`, `game_service`, `physics`, `player_service` | 4 |
@@ -901,6 +902,24 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 | [`RxHumanoidUtils.luau`](src/shared/_Index/quenty_characterutils@0.0.1/RxHumanoidUtils.luau) | shared | Class/model | Rx Humanoid Utils provides the class/model implementation used by the Characterutils package. Public entry points include `RxHumanoidUtils.observeRunningSpeed`, `emitRunningSpeed`, `RxHumanoidUtils.observeHumanoidStateType`, `emitStateType`, `RxHumanoidUtils.observeHumanoidHealth`, `RxHumanoidUtils.observeHumanoidHealthAsBrio`. |
 | [`RxR15Utils.luau`](src/shared/_Index/quenty_characterutils@0.0.1/RxR15Utils.luau) | shared | Class/model | Utility methods to query components of an R15 character. Public entry points include `RxR15Utils.observeRigAttachmentBrio`, `RxR15Utils.observeRigMotorBrio`, `RxR15Utils.observeRigWeldBrio`, `RxR15Utils.observeCharacterPartBrio`, `RxR15Utils.observeHumanoidBrio`, `RxR15Utils.observeHumanoidScaleValueObject`, `RxR15Utils.observeHumanoidScaleProperty`, `RxR15Utils.observeShoulderRigAttachmentBrio`. |
 | [`RxRootPartUtils.luau`](src/shared/_Index/quenty_characterutils@0.0.1/RxRootPartUtils.luau) | shared | Class/model | Rx Root Part Utils provides the class/model implementation used by the Characterutils package. Public entry points include `RxRootPartUtils.observeHumanoidRootPartBrio`, `RxRootPartUtils.observeHumanoidRootPartBrioFromHumanoid`. |
+
+# chatproviderservice
+
+- **Purpose:** Modern TextChatService tag rendering with ordered, replicated user tags.
+- **Path:** [`src/shared/_Index/quenty_chatproviderservice@0.0.1/`](src/shared/_Index/quenty_chatproviderservice@0.0.1/), [`src/server/_Index/quenty_chatproviderservice@0.0.1/`](src/server/_Index/quenty_chatproviderservice@0.0.1/)
+- **Short Description:** Provides a server-authoritative chat tag registry and a client formatter for stacked colored tags.
+- **Tags:** `data`, `game_service`, `player_service`, `reactive`, `security`, `serialization`, `utility`
+
+### Submodules
+
+| Module | Realm | Kind | Responsibility and public surface |
+| --- | --- | --- | --- |
+| [`ChatProviderService.luau`](src/server/_Index/quenty_chatproviderservice@0.0.1/ChatProviderService.luau) | server | Service | Maintains authoritative player tags and implements the shared Tie contract. |
+| [`ChatProviderServiceClient.luau`](src/shared/_Index/quenty_chatproviderservice@0.0.1/ChatProviderServiceClient.luau) | client | Service | Formats replicated tags through TextChatService.OnIncomingMessage and exposes client observations. |
+| [`Shared/ChatProviderServiceConstants.luau`](src/shared/_Index/quenty_chatproviderservice@0.0.1/Shared/ChatProviderServiceConstants.luau) | shared | Constants | Read-only formatting and tag limits. |
+| [`Shared/ChatProviderServiceInterface.luau`](src/shared/_Index/quenty_chatproviderservice@0.0.1/Shared/ChatProviderServiceInterface.luau) | shared | Interface | Tie contract for observing tags by player name. |
+| [`Shared/ChatProviderServiceTypes.luau`](src/shared/_Index/quenty_chatproviderservice@0.0.1/Shared/ChatProviderServiceTypes.luau) | shared | Types | Shared tag input and output types. |
+| [`Shared/ChatProviderServiceUtils.luau`](src/shared/_Index/quenty_chatproviderservice@0.0.1/Shared/ChatProviderServiceUtils.luau) | shared | Utility | Validates, orders, and renders chat tags. |
 
 # clientcamera
 

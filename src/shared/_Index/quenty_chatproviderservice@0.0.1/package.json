@@ -1,0 +1,23 @@
+{
+  "name": "quenty/chatproviderservice",
+  "version": "0.0.1",
+  "exports": {
+    "ChatProviderServiceClient": "ChatProviderServiceClient",
+    "ChatProviderServiceConstants": "Shared/ChatProviderServiceConstants",
+    "ChatProviderServiceInterface": "Shared/ChatProviderServiceInterface",
+    "ChatProviderServiceTypes": "Shared/ChatProviderServiceTypes",
+    "ChatProviderServiceUtils": "Shared/ChatProviderServiceUtils"
+  },
+  "dependencies": [
+    "quenty/attributeutils@0.0.1",
+    "quenty/maid@0.0.1",
+    "quenty/playerutils@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/servicebag@0.0.1",
+    "quenty/t@0.0.1",
+    "quenty/tableutils@0.0.1",
+    "quenty/tie@0.0.1",
+    "quenty/valueobject@0.0.1"
+  ],
+  "externals": []
+}

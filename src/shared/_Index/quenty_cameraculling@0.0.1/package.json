@@ -10,6 +10,7 @@
     "quenty/preferredparentutils@0.0.1",
     "quenty/rx@0.0.1",
     "quenty/rxcollectionserviceutils@0.0.1",
+    "quenty/servicebag@0.0.1",
     "quenty/signal@0.0.1",
     "quenty/t@0.0.1"
   ],

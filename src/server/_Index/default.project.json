@@ -219,6 +219,30 @@
         "$path": "quenty_banservice@0.0.1/BanService.luau"
       }
     },
+    "quenty/chatproviderservice@0.0.1": {
+      "$className": "Folder",
+      "ChatProviderServiceClient": {
+        "$path": "../../shared/_Index/quenty_chatproviderservice@0.0.1/ChatProviderServiceClient.luau"
+      },
+      "Shared": {
+        "$className": "Folder",
+        "ChatProviderServiceConstants": {
+          "$path": "../../shared/_Index/quenty_chatproviderservice@0.0.1/Shared/ChatProviderServiceConstants.luau"
+        },
+        "ChatProviderServiceInterface": {
+          "$path": "../../shared/_Index/quenty_chatproviderservice@0.0.1/Shared/ChatProviderServiceInterface.luau"
+        },
+        "ChatProviderServiceTypes": {
+          "$path": "../../shared/_Index/quenty_chatproviderservice@0.0.1/Shared/ChatProviderServiceTypes.luau"
+        },
+        "ChatProviderServiceUtils": {
+          "$path": "../../shared/_Index/quenty_chatproviderservice@0.0.1/Shared/ChatProviderServiceUtils.luau"
+        }
+      },
+      "ChatProviderService": {
+        "$path": "quenty_chatproviderservice@0.0.1/ChatProviderService.luau"
+      }
+    },
     "quenty/clipcharacters@0.0.1": {
       "$className": "Folder",
       "Client": {

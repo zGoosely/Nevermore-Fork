@@ -132,6 +132,9 @@
     "quenty/characterutils@0.0.1": {
       "$path": "quenty_characterutils@0.0.1"
     },
+    "quenty/chatproviderservice@0.0.1": {
+      "$path": "quenty_chatproviderservice@0.0.1"
+    },
     "quenty/clientcamera@0.0.1": {
       "$path": "quenty_clientcamera@0.0.1"
     },

@@ -1,0 +1,40 @@
+{
+  "purpose": "Modern TextChatService tag rendering with ordered, replicated user tags.",
+  "description": "Provides a server-authoritative chat tag registry and a client formatter for stacked colored tags.",
+  "tags": [
+    "data",
+    "game_service",
+    "player_service",
+    "reactive",
+    "security",
+    "serialization",
+    "utility"
+  ],
+  "modules": {
+    "ChatProviderServiceClient.luau": {
+      "realm": "client",
+      "kind": "Service",
+      "description": "Formats replicated tags through TextChatService.OnIncomingMessage and exposes client observations."
+    },
+    "Shared/ChatProviderServiceConstants.luau": {
+      "realm": "shared",
+      "kind": "Constants",
+      "description": "Read-only formatting and tag limits."
+    },
+    "Shared/ChatProviderServiceInterface.luau": {
+      "realm": "shared",
+      "kind": "Interface",
+      "description": "Tie contract for observing tags by player name."
+    },
+    "Shared/ChatProviderServiceTypes.luau": {
+      "realm": "shared",
+      "kind": "Types",
+      "description": "Shared tag input and output types."
+    },
+    "Shared/ChatProviderServiceUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Validates, orders, and renders chat tags."
+    }
+  }
+}
