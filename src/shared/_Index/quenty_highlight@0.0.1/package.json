@@ -2,7 +2,11 @@
   "name": "quenty/highlight",
   "version": "0.0.1",
   "exports": {
-    "AnimatedHighlight": "Client/Stack/AnimatedHighlight"
+    "AnimatedHighlight": "Client/Stack/AnimatedHighlight",
+    "AnimatedHighlightGroup": "Client/Stack/AnimatedHighlightGroup",
+    "AnimatedHighlightModel": "Client/Stack/AnimatedHighlightModel",
+    "AnimatedHighlightStack": "Client/Stack/AnimatedHighlightStack",
+    "HighlightServiceClient": "Client/HighlightServiceClient"
   },
   "dependencies": [
     "quenty/baseobject@0.0.1",
