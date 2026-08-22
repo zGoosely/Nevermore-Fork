@@ -1,0 +1,17 @@
+{
+  "name": "quenty/cameraculling",
+  "version": "0.0.1",
+  "exports": {
+    "CameraCulling": "CameraCulling",
+    "CameraCullingUtils": "CameraCullingUtils"
+  },
+  "dependencies": [
+    "quenty/maid@0.0.1",
+    "quenty/preferredparentutils@0.0.1",
+    "quenty/rx@0.0.1",
+    "quenty/rxcollectionserviceutils@0.0.1",
+    "quenty/signal@0.0.1",
+    "quenty/t@0.0.1"
+  ],
+  "externals": []
+}

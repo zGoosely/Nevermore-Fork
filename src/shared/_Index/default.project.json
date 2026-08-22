@@ -117,6 +117,9 @@
     "quenty/bytenet@0.0.1": {
       "$path": "quenty_bytenet@0.0.1"
     },
+    "quenty/cameraculling@0.0.1": {
+      "$path": "quenty_cameraculling@0.0.1"
+    },
     "quenty/cancellabledelay@0.0.1": {
       "$path": "quenty_cancellabledelay@0.0.1"
     },

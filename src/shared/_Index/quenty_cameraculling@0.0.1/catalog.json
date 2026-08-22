@@ -1,0 +1,17 @@
+{
+  "purpose": "Provides lightweight camera-distance culling using spatial cells and render-state restoration.",
+  "description": "CameraCulling tracks tagged instances in spatial cells and exposes manual, automatic, and observable culling controls.",
+  "tags": ["animation", "game_service", "gui", "math", "reactive", "utility", "world"],
+  "modules": {
+    "CameraCulling.luau": {
+      "realm": "client",
+      "kind": "Class/model",
+      "description": "Tracks camera-distance culling for tagged instances and restores their render state."
+    },
+    "CameraCullingUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Derives culling bounds, cell coordinates, and camera-distance decisions."
+    }
+  }
+}

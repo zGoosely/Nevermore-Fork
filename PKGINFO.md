@@ -3,7 +3,7 @@
 This file is generated from each package's `catalog.json` and `package.json`. Edit catalog metadata with
 `nevermore-packages` or by changing the sidecar, then run `python3 scripts/sync_packages.py`.
 
-**Coverage:** 220 packages · 890 production modules
+**Coverage:** 221 packages · 892 production modules
 
 ## Package directory
 
@@ -46,6 +46,7 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 | [brioutils](#brioutils) | `0.0.1` | `reactive`, `utility` | 1 |
 | [buttondragmodel](#buttondragmodel) | `0.0.1` | `gui`, `reactive` | 1 |
 | [bytenet](#bytenet) | `0.0.1` | `data`, `enums`, `localization`, `math` | 39 |
+| [cameraculling](#cameraculling) | `0.0.1` | `animation`, `game_service`, `gui`, `math`, `reactive`, `utility`, `world` | 2 |
 | [cancellabledelay](#cancellabledelay) | `0.0.1` | `lifecycle` | 1 |
 | [canceltoken](#canceltoken) | `0.0.1` | `lifecycle`, `math`, `reactive` | 2 |
 | [cframeutils](#cframeutils) | `0.0.1` | `data`, `math`, `serialization`, `utility` | 3 |
@@ -824,6 +825,20 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 | [`ByteNet/replicated/replicatedValue.luau`](src/shared/_Index/quenty_bytenet@0.0.1/ByteNet/replicated/replicatedValue.luau) | shared | Module | Replicated Value provides the module implementation used by the Bytenet package. Public entry points include `replicatedValuePrototype.write`, `replicatedValuePrototype.read`. |
 | [`ByteNet/replicated/values.luau`](src/shared/_Index/quenty_bytenet@0.0.1/ByteNet/replicated/values.luau) | shared | Module | Values provides the module implementation used by the Bytenet package. Public entry points include `values.start`, `values.access`. |
 | [`ByteNet/types.luau`](src/shared/_Index/quenty_bytenet@0.0.1/ByteNet/types.luau) | shared | Module | Types provides the module implementation used by the Bytenet package. |
+
+# cameraculling
+
+- **Purpose:** Provides lightweight camera-distance culling using spatial cells and render-state restoration.
+- **Path:** [`src/shared/_Index/quenty_cameraculling@0.0.1/`](src/shared/_Index/quenty_cameraculling@0.0.1/)
+- **Short Description:** CameraCulling tracks tagged instances in spatial cells and exposes manual, automatic, and observable culling controls.
+- **Tags:** `animation`, `game_service`, `gui`, `math`, `reactive`, `utility`, `world`
+
+### Submodules
+
+| Module | Realm | Kind | Responsibility and public surface |
+| --- | --- | --- | --- |
+| [`CameraCulling.luau`](src/shared/_Index/quenty_cameraculling@0.0.1/CameraCulling.luau) | client | Class/model | Tracks camera-distance culling for tagged instances and restores their render state. |
+| [`CameraCullingUtils.luau`](src/shared/_Index/quenty_cameraculling@0.0.1/CameraCullingUtils.luau) | shared | Utility | Derives culling bounds, cell coordinates, and camera-distance decisions. |
 
 # cancellabledelay
 
