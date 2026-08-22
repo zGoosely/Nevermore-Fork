@@ -15,6 +15,11 @@
       "realm": "server",
       "kind": "Service",
       "description": "Maintains authoritative player tags and implements the shared Tie contract."
+    },
+    "ChatTagGroup.luau": {
+      "realm": "server",
+      "kind": "Class/model",
+      "description": "Reusable membership-backed chat tag group with add, remove, and Brio observation APIs."
     }
   }
 }

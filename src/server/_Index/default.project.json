@@ -241,6 +241,9 @@
       },
       "ChatProviderService": {
         "$path": "quenty_chatproviderservice@0.0.1/ChatProviderService.luau"
+      },
+      "ChatTagGroup": {
+        "$path": "quenty_chatproviderservice@0.0.1/ChatTagGroup.luau"
       }
     },
     "quenty/clipcharacters@0.0.1": {

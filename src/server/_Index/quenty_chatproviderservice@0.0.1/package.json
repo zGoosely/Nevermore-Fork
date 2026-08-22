@@ -2,10 +2,13 @@
   "name": "quenty/chatproviderservice",
   "version": "0.0.1",
   "exports": {
-    "ChatProviderService": "ChatProviderService"
+    "ChatProviderService": "ChatProviderService",
+    "ChatTagGroup": "ChatTagGroup"
   },
   "dependencies": [
+    "quenty/baseobject@0.0.1",
     "quenty/maid@0.0.1",
+    "quenty/observablecollection@0.0.1",
     "quenty/playerutils@0.0.1",
     "quenty/rx@0.0.1",
     "quenty/servicebag@0.0.1",

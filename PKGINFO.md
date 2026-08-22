@@ -3,7 +3,7 @@
 This file is generated from each package's `catalog.json` and `package.json`. Edit catalog metadata with
 `nevermore-packages` or by changing the sidecar, then run `python3 scripts/sync_packages.py`.
 
-**Coverage:** 222 packages · 898 production modules
+**Coverage:** 222 packages · 899 production modules
 
 ## Package directory
 
@@ -51,7 +51,7 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 | [canceltoken](#canceltoken) | `0.0.1` | `lifecycle`, `math`, `reactive` | 2 |
 | [cframeutils](#cframeutils) | `0.0.1` | `data`, `math`, `serialization`, `utility` | 3 |
 | [characterutils](#characterutils) | `0.0.1` | `audio`, `data`, `player_service`, `reactive`, `utility` | 8 |
-| [chatproviderservice](#chatproviderservice) | `0.0.1` | `data`, `game_service`, `player_service`, `reactive`, `security`, `serialization`, `utility` | 6 |
+| [chatproviderservice](#chatproviderservice) | `0.0.1` | `data`, `game_service`, `player_service`, `reactive`, `security`, `serialization`, `utility` | 7 |
 | [clientcamera](#clientcamera) | `0.0.1` | `animation`, `data`, `game_service`, `gui`, `input`, `math`, `physics`, `player_service`, `reactive`, `security`, `utility` | 37 |
 | [clientranslator](#clientranslator) | `0.0.1` | `data`, `enums`, `game_service`, `input`, `localization`, `math`, `player_service`, `serialization`, `utility` | 8 |
 | [clipcharacters](#clipcharacters) | `0.0.1` | `enums`, `game_service`, `physics`, `player_service` | 4 |
@@ -916,6 +916,7 @@ This file is generated from each package's `catalog.json` and `package.json`. Ed
 | --- | --- | --- | --- |
 | [`ChatProviderService.luau`](src/server/_Index/quenty_chatproviderservice@0.0.1/ChatProviderService.luau) | server | Service | Maintains authoritative player tags and implements the shared Tie contract. |
 | [`ChatProviderServiceClient.luau`](src/shared/_Index/quenty_chatproviderservice@0.0.1/ChatProviderServiceClient.luau) | client | Service | Formats replicated tags through TextChatService.OnIncomingMessage and exposes client observations. |
+| [`ChatTagGroup.luau`](src/server/_Index/quenty_chatproviderservice@0.0.1/ChatTagGroup.luau) | server | Class/model | Reusable membership-backed chat tag group with add, remove, and Brio observation APIs. |
 | [`Shared/ChatProviderServiceConstants.luau`](src/shared/_Index/quenty_chatproviderservice@0.0.1/Shared/ChatProviderServiceConstants.luau) | shared | Constants | Read-only formatting and tag limits. |
 | [`Shared/ChatProviderServiceInterface.luau`](src/shared/_Index/quenty_chatproviderservice@0.0.1/Shared/ChatProviderServiceInterface.luau) | shared | Interface | Tie contract for observing tags by player name. |
 | [`Shared/ChatProviderServiceTypes.luau`](src/shared/_Index/quenty_chatproviderservice@0.0.1/Shared/ChatProviderServiceTypes.luau) | shared | Types | Shared tag input and output types. |

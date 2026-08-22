@@ -9,6 +9,7 @@
 const ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 const ChatProviderServiceConstants = require("@game/ReplicatedStorage/Packages/ChatProviderServiceConstants")
+const ChatTagGroup = require("./ChatTagGroup")
 const ChatProviderServiceInterface = require("@game/ReplicatedStorage/Packages/ChatProviderServiceInterface")
 const ChatProviderServiceTypes = require("@game/ReplicatedStorage/Packages/ChatProviderServiceTypes")
 const ChatProviderServiceUtils = require("@game/ReplicatedStorage/Packages/ChatProviderServiceUtils")
@@ -37,6 +38,7 @@ export type ChatProviderService = typeof(setmetatable(
 		_maid: Maid.Maid,
 		_tieRealmService: TieRealmService.TieRealmService,
 		_states: { [string]: TagState },
+		_groups: { [string]: ChatTagGroup.ChatTagGroup },
 	},
 	{} :: typeof({ __index = ChatProviderService })
 ))
@@ -49,6 +51,7 @@ function ChatProviderService.Init(self: ChatProviderService, serviceBag: Service
 	self._maid = Maid.new()
 	self._tieRealmService = serviceBag:GetService(TieRealmService)
 	self._states = {}
+	self._groups = {}
 
 	self._maid:GiveTask(RxPlayerUtils.observePlayersBrio():Subscribe(function(playerBrio)
 		local player = playerBrio:GetValue()
@@ -67,6 +70,27 @@ function ChatProviderService.Init(self: ChatProviderService, serviceBag: Service
 	self._maid:Add(
 		ChatProviderServiceInterface.Server:Implement(ReplicatedStorage, self, self._tieRealmService:GetTieRealm())
 	)
+end
+
+--[=[
+	Creates a reusable group that applies one tag to its members.
+
+	@within ChatProviderService
+	@param tagInfo ChatTagInput
+	@return ChatTagGroup
+]=]
+function ChatProviderService.CreateTagGroup(self: ChatProviderService, tagInfo: ChatTagInput): ChatTagGroup.ChatTagGroup
+	assert(ChatProviderServiceUtils.isChatTagInput(tagInfo), "Bad tagInfo")
+	local tag = ChatProviderServiceUtils.createChatTag(tagInfo)
+	assert(self._groups[tag.Id] == nil, "A tag group with this id already exists")
+
+	local group = self._maid:Add(ChatTagGroup.new(tag, function(player: Player, input: ChatTagInput)
+		return self:AddTag(player, input)
+	end, function(player: Player, tagId: string)
+		return self:RemoveTag(player, tagId)
+	end))
+	self._groups[tag.Id] = group
+	return group
 end
 
 function ChatProviderService._getState(self: ChatProviderService, userName: string): TagState
