@@ -1,0 +1,9 @@
+{
+  "name": "quenty/octree",
+  "version": "0.0.1",
+  "exports": {
+    "Octree": "Octree"
+  },
+  "dependencies": [],
+  "externals": []
+}

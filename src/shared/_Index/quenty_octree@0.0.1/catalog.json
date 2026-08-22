@@ -1,0 +1,26 @@
+{
+  "purpose": "Spatial indexing for fast 3D region and radius queries.",
+  "description": "Provides an Octree implementation for efficiently indexing and querying points in three-dimensional space.",
+  "tags": [
+    "data",
+    "math",
+    "spatial"
+  ],
+  "modules": {
+    "Octree.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Maintains an octree of spatial nodes and supports nearest-neighbor and region queries."
+    },
+    "OctreeNode.luau": {
+      "realm": "shared",
+      "kind": "Class/model",
+      "description": "Represents a point stored in an Octree."
+    },
+    "OctreeRegionUtils.luau": {
+      "realm": "shared",
+      "kind": "Utility",
+      "description": "Provides octree region and bounds calculations."
+    }
+  }
+}

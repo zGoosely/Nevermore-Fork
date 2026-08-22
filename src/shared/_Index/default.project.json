@@ -369,6 +369,9 @@
     "quenty/numberutils@0.0.1": {
       "$path": "quenty_numberutils@0.0.1"
     },
+    "quenty/octree@0.0.1": {
+      "$path": "quenty_octree@0.0.1"
+    },
     "quenty/observablecollection@0.0.1": {
       "$path": "quenty_observablecollection@0.0.1"
     },
