@@ -11,6 +11,7 @@ const ClientCullingModel = require("./ClientCullingModel")
 const ClientCullingRegistry = require("./ClientCullingRegistry")
 const Maid = require("@game/ReplicatedStorage/Packages/Maid")
 const ServiceBag = require("@game/ReplicatedStorage/Packages/ServiceBag")
+const Signal = require("@game/ReplicatedStorage/Packages/Signal")
 const TransparencyService = require("@game/ReplicatedStorage/Packages/TransparencyService")
 const t = require("@game/ReplicatedStorage/Packages/t")
 
@@ -69,6 +70,21 @@ function ClientCullingService.IsCulled(self: ClientCullingService, adornee: Inst
 	assert(t.Instance(adornee), "Bad adornee")
 	const model = self._cullBinder:Get(adornee)
 	return model ~= nil and model:IsCulled()
+end
+
+--[=[
+	Returns a signal which fires when a tagged instance enters or leaves culling.
+
+	@param adornee Instance
+	@return Signal.Signal<(boolean)>?
+]=]
+function ClientCullingService.GetCulledChangedSignal(
+	self: ClientCullingService,
+	adornee: Instance
+): Signal.Signal<(boolean)>?
+	assert(t.Instance(adornee), "Bad adornee")
+	const model = self._cullBinder:Get(adornee)
+	return if model then model.CulledChanged else nil
 end
 
 --[=[

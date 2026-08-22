@@ -11,6 +11,7 @@ const ClientCullingRegistry = require("./ClientCullingRegistry")
 const ClientCullingTypes = require("./ClientCullingTypes")
 const ClientCullingUtils = require("./ClientCullingUtils")
 const Maid = require("@game/ReplicatedStorage/Packages/Maid")
+const Signal = require("@game/ReplicatedStorage/Packages/Signal")
 const t = require("@game/ReplicatedStorage/Packages/t")
 
 type CullBounds = ClientCullingTypes.CullBounds
@@ -24,6 +25,7 @@ ClientCullingModel.__index = ClientCullingModel
 export type ClientCullingModel = typeof(setmetatable(
 	{} :: {
 		_maid: Maid.Maid,
+		CulledChanged: Signal.Signal<(boolean)>,
 		_adornee: Instance,
 		_mode: CullMode,
 		_registry: ClientCullingRegistry.ClientCullingRegistry,
@@ -51,6 +53,7 @@ function ClientCullingModel.new(
 
 	const self = setmetatable({}, ClientCullingModel) :: ClientCullingModel
 	self._maid = Maid.new()
+	self.CulledChanged = self._maid:Add(Signal.new() :: Signal.Signal<(boolean)>)
 	self._adornee = adornee
 	self._mode = mode
 	self._registry = registry
@@ -151,6 +154,7 @@ function ClientCullingModel.SetCulled(self: ClientCullingModel, culled: boolean)
 	end
 
 	self._culled = culled
+	self.CulledChanged:Fire(culled)
 	self._registry:SetEntryCulled(self :: any, culled)
 end
 
