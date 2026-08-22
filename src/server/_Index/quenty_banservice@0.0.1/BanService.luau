@@ -124,13 +124,13 @@ end
 	@param player Player
 	@return Promise<()>
 ]=]
-function BanService.UnbanAsync(self: BanService, player: Player): Promise.Promise<()>
-	assert(t.instanceIsA("Player")(player), "Bad player")
+function BanService.UnbanAsync(self: BanService, userId: number): Promise.Promise<()>
+	assert(t.number(userId), "Bad player")
 
 	return self._maid:GivePromise(Promise.new(function(resolve, reject)
 		const success, resultOrError = (pcall :: any)(function()
 			Players:UnbanAsync({
-				UserIds = { player.UserId },
+				UserIds = { userId },
 				ApplyToUniverse = APPLY_TO_UNIVERSE,
 			})
 		end)
